@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author valhalla
+ * @author LAPR3_20152016_G27
  */
 public class ProjectDataLocal implements ProjectData {
 
@@ -42,6 +42,8 @@ public class ProjectDataLocal implements ProjectData {
 	@Override
 	public Project clone(Project project) {
 		Project newProject = this.newInstance();
+                newProject.setName(project.getName());
+                newProject.setDescription(project.getDescription());
 		return newProject;
 	}
 
