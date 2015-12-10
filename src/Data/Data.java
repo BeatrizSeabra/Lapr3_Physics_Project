@@ -9,7 +9,7 @@ package Data;
  *
  * @author LAPR3_20152016_G27
  */
-abstract class Data {
+public abstract class Data {
 
 	static private ProjectData projectData = new ProjectDataLocal();
 
