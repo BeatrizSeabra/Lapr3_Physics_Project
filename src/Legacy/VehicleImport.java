@@ -3,27 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Data;
+package Legacy;
 
-import Model.Project;
+import Model.Vehicle;
 import java.util.List;
 
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public interface ProjectData {
+public interface VehicleImport {
 
-	Project newInstance();
-
-	List<Project> all();
-
-	Boolean save(Project project);
-
-	Project clone(Project project);
-
-	Project get(Integer id);
-
-	Boolean hasChanged(Project project);
+	List<Vehicle> importData(String data);
 
 }

@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Data.Data;
 import Model.Project;
 
 /**
@@ -16,6 +17,11 @@ public abstract class ContextController {
 	static private Project currentProject;
 
 	static public Project getOpenProject() {
+		if (ContextController.currentProject == null) {
+			return null;
+		}
+		ContextController.currentProject = Data.getProjectData().
+			get(ContextController.currentProject.getId());
 		return ContextController.currentProject;
 	}
 

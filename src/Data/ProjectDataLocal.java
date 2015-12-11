@@ -15,11 +15,19 @@ import java.util.List;
  */
 public class ProjectDataLocal implements ProjectData {
 
-	List<Project> list = new ArrayList();
+	private List<Project> list = new ArrayList();
+	private Integer currentIndex = 0;
+
+	private Integer getCurrentIndex() {
+		this.currentIndex++;
+		return this.currentIndex;
+	}
 
 	@Override
 	public Project newInstance() {
-		return new Project();
+		Project project = new Project();
+		project.setId(this.getCurrentIndex());
+		return project;
 	}
 
 	@Override
@@ -42,9 +50,26 @@ public class ProjectDataLocal implements ProjectData {
 	@Override
 	public Project clone(Project project) {
 		Project newProject = this.newInstance();
-                newProject.setName(project.getName());
-                newProject.setDescription(project.getDescription());
+		newProject.setId(this.getCurrentIndex());
+		newProject.setName(project.getName());
+		newProject.setDescription(project.getDescription());
 		return newProject;
+	}
+
+	@Override
+	public Project get(Integer id) {
+		for (Project project : this.list) {
+			if (project.getId() == id) {
+				return project;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public Boolean hasChanged(Project project) {
+		Project oldProject = this.get(project.getId());
+		return !oldProject.equals(project);
 	}
 
 }

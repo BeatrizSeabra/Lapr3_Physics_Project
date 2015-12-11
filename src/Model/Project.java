@@ -26,6 +26,13 @@ public class Project {
 	}
 
 	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
 	 * @return the name
 	 */
 	public String getName() {
@@ -51,6 +58,30 @@ public class Project {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Boolean addVehicle(Vehicle vehicle) {
+		return this.vehicles.add(vehicle);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Project other = (Project) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		return 11 * this.id + 29 * this.getClass().hashCode();
 	}
 
 }
