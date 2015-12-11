@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,6 +63,10 @@ public class Project {
 
 	public Boolean addVehicle(Vehicle vehicle) {
 		return this.vehicles.add(vehicle);
+	}
+
+	public List<Vehicle> getVehicles() {
+		return new ArrayList(this.vehicles);
 	}
 
 	@Override

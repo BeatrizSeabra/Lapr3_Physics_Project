@@ -6,6 +6,7 @@
 package FunctionalTests;
 
 import Controller.AddVehiclesController;
+import Controller.ContextController;
 import Model.Project;
 import Model.Vehicle;
 import java.util.List;
@@ -31,7 +32,7 @@ public class UCP05AddVehiclesTest {
 		this.project.setId(1);
 		this.project.setName("Project Name");
 		this.project.setDescription("Project Description");
-		Controller.ContextController.setOpenProject(this.project);
+		ContextController.setOpenProject(this.project);
 		this.avController = new AddVehiclesController();
 		this.filePathVehicles = "test/Files/VehiclesXMLTest.xml";
 	}
@@ -63,6 +64,11 @@ public class UCP05AddVehiclesTest {
 		assertEquals(vehicles.size(), 0);
 		Boolean save = this.avController.saveProjectVehicles();
 		assertEquals(save, true);
+		for (Vehicle vehicle : vehicles) {
+			if (!this.project.getVehicles().contains(vehicle)) {
+				assertEquals(true, false);
+			}
+		}
 	}
 
 }

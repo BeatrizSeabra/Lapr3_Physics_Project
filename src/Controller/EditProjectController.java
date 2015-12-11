@@ -8,7 +8,6 @@ package Controller;
 import Data.Data;
 import Data.ProjectData;
 import Model.Project;
-import java.util.List;
 
 /**
  *
@@ -21,18 +20,13 @@ public class EditProjectController {
 
 	public EditProjectController() {
 		this.projectData = Data.getProjectData();
-	}
-
-	public List<Project> getAllProjects() {
-		return this.projectData.all();
-	}
-
-	public String setProject(Project project) {
-		this.projectData.clone(project);
-		return this.project.toString();
+		this.project = ContextController.getOpenProject();
 	}
 
 	public Boolean defineProject(String name, String description) {
+		System.out.println(this.project);
+		this.project = ContextController.getOpenProject();
+		System.out.println(this.project);
 		this.project.setName(name);
 		this.project.setDescription(description);
 		return this.project.getName().equalsIgnoreCase(name) && this.project.

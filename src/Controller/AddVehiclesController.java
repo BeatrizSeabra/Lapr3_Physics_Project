@@ -6,7 +6,6 @@
 package Controller;
 
 import Data.Data;
-import Data.ProjectData;
 import Legacy.Legacy;
 import Model.Project;
 import Model.Vehicle;
@@ -18,14 +17,8 @@ import java.util.List;
  */
 public class AddVehiclesController {
 
-	private ProjectData projectData;
 	private Project project;
 	private List<Vehicle> vehicles;
-
-	public AddVehiclesController() {
-		this.projectData = Data.getProjectData();
-		this.project = ContextController.getOpenProject();
-	}
 
 	public List<Vehicle> loadVehicles(String filePath) {
 		this.vehicles = Legacy.importVehicles(filePath);
@@ -33,10 +26,11 @@ public class AddVehiclesController {
 	}
 
 	public Boolean saveProjectVehicles() {
+		this.project = ContextController.getOpenProject();
 		for (Vehicle vehicle : this.vehicles) {
 			this.project.addVehicle(vehicle);
 		}
-		return this.projectData.save(this.project);
+		return Data.getProjectData().save(this.project);
 	}
 
 }
