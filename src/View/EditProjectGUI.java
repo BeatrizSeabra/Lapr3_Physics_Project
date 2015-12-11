@@ -36,6 +36,7 @@ public class EditProjectGUI extends javax.swing.JFrame {
 				jButtonCancelActionPerformed(null);
 			}
 		});
+		this.setVisible(true);
 	}
 
 	/**

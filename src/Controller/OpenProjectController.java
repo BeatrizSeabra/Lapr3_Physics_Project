@@ -19,16 +19,12 @@ public class OpenProjectController {
 	private ProjectData projectData;
 	private Project project;
 
-	private void OpenProject() {
+	public List<Project> PedeListaProjetosExistentes() {
 		this.projectData = Data.getProjectData();
-
-	}
-
-	private List<Project> PedeListaProjetosExistentes() {
 		return this.projectData.all();
 	}
 
-	private void ProjetoEscolhido(Project proj) {
+	public void ProjetoEscolhido(Project proj) {
 		ContextController.setOpenProject(proj);
 	}
 }

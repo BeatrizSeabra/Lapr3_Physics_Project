@@ -69,6 +69,11 @@ public class ApplicationGUI extends javax.swing.JFrame {
                 openProjectMouseClicked(evt);
             }
         });
+        openProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openProjectActionPerformed(evt);
+            }
+        });
         project.add(openProject);
 
         createProject.setText("Create");
@@ -201,7 +206,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openProjectMouseClicked
-		// TODO add your handling code here:
+
     }//GEN-LAST:event_openProjectMouseClicked
 
     private void createProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectActionPerformed
@@ -213,7 +218,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_copyProjectActionPerformed
 
     private void editProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProjectActionPerformed
-		new EditProjectGUI(this).setVisible(true);
+		new EditProjectGUI(this);
     }//GEN-LAST:event_editProjectActionPerformed
 
     private void addVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleActionPerformed
@@ -235,6 +240,10 @@ public class ApplicationGUI extends javax.swing.JFrame {
     private void vehicleComparisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleComparisonActionPerformed
 		// TODO add your handling code here:
     }//GEN-LAST:event_vehicleComparisonActionPerformed
+
+    private void openProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openProjectActionPerformed
+		new OpenProjectGUI(this);
+    }//GEN-LAST:event_openProjectActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addVehicle;
