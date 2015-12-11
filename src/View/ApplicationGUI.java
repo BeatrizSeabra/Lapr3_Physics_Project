@@ -210,7 +210,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_openProjectMouseClicked
 
     private void createProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createProjectActionPerformed
-		// TODO add your handling code here:
+		new CreateProjectGUI(this);
     }//GEN-LAST:event_createProjectActionPerformed
 
     private void copyProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyProjectActionPerformed
@@ -222,7 +222,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_editProjectActionPerformed
 
     private void addVehicleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addVehicleActionPerformed
-		// TODO add your handling code here:
+		new AddVehiclesGUI(this);
     }//GEN-LAST:event_addVehicleActionPerformed
 
     private void bestPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bestPathActionPerformed
