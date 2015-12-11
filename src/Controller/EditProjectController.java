@@ -24,7 +24,6 @@ public class EditProjectController {
 	}
 
 	public Boolean defineProject(String name, String description) {
-		System.out.println(this.project);
 		this.project = ContextController.getOpenProject();
 		System.out.println(this.project);
 		this.project.setName(name);
