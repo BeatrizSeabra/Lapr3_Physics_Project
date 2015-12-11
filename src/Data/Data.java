@@ -5,13 +5,16 @@
  */
 package Data;
 
+import System.Settings;
+
 /**
  *
  * @author LAPR3_20152016_G27
  */
 public abstract class Data {
 
-	static private ProjectData projectData = new ProjectDataLocal();
+	static private ProjectData projectData = (ProjectData) Settings.
+		loadClass(Settings.getConfiguration("ProjectData").get(0));
 
 	static public ProjectData getProjectData() {
 		return Data.projectData;

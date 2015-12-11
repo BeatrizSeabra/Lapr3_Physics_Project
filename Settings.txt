@@ -1,0 +1,6 @@
+# Class of Data System Persistence
+ProjectData=Data.ProjectDataLocal
+
+# Import Class
+importRoadNetwork=Legacy.RoadNetworkImportXML
+importVehicles=Legacy.VehicleImportXML

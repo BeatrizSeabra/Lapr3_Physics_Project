@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Legacy;
-
-import Model.Vehicle;
-import java.util.List;
+package Model;
 
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public interface VehicleImport {
-
-	String getExtension();
-
-	List<Vehicle> importData(String data);
+public class RoadNetwork {
 
 }

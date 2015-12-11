@@ -5,17 +5,17 @@
  */
 package Legacy;
 
-import Model.Vehicle;
+import Model.RoadNetwork;
 import java.util.List;
 
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public interface VehicleImport {
+public interface RoadNetworkImport {
 
 	String getExtension();
 
-	List<Vehicle> importData(String data);
+	List<RoadNetwork> importData(String data);
 
 }

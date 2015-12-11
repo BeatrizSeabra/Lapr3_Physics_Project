@@ -5,7 +5,7 @@
  */
 package Legacy;
 
-import Model.Vehicle;
+import Model.RoadNetwork;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author LAPR3_20152016_G27
  */
-public class VehicleImportXML implements VehicleImport {
+public class RoadNetworkImportXML implements RoadNetworkImport {
 
 	@Override
 	public String getExtension() {
@@ -21,9 +21,9 @@ public class VehicleImportXML implements VehicleImport {
 	}
 
 	@Override
-	public List<Vehicle> importData(String data) {
-		List<Vehicle> vehicles = new ArrayList();
-		return vehicles;
+	public List<RoadNetwork> importData(String data) {
+		List<RoadNetwork> networks = new ArrayList();
+		return networks;
 	}
 
 }
