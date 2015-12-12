@@ -31,7 +31,7 @@
                       <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
                       <Component id="jButtonClean" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="162" max="32767" attributes="0"/>
+                      <EmptySpace pref="166" max="32767" attributes="0"/>
                       <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -39,7 +39,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButtonRoad" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonLoadVehicles" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -48,7 +48,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="62" max="32767" attributes="0"/>
-              <Component id="jButtonRoad" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonLoadVehicles" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPaneList" min="-2" pref="189" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
@@ -81,18 +81,18 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cancell"/>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonRoad">
+    <Component class="javax.swing.JButton" name="jButtonLoadVehicles">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Road Network"/>
+        <Property name="text" type="java.lang.String" value="Load Vehicles"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRoadActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLoadVehiclesActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneList">
@@ -102,7 +102,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JList" name="jList1">
+        <Component class="javax.swing.JList" name="jListVehicles">
           <Properties>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="new javax.swing.AbstractListModel() {&#xa;    String[] strings = { &quot;Item2&quot; };&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>

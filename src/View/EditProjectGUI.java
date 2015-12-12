@@ -6,37 +6,39 @@
 package View;
 
 import Controller.EditProjectController;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
-import static javax.swing.JOptionPane.showMessageDialog;
+import Model.Project;
+import System.Error;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public class EditProjectGUI extends javax.swing.JFrame {
+public class EditProjectGUI extends GraphicUserInterface {
 
-	private EditProjectController controller;
-	private JFrame pai;
+	private EditProjectController editProjectController;
 
 	/**
 	 * Creates new form EditProjectGUI
 	 *
-	 * @param pai
+	 * @param origin
 	 */
-	public EditProjectGUI(JFrame pai) {
-		initComponents();
-		this.pai = pai;
-		this.pai.setEnabled(false);
-		this.controller = new EditProjectController();
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		this.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				jButtonCancelActionPerformed(null);
-			}
-		});
-		this.setVisible(true);
+	public EditProjectGUI(GraphicUserInterface origin) {
+		this.initComponents();
+		this.creation(origin);
+	}
+
+	@Override
+	public void initiation() {
+		this.editProjectController = new EditProjectController();
+		this.editProjectController.initiation();
+	}
+
+	@Override
+	public void update() {
+		Project project = this.editProjectController.getProject();
+		this.jTextFieldName.setText(project.getName());
+		this.jTextFieldDescription.setText(project.getDescription());
 	}
 
 	/**
@@ -129,26 +131,24 @@ public class EditProjectGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-		this.pai.setEnabled(true);
-		dispose();
+		this.close();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-		this.jTextFieldName.setText("");
-		this.jTextFieldDescription.setText("");
+		this.editProjectController.initiation();
+		this.update();
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-		if (this.controller.
-			defineProject(this.jTextFieldName.getText(), this.jTextFieldDescription.
-						  getText())) {
-			if (this.controller.registProject()) {
-				showMessageDialog(this, "Alteração bem sucedida");
-			} else {
-				showMessageDialog(this, "Não foi possível alterar projeto");
-			}
+		if (this.editProjectController.
+			editProject(this.jTextFieldName.getText(), this.jTextFieldDescription.
+						getText()) && this.editProjectController.saveProject()) {
+			JOptionPane.showMessageDialog(this, "Edited successfully design!");
+			this.close();
 		} else {
-			showMessageDialog(this, "Não foi possível alterar projeto");
+			JOptionPane.
+				showMessageDialog(this, "Could not edit the project: " + Error.
+								  getErrorMessage());
 		}
     }//GEN-LAST:event_jButtonSaveActionPerformed
 

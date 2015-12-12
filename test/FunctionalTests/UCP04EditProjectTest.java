@@ -55,8 +55,8 @@ public class UCP04EditProjectTest {
 	@Test
 	public void testUCP04Functional() {
 		System.out.println("testUCP04Functional");
-		this.editController.defineProject("Name X", "Description X");
-		this.editController.registProject();
+		this.editController.editProject("Name X", "Description X");
+		this.editController.saveProject();
 		assertEquals(this.project.getDescription(), "Description X");
 		assertEquals(this.project.getName(), "Name X");
 	}

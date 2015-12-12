@@ -57,9 +57,9 @@ public class UCP01OpenProjectTest {
 	@Test
 	public void testUCP01Functional() {
 		System.out.println("testUCP01Functional");
-		List<Project> list = this.openController.PedeListaProjetosExistentes();
+		List<Project> list = this.openController.getAllProjects();
 		assertEquals(list.size(), 1);
-		this.openController.ProjetoEscolhido(list.get(0));
+		this.openController.openProject(list.get(0));
 		assertEquals(ContextController.getOpenProject(), list.get(0));
 	}
 }

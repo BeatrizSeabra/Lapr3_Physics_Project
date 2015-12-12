@@ -6,25 +6,21 @@
 package Controller;
 
 import Data.Data;
-import Data.ProjectData;
 import Model.Project;
 import java.util.List;
 
 /**
  *
- * @author Eduardo
+ * @author LAPR3_20152016_G27
  */
 public class OpenProjectController {
 
-	private ProjectData projectData;
-	private Project project;
-
-	public List<Project> PedeListaProjetosExistentes() {
-		this.projectData = Data.getProjectData();
-		return this.projectData.all();
+	public List<Project> getAllProjects() {
+		return Data.getProjectData().all();
 	}
 
-	public void ProjetoEscolhido(Project proj) {
-		ContextController.setOpenProject(proj);
+	public Boolean openProject(Project project) {
+		ContextController.setOpenProject(project);
+		return ContextController.getOpenProject().equals(project);
 	}
 }

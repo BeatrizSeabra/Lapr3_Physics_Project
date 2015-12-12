@@ -18,7 +18,7 @@ public class ProjectDataLocal implements ProjectData {
 	private List<Project> list = new ArrayList();
 	private Integer currentIndex = 0;
 
-	private Integer getCurrentIndex() {
+	private Integer getNextIndex() {
 		this.currentIndex++;
 		return this.currentIndex;
 	}
@@ -26,8 +26,13 @@ public class ProjectDataLocal implements ProjectData {
 	@Override
 	public Project newInstance() {
 		Project project = new Project();
-		project.setId(this.getCurrentIndex());
+		project.setId(this.getNextIndex());
 		return project;
+	}
+
+	@Override
+	public Integer size() {
+		return this.list.size();
 	}
 
 	@Override
@@ -37,22 +42,23 @@ public class ProjectDataLocal implements ProjectData {
 
 	@Override
 	public Boolean save(Project project) {
-		for (Project proj : this.list) {
-			if (proj.equals(project)) {
-				proj.setName(project.getName());
-				proj.setDescription(project.getDescription());
-				return true;
+		for (int i = 0; i < this.size(); i++) {
+			if (this.list.get(i).getId() == project.getId()) {
+				return this.list.set(i, project.clone()) != null;
 			}
 		}
 		return this.list.add(project);
 	}
 
 	@Override
+	public Project copy(Project project) {
+		return project.clone();
+	}
+
+	@Override
 	public Project clone(Project project) {
-		Project newProject = this.newInstance();
-		newProject.setId(this.getCurrentIndex());
-		newProject.setName(project.getName());
-		newProject.setDescription(project.getDescription());
+		Project newProject = this.copy(project);
+		newProject.setId(this.getNextIndex());
 		return newProject;
 	}
 
@@ -60,7 +66,7 @@ public class ProjectDataLocal implements ProjectData {
 	public Project get(Integer id) {
 		for (Project project : this.list) {
 			if (project.getId() == id) {
-				return project;
+				return this.copy(project);
 			}
 		}
 		return null;

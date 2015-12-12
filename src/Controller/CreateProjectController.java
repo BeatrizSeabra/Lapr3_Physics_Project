@@ -11,7 +11,6 @@ import Legacy.Legacy;
 import Model.Project;
 import Model.RoadNetwork;
 import Model.Vehicle;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,10 +19,8 @@ import java.util.List;
  */
 public class CreateProjectController {
 
-	private Project p_project;
 	private ProjectData projectData;
-	private List<Vehicle> vehicles;
-	private List<RoadNetwork> roadNetworks;
+	private Project project;
 
 	/**
 	 * Construtor com como parametro
@@ -31,46 +28,44 @@ public class CreateProjectController {
 	 */
 	public CreateProjectController() {
 		this.projectData = Data.getProjectData();
-	}
-
-	public List<Vehicle> loadVehicles(String filePath) {
-		this.vehicles = Legacy.importVehicles(filePath);
-		return this.vehicles;
-	}
-
-	public List<RoadNetwork> loadRoadNetwork(String filePath) {
-		this.roadNetworks = Legacy.importRoadNetwork(filePath);
-		return this.roadNetworks;
+		this.newProject();
 	}
 
 	public Boolean newProject() {
-
-		this.p_project = this.projectData.newInstance();
-		this.vehicles = new ArrayList();
-		this.roadNetworks = new ArrayList();
-		return this.p_project != null;
+		this.project = this.projectData.newInstance();
+		return this.project != null;
 	}
 
 	public Boolean setDataProject(String name, String description) {
-
-		p_project.setName(name);
-		p_project.setDescription(description);
-
-		return this.p_project.getName().equalsIgnoreCase(name) && this.p_project.
+		project.setName(name);
+		project.setDescription(description);
+		return this.project.getName().equalsIgnoreCase(name) && this.project.
 			getDescription().equalsIgnoreCase(description);
+	}
+
+	public void loadVehicles(String filePath) {
+		for (Vehicle vehicle : Legacy.importVehicles(filePath)) {
+			this.project.addVehicle(vehicle);
+		}
+	}
+
+	public void loadRoadNetwork(String filePath) {
+		for (RoadNetwork roadNetwork : Legacy.importRoadNetwork(filePath)) {
+			this.project.addRoadNetwork(roadNetwork);
+		}
+	}
+
+	public List<RoadNetwork> getProjectRoadNetworks() {
+		return this.project.getRoadNetworks();
 
 	}
 
-	public List<RoadNetwork> getAllRoadNetwork() {
-		return new ArrayList(this.roadNetworks);
-
-	}
-
-	public List<Vehicle> getAllVehicle() {
-		return new ArrayList(this.vehicles);
+	public List<Vehicle> getProjectVehicles() {
+		return this.project.getVehicles();
 	}
 
 	public Boolean registProject() {
-		return this.projectData.save(this.p_project);
+		return this.projectData.save(this.project);
 	}
+
 }

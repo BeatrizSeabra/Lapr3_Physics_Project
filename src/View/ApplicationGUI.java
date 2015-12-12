@@ -5,17 +5,51 @@
  */
 package View;
 
+import Controller.ContextController;
+import java.awt.FlowLayout;
+
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public class ApplicationGUI extends javax.swing.JFrame {
+public class ApplicationGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form MainFrame
 	 */
 	public ApplicationGUI() {
-		initComponents();
+		this.initComponents();
+		this.creation(null);
+	}
+
+	@Override
+	public void initiation() {
+		this.setLocationRelativeTo(null);
+	}
+
+	@Override
+	public void update() {
+		this.rootPane.getContentPane().removeAll();
+		if (ContextController.getOpenProject() != null) {
+			this.rootPane.getContentPane().setLayout(new FlowLayout());
+			this.rootPane.getContentPane().add(new ViewProjectGUI());
+			this.accessMenu(true);
+		} else {
+			this.initComponents();
+			this.accessMenu(false);
+		}
+		this.repaint();
+		this.revalidate();
+	}
+
+	private void accessMenu(Boolean state) {
+		this.addVehicle.setEnabled(state);
+		this.copyProject.setEnabled(state);
+		this.editProject.setEnabled(state);
+		this.jMenuItemCloseProject.setEnabled(state);
+		this.analysis.setEnabled(state);
+		this.simulation.setEnabled(state);
+		this.results.setEnabled(state);
 	}
 
 	/**
@@ -29,13 +63,17 @@ public class ApplicationGUI extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jLabelWithWarning = new javax.swing.JLabel();
+        jLabelCreateProject = new javax.swing.JLabel();
+        jLabelOpenProject = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        project = new javax.swing.JMenu();
+        closeProject = new javax.swing.JMenu();
         openProject = new javax.swing.JMenuItem();
         createProject = new javax.swing.JMenuItem();
         copyProject = new javax.swing.JMenuItem();
         editProject = new javax.swing.JMenuItem();
         addVehicle = new javax.swing.JMenuItem();
+        jMenuItemCloseProject = new javax.swing.JMenuItem();
         analysis = new javax.swing.JMenu();
         bestPath = new javax.swing.JMenuItem();
         fastestPath = new javax.swing.JMenuItem();
@@ -60,8 +98,36 @@ public class ApplicationGUI extends javax.swing.JFrame {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(500, 400));
+        setPreferredSize(new java.awt.Dimension(500, 400));
+        setSize(new java.awt.Dimension(500, 400));
 
-        project.setText("Project");
+        jLabelWithWarning.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        jLabelWithWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelWithWarning.setText("\"There is no active project!\"");
+
+        jLabelCreateProject.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabelCreateProject.setForeground(new java.awt.Color(0, 51, 255));
+        jLabelCreateProject.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelCreateProject.setText("Create a project...");
+        jLabelCreateProject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCreateProjectMouseClicked(evt);
+            }
+        });
+
+        jLabelOpenProject.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabelOpenProject.setForeground(new java.awt.Color(0, 51, 255));
+        jLabelOpenProject.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelOpenProject.setText("Open a project...");
+        jLabelOpenProject.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelOpenProjectMouseClicked(evt);
+            }
+        });
+
+        closeProject.setText("Project");
 
         openProject.setText("Open");
         openProject.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -74,7 +140,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
                 openProjectActionPerformed(evt);
             }
         });
-        project.add(openProject);
+        closeProject.add(openProject);
 
         createProject.setText("Create");
         createProject.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +148,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
                 createProjectActionPerformed(evt);
             }
         });
-        project.add(createProject);
+        closeProject.add(createProject);
 
         copyProject.setText("Copy");
         copyProject.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +156,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
                 copyProjectActionPerformed(evt);
             }
         });
-        project.add(copyProject);
+        closeProject.add(copyProject);
 
         editProject.setText("Edit");
         editProject.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +164,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
                 editProjectActionPerformed(evt);
             }
         });
-        project.add(editProject);
+        closeProject.add(editProject);
 
         addVehicle.setText("Add Vehicle");
         addVehicle.addActionListener(new java.awt.event.ActionListener() {
@@ -106,9 +172,17 @@ public class ApplicationGUI extends javax.swing.JFrame {
                 addVehicleActionPerformed(evt);
             }
         });
-        project.add(addVehicle);
+        closeProject.add(addVehicle);
 
-        jMenuBar1.add(project);
+        jMenuItemCloseProject.setText("Close Project");
+        jMenuItemCloseProject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCloseProjectActionPerformed(evt);
+            }
+        });
+        closeProject.add(jMenuItemCloseProject);
+
+        jMenuBar1.add(closeProject);
 
         analysis.setText("Analysis");
 
@@ -195,11 +269,27 @@ public class ApplicationGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(155, Short.MAX_VALUE)
+                .addComponent(jLabelWithWarning)
+                .addGap(145, 145, 145))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelCreateProject)
+                    .addComponent(jLabelOpenProject))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jLabelWithWarning)
+                .addGap(57, 57, 57)
+                .addComponent(jLabelCreateProject)
+                .addGap(46, 46, 46)
+                .addComponent(jLabelOpenProject)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,7 +304,7 @@ public class ApplicationGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createProjectActionPerformed
 
     private void copyProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyProjectActionPerformed
-		// TODO add your handling code here:
+		new CopyProjectGUI(this);
     }//GEN-LAST:event_copyProjectActionPerformed
 
     private void editProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editProjectActionPerformed
@@ -245,10 +335,24 @@ public class ApplicationGUI extends javax.swing.JFrame {
 		new OpenProjectGUI(this);
     }//GEN-LAST:event_openProjectActionPerformed
 
+    private void jLabelCreateProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCreateProjectMouseClicked
+		this.createProjectActionPerformed(null);
+    }//GEN-LAST:event_jLabelCreateProjectMouseClicked
+
+    private void jLabelOpenProjectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelOpenProjectMouseClicked
+		this.openProjectActionPerformed(null);
+    }//GEN-LAST:event_jLabelOpenProjectMouseClicked
+
+    private void jMenuItemCloseProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCloseProjectActionPerformed
+		ContextController.setOpenProject(null);
+		this.update();
+    }//GEN-LAST:event_jMenuItemCloseProjectActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addVehicle;
     private javax.swing.JMenu analysis;
     private javax.swing.JMenuItem bestPath;
+    private javax.swing.JMenu closeProject;
     private javax.swing.JMenuItem copyProject;
     private javax.swing.JMenuItem copySimulation;
     private javax.swing.JMenuItem createProject;
@@ -260,13 +364,16 @@ public class ApplicationGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem filterResults;
     private javax.swing.JMenu globalResults;
     private javax.swing.JMenuItem gnuplot;
+    private javax.swing.JLabel jLabelCreateProject;
+    private javax.swing.JLabel jLabelOpenProject;
+    private javax.swing.JLabel jLabelWithWarning;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemCloseProject;
     private javax.swing.JMenuItem mostEfficientPath;
     private javax.swing.JMenuItem newSimulation;
     private javax.swing.JMenuItem openProject;
-    private javax.swing.JMenu project;
     private javax.swing.JMenu results;
     private javax.swing.JMenuItem resultsExport;
     private javax.swing.JMenuItem resultsSummary;

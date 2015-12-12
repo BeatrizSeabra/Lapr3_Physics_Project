@@ -17,7 +17,8 @@ public class Project {
 	private Integer id;
 	private String name;
 	private String description;
-	private List<Vehicle> vehicles;
+	private List<RoadNetwork> roadNetworks = new ArrayList();
+	private List<Vehicle> vehicles = new ArrayList();
 
 	/**
 	 * @return the id
@@ -61,6 +62,14 @@ public class Project {
 		this.description = description;
 	}
 
+	public Boolean addRoadNetwork(RoadNetwork roadNetwork) {
+		return this.roadNetworks.add(roadNetwork);
+	}
+
+	public List<RoadNetwork> getRoadNetworks() {
+		return new ArrayList(this.roadNetworks);
+	}
+
 	public Boolean addVehicle(Vehicle vehicle) {
 		return this.vehicles.add(vehicle);
 	}
@@ -86,7 +95,38 @@ public class Project {
 
 	@Override
 	public int hashCode() {
-		return 11 * this.id + 29 * this.getClass().hashCode();
+		int hash = 29;
+		hash += 11 * this.id.hashCode();
+		hash += 11 * this.name.hashCode();
+		hash += 11 * this.description.hashCode();
+		for (RoadNetwork roadNetwork : this.roadNetworks) {
+			hash += 7 * roadNetwork.hashCode();
+		}
+		for (Vehicle vehicle : this.vehicles) {
+			hash += 7 * vehicle.hashCode();
+		}
+		return hash;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder(this.id.toString()).append(" - ").
+			append(this.name).toString();
+	}
+
+	@Override
+	public Project clone() {
+		Project project = new Project();
+		project.setId(this.id);
+		project.setName(this.name);
+		project.setDescription(this.description);
+		for (RoadNetwork roadNetwork : this.roadNetworks) {
+			project.addRoadNetwork(roadNetwork);
+		}
+		for (Vehicle vehicle : this.vehicles) {
+			project.addVehicle(vehicle);
+		}
+		return project;
 	}
 
 }

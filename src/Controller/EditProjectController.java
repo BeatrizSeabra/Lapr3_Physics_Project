@@ -18,21 +18,24 @@ public class EditProjectController {
 	private ProjectData projectData;
 	private Project project;
 
-	public EditProjectController() {
+	public void initiation() {
 		this.projectData = Data.getProjectData();
 		this.project = ContextController.getOpenProject();
 	}
 
-	public Boolean defineProject(String name, String description) {
+	public Project getProject() {
+		return this.project;
+	}
+
+	public Boolean editProject(String name, String description) {
 		this.project = ContextController.getOpenProject();
-		System.out.println(this.project);
 		this.project.setName(name);
 		this.project.setDescription(description);
 		return this.project.getName().equalsIgnoreCase(name) && this.project.
 			getDescription().equalsIgnoreCase(description);
 	}
 
-	public Boolean registProject() {
+	public Boolean saveProject() {
 		return this.projectData.save(this.project);
 	}
 }

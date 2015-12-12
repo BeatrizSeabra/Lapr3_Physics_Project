@@ -20,15 +20,24 @@ public class AddVehiclesController {
 	private Project project;
 	private List<Vehicle> vehicles;
 
-	public List<Vehicle> loadVehicles(String filePath) {
-		this.vehicles = Legacy.importVehicles(filePath);
+	public void initiation() {
+		this.project = ContextController.getOpenProject();
+		this.vehicles = this.project.getVehicles();
+	}
+
+	public List<Vehicle> getVehicles() {
 		return this.vehicles;
 	}
 
+	public Boolean loadVehicles(String filePath) {
+		return this.vehicles.addAll(Legacy.importVehicles(filePath));
+	}
+
 	public Boolean saveProjectVehicles() {
-		this.project = ContextController.getOpenProject();
 		for (Vehicle vehicle : this.vehicles) {
-			this.project.addVehicle(vehicle);
+			if (!this.project.getVehicles().contains(vehicle)) {
+				this.project.addVehicle(vehicle);
+			}
 		}
 		return Data.getProjectData().save(this.project);
 	}

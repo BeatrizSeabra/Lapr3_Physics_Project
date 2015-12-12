@@ -16,9 +16,13 @@ public interface ProjectData {
 
 	Project newInstance();
 
+	Integer size();
+
 	List<Project> all();
 
 	Boolean save(Project project);
+
+	Project copy(Project project);
 
 	Project clone(Project project);
 
