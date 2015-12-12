@@ -23,7 +23,7 @@ import org.junit.Test;
  */
 public class UCP05AddVehiclesTest {
 
-	private AddVehiclesController avController;
+	private AddVehiclesController addVehiclesController;
 	private Project project;
 	private String filePathVehicles;
 
@@ -33,7 +33,7 @@ public class UCP05AddVehiclesTest {
 		this.project.setName("Project Name");
 		this.project.setDescription("Project Description");
 		ContextController.setOpenProject(this.project);
-		this.avController = new AddVehiclesController();
+		this.addVehiclesController = new AddVehiclesController();
 		this.filePathVehicles = "test/Files/VehiclesXMLTest.xml";
 	}
 
@@ -59,10 +59,11 @@ public class UCP05AddVehiclesTest {
 	@Test
 	public void testUCP05Functional() {
 		System.out.println("testUCP05Functional");
-		List<Vehicle> vehicles = this.avController.
-			loadVehicles(this.filePathVehicles);
+		this.addVehiclesController.initiation();
+		this.addVehiclesController.loadVehicles(this.filePathVehicles);
+		List<Vehicle> vehicles = this.addVehiclesController.getVehicles();
 		assertEquals(vehicles.size(), 0);
-		Boolean save = this.avController.saveProjectVehicles();
+		Boolean save = this.addVehiclesController.saveProjectVehicles();
 		assertEquals(save, true);
 		for (Vehicle vehicle : vehicles) {
 			if (!this.project.getVehicles().contains(vehicle)) {

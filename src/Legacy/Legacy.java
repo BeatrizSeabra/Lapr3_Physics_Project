@@ -12,6 +12,7 @@ import System.Settings;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,9 +67,37 @@ public abstract class Legacy {
 		}
 	}
 
+	public static List<String[]> importScalesMeasures() {
+		List<String> configurations = Settings.
+			getConfiguration("scalesMeasures");
+		if (configurations.isEmpty()) {
+			Error.
+				setErrorMessage("Key value scalesMeasures not defined in the configuration file!");
+			return null;
+		}
+		String file = Legacy.readFile(configurations.get(0));
+		List<String[]> list = new ArrayList();
+		for (String line : file.split("\\n")) {
+			line = line.trim();
+			if (!line.isEmpty()) {
+				String data[] = line.split(";");
+				if (data.length == 3) {
+					list.add(data);
+				}
+			}
+		}
+		return list;
+	}
+
 	public static List<Vehicle> importVehicles(String filePath) {
-		String data = Legacy.readFile(filePath);
+		filePath = filePath.trim();
+		if (filePath.isEmpty() || filePath.split(".").length < 2) {
+			Error.
+				setErrorMessage("Could not get the file extension: " + filePath);
+			return null;
+		}
 		String extension = filePath.split(".")[filePath.split(".").length - 1];
+		String data = Legacy.readFile(filePath);
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getConfiguration("importVehicles"));
 		for (Object object : objects) {
@@ -76,7 +105,6 @@ public abstract class Legacy {
 			if (vehicleImport != null && vehicleImport.getExtension().
 				equals(extension)) {
 				return vehicleImport.importData(data);
-
 			}
 		}
 		Error.setErrorMessage("Could not load this extension: ");
@@ -84,8 +112,13 @@ public abstract class Legacy {
 	}
 
 	public static List<RoadNetwork> importRoadNetwork(String filePath) {
-		String data = Legacy.readFile(filePath);
+		if (filePath.isEmpty() || filePath.split(".").length < 2) {
+			Error.
+				setErrorMessage("Could not get the file extension: " + filePath);
+			return null;
+		}
 		String extension = filePath.split(".")[filePath.split(".").length - 1];
+		String data = Legacy.readFile(filePath);
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getConfiguration("importRoadNetwork"));
 		for (Object object : objects) {

@@ -30,7 +30,11 @@ public class AddVehiclesController {
 	}
 
 	public Boolean loadVehicles(String filePath) {
-		return this.vehicles.addAll(Legacy.importVehicles(filePath));
+		List<Vehicle> vehicles = Legacy.importVehicles(filePath);
+		if (vehicles != null) {
+			return this.vehicles.addAll(vehicles);
+		}
+		return false;
 	}
 
 	public Boolean saveProjectVehicles() {

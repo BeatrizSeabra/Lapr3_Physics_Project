@@ -95,7 +95,7 @@ public class Project {
 
 	@Override
 	public int hashCode() {
-		int hash = 29;
+		int hash = 29 * this.getClass().hashCode();
 		hash += 11 * this.id.hashCode();
 		hash += 11 * this.name.hashCode();
 		hash += 11 * this.description.hashCode();

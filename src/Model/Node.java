@@ -7,26 +7,11 @@ package Model;
 
 /**
  *
- * @author lapr3_1516_g27
+ * @author LAPR3_20152016_G27
  */
-public class Vehicle {
+public class Node {
 
-	private Integer id;
 	private String name;
-
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the name
@@ -50,7 +35,7 @@ public class Vehicle {
 		if (this.getClass() != obj.getClass()) {
 			return false;
 		}
-		Vehicle other = (Vehicle) obj;
+		Node other = (Node) obj;
 		if (other == null) {
 			return false;
 		}
@@ -59,8 +44,7 @@ public class Vehicle {
 
 	@Override
 	public int hashCode() {
-		int hash = 29 * this.getClass().hashCode();
-		hash += 11 * this.id.hashCode();
+		int hash = 29 * this.getClass().hashCode();;
 		hash += 11 * this.name.hashCode();
 		return hash;
 	}
