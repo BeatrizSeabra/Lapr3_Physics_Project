@@ -6,7 +6,7 @@
 		<node id="n2"/>
 	</node_list>
 	<section_list>
-		<road_section begin="n0" end="n01">
+		<road_section begin="n0" end="n1">
 			<road>"E01"</road>
 			<typology>"regular road"</typology>
 			<direction>"bidirectional"</direction>

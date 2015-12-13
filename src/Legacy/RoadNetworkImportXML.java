@@ -5,7 +5,12 @@
  */
 package Legacy;
 
+import Model.Node;
+import Model.Road;
 import Model.RoadNetwork;
+import Model.Section;
+import Model.Segment;
+import Physics.Measure;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +33,17 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 	public List<RoadNetwork> importData(String data) {
 		List<RoadNetwork> networks = new ArrayList();
 		try {
-			String text = "", road = "", typology = "", direction = "", toll = "", wind_direction = "", wind_speed = "",
+			String text = "", idNetwork = "", networkDescription = "", idNode = "", roadBegin = "", roadEnd = "",
+				segmentId = "", roadName = "", typology = "", direction = "", toll = "", wind_direction = "", wind_speed = "",
 				height = "", slope = "", length = "", rrc = "", max_velocity = "", min_velocity = "", number_vehicles = "";
+			ArrayList<Node> listNodes = null;
+			ArrayList<Segment> listSegments = null;
+			ArrayList<Section> listSections = null;
+			RoadNetwork roadNetwork = null;
+			Node node = null;
+			Road road = null;
+			Section section = null;
+			Segment segment = null;
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = factory.
 				createXMLStreamReader(new StringReader(data));
@@ -38,15 +52,31 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 				switch (event) {
 					case XMLStreamConstants.START_ELEMENT: {
 						switch (reader.getLocalName()) {
+							case "Network":
+								roadNetwork = new RoadNetwork();
+								idNetwork = reader.getAttributeValue(0);
+								networkDescription = reader.getAttributeValue(1);
+								break;
+							case "node_list":
+								listNodes = new ArrayList();
+							case "node":
+								idNode = reader.getAttributeValue(0);
+								node = new Node();
+								node.setName(idNode);
+								roadNetwork.addNode(node);
+								break;
 							case "section_list":
-								System.out.println("Section List:");
+								listSections = new ArrayList();
 								break;
 							case "road_section":
-								System.out.println("Road Section:");
+								roadNetwork = null;
+								section = null;
+								roadBegin = reader.getAttributeValue(0);
+								roadEnd = reader.getAttributeValue(1);
 								break;
-							// Secção dos roads
 							case "road":
-								road = "";
+								road = null;
+								roadName = "";
 								break;
 							case "typology":
 								typology = "";
@@ -63,16 +93,12 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 							case "wind_speed":
 								wind_speed = "";
 								break;
-							//Secção dos segments
 							case "segment_list":
-								System.out.
-									println("Road: " + road
-										+ "\ntypology: " + typology
-										+ "\ndirection: " + direction
-										+ "\nToll: " + toll
-										+ "\nWind diretion: " + wind_direction
-										+ "\nWind Speed: " + wind_speed);
-								System.out.println("Lista Segments:");
+								listSegments = new ArrayList();
+								break;
+							case "segment":
+								segment = null;
+								segmentId = reader.getAttributeValue(0);
 								break;
 							case "height":
 								height = "";
@@ -104,9 +130,10 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 					}
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
-							// Secção dos roads
 							case "road":
-								road = text;
+								roadName = text;
+								road = new Road();
+								road.setName(roadName);
 								break;
 							case "typology":
 								typology = text;
@@ -123,7 +150,6 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 							case "wind_speed":
 								wind_speed = text;
 								break;
-							//Secção dos segments
 							case "height":
 								height = text;
 								break;
@@ -146,20 +172,49 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 								number_vehicles = text;
 								break;
 							case "segment":
-								System.out.
-									println("Segment: \nHeight: " + height + "\nSlope: " + slope
-										+ "\nLength: " + length + "\nRCC: " + rrc + "\nMax V: "
-										+ max_velocity + "\nMin V: " + min_velocity + "\nNumber veichles: "
-										+ number_vehicles);
-								break;
-							case "segment_list":
-								System.out.println();
+								segment = new Segment();
+								segment.setName(segmentId);
+								segment.setHeight(Double.parseDouble(height));
+								slope = slope.substring(0, slope.length() - 1);
+								segment.setSlope(Double.parseDouble(slope));
+								String[] auxiliar = length.split(" ");
+								segment.setLength(new Measure(Double.
+									parseDouble(auxiliar[0]), auxiliar[1]));
+								segment.setRrc(Double.parseDouble(rrc));
+								auxiliar = max_velocity.split(" ");
+								segment.setMaxVelocity(new Measure(Double.
+									parseDouble(auxiliar[0]), auxiliar[1]));
+								auxiliar = min_velocity.split(" ");
+								segment.setMinVelocity(new Measure(Double.
+									parseDouble(auxiliar[0]), auxiliar[1]));
+								segment.setNumberVehicles(Double.
+									parseDouble(number_vehicles));
+								listSegments.add(segment);
 								break;
 							case "road_section":
-								System.out.println();
-								break;
-							case "section_list":
-								System.out.println();
+								section = new Section();
+								road = new Road();
+								road.setName(roadName);
+								section.setRoad(road.getName());
+								section.setTypology(typology);
+								section.setDirection(direction);
+								section.setToll(Double.parseDouble(toll));
+								section.setWindDirection(Double.
+									parseDouble(wind_direction));
+								auxiliar = wind_speed.split(" ");
+								section.setWindSpeed(new Measure(Double.
+									parseDouble(auxiliar[0]), auxiliar[1]));
+								for (Segment seg : listSegments) {
+									section.addSegment(seg);
+								}
+								listSections.add(section);
+								roadNetwork = new RoadNetwork();
+								Node nodeBegin = new Node();
+								nodeBegin.setName(roadBegin);
+								Node nodeEnd = new Node();
+								nodeEnd.setName(roadEnd);
+								roadNetwork.
+									addSection(nodeBegin, nodeEnd, section);
 								break;
 						}
 						break;
