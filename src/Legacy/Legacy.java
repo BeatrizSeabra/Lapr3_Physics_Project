@@ -9,11 +9,13 @@ import Model.RoadNetwork;
 import Model.Vehicle;
 import System.Error;
 import System.Settings;
+import System.Util;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -21,6 +23,10 @@ import java.util.Scanner;
  * @author LAPR3_20152016_G27
  */
 public abstract class Legacy {
+
+	public static String getExtension(String filePath) {
+		return filePath.substring(filePath.lastIndexOf(".")).replace(".", "");
+	}
 
 	public static void writeFile(String filePath, String text,
 								 boolean additional) {
@@ -33,10 +39,6 @@ public abstract class Legacy {
 			escritor.write(text);
 			escritor.close();
 		} catch (Exception ex) {
-//			//Verificar se dar erro se gravar no ficheiro de log e esse devolver erro
-//			System.out.println(Dados.
-//				mensagemLog(new StringBuffer("Erro ao gravar no ficheiro ").
-//					append(nomeFicheiro).append(" ").append(ex).toString()));
 			Error.
 				setErrorMessage(new StringBuffer("Error writing to file ").
 					append(filePath).append(" ").append(ex).toString());
@@ -67,66 +69,64 @@ public abstract class Legacy {
 		}
 	}
 
-	public static List<String[]> importScalesMeasures() {
-		List<String> configurations = Settings.
-			getConfiguration("scalesMeasures");
-		if (configurations.isEmpty()) {
-			Error.
-				setErrorMessage("Key value scalesMeasures not defined in the configuration file!");
+	public static Map<String, Double> importScalesMeasures(String filePath) {
+		Map<String, Double> map = new HashMap();
+		String file = Legacy.readFile(filePath);
+		if (file == null) {
 			return null;
 		}
-		String file = Legacy.readFile(configurations.get(0));
-		List<String[]> list = new ArrayList();
 		for (String line : file.split("\\n")) {
 			line = line.trim();
 			if (!line.isEmpty()) {
 				String data[] = line.split(";");
 				if (data.length == 3) {
-					list.add(data);
+					map.put(data[0] + data[1], Util.toDouble(data[2]));
 				}
 			}
 		}
-		return list;
-	}
 
-	public static List<Vehicle> importVehicles(String filePath) {
-		filePath = filePath.trim();
-		if (filePath.isEmpty() || filePath.split(".").length < 2) {
-			Error.
-				setErrorMessage("Could not get the file extension: " + filePath);
-			return null;
-		}
-		String extension = filePath.split(".")[filePath.split(".").length - 1];
-		String data = Legacy.readFile(filePath);
-		List<Object> objects = Settings.loadAllClass(Settings.
-			getConfiguration("importVehicles"));
-		for (Object object : objects) {
-			VehicleImport vehicleImport = (VehicleImport) object;
-			if (vehicleImport != null && vehicleImport.getExtension().
-				equals(extension)) {
-				return vehicleImport.importData(data);
-			}
-		}
-		Error.setErrorMessage("Could not load this extension: ");
-		return null;
+		return map;
 	}
 
 	public static List<RoadNetwork> importRoadNetwork(String filePath) {
-		if (filePath.isEmpty() || filePath.split(".").length < 2) {
+		filePath = filePath.trim();
+		String extension = Legacy.getExtension(filePath);
+		if (extension == null || extension.isEmpty()) {
 			Error.
 				setErrorMessage("Could not get the file extension: " + filePath);
 			return null;
 		}
-		String extension = filePath.split(".")[filePath.split(".").length - 1];
 		String data = Legacy.readFile(filePath);
 		List<Object> objects = Settings.loadAllClass(Settings.
-			getConfiguration("importRoadNetwork"));
+			getOptions("RoadNetworkImportClass"));
 		for (Object object : objects) {
 			RoadNetworkImport roadNetworkImport = (RoadNetworkImport) object;
 			if (roadNetworkImport != null && roadNetworkImport.getExtension().
 				equals(extension)) {
 				return roadNetworkImport.importData(data);
 
+			}
+		}
+		Error.setErrorMessage("Could not load this extension: ");
+		return null;
+	}
+
+	public static List<Vehicle> importVehicles(String filePath) {
+		filePath = filePath.trim();
+		String extension = Legacy.getExtension(filePath);
+		if (extension == null || extension.isEmpty()) {
+			Error.
+				setErrorMessage("Could not get the file extension: " + filePath);
+			return null;
+		}
+		String data = Legacy.readFile(filePath);
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("VehiclesImportClass"));
+		for (Object object : objects) {
+			VehicleImport vehicleImport = (VehicleImport) object;
+			if (vehicleImport != null && vehicleImport.getExtension().
+				equals(extension)) {
+				return vehicleImport.importData(data);
 			}
 		}
 		Error.setErrorMessage("Could not load this extension: ");

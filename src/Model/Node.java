@@ -11,7 +11,11 @@ package Model;
  */
 public class Node {
 
-	private String name;
+	private String name = "none";
+
+	public Node(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * @return the name
@@ -44,9 +48,14 @@ public class Node {
 
 	@Override
 	public int hashCode() {
-		int hash = 29 * this.getClass().hashCode();;
+		int hash = 29 * this.getClass().hashCode();
 		hash += 11 * this.name.hashCode();
 		return hash;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
 	}
 
 }

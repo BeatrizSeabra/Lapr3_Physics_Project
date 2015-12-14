@@ -27,4 +27,31 @@ public class Road {
 		this.name = name;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Road other = (Road) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.name.hashCode();
+		return hash;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
 }

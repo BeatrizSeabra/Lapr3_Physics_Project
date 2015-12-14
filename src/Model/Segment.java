@@ -134,4 +134,38 @@ public class Segment {
 		this.numberVehicles = numberVehicles;
 	}
 
+	@Override
+	public String toString() {
+		return "Segment " + this.name;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Segment other = (Segment) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.name.hashCode();
+		hash += 11 * this.height.hashCode();
+		hash += 11 * this.slope.hashCode();
+		hash += 11 * this.length.hashCode();
+		hash += 11 * this.rrc.hashCode();
+		hash += 11 * this.maxVelocity.hashCode();
+		hash += 11 * this.minVelocity.hashCode();
+		hash += 11 * this.numberVehicles.hashCode();
+		return hash;
+	}
+
 }

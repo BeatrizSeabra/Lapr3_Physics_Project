@@ -5,6 +5,9 @@
  */
 package System;
 
+import Legacy.Legacy;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author LAPR3_20152016_G27
@@ -12,13 +15,34 @@ package System;
 public abstract class Error {
 
 	static private String errorMessage;
+	static private String keyLogFilePath = "LogFilePath";
+
+	static public String getLogFilePath() {
+		return Settings.getOption(Error.keyLogFilePath);
+	}
 
 	static public void setErrorMessage(String errorMessage) {
+		Error.log(errorMessage);
 		Error.errorMessage = errorMessage;
 	}
 
 	static public String getErrorMessage() {
 		return Error.errorMessage;
+	}
+
+	static public void log(String occurrence) {
+		String text = new StringBuilder(LocalDateTime.now().toString().
+			replace('T', ' ')).append(": ").append(occurrence.
+				replaceAll("\n", " - ")).append("\n\n").toString();
+		Legacy.writeFile(Error.getLogFilePath(), text, true);
+	}
+
+	static public String log() {
+		return Legacy.readFile(Error.getLogFilePath());
+	}
+
+	static public void clearLog() {
+		Legacy.writeFile(Error.getLogFilePath(), " ", false);
 	}
 
 }

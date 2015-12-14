@@ -85,9 +85,17 @@ public class ProjectTest {
 	@Test
 	public void testHashCode() {
 		System.out.println("testHashCode");
+		Integer expResult = 29 * this.project.getClass().hashCode();
+		expResult += 11 * this.project.getId().hashCode();
+		expResult += 11 * this.project.getName().hashCode();
+		expResult += 11 * this.project.getDescription().hashCode();
+		for (RoadNetwork roadNetwork : this.project.getRoadNetworks()) {
+			expResult += 7 * roadNetwork.hashCode();
+		}
+		for (Vehicle vehicle : this.project.getVehicles()) {
+			expResult += 7 * vehicle.hashCode();
+		}
 		Integer result = this.project.hashCode();
-		Integer expResult = 11 * this.project.getId() + 29 * Project.class.
-			hashCode();
 		assertEquals(expResult, result);
 	}
 

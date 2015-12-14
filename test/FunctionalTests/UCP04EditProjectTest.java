@@ -8,6 +8,7 @@ package FunctionalTests;
 import Controller.ContextController;
 import Controller.EditProjectController;
 import Model.Project;
+import System.Settings;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -25,6 +26,7 @@ public class UCP04EditProjectTest {
 	private Project project;
 
 	public UCP04EditProjectTest() {
+		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.project = new Project();
 		this.project.setId(1);
 		this.project.setName("Project Name");

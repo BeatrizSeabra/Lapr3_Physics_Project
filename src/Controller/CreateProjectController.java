@@ -22,16 +22,8 @@ public class CreateProjectController {
 	private ProjectData projectData;
 	private Project project;
 
-	/**
-	 * Construtor com como parametro
-	 *
-	 */
-	public CreateProjectController() {
+	public Boolean initiation() {
 		this.projectData = Data.getProjectData();
-		this.newProject();
-	}
-
-	public Boolean newProject() {
 		this.project = this.projectData.newInstance();
 		return this.project != null;
 	}

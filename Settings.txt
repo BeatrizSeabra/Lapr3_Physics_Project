@@ -1,9 +1,0 @@
-# Class of Data System Persistence
-ProjectData=Data.ProjectDataLocal
-
-# Scales Measures File
-scalesMeasures=scalesMeasures.csv
-
-# Import Class
-importRoadNetwork=Legacy.RoadNetworkImportXML
-importVehicles=Legacy.VehicleImportXML

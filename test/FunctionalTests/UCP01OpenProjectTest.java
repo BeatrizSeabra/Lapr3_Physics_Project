@@ -9,6 +9,7 @@ import Controller.ContextController;
 import Controller.OpenProjectController;
 import Data.Data;
 import Model.Project;
+import System.Settings;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,6 +28,7 @@ public class UCP01OpenProjectTest {
 	private Project project;
 
 	public UCP01OpenProjectTest() {
+		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.project = new Project();
 		this.project.setId(1);
 		this.project.setName("Project Name");

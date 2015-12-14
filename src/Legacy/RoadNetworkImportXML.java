@@ -6,11 +6,12 @@
 package Legacy;
 
 import Model.Node;
-import Model.Road;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
 import Physics.Measure;
+import System.Error;
+import System.Util;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,17 +34,13 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 	public List<RoadNetwork> importData(String data) {
 		List<RoadNetwork> networks = new ArrayList();
 		try {
-			String text = "", idNetwork = "", networkDescription = "", idNode = "", roadBegin = "", roadEnd = "",
-				segmentId = "", roadName = "", typology = "", direction = "", toll = "", wind_direction = "", wind_speed = "",
-				height = "", slope = "", length = "", rrc = "", max_velocity = "", min_velocity = "", number_vehicles = "";
-			ArrayList<Node> listNodes = null;
-			ArrayList<Segment> listSegments = null;
-			ArrayList<Section> listSections = null;
 			RoadNetwork roadNetwork = null;
-			Node node = null;
-			Road road = null;
+			String text = null, road = null, typology = null, direction = null, windSpeedUnit = null, lengthUnit = null, maxVelocityUnit = null, minVelocityUnit = null;
+			Double toll = null, windDirection = null, windSpeed = null, height = null, slope = null, length = null, rrc = null, maxVelocity = null, minVelocity = null, numberVehicles = null;
+			Node nodeBegin = null, nodeEnd = null;
 			Section section = null;
 			Segment segment = null;
+			List<Segment> segments = null;
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = factory.
 				createXMLStreamReader(new StringReader(data));
@@ -54,86 +51,42 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 						switch (reader.getLocalName()) {
 							case "Network":
 								roadNetwork = new RoadNetwork();
-								idNetwork = reader.getAttributeValue(0);
-								networkDescription = reader.getAttributeValue(1);
+								reader.getAttributeValue(0).trim();
+								reader.getAttributeValue(1).trim();
+								networks.add(roadNetwork);
 								break;
-							case "node_list":
-								listNodes = new ArrayList();
 							case "node":
-								idNode = reader.getAttributeValue(0);
-								node = new Node();
-								node.setName(idNode);
-								roadNetwork.addNode(node);
-								break;
-							case "section_list":
-								listSections = new ArrayList();
+								roadNetwork.addNode(new Node(reader.
+									getAttributeValue(0).trim()));
 								break;
 							case "road_section":
-								roadNetwork = null;
-								section = null;
-								roadBegin = reader.getAttributeValue(0);
-								roadEnd = reader.getAttributeValue(1);
-								break;
-							case "road":
-								road = null;
-								roadName = "";
-								break;
-							case "typology":
-								typology = "";
-								break;
-							case "direction":
-								direction = "";
-								break;
-							case "toll":
-								toll = "";
-								break;
-							case "wind_direction":
-								wind_direction = "";
-								break;
-							case "wind_speed":
-								wind_speed = "";
+								section = new Section();
+								nodeBegin = new Node(reader.getAttributeValue(0).
+									trim());
+								nodeEnd = new Node(reader.getAttributeValue(1).
+									trim());
 								break;
 							case "segment_list":
-								listSegments = new ArrayList();
+								segments = new ArrayList();
 								break;
 							case "segment":
-								segment = null;
-								segmentId = reader.getAttributeValue(0);
+								segment = new Segment();
+								segment.setName(reader.getAttributeValue(0).
+									trim());
 								break;
-							case "height":
-								height = "";
-								break;
-							case "slope":
-								slope = "";
-								break;
-							case "length":
-								length = "";
-								break;
-							case "rrc":
-								rrc = "";
-								break;
-							case "max_velocity":
-								max_velocity = "";
-								break;
-							case "min_velocity":
-								min_velocity = "";
-								break;
-							case "number_vehicles":
-								number_vehicles = "";
+							default:
 								break;
 						}
 						break;
 					}
 					case XMLStreamConstants.CHARACTERS: {
-						text = reader.getText().trim();
+						text = reader.getText().replaceAll("\"", "").trim();
 						break;
 					}
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
 							case "road":
-								roadName = text;
-								road = new Road();
-								road.setName(roadName);
+								road = text;
 								break;
 							case "typology":
 								typology = text;
@@ -142,88 +95,89 @@ public class RoadNetworkImportXML implements RoadNetworkImport {
 								direction = text;
 								break;
 							case "toll":
-								toll = text;
+								toll = Util.toDouble(text);
 								break;
 							case "wind_direction":
-								wind_direction = text;
+								windDirection = Util.toDouble(text);
 								break;
 							case "wind_speed":
-								wind_speed = text;
-								break;
-							case "height":
-								height = text;
-								break;
-							case "slope":
-								slope = text;
-								break;
-							case "length":
-								length = text;
-								break;
-							case "rrc":
-								rrc = text;
-								break;
-							case "max_velocity":
-								max_velocity = text;
-								break;
-							case "min_velocity":
-								min_velocity = text;
-								break;
-							case "number_vehicles":
-								number_vehicles = text;
-								break;
-							case "segment":
-								segment = new Segment();
-								segment.setName(segmentId);
-								segment.setHeight(Double.parseDouble(height));
-								slope = slope.substring(0, slope.length() - 1);
-								segment.setSlope(Double.parseDouble(slope));
-								String[] auxiliar = length.split(" ");
-								segment.setLength(new Measure(Double.
-									parseDouble(auxiliar[0]), auxiliar[1]));
-								segment.setRrc(Double.parseDouble(rrc));
-								auxiliar = max_velocity.split(" ");
-								segment.setMaxVelocity(new Measure(Double.
-									parseDouble(auxiliar[0]), auxiliar[1]));
-								auxiliar = min_velocity.split(" ");
-								segment.setMinVelocity(new Measure(Double.
-									parseDouble(auxiliar[0]), auxiliar[1]));
-								segment.setNumberVehicles(Double.
-									parseDouble(number_vehicles));
-								listSegments.add(segment);
+								String windSpeedData[] = text.split(" ");
+								windSpeed = Util.toDouble(windSpeedData[0].
+									trim());
+								windSpeedUnit = windSpeedData[1].trim();
 								break;
 							case "road_section":
-								section = new Section();
-								road = new Road();
-								road.setName(roadName);
-								section.setRoad(road.getName());
+								section.setRoad(road);
 								section.setTypology(typology);
 								section.setDirection(direction);
-								section.setToll(Double.parseDouble(toll));
-								section.setWindDirection(Double.
-									parseDouble(wind_direction));
-								auxiliar = wind_speed.split(" ");
-								section.setWindSpeed(new Measure(Double.
-									parseDouble(auxiliar[0]), auxiliar[1]));
-								for (Segment seg : listSegments) {
-									section.addSegment(seg);
-								}
-								listSections.add(section);
-								roadNetwork = new RoadNetwork();
-								Node nodeBegin = new Node();
-								nodeBegin.setName(roadBegin);
-								Node nodeEnd = new Node();
-								nodeEnd.setName(roadEnd);
+								section.setToll(toll);
+								section.setWindDirection(windDirection);
+								section.
+									setWindSpeed(new Measure(windSpeed, windSpeedUnit));
 								roadNetwork.
 									addSection(nodeBegin, nodeEnd, section);
+								break;
+							case "height":
+								height = Util.toDouble(text);
+								break;
+							case "slope":
+								slope = Util.toDouble(text.split("%")[0]);
+								break;
+							case "length":
+								String lengthData[] = text.split(" ");
+								length = Util.toDouble(lengthData[0]);
+								lengthUnit = lengthData[1].trim();
+								break;
+							case "rrc":
+								rrc = Util.toDouble(text);
+								break;
+							case "max_velocity":
+								String maxVelocityData[] = text.split(" ");
+								maxVelocity = Util.toDouble(maxVelocityData[0]);
+								maxVelocityUnit = maxVelocityData[1].trim();
+								break;
+							case "min_velocity":
+								String minVelocityData[] = text.split(" ");
+								minVelocity = Util.toDouble(minVelocityData[0]);
+								minVelocityUnit = minVelocityData[1].trim();
+								break;
+							case "number_vehicles":
+								numberVehicles = Util.toDouble(text);
+								break;
+							case "segment":
+								segment.setHeight(height);
+								segment.setSlope(slope);
+								segment.
+									setLength(new Measure(length, lengthUnit));
+								segment.setRrc(rrc);
+								segment.
+									setMaxVelocity(new Measure(maxVelocity, maxVelocityUnit));
+								segment.
+									setMinVelocity(new Measure(minVelocity, minVelocityUnit));
+								segment.setNumberVehicles(numberVehicles);
+								segments.add(segment);
+								break;
+							case "segment_list":
+								for (Segment seg : segments) {
+									section.addSegment(seg);
+								}
+								segments = null;
+								break;
+							default:
 								break;
 						}
 						break;
 					}
+					default:
+						break;
 				}
 			}
 		} catch (Exception ex) {
-			System.out.println(ex.getMessage());
+			Error.
+				setErrorMessage("The XML content contains errors that prevent the loading of data to the road networks list: " + ex);
+			return null;
 		}
 		return networks;
 	}
+
 }

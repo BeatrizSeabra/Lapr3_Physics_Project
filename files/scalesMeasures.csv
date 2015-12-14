@@ -1,3 +1,22 @@
+mile;km;1,6093
+ft;m;0,3048
+in;m;0,0254
+in;cm;2,54
+km/h;m/s;0,2778
+mph;km/h;1,609
+mph;m/s;0,447
+rpm;rad/s;0,105
+G;m/s2;9,8
+G;lb/s2;32,1
+lb;N;4,45
+lb;kg;0,4536
+lb.ft;N.m;1,356
+lb.ft/s;W;1,356
+hp;ft.lb/s;550
+hp;W;745,7
+metrichp;hp;0,986
+metrichp;W;735,5
+
 m/s2;m/s2;1
 m/s2;grav;0,1019716213
 

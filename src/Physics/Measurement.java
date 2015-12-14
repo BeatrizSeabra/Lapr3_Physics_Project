@@ -7,6 +7,7 @@ package Physics;
 
 import Legacy.Legacy;
 import System.Error;
+import System.Settings;
 
 /**
  *
@@ -14,32 +15,35 @@ import System.Error;
  */
 public abstract class Measurement {
 
-	static public Measure convertMeasure(Measure measure, String unit) {
+	private static String keyScalesMeasuresFilePath = "ScalesMeasuresFilePath";
+
+	static public String getScalesMeasuresFilePath() {
+		return Settings.getOption(Measurement.keyScalesMeasuresFilePath);
+	}
+
+	static public Measure convert(Measure measure, String unit) {
 		if (measure.getUnit().equalsIgnoreCase(unit)) {
 			return new Measure(measure.getValue(), unit);
 		}
-		for (String[] data : Legacy.importScalesMeasures()) {
-			if (data[0].equalsIgnoreCase(measure.getUnit()) && data[1].
-				equalsIgnoreCase(unit)) {
-				return new Measure(measure.getValue() * Double.
-					parseDouble(data[2]), unit);
-			}
+		Double ratio = Legacy.
+			importScalesMeasures(Measurement.getScalesMeasuresFilePath()).
+			get(measure.getUnit() + unit);
+		if (ratio == null) {
+			Error.
+				setErrorMessage("The conversion was not possible because there is no file in the relationship between units!");
+			return null;
 		}
-		Error.
-			setErrorMessage("The conversion was not possible because there is no file in the relationship between units!");
-		return null;
+		return new Measure(measure.getValue() * ratio, unit);
 	}
 
-	static public Boolean sumMeasures(Measure measure, Measure measureSum) {
-		if (!measure.getUnit().equalsIgnoreCase(measureSum.getUnit())) {
+	static public Measure sum(Measure measureA, Measure measureB) {
+		measureB = Measurement.convert(measureB, measureA.getUnit());
+		if (measureB == null) {
 			return null;
 		}
-		measureSum = Measurement.convertMeasure(measureSum, measure.getUnit());
-		if (measureSum == null) {
-			return null;
-		}
-		measure.setValue(measure.getValue() + measureSum.getValue());
-		return null;
+		measureA.setValue(measureA.getValue() + measureB.getValue());
+		return new Measure(measureA.getValue() + measureB.getValue(), measureA.
+						   getUnit());
 	}
 
 }

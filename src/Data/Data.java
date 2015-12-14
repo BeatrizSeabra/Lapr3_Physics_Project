@@ -14,10 +14,17 @@ import System.Settings;
 public abstract class Data {
 
 	static private ProjectData projectData = (ProjectData) Settings.
-		loadClass(Settings.getConfiguration("ProjectData").get(0));
+		loadClass(Settings.getOption("ProjectData"));
+
+	static private VehicleData vehicleData = (VehicleData) Settings.
+		loadClass(Settings.getOption("VehicleData"));
 
 	static public ProjectData getProjectData() {
 		return Data.projectData;
+	}
+
+	static public VehicleData getVehicleData() {
+		return Data.vehicleData;
 	}
 
 }

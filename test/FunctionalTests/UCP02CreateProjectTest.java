@@ -8,6 +8,7 @@ package FunctionalTests;
 import Controller.ContextController;
 import Controller.CreateProjectController;
 import Model.Project;
+import System.Settings;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -25,16 +26,17 @@ import org.junit.Test;
  */
 public class UCP02CreateProjectTest {
 
-	private CreateProjectController cpController;
+	private CreateProjectController createProjectController;
 	private Project project;
+	private String filePathRoadNetwork;
+	private String filePathVehicles;
 
 	public UCP02CreateProjectTest() {
-		this.project = new Project();
-		this.project.setId(1);
-		this.project.setName("Project Name");
-		this.project.setDescription("Project Description");
-		ContextController.setOpenProject(this.project);
-		this.cpController = new CreateProjectController();
+		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
+		ContextController.setOpenProject(null);
+		this.createProjectController = new CreateProjectController();
+		this.filePathRoadNetwork = "test/Files/RoadNetworkXMLTest.xml";
+		this.filePathVehicles = "test/Files/VehiclesXMLTest.xml";
 	}
 
 	@BeforeClass
@@ -59,8 +61,9 @@ public class UCP02CreateProjectTest {
 	@Test
 	public void testUCP02Functional() {
 		System.out.println("testUCP02Functional");
-		this.cpController.setDataProject("Name X", "Description X");
-		this.cpController.registProject();
+		this.createProjectController.initiation();
+		this.createProjectController.setDataProject("Name X", "Description X");
+		this.createProjectController.registProject();
 		assertEquals(this.project.getDescription(), "Description X");
 		assertEquals(this.project.getName(), "Name X");
 	}

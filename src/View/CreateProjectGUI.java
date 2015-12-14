@@ -36,6 +36,8 @@ public class CreateProjectGUI extends GraphicUserInterface {
 	public void initiation() {
 		this.jListRoadNetworks.setModel(this.jModelListRoadNetworks);
 		this.jListVehicles.setModel(jModelListVehicles);
+		this.createProjectController = new CreateProjectController();
+		this.createProjectController.initiation();
 	}
 
 	@Override
@@ -236,7 +238,7 @@ public class CreateProjectGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-		this.createProjectController.newProject();
+		this.createProjectController.initiation();
 		this.jTextFieldDescription.setText("");
 		this.jTextFieldName.setText("");
 		this.update();

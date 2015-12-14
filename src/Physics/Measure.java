@@ -48,6 +48,29 @@ public class Measure {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Measure other = (Measure) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.value.hashCode();
+		hash += 11 * this.unit.hashCode();
+		return hash;
+	}
+
+	@Override
 	public String toString() {
 		return new StringBuilder(this.value.toString()).append(" ").append(unit).
 			toString();

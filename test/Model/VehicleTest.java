@@ -23,6 +23,12 @@ public class VehicleTest {
 	public VehicleTest() {
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
+		this.vehicle.setName("Vehicle Name");
+		this.vehicle.setType("Vehicle Type");
+		this.vehicle.setMotorization("Vehicle Motorization");
+		this.vehicle.setMass(100.0);
+		this.vehicle.setLoad(100.0);
+		this.vehicle.setDragCoefficient(100.0);
 	}
 
 	@BeforeClass
@@ -47,9 +53,15 @@ public class VehicleTest {
 	@Test
 	public void testHashCode() {
 		System.out.println("testHashCode");
+		Integer expResult = 29 * this.vehicle.getClass().hashCode();
+		expResult += 11 * this.vehicle.getId().hashCode();
+		expResult += 11 * this.vehicle.getName().hashCode();
+		expResult += 11 * this.vehicle.getType().hashCode();
+		expResult += 11 * this.vehicle.getMotorization().hashCode();
+		expResult += 11 * this.vehicle.getMass().hashCode();
+		expResult += 11 * this.vehicle.getLoad().hashCode();
+		expResult += 11 * this.vehicle.getDragCoefficient().hashCode();
 		Integer result = this.vehicle.hashCode();
-		Integer expResult = 11 * this.vehicle.getId() + 29 * Vehicle.class.
-			hashCode();
 		assertEquals(expResult, result);
 	}
 
@@ -59,11 +71,19 @@ public class VehicleTest {
 	@Test
 	public void testEquals() {
 		System.out.println("testEquals");
-		Vehicle vehicle = new Vehicle();
-		vehicle.setId(1);
-		Boolean result = this.vehicle.equals(vehicle);
-		Boolean expResult = true;
-		assertEquals(expResult, result);
+		Vehicle vehicle = this.vehicle.clone();
+		assertEquals(this.vehicle.equals(vehicle), true);
+	}
+
+	/**
+	 * Test of equals method, of class Project.
+	 */
+	@Test
+	public void testEqualsFalseId() {
+		System.out.println("testEqualsFalseId");
+		Vehicle vehicle = this.vehicle.clone();
+		vehicle.setId(2);
+		assertEquals(this.vehicle.equals(vehicle), false);
 	}
 
 	/**
@@ -72,11 +92,9 @@ public class VehicleTest {
 	@Test
 	public void testEqualsFalseHash() {
 		System.out.println("testEqualsFalseHash");
-		Vehicle vehicle = new Vehicle();
-		vehicle.setId(11);
-		Boolean result = this.vehicle.equals(vehicle);
-		Boolean expResult = false;
-		assertEquals(expResult, result);
+		Vehicle vehicle = this.vehicle.clone();
+		vehicle.setName("Name");
+		assertEquals(this.vehicle.equals(vehicle), false);
 	}
 
 	/**
@@ -85,9 +103,7 @@ public class VehicleTest {
 	@Test
 	public void testEqualsFalseNull() {
 		System.out.println("testEqualsFalseNull");
-		Boolean result = this.vehicle.equals(null);
-		Boolean expResult = false;
-		assertEquals(expResult, result);
+		assertEquals(this.vehicle.equals(null), false);
 	}
 
 	/**
@@ -96,9 +112,7 @@ public class VehicleTest {
 	@Test
 	public void testEqualsFalseClass() {
 		System.out.println("testEqualsFalseClass");
-		Boolean result = this.vehicle.equals(new String());
-		Boolean expResult = false;
-		assertEquals(expResult, result);
+		assertEquals(this.vehicle.equals(new String()), false);
 	}
 
 }

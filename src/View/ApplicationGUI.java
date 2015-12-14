@@ -92,6 +92,8 @@ public class ApplicationGUI extends GraphicUserInterface {
         resultsExport = new javax.swing.JMenuItem();
         filterResults = new javax.swing.JMenuItem();
         gnuplot = new javax.swing.JMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuItemLog = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -100,7 +102,6 @@ public class ApplicationGUI extends GraphicUserInterface {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 400));
         setMinimumSize(new java.awt.Dimension(500, 400));
-        setPreferredSize(new java.awt.Dimension(500, 400));
         setSize(new java.awt.Dimension(500, 400));
 
         jLabelWithWarning.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
@@ -263,6 +264,18 @@ public class ApplicationGUI extends GraphicUserInterface {
 
         jMenuBar1.add(results);
 
+        jMenuHelp.setText("Help");
+
+        jMenuItemLog.setText("Log");
+        jMenuItemLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemLogActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jMenuItemLog);
+
+        jMenuBar1.add(jMenuHelp);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -348,6 +361,10 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.update();
     }//GEN-LAST:event_jMenuItemCloseProjectActionPerformed
 
+    private void jMenuItemLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogActionPerformed
+		new LogGUI(null);
+    }//GEN-LAST:event_jMenuItemLogActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addVehicle;
     private javax.swing.JMenu analysis;
@@ -368,9 +385,11 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JLabel jLabelOpenProject;
     private javax.swing.JLabel jLabelWithWarning;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCloseProject;
+    private javax.swing.JMenuItem jMenuItemLog;
     private javax.swing.JMenuItem mostEfficientPath;
     private javax.swing.JMenuItem newSimulation;
     private javax.swing.JMenuItem openProject;

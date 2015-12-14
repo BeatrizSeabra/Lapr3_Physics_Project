@@ -122,9 +122,44 @@ public class Section {
 	public Measure getTotalLength() {
 		Measure measure = new Measure(0.0, "km");
 		for (Segment segment : this.segments) {
-			Measurement.sumMeasures(measure, segment.getLength());
+			measure = Measurement.sum(measure, segment.getLength());
 		}
 		return measure;
+	}
+
+	@Override
+	public String toString() {
+		return "Section for " + this.road;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Section other = (Section) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.road.hashCode();
+		hash += 11 * this.typology.hashCode();
+		hash += 11 * this.direction.hashCode();
+		hash += 11 * this.toll.hashCode();
+		hash += 11 * this.windDirection.hashCode();
+		hash += 11 * this.windSpeed.hashCode();
+		for (Segment segment : this.segments) {
+			hash += 11 * segment.hashCode();
+		}
+		return hash;
 	}
 
 }

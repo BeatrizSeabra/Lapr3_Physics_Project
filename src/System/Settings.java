@@ -6,8 +6,10 @@
 package System;
 
 import Legacy.Legacy;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  *
@@ -15,20 +17,36 @@ import java.util.List;
  */
 public abstract class Settings {
 
-	private static String configurationFilePath = "Settings.txt";
+	private static String settingsFilePath = "settings.properties";
 
-	public static List<String> getConfiguration(String key) {
-		List<String> configuracoes = new ArrayList();
-		String configuracao = Legacy.readFile(Settings.configurationFilePath);
-		String[] linhas = Legacy.readFile(Settings.configurationFilePath).
-			split("\n");
-		for (int i = 0; i < linhas.length; i++) {
-			String[] linha = linhas[i].split("=");
-			if (linha.length == 2 && linha[0].trim().equalsIgnoreCase(key)) {
-				configuracoes.add(linha[1].trim());
-			}
+	public static String getSettingsFilePath() {
+		return Settings.settingsFilePath;
+	}
+
+	public static void setSettingsFilePath(String filePath) {
+		Settings.settingsFilePath = filePath;
+	}
+
+	public static String getOption(String key) {
+		try {
+			Properties properties = new Properties();
+			properties.load(new StringReader(Legacy.
+				readFile(Settings.settingsFilePath)));
+			return properties.getProperty(key);
+		} catch (Exception ex) {
+			Error.
+				setErrorMessage(new StringBuilder("Could not get the settings property: ").
+					append(ex).toString());
+			return null;
 		}
-		return configuracoes;
+	}
+
+	public static String[] getOptions(String key) {
+		String option = Settings.getOption(key);
+		if (option == null) {
+			return null;
+		}
+		return option.split(";");
 	}
 
 	public static Object loadClass(String name) {
@@ -41,7 +59,7 @@ public abstract class Settings {
 		}
 	}
 
-	public static List<Object> loadAllClass(List<String> names) {
+	public static List<Object> loadAllClass(String[] names) {
 		List<Object> objects = new ArrayList();
 		StringBuilder error = new StringBuilder();
 		for (String name : names) {

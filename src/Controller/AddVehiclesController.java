@@ -32,7 +32,23 @@ public class AddVehiclesController {
 	public Boolean loadVehicles(String filePath) {
 		List<Vehicle> vehicles = Legacy.importVehicles(filePath);
 		if (vehicles != null) {
-			return this.vehicles.addAll(vehicles);
+			for (Vehicle newVehicle : vehicles) {
+				Integer number = 1;
+				for (Vehicle vehicle : this.vehicles) {
+					if (newVehicle.getName().equals(vehicle.getName())) {
+						if (number == 1) {
+							newVehicle.
+								setName(newVehicle.getName() + " " + number);
+						} else {
+							newVehicle.setName(newVehicle.getName().
+								replaceAll(" [0-9]+$", " " + number));
+						}
+						number++;
+					}
+				}
+				this.vehicles.add(newVehicle);
+			}
+			return true;
 		}
 		return false;
 	}
