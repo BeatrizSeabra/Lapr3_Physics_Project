@@ -15,6 +15,8 @@ import System.Util;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
@@ -23,11 +25,22 @@ import javax.xml.stream.XMLStreamReader;
  *
  * @author LAPR3_20152016_G27
  */
-public class RoadNetworkImportXML implements RoadNetworkImport {
+public class RoadNetworkImportXML implements Import<RoadNetwork> {
 
 	@Override
 	public String getExtension() {
 		return "xml";
+	}
+
+	@Override
+	public String getExtensionDescription() {
+		return "XML Documents (*.xml)";
+	}
+
+	@Override
+	public FileFilter getExtensionFilter() {
+		return new FileNameExtensionFilter(this.getExtensionDescription(), this.
+										   getExtension());
 	}
 
 	@Override

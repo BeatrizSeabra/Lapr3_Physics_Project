@@ -6,9 +6,11 @@
 package FunctionalTests;
 
 import Controller.ContextController;
-import Controller.CreateProjectController;
+import Controller.EditProjectController;
+import Data.Data;
 import Model.Project;
 import System.Settings;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -18,25 +20,21 @@ import org.junit.Test;
 
 /**
  *
- * @author ruben
- */
-/**
- *
  * @author LAPR3_20152016_G27
  */
-public class UCP02CreateProjectTest {
+public class EditProjectTest {
 
-	private CreateProjectController createProjectController;
+	private EditProjectController editController;
 	private Project project;
-	private String filePathRoadNetwork;
-	private String filePathVehicles;
 
-	public UCP02CreateProjectTest() {
+	public EditProjectTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
-		ContextController.setOpenProject(null);
-		this.createProjectController = new CreateProjectController();
-		this.filePathRoadNetwork = "test/Files/RoadNetworkXMLTest.xml";
-		this.filePathVehicles = "test/Files/VehiclesXMLTest.xml";
+		this.project = new Project();
+		this.project.setId(1);
+		this.project.setName("Project Name");
+		this.project.setDescription("Project Description");
+		ContextController.setOpenProject(this.project);
+		this.editController = new EditProjectController();
 	}
 
 	@BeforeClass
@@ -59,12 +57,14 @@ public class UCP02CreateProjectTest {
 	 * Test functional of functionality, of class AddVehiclesController.
 	 */
 	@Test
-	public void testUCP02Functional() {
-		System.out.println("testUCP02Functional");
-		this.createProjectController.initiation();
-		this.createProjectController.setDataProject("Name X", "Description X");
-		this.createProjectController.registProject();
-		assertEquals(this.project.getDescription(), "Description X");
-		assertEquals(this.project.getName(), "Name X");
+	public void testEditProjectFunctional() {
+		System.out.println("testEditProjectFunctional");
+		this.editController.initiation();
+		this.editController.editProject("Name X", "Description X");
+		this.editController.saveProject();
+		List<Project> projects = Data.getProjectData().all();
+		assertEquals(projects.size(), 1);
+		assertEquals(projects.get(0).getName(), "Name X");
+		assertEquals(projects.get(0).getDescription(), "Description X");
 	}
 }

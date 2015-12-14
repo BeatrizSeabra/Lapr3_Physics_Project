@@ -19,6 +19,7 @@ public class AddVehiclesController {
 
 	private Project project;
 	private List<Vehicle> vehicles;
+	private List<String> names;
 
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
@@ -32,25 +33,37 @@ public class AddVehiclesController {
 	public Boolean loadVehicles(String filePath) {
 		List<Vehicle> vehicles = Legacy.importVehicles(filePath);
 		if (vehicles != null) {
-			for (Vehicle newVehicle : vehicles) {
-				Integer number = 1;
-				for (Vehicle vehicle : this.vehicles) {
-					if (newVehicle.getName().equals(vehicle.getName())) {
-						if (number == 1) {
-							newVehicle.
-								setName(newVehicle.getName() + " " + number);
-						} else {
-							newVehicle.setName(newVehicle.getName().
-								replaceAll(" [0-9]+$", " " + number));
-						}
-						number++;
-					}
-				}
-				this.vehicles.add(newVehicle);
-			}
+			this.concatenateVehicles(this.vehicles, vehicles);
 			return true;
 		}
 		return false;
+	}
+
+	public void concatenateVehicles(List<Vehicle> vehicles,
+									List<Vehicle> newVehicles) {
+		for (Vehicle newVehicle : newVehicles) {
+			Integer number = 1;
+			while (this.quantityName(vehicles, newVehicle.getName()) != 0) {
+				if (number == 1) {
+					newVehicle.setName(newVehicle.getName() + " " + number);
+				} else {
+					newVehicle.setName(newVehicle.getName().
+						replaceAll(" [0-9]+$", " " + number));
+				}
+				number++;
+			}
+			vehicles.add(newVehicle);
+		}
+	}
+
+	public Integer quantityName(List<Vehicle> vehicles, String name) {
+		Integer amount = 0;
+		for (Vehicle vehicle : vehicles) {
+			if (vehicle.getName().equals(name)) {
+				amount++;
+			}
+		}
+		return amount;
 	}
 
 	public Boolean saveProjectVehicles() {

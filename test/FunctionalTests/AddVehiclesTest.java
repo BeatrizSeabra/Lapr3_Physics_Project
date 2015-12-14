@@ -23,14 +23,14 @@ import org.junit.Test;
  *
  * @author LAPR3_20152016_G27
  */
-public class UCP05AddVehiclesTest {
+public class AddVehiclesTest {
 
 	private AddVehiclesController addVehiclesController;
 	private Project project;
 	private String filePathVehicles;
 	private String filePathVehiclesSimple;
 
-	public UCP05AddVehiclesTest() {
+	public AddVehiclesTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.filePathVehicles = Settings.getOption("VehiclesFilePath");
 		this.filePathVehiclesSimple = Settings.
@@ -63,8 +63,8 @@ public class UCP05AddVehiclesTest {
 	 * Test functional of functionality, of class AddVehiclesController.
 	 */
 	@Test
-	public void testUCP05Functional() {
-		System.out.println("testUCP05Functional");
+	public void testAddVehiclesFunctional() {
+		System.out.println("testAddVehiclesFunctional");
 		this.addVehiclesController.initiation();
 		this.addVehiclesController.loadVehicles(this.filePathVehicles);
 		List<Vehicle> vehicles = this.addVehiclesController.getVehicles();

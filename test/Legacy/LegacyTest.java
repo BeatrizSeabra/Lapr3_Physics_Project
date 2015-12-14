@@ -127,7 +127,7 @@ public class LegacyTest {
 	 */
 	@Test
 	public void testImportScalesMeasures() {
-		System.out.println("importScalesMeasures");
+		System.out.println("testImportScalesMeasures");
 		Map<String, Double> expResult = new HashMap();
 		expResult.put("hmin", 60.0);
 		expResult.put("hs", 3600.0);
@@ -145,7 +145,7 @@ public class LegacyTest {
 	 */
 	@Test
 	public void testImportRoadNetwork() {
-		System.out.println("importRoadNetwork");
+		System.out.println("testImportRoadNetwork");
 		List<RoadNetwork> expResult = this.roadNetworks;
 		List<RoadNetwork> result = Legacy.
 			importRoadNetwork(this.filePathRoadNetwork);

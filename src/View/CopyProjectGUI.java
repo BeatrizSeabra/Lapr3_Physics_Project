@@ -104,8 +104,7 @@ public class CopyProjectGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopyActionPerformed
-		if (this.copyProjectController.copyProject() && this.copyProjectController.
-			save()) {
+		if (this.copyProjectController.copyProject() && this.copyProjectController.saveProject()) {
 			JOptionPane.showMessageDialog(this, "Successfully copied project!");
 			this.close();
 		} else {

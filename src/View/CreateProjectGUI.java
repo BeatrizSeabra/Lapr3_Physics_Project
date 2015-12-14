@@ -6,12 +6,12 @@
 package View;
 
 import Controller.CreateProjectController;
+import Legacy.Legacy;
 import Model.RoadNetwork;
 import Model.Vehicle;
 import System.Error;
 import java.io.File;
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -198,7 +198,7 @@ public class CreateProjectGUI extends GraphicUserInterface {
 		} else if (this.createProjectController.
 			setDataProject(this.jTextFieldName.getText(), this.jTextFieldDescription.
 						   getText()) && this.createProjectController.
-			registProject()) {
+			saveProject()) {
 			JOptionPane.
 				showMessageDialog(this, "Creation project successfully!");
 			this.close();
@@ -210,22 +210,21 @@ public class CreateProjectGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonRoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRoadActionPerformed
-		JFileChooser fileChooser = new JFileChooser();
-		int response = fileChooser.showOpenDialog(this);
-		if (response == 0) {
-			for (File file : fileChooser.getSelectedFiles()) {
-				this.createProjectController.
-					loadVehicles(file.getAbsolutePath());
+		File[] files = this.getFiles(Legacy.
+			getFiltersExtensionsImportRoadNetwork());
+		if (files != null) {
+			for (File file : files) {
+				this.createProjectController.loadRoadNetwork(file.
+					getAbsolutePath());
 			}
 		}
 		this.update();
     }//GEN-LAST:event_jButtonRoadActionPerformed
 
     private void jButtonVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVehiclesActionPerformed
-		JFileChooser fileChooser = new JFileChooser();
-		int response = fileChooser.showOpenDialog(this);
-		if (response == 0) {
-			for (File file : fileChooser.getSelectedFiles()) {
+		File[] files = this.getFiles(Legacy.getFiltersExtensionsImportVehicle());
+		if (files != null) {
+			for (File file : files) {
 				this.createProjectController.
 					loadVehicles(file.getAbsolutePath());
 			}

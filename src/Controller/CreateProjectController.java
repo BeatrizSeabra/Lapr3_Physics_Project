@@ -11,6 +11,7 @@ import Legacy.Legacy;
 import Model.Project;
 import Model.RoadNetwork;
 import Model.Vehicle;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,10 +22,16 @@ public class CreateProjectController {
 
 	private ProjectData projectData;
 	private Project project;
+	private List<RoadNetwork> roadNetworks;
+	private List<Vehicle> vehicles;
+	private AddVehiclesController addVehiclesController;
 
 	public Boolean initiation() {
 		this.projectData = Data.getProjectData();
 		this.project = this.projectData.newInstance();
+		this.roadNetworks = new ArrayList();
+		this.vehicles = new ArrayList();
+		this.addVehiclesController = new AddVehiclesController();
 		return this.project != null;
 	}
 
@@ -35,28 +42,37 @@ public class CreateProjectController {
 			getDescription().equalsIgnoreCase(description);
 	}
 
-	public void loadVehicles(String filePath) {
-		for (Vehicle vehicle : Legacy.importVehicles(filePath)) {
-			this.project.addVehicle(vehicle);
+	public Boolean loadVehicles(String filePath) {
+		List<Vehicle> newVehicles = Legacy.importVehicles(filePath);
+		if (newVehicles != null) {
+			this.addVehiclesController.
+				concatenateVehicles(this.vehicles, newVehicles);
+			return true;
 		}
+		return false;
 	}
 
 	public void loadRoadNetwork(String filePath) {
 		for (RoadNetwork roadNetwork : Legacy.importRoadNetwork(filePath)) {
-			this.project.addRoadNetwork(roadNetwork);
+			this.roadNetworks.add(roadNetwork);
 		}
 	}
 
 	public List<RoadNetwork> getProjectRoadNetworks() {
-		return this.project.getRoadNetworks();
-
+		return this.roadNetworks;
 	}
 
 	public List<Vehicle> getProjectVehicles() {
-		return this.project.getVehicles();
+		return this.vehicles;
 	}
 
-	public Boolean registProject() {
+	public Boolean saveProject() {
+		for (RoadNetwork roadNetwork : this.roadNetworks) {
+			this.project.addRoadNetwork(roadNetwork);
+		}
+		for (Vehicle vehicle : this.vehicles) {
+			this.project.addVehicle(vehicle);
+		}
 		return this.projectData.save(this.project);
 	}
 

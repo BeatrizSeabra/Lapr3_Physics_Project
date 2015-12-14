@@ -22,12 +22,12 @@ import org.junit.Test;
  *
  * @author LAPR3_20152016_G27
  */
-public class UCP01OpenProjectTest {
+public class OpenProjectTest {
 
 	private OpenProjectController openController;
 	private Project project;
 
-	public UCP01OpenProjectTest() {
+	public OpenProjectTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.project = new Project();
 		this.project.setId(1);
@@ -57,11 +57,12 @@ public class UCP01OpenProjectTest {
 	 * Test functional of functionality, of class AddVehiclesController.
 	 */
 	@Test
-	public void testUCP01Functional() {
-		System.out.println("testUCP01Functional");
-		List<Project> list = this.openController.getAllProjects();
-		assertEquals(list.size(), 1);
-		this.openController.openProject(list.get(0));
-		assertEquals(ContextController.getOpenProject(), list.get(0));
+	public void testOpenProjectFunctional() {
+		System.out.println("testOpenProjectFunctional");
+		assertEquals(ContextController.getOpenProject(), null);
+		List<Project> projects = this.openController.getAllProjects();
+		assertEquals(projects.size(), 1);
+		this.openController.openProject(projects.get(0));
+		assertEquals(ContextController.getOpenProject(), projects.get(0));
 	}
 }

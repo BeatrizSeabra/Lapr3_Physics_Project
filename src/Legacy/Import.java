@@ -5,17 +5,21 @@
  */
 package Legacy;
 
-import Model.RoadNetwork;
 import java.util.List;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public interface RoadNetworkImport {
+public interface Import<T> {
 
 	String getExtension();
 
-	List<RoadNetwork> importData(String data);
+	String getExtensionDescription();
+
+	FileFilter getExtensionFilter();
+
+	List<T> importData(String data);
 
 }

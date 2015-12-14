@@ -43,7 +43,7 @@ public class ErrorTest {
 	 */
 	@Test
 	public void testGetLogFilePath() {
-		System.out.println("getLogFilePath");
+		System.out.println("testGetLogFilePath");
 		String expResult = "test/Files/logTest.txt";
 		String result = Error.getLogFilePath();
 		assertEquals(expResult, result);
@@ -54,7 +54,7 @@ public class ErrorTest {
 	 */
 	@Test
 	public void testSetGetErrorMessage() {
-		System.out.println("setErrorMessage");
+		System.out.println("testSetGetErrorMessage");
 		Error.clearLog();
 		String errorMessage = "Test error message!";
 		Error.setErrorMessage(errorMessage);
@@ -66,7 +66,7 @@ public class ErrorTest {
 	 */
 	@Test
 	public void testLog_String() {
-		System.out.println("log");
+		System.out.println("testLog_String");
 		String menssege = "test";
 		Error.clearLog();
 		Error.log(menssege);

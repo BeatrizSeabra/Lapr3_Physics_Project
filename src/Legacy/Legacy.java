@@ -13,10 +13,13 @@ import System.Util;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -52,15 +55,6 @@ public abstract class Legacy {
 				arquivo.createNewFile();
 			}
 			return new Scanner(arquivo).useDelimiter("\\Z").next();
-//			//Forma de leitura do ficheiro oposta a usada para escrita, mais complexa!
-//			BufferedReader leitor = new BufferedReader(new FileReader(arquivo));
-//			StringBuilder texto = new StringBuilder();
-//			String linha;
-//			while ((linha = leitor.readLine()) != null) {
-//				texto.append(linha);
-//			}
-//			leitor.close();
-//			return texto.toString();
 		} catch (Exception ex) {
 			Error.
 				setErrorMessage(new StringBuffer("Error loading file ").
@@ -84,8 +78,33 @@ public abstract class Legacy {
 				}
 			}
 		}
-
 		return map;
+	}
+
+	public static List<FileFilter> getFiltersExtensionsImportRoadNetwork() {
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("RoadNetworkImportClass"));
+		List<FileFilter> filters = new ArrayList();
+		for (Object object : objects) {
+			Import roadNetworkImport = (Import) object;
+			if (roadNetworkImport != null) {
+				filters.add(roadNetworkImport.getExtensionFilter());
+			}
+		}
+		return filters;
+	}
+
+	public static String[] getExtensionsImportRoadNetwork() {
+		List<FileFilter> filters = Legacy.
+			getFiltersExtensionsImportRoadNetwork();
+		StringBuilder string = new StringBuilder();
+		for (FileFilter filter : filters) {
+			for (String extension : ((FileNameExtensionFilter) filter).
+				getExtensions()) {
+				string.append(";").append(extension);
+			}
+		}
+		return string.toString().substring(1).split(";");
 	}
 
 	public static List<RoadNetwork> importRoadNetwork(String filePath) {
@@ -100,15 +119,28 @@ public abstract class Legacy {
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions("RoadNetworkImportClass"));
 		for (Object object : objects) {
-			RoadNetworkImport roadNetworkImport = (RoadNetworkImport) object;
-			if (roadNetworkImport != null && roadNetworkImport.getExtension().
+			Import imports = (Import) object;
+			if (imports != null && imports.getExtension().
 				equals(extension)) {
-				return roadNetworkImport.importData(data);
+				return imports.importData(data);
 
 			}
 		}
 		Error.setErrorMessage("Could not load this extension: ");
 		return null;
+	}
+
+	public static List<FileFilter> getFiltersExtensionsImportVehicle() {
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("VehicleImportClass"));
+		List<FileFilter> filters = new ArrayList();
+		for (Object object : objects) {
+			Import imports = (Import) object;
+			if (imports != null) {
+				filters.add(imports.getExtensionFilter());
+			}
+		}
+		return filters;
 	}
 
 	public static List<Vehicle> importVehicles(String filePath) {
@@ -121,9 +153,9 @@ public abstract class Legacy {
 		}
 		String data = Legacy.readFile(filePath);
 		List<Object> objects = Settings.loadAllClass(Settings.
-			getOptions("VehiclesImportClass"));
+			getOptions("VehicleImportClass"));
 		for (Object object : objects) {
-			VehicleImport vehicleImport = (VehicleImport) object;
+			Import vehicleImport = (Import) object;
 			if (vehicleImport != null && vehicleImport.getExtension().
 				equals(extension)) {
 				return vehicleImport.importData(data);

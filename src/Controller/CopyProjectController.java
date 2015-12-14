@@ -7,7 +7,6 @@ package Controller;
 
 import Data.Data;
 import Data.ProjectData;
-import Data.ProjectData;
 import Model.Project;
 
 /**
@@ -15,22 +14,24 @@ import Model.Project;
  * @author LAPR3_20152016_G27
  */
 public class CopyProjectController {
-    private Project opened;
-    private Project copy;
-    private ProjectData rp;
-    
-    /**
-     *
-     * @return
-     */
-    public Boolean copyProject(){
-        this.opened = ContextController.getOpenProject();
-        this.rp = Data.getProjectData();
-        this.copy = this.rp.clone(this.opened);
-        return true;
-    }
-    public Boolean save(){
-        this.rp.save(this.copy);
-        return true;
-    }
+
+	private Project project;
+	private Project projectCopy;
+	private ProjectData projectData;
+
+	public Boolean initiation() {
+		this.projectData = Data.getProjectData();
+		this.project = ContextController.getOpenProject();
+		return this.project != null;
+	}
+
+	public Boolean copyProject() {
+		this.projectCopy = this.projectData.clone(this.project);
+		return this.projectCopy != null;
+	}
+
+	public Boolean saveProject() {
+		this.projectData.save(this.projectCopy);
+		return true;
+	}
 }

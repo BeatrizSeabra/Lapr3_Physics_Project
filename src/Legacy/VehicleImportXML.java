@@ -12,6 +12,7 @@ import System.Util;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
@@ -20,11 +21,22 @@ import javax.xml.stream.XMLStreamReader;
  *
  * @author LAPR3_20152016_G27
  */
-public class VehicleImportXML implements VehicleImport {
+public class VehicleImportXML implements Import<Vehicle> {
 
 	@Override
 	public String getExtension() {
 		return "xml";
+	}
+
+	@Override
+	public String getExtensionDescription() {
+		return "XML Documents (*.xml)";
+	}
+
+	@Override
+	public FileNameExtensionFilter getExtensionFilter() {
+		return new FileNameExtensionFilter(this.getExtensionDescription(), this.
+										   getExtension());
 	}
 
 	@Override

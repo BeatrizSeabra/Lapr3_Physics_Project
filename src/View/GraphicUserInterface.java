@@ -5,11 +5,16 @@
  */
 package View;
 
-import java.awt.HeadlessException;
+import System.Error;
+import System.Settings;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
@@ -43,6 +48,42 @@ public abstract class GraphicUserInterface extends JFrame {
 			this.origin.setEnabled(true);
 		}
 		this.dispose();
+	}
+
+	public File getFile(List<FileFilter> filters) {
+		JFileChooser fileChooser = new JFileChooser(Settings.
+			getOption("PathFilesFolder"));
+		fileChooser.setMultiSelectionEnabled(true);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		if (filters != null) {
+			for (FileFilter filter : filters) {
+				fileChooser.addChoosableFileFilter(filter);
+			}
+		}
+		int response = fileChooser.showOpenDialog(this);
+		if (response == 0) {
+			return fileChooser.getSelectedFile();
+		}
+		Error.setErrorMessage("None selected and chosen file!");
+		return null;
+	}
+
+	public File[] getFiles(List<FileFilter> filters) {
+		JFileChooser fileChooser = new JFileChooser(Settings.
+			getOption("PathFilesFolder"));
+		fileChooser.setMultiSelectionEnabled(true);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		if (filters != null) {
+			for (FileFilter filter : filters) {
+				fileChooser.addChoosableFileFilter(filter);
+			}
+		}
+		int response = fileChooser.showOpenDialog(this);
+		if (response == 0) {
+			return fileChooser.getSelectedFiles();
+		}
+		Error.setErrorMessage("None selected and chosen file!");
+		return null;
 	}
 
 	abstract void initiation();

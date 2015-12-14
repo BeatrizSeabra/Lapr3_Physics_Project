@@ -6,11 +6,11 @@
 package View;
 
 import Controller.AddVehiclesController;
+import Legacy.Legacy;
 import Model.Vehicle;
 import System.Error;
 import java.io.File;
 import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -143,10 +143,9 @@ public class AddVehiclesGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonLoadVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoadVehiclesActionPerformed
-		JFileChooser fileChooser = new JFileChooser();
-		int response = fileChooser.showOpenDialog(this);
-		if (response == 0) {
-			for (File file : fileChooser.getSelectedFiles()) {
+		File[] files = this.getFiles(Legacy.getFiltersExtensionsImportVehicle());
+		if (files != null) {
+			for (File file : files) {
 				this.addVehiclesController.loadVehicles(file.getAbsolutePath());
 			}
 		}

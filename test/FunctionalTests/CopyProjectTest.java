@@ -6,9 +6,11 @@
 package FunctionalTests;
 
 import Controller.ContextController;
-import Controller.EditProjectController;
+import Controller.CopyProjectController;
+import Data.Data;
 import Model.Project;
 import System.Settings;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -20,19 +22,19 @@ import org.junit.Test;
  *
  * @author LAPR3_20152016_G27
  */
-public class UCP04EditProjectTest {
+public class CopyProjectTest {
 
-	private EditProjectController editController;
+	private CopyProjectController copyProjectController;
 	private Project project;
 
-	public UCP04EditProjectTest() {
+	public CopyProjectTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
-		this.project = new Project();
-		this.project.setId(1);
+		this.project = Data.getProjectData().newInstance();
 		this.project.setName("Project Name");
 		this.project.setDescription("Project Description");
+		Data.getProjectData().save(project);
 		ContextController.setOpenProject(this.project);
-		this.editController = new EditProjectController();
+		this.copyProjectController = new CopyProjectController();
 	}
 
 	@BeforeClass
@@ -55,11 +57,17 @@ public class UCP04EditProjectTest {
 	 * Test functional of functionality, of class AddVehiclesController.
 	 */
 	@Test
-	public void testUCP04Functional() {
-		System.out.println("testUCP04Functional");
-		this.editController.editProject("Name X", "Description X");
-		this.editController.saveProject();
-		assertEquals(this.project.getDescription(), "Description X");
-		assertEquals(this.project.getName(), "Name X");
+	public void testCopyProjectFunctional() {
+		System.out.println("testCopyProjectFunctional");
+		this.copyProjectController.initiation();
+		List<Project> projects = Data.getProjectData().all();
+		assertEquals(projects.size(), 1);
+		this.copyProjectController.copyProject();
+		this.copyProjectController.saveProject();
+		projects = Data.getProjectData().all();
+		assertEquals(projects.get(0).getId() != projects.get(1).getId(), true);
+		assertEquals(projects.get(0).getName(), projects.get(1).getName());
+		assertEquals(projects.get(0).getDescription(), projects.get(1).
+					 getDescription());
 	}
 }
