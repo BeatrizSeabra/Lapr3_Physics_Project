@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Physics.Measure;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -73,9 +74,15 @@ public class RoadNetworkTest {
 		Node startNode = new Node("Node 1");
 		Node endNode = new Node("Node 2");
 		Section section = new Section();
+		section.setDirection("Section Diretion");
+		section.setRoad("Section road");
+		section.setToll(1.0);
+		section.setTypology("Section typology");
+		section.setWindDirection(2.0);
+		section.setWindSpeed(new Measure(3.0, "km"));
 		this.roadNetwork.addSection(startNode, endNode, section);
-		assertEquals(true, this.roadNetwork.getGraph().
-					 containsEdge(startNode, endNode));
+		assertEquals(section, this.roadNetwork.getGraph().
+					 getEdge(startNode, endNode).getElement());
 	}
 
 	/**
@@ -95,22 +102,20 @@ public class RoadNetworkTest {
 	/**
 	 * Test of getSection method, of class RoadNetwork.
 	 */
-	/*
 	@Test
 	public void testGetSection() {
 		System.out.println("testGetSection");
-		RoadNetwork roadNetwork = new RoadNetwork();
-		Node node1 = new Node("Node 1");
-		Node node2 = new Node("Node 2");
 		Section section = new Section();
-		roadNetwork.addNode(node1);
-		roadNetwork.addNode(node2);
-		roadNetwork.addSection(node1, node2, section);
-		System.out.println("Valor da section: " + roadNetwork.
-			getSection(node1, node2));
-		assertEquals(section, roadNetwork.getSection(node1, node2));
+		section.setDirection("Section Diretion");
+		section.setRoad("Section road");
+		section.setToll(1.0);
+		section.setTypology("Section typology");
+		section.setWindDirection(2.0);
+		section.setWindSpeed(new Measure(3.0, "km"));
+		this.roadNetwork.addSection(node1, node2, section);
+		assertEquals(section, this.roadNetwork.getSection(node1, node2));
 	}
-	 */
+
 	/**
 	 * Test of shortestPath method, of class RoadNetwork.
 	 */
