@@ -19,7 +19,7 @@ public class ExportHTML implements Export {
 	}
 
 	private static String begin() {
-		return "<!DOCTYPE> <html>   <head>       <title>Projeto de FSIAP</title>       <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">       <link rel=\"icon\" type=\"image/ico\" href=\"http://www.isep.ipp.pt/favicon.ico\">   </head>   <body>       <div align=\"center\">       <img src=\"http://www.dei.isep.ipp.pt/images/topo_index.png\" alt=\"Logotipo ISEP\" >       </div>";
+		return "<!DOCTYPE> <html>   <head>       <title>Project LAPR3</title>       <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">       <link rel=\"icon\" type=\"image/ico\" href=\"http://www.isep.ipp.pt/favicon.ico\">   </head>   <body>       <div align=\"center\">       <img src=\"http://www.dei.isep.ipp.pt/images/topo_index.png\" alt=\"Logotipo ISEP\" >       </div>";
 	}
 
 	private String addText(String text) {
