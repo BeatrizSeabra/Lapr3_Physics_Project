@@ -7,6 +7,9 @@ package Model;
 
 import Graph.Edge;
 import Graph.Graph;
+import Graph.GraphAlgorithms;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 /**
@@ -32,6 +35,17 @@ public class RoadNetwork {
 
 	public Graph<Node, Section> getGraph() {
 		return this.graph;
+	}
+
+	public Section getSection(Node startNode, Node endNode) {
+		return this.getGraph().getEdge(startNode, endNode).getElement();
+	}
+
+	public Deque<Node> shortestPath(Node startNode, Node endNode) {
+		Deque<Node> shortestPath = new ArrayDeque();
+		GraphAlgorithms.
+			shortestPath(this.graph, startNode, endNode, shortestPath);
+		return shortestPath;
 	}
 
 	@Override
