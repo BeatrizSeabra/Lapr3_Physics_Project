@@ -79,7 +79,7 @@ public class CreateProjectTest {
 		assertEquals(roadNetwork.getDescription(), "Simple test set to begin development");
 		this.createProjectController.loadVehicles(this.filePathVehicles);
 		vehicles = this.createProjectController.getProjectVehicles();
-		assertEquals(vehicles.size(), 3);
+		assertEquals(vehicles.size(), 1);
 		this.createProjectController.saveProject();
 		projects = Data.getProjectData().all();
 		assertEquals(projects.size(), 1);

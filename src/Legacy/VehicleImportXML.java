@@ -13,7 +13,6 @@ import System.Util;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -51,11 +50,7 @@ public class VehicleImportXML implements Import<Vehicle> {
 		Double load = null;
 		String loadType = null;
 		String segmentType = null;
-		Double SegmentLimit = null;
-		Map<String, Double> velocityLimits = null;
 		Integer gearId = null;
-		Double ratio = null;
-		Map<Integer, Double> gears = null;
 		try {
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = factory.
@@ -70,18 +65,12 @@ public class VehicleImportXML implements Import<Vehicle> {
 								vehicle.setName(reader.getAttributeValue(0).
 									trim());
 								vehicle.setDescription(reader.
-									getAttributeValue(1));
+									getAttributeValue(1).trim());
 								vehicles.add(vehicle);
-								break;
-							case "velocity_limit_list":
-								velocityLimits = vehicle.getVelocityLimits();
-								break;
-							case "gear_list":
-								gears = vehicle.getGears();
 								break;
 							case "gear":
 								gearId = Integer.parseInt(reader.
-									getAttributeValue(0));
+									getAttributeValue(0).trim());
 								break;
 							default:
 								break;
@@ -95,8 +84,7 @@ public class VehicleImportXML implements Import<Vehicle> {
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
 							case "type":
-								vehicle.
-									setType(text);
+								vehicle.setType(text);
 								break;
 							case "motorization":
 								vehicle.setMotorization(text);
@@ -106,23 +94,21 @@ public class VehicleImportXML implements Import<Vehicle> {
 								break;
 							case "mass":
 								String massData[] = text.split(" ");
-								mass = Util.toDouble(massData[0].
-									trim());
+								mass = Util.toDouble(massData[0].trim());
 								massType = massData[1].trim();
 								vehicle.setMass(new Measure(mass, massType));
 								break;
 							case "load":
 								String loadData[] = text.split(" ");
-								load = Util.toDouble(loadData[0].
-									trim());
+								load = Util.toDouble(loadData[0].trim());
 								loadType = loadData[1].trim();
-								vehicle.setMass(new Measure(load, loadType));
+								vehicle.setLoad(new Measure(load, loadType));
 								break;
 							case "drag":
 								vehicle.setDragCoefficient(Util.toDouble(text));
 								break;
 							case "rrc":
-								vehicle.setRollingCcoefficient(Util.
+								vehicle.setRollingRcoefficient(Util.
 									toDouble(text));
 								break;
 							case "wheel_size":
@@ -132,10 +118,8 @@ public class VehicleImportXML implements Import<Vehicle> {
 								segmentType = text;
 								break;
 							case "limit":
-								SegmentLimit = Util.toDouble(text);
-								break;
-							case "velocity_limit":
-								velocityLimits.put(segmentType, SegmentLimit);
+								vehicle.setVelocityLimits(segmentType, Util.
+														  toDouble(text));
 								break;
 							case "torque":
 								vehicle.setTorque(Util.toDouble(text));
@@ -156,10 +140,7 @@ public class VehicleImportXML implements Import<Vehicle> {
 								vehicle.setFinalDriveRatio(Util.toDouble(text));
 								break;
 							case "ratio":
-								ratio = Util.toDouble(text);
-								break;
-							case "gear":
-								gears.put(gearId, ratio);
+								vehicle.setGear(gearId, Util.toDouble(text));
 								break;
 							default:
 								break;

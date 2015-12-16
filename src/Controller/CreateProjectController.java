@@ -44,7 +44,7 @@ public class CreateProjectController {
 
 	public Boolean loadVehicles(String filePath) {
 		List<Vehicle> newVehicles = Legacy.importVehicles(filePath);
-		if (newVehicles != null) {
+		if (newVehicles != null && !newVehicles.isEmpty()) {
 			this.addVehiclesController.
 				concatenateVehicles(this.vehicles, newVehicles);
 			return true;
@@ -54,7 +54,9 @@ public class CreateProjectController {
 
 	public void loadRoadNetwork(String filePath) {
 		List<RoadNetwork> roadNetworks = Legacy.importRoadNetwork(filePath);
-		this.roadNetwork = roadNetworks.get(roadNetworks.size() - 1);
+		if (roadNetworks != null && !roadNetworks.isEmpty()) {
+			this.roadNetwork = roadNetworks.get(roadNetworks.size() - 1);
+		}
 	}
 
 	public RoadNetwork getProjectRoadNetwork() {

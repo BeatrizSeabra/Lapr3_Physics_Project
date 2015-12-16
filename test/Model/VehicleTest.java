@@ -33,7 +33,7 @@ public class VehicleTest {
 		this.vehicle.setMass(new Measure(100.0, "kg"));
 		this.vehicle.setLoad(new Measure(100.0, "kg"));
 		this.vehicle.setDragCoefficient(100.0);
-		this.vehicle.setRollingCcoefficient(100.0);
+		this.vehicle.setRollingRcoefficient(100.0);
 		this.vehicle.setWheelSize(100.0);
 		this.vehicle.setTorque(100.0);
 		this.vehicle.setRPM(100.0);

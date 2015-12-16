@@ -188,7 +188,7 @@ public class Vehicle {
 	/**
 	 * @param rollingCcoefficient the rollingCcoefficient to set
 	 */
-	public void setRollingCcoefficient(Double rollingCcoefficient) {
+	public void setRollingRcoefficient(Double rollingCcoefficient) {
 		this.rollingCcoefficient = rollingCcoefficient;
 	}
 
@@ -362,7 +362,7 @@ public class Vehicle {
 		vehicle.setMass(this.mass);
 		vehicle.setLoad(this.load);
 		vehicle.setDragCoefficient(this.dragCoefficient);
-		vehicle.setRollingCcoefficient(this.rollingCcoefficient);
+		vehicle.setRollingRcoefficient(this.rollingCcoefficient);
 		vehicle.setWheelSize(this.wheelSize);
 		vehicle.setTorque(this.torque);
 		vehicle.setRPM(this.RPM);

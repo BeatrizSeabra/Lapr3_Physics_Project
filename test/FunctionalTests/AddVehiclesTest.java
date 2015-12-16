@@ -28,13 +28,10 @@ public class AddVehiclesTest {
 	private AddVehiclesController addVehiclesController;
 	private Project project;
 	private String filePathVehicles;
-	private String filePathVehiclesSimple;
 
 	public AddVehiclesTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.filePathVehicles = Settings.getOption("VehiclesFilePath");
-		this.filePathVehiclesSimple = Settings.
-			getOption("VehiclesFilePathSimple");
 		this.project = new Project();
 		this.project.setId(1);
 		this.project.setName("Project Name");
@@ -68,13 +65,13 @@ public class AddVehiclesTest {
 		this.addVehiclesController.initiation();
 		this.addVehiclesController.loadVehicles(this.filePathVehicles);
 		List<Vehicle> vehicles = this.addVehiclesController.getVehicles();
-		assertEquals(vehicles.size(), 3);
-		this.addVehiclesController.loadVehicles(this.filePathVehiclesSimple);
-		this.addVehiclesController.loadVehicles(this.filePathVehiclesSimple);
+		assertEquals(vehicles.size(), 1);
+		this.addVehiclesController.loadVehicles(this.filePathVehicles);
+		this.addVehiclesController.loadVehicles(this.filePathVehicles);
 		vehicles = this.addVehiclesController.getVehicles();
-		assertEquals(vehicles.size(), 5);
-		assertEquals(vehicles.get(3).getName(), "v01 1");
-		assertEquals(vehicles.get(4).getName(), "v01 2");
+		assertEquals(vehicles.size(), 3);
+		assertEquals(vehicles.get(1).getName(), "Dummy01 1");
+		assertEquals(vehicles.get(2).getName(), "Dummy01 2");
 		Boolean save = this.addVehiclesController.saveProjectVehicles();
 		assertEquals(save, true);
 		for (Vehicle vehicle : vehicles) {
