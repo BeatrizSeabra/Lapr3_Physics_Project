@@ -7,11 +7,13 @@ package Legacy;
 
 import Data.Data;
 import Model.Vehicle;
+import Physics.Measure;
 import System.Error;
 import System.Util;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -44,6 +46,16 @@ public class VehicleImportXML implements Import<Vehicle> {
 		List<Vehicle> vehicles = new ArrayList();
 		Vehicle vehicle = null;
 		String text = null;
+		Double mass = null;
+		String massType = null;
+		Double load = null;
+		String loadType = null;
+		String segmentType = null;
+		Double SegmentLimit = null;
+		Map<String, Double> velocityLimits = null;
+		Integer gearId = null;
+		Double ratio = null;
+		Map<Integer, Double> gears = null;
 		try {
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = factory.
@@ -57,7 +69,19 @@ public class VehicleImportXML implements Import<Vehicle> {
 								vehicle = Data.getVehicleData().newInstance();
 								vehicle.setName(reader.getAttributeValue(0).
 									trim());
+								vehicle.setDescription(reader.
+									getAttributeValue(1));
 								vehicles.add(vehicle);
+								break;
+							case "velocity_limit_list":
+								velocityLimits = vehicle.getVelocityLimits();
+								break;
+							case "gear_list":
+								gears = vehicle.getGears();
+								break;
+							case "gear":
+								gearId = Integer.parseInt(reader.
+									getAttributeValue(0));
 								break;
 							default:
 								break;
@@ -77,14 +101,65 @@ public class VehicleImportXML implements Import<Vehicle> {
 							case "motorization":
 								vehicle.setMotorization(text);
 								break;
+							case "fuel":
+								vehicle.setFuel(text);
+								break;
 							case "mass":
-								vehicle.setMass(Util.toDouble(text));
+								String massData[] = text.split(" ");
+								mass = Util.toDouble(massData[0].
+									trim());
+								massType = massData[1].trim();
+								vehicle.setMass(new Measure(mass, massType));
 								break;
 							case "load":
-								vehicle.setLoad(Util.toDouble(text));
+								String loadData[] = text.split(" ");
+								load = Util.toDouble(loadData[0].
+									trim());
+								loadType = loadData[1].trim();
+								vehicle.setMass(new Measure(load, loadType));
 								break;
-							case "drag_coefficient":
+							case "drag":
 								vehicle.setDragCoefficient(Util.toDouble(text));
+								break;
+							case "rrc":
+								vehicle.setRollingCcoefficient(Util.
+									toDouble(text));
+								break;
+							case "wheel_size":
+								vehicle.setWheelSize(Util.toDouble(text));
+								break;
+							case "segment_type":
+								segmentType = text;
+								break;
+							case "limit":
+								SegmentLimit = Util.toDouble(text);
+								break;
+							case "velocity_limit":
+								velocityLimits.put(segmentType, SegmentLimit);
+								break;
+							case "torque":
+								vehicle.setTorque(Util.toDouble(text));
+								break;
+							case "rpm":
+								vehicle.setRPM(Util.toDouble(text));
+								break;
+							case "consumption":
+								vehicle.setComsumption(Util.toDouble(text));
+								break;
+							case "min_rpm":
+								vehicle.setMinRPM(Util.toDouble(text));
+								break;
+							case "max_rpm":
+								vehicle.setMaxRPM(Util.toDouble(text));
+								break;
+							case "final_drive_ratio":
+								vehicle.setFinalDriveRatio(Util.toDouble(text));
+								break;
+							case "ratio":
+								ratio = Util.toDouble(text);
+								break;
+							case "gear":
+								gears.put(gearId, ratio);
 								break;
 							default:
 								break;

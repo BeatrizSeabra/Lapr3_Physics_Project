@@ -38,12 +38,31 @@ public class VehicleImportXMLTest {
 		this.dataXML = Legacy.readFile(this.filePathVehicles);
 		this.vehicle1 = new Vehicle();
 		this.vehicle1.setId(1);
-		this.vehicle1.setName("v01");
-		this.vehicle1.setType("truck");
+		this.vehicle1.setName("Dummy01");
+		this.vehicle1.setDescription("Dummy teste vehicle");
+		this.vehicle1.setType("car");
 		this.vehicle1.setMotorization("combustion");
-		this.vehicle1.setMass(new Measure(500.0, "kg"));
-		this.vehicle1.setLoad(new Measure(1.0, "kg"));
-		this.vehicle1.setDragCoefficient(4.0);
+		this.vehicle1.setFuel("gasoline");
+		this.vehicle1.setMass(new Measure(1400.0, "kg"));
+		this.vehicle1.setLoad(new Measure(120.0, "kg"));
+		this.vehicle1.setDragCoefficient(0.35);
+		this.vehicle1.setRollingCcoefficient(0.01);
+		this.vehicle1.setWheelSize(0.5);
+		this.vehicle1.getVelocityLimits().put("Highway", 100.0);
+		this.vehicle1.setTorque(250.0);
+		this.vehicle1.setRPM(2500.0);
+		this.vehicle1.setComsumption(8.2);
+		this.vehicle1.setMinRPM(1000.0);
+		this.vehicle1.setMaxRPM(5500.0);
+		this.vehicle1.setFinalDriveRatio(2.6);
+		this.vehicle1.getGears().put(01, 3.5);
+		this.vehicle1.getGears().put(02, 2.5);
+		this.vehicle1.getGears().put(03, 1.25);
+		this.vehicle1.getGears().put(04, 0.9);
+		this.vehicles = new ArrayList();
+		this.vehicles.add(vehicle1);
+
+		/*
 		this.vehicle2 = new Vehicle();
 		this.vehicle2.setId(2);
 		this.vehicle2.setName("v02");
@@ -64,6 +83,7 @@ public class VehicleImportXMLTest {
 		this.vehicles.add(this.vehicle1);
 		this.vehicles.add(this.vehicle2);
 		this.vehicles.add(this.vehicle3);
+		 */
 	}
 
 	@BeforeClass
