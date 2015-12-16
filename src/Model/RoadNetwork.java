@@ -143,7 +143,7 @@ public class RoadNetwork {
 				string.
 					append("\t\tSegment: '" + segment.getName() + "' '" + segment.
 						getHeight() + "' '" + segment.getSlope() + "' '" + segment.
-						getLength() + "' '" + segment.getRrc() + "' '" + segment.
+						getLength() + "' '" + segment.
 						getMaxVelocity() + "' '" + segment.
 						getMinVelocity() + "' '" + segment.
 						getNumberVehicles() + "'\n");

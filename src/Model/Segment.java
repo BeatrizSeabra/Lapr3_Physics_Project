@@ -17,7 +17,6 @@ public class Segment {
 	private Double height;
 	private Double slope;
 	private Measure length;
-	private Double rrc;
 	private Measure maxVelocity;
 	private Measure minVelocity;
 	private Double numberVehicles;
@@ -76,20 +75,6 @@ public class Segment {
 	 */
 	public void setLength(Measure length) {
 		this.length = length;
-	}
-
-	/**
-	 * @return the rrc
-	 */
-	public Double getRrc() {
-		return rrc;
-	}
-
-	/**
-	 * @param rrc the rrc to set
-	 */
-	public void setRrc(Double rrc) {
-		this.rrc = rrc;
 	}
 
 	/**
@@ -161,7 +146,6 @@ public class Segment {
 		hash += 11 * this.height.hashCode();
 		hash += 11 * this.slope.hashCode();
 		hash += 11 * this.length.hashCode();
-		hash += 11 * this.rrc.hashCode();
 		hash += 11 * this.maxVelocity.hashCode();
 		hash += 11 * this.minVelocity.hashCode();
 		hash += 11 * this.numberVehicles.hashCode();

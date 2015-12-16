@@ -58,7 +58,6 @@ public class LegacyTest {
 		this.segment.setHeight(100.0);
 		this.segment.setSlope(1.5);
 		this.segment.setLength(new Measure(3.2, "Km"));
-		this.segment.setRrc(0.01);
 		this.segment.setMaxVelocity(new Measure(90.0, "Km/h"));
 		this.segment.setMinVelocity(new Measure(0.0, "Km/h"));
 		this.segment.setNumberVehicles(20.0);

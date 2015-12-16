@@ -143,9 +143,6 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 								length = Util.toDouble(lengthData[0]);
 								lengthUnit = lengthData[1].trim();
 								break;
-							case "rrc":
-								rrc = Util.toDouble(text);
-								break;
 							case "max_velocity":
 								String maxVelocityData[] = text.split(" ");
 								maxVelocity = Util.toDouble(maxVelocityData[0]);
@@ -164,7 +161,6 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 								segment.setSlope(slope);
 								segment.
 									setLength(new Measure(length, lengthUnit));
-								segment.setRrc(rrc);
 								segment.
 									setMaxVelocity(new Measure(maxVelocity, maxVelocityUnit));
 								segment.

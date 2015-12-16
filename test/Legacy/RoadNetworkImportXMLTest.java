@@ -54,7 +54,6 @@ public class RoadNetworkImportXMLTest {
 		this.segment0.setHeight(100.0);
 		this.segment0.setSlope(1.5);
 		this.segment0.setLength(new Measure(3.2, "Km"));
-		this.segment0.setRrc(0.01);
 		this.segment0.setMaxVelocity(new Measure(90.0, "Km/h"));
 		this.segment0.setMinVelocity(new Measure(0.0, "Km/h"));
 		this.segment0.setNumberVehicles(20.0);
@@ -63,7 +62,6 @@ public class RoadNetworkImportXMLTest {
 		this.segment1.setHeight(148.0);
 		this.segment1.setSlope(-1.5);
 		this.segment1.setLength(new Measure(3.2, "Km"));
-		this.segment1.setRrc(0.01);
 		this.segment1.setMaxVelocity(new Measure(90.0, "Km/h"));
 		this.segment1.setMinVelocity(new Measure(0.0, "Km/h"));
 		this.segment1.setNumberVehicles(20.0);
@@ -82,7 +80,6 @@ public class RoadNetworkImportXMLTest {
 		this.segment2.setHeight(100.0);
 		this.segment2.setSlope(0.0);
 		this.segment2.setLength(new Measure(10.0, "Km"));
-		this.segment2.setRrc(0.01);
 		this.segment2.setMaxVelocity(new Measure(90.0, "Km/h"));
 		this.segment2.setMinVelocity(new Measure(0.0, "Km/h"));
 		this.segment2.setNumberVehicles(30.0);
@@ -91,7 +88,6 @@ public class RoadNetworkImportXMLTest {
 		this.segment3.setHeight(100.0);
 		this.segment3.setSlope(0.5);
 		this.segment3.setLength(new Measure(5.0, "Km"));
-		this.segment3.setRrc(0.01);
 		this.segment3.setMaxVelocity(new Measure(90.0, "Km/h"));
 		this.segment3.setMinVelocity(new Measure(0.0, "Km/h"));
 		this.segment3.setNumberVehicles(20.0);
@@ -110,7 +106,6 @@ public class RoadNetworkImportXMLTest {
 		this.segment4.setHeight(100.0);
 		this.segment4.setSlope(0.125);
 		this.segment4.setLength(new Measure(20.0, "Km"));
-		this.segment4.setRrc(0.015);
 		this.segment4.setMaxVelocity(new Measure(120.0, "Km/h"));
 		this.segment4.setMinVelocity(new Measure(50.0, "Km/h"));
 		this.segment4.setNumberVehicles(100.0);

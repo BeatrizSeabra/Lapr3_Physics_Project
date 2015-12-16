@@ -29,7 +29,6 @@ public class SegmentTest {
 		this.segment.setMaxVelocity(new Measure(4.0, "km"));
 		this.segment.setMinVelocity(new Measure(5.0, "km"));
 		this.segment.setSlope(6.0);
-		this.segment.setRrc(7.0);
 		this.segment.setNumberVehicles(8.0);
 	}
 
@@ -116,17 +115,6 @@ public class SegmentTest {
 	}
 
 	/**
-	 * Test of getRrc and setRrc method, of class Segment.
-	 */
-	@Test
-	public void testSetGetRrc() {
-		System.out.println("testSetGetRrc");
-		Double expResult = 25.0;
-		this.segment.setRrc(expResult);
-		assertEquals(expResult, this.segment.getRrc());
-	}
-
-	/**
 	 * Test of getNumberVehicles and setNumberVehicles method, of class Segment.
 	 */
 	@Test
@@ -149,7 +137,6 @@ public class SegmentTest {
 		expResult += 11 * this.segment.getLength().hashCode();
 		expResult += 11 * this.segment.getMaxVelocity().hashCode();
 		expResult += 11 * this.segment.getMinVelocity().hashCode();
-		expResult += 11 * this.segment.getRrc().hashCode();
 		expResult += 11 * this.segment.getSlope().hashCode();
 		expResult += 11 * this.segment.getNumberVehicles().hashCode();
 		Integer result = this.segment.hashCode();
@@ -169,7 +156,6 @@ public class SegmentTest {
 		segment.setMaxVelocity(new Measure(4.0, "km"));
 		segment.setMinVelocity(new Measure(5.0, "km"));
 		segment.setSlope(6.0);
-		segment.setRrc(7.0);
 		segment.setNumberVehicles(8.0);
 		assertEquals(true, this.segment.equals(segment));
 	}
@@ -187,7 +173,6 @@ public class SegmentTest {
 		segment.setMaxVelocity(new Measure(4.0, "km"));
 		segment.setMinVelocity(new Measure(5.0, "km"));
 		segment.setSlope(6.0);
-		segment.setRrc(7.0);
 		segment.setNumberVehicles(8.0);
 		assertEquals(false, this.segment.equals(segment));
 	}
