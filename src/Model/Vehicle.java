@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Map;
+
 /**
  *
  * @author LAPR3_20152016_G27
@@ -13,12 +15,24 @@ public class Vehicle {
 
 	private Integer id;
 	private String name;
+        private String description;
 	private String type;
 	private String motorization;
+        private String fuel;
 	private Double mass;
 	private Double load;
 	private Double dragCoefficient;
-
+        private Double rollingCcoefficient;
+        private Double wheelSize;
+        private Map<String,Double> velocityLimits;
+        private Double torque;
+        private Double rpm;
+        private Double comsumption;
+        private Double minRPM;
+        private Double maxRPM;
+        private Map<Integer,Double> gears;
+        
+        
 	/**
 	 * @return the id
 	 */
@@ -162,5 +176,93 @@ public class Vehicle {
 		vehicle.setDragCoefficient(this.dragCoefficient);
 		return vehicle;
 	}
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getFuel() {
+        return fuel;
+    }
+
+    public Double getRollingCcoefficient() {
+        return rollingCcoefficient;
+    }
+
+    public Double getWheelSize() {
+        return wheelSize;
+    }
+
+    public Map<String,Double> getVelocityLimits() {
+        return velocityLimits;
+    }
+
+    public Double getTorque() {
+        return torque;
+    }
+
+    public Double getRpm() {
+        return rpm;
+    }
+
+    public Double getComsumption() {
+        return comsumption;
+    }
+
+    public Double getMinRPM() {
+        return minRPM;
+    }
+
+    public Double getMaxRPM() {
+        return maxRPM;
+    }
+
+    public Map<Integer,Double> getGears() {
+        return gears;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
+    }
+
+    public void setRollingCcoefficient(Double rollingCcoefficient) {
+        this.rollingCcoefficient = rollingCcoefficient;
+    }
+
+    public void setWheelSize(Double wheelSize) {
+        this.wheelSize = wheelSize;
+    }
+
+    public void setVelocityLimits(Map<String,Double> velocityLimits) {
+        this.velocityLimits = velocityLimits;
+    }
+
+    public void setTorque(Double torque) {
+        this.torque = torque;
+    }
+
+    public void setRpm(Double rpm) {
+        this.rpm = rpm;
+    }
+
+    public void setComsumption(Double comsumption) {
+        this.comsumption = comsumption;
+    }
+
+    public void setMinRPM(Double minRPM) {
+        this.minRPM = minRPM;
+    }
+
+    public void setMaxRPM(Double maxRPM) {
+        this.maxRPM = maxRPM;
+    }
+
+    public void setGears(Map<Integer,Double> gears) {
+        this.gears = gears;
+    }
 
 }

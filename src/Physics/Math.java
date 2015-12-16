@@ -5,6 +5,7 @@
  */
 package Physics;
 
+import Model.Segment;
 import Model.Vehicle;
 
 /**
@@ -12,7 +13,14 @@ import Model.Vehicle;
  * @author Biia
  */
 public class Math {
-    public static Double getFrictionForce(Vehicle vehicle, Double slope){
+    private static Double getGravity(){
+        return 9.80665;
+    }
+            
+    public static Double getFrictionForce(Vehicle vehicle, Segment segment){
+        Double frictionForce = vehicle.getMass()+vehicle.getLoad();
+        frictionForce = frictionForce * Math.getGravity();
+        
         return 0.0;
     }
     public static Double getVehicleForce(Vehicle vehicle){
