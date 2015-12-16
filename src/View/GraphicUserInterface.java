@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -50,40 +51,63 @@ public abstract class GraphicUserInterface extends JFrame {
 		this.dispose();
 	}
 
-	public File getFile(List<FileFilter> filters) {
-		JFileChooser fileChooser = new JFileChooser(Settings.
-			getOption("PathFilesFolder"));
-		fileChooser.setMultiSelectionEnabled(true);
-		fileChooser.setAcceptAllFileFilterUsed(false);
-		if (filters != null) {
-			for (FileFilter filter : filters) {
-				fileChooser.addChoosableFileFilter(filter);
+	public String saveFile(List<FileFilter> filters) {
+		JFileChooser fileChooser = this.getJFileChooser(filters);
+		int response = fileChooser.showSaveDialog(this);
+		if (response == JFileChooser.APPROVE_OPTION) {
+			String file = fileChooser.getSelectedFile().toString();
+			String extension = ((FileNameExtensionFilter) fileChooser.
+				getFileFilter()).getExtensions()[0];
+			if (!file.endsWith(extension)) {
+				StringBuilder stringBuilder = new StringBuilder();
+				stringBuilder.append(file);
+				stringBuilder.append(".");
+				stringBuilder.append(extension);
+				file = stringBuilder.toString();
 			}
-		}
-		int response = fileChooser.showOpenDialog(this);
-		if (response == 0) {
-			return fileChooser.getSelectedFile();
+			return file;
 		}
 		Error.setErrorMessage("None selected and chosen file!");
 		return null;
 	}
 
-	public File[] getFiles(List<FileFilter> filters) {
+	public String selectFile(List<FileFilter> filters) {
+		JFileChooser fileChooser = this.getJFileChooser(filters);
+		fileChooser.setMultiSelectionEnabled(false);
+		int response = fileChooser.showOpenDialog(this);
+		if (response == JFileChooser.APPROVE_OPTION) {
+			return fileChooser.getSelectedFile().toString();
+		}
+		Error.setErrorMessage("None selected and chosen file!");
+		return null;
+	}
+
+	public String[] selectFiles(List<FileFilter> filters) {
+		JFileChooser fileChooser = this.getJFileChooser(filters);
+		fileChooser.setMultiSelectionEnabled(true);
+		int response = fileChooser.showOpenDialog(this);
+		if (response == JFileChooser.APPROVE_OPTION) {
+			StringBuilder stringBuilder = new StringBuilder();
+			for (File file : fileChooser.getSelectedFiles()) {
+				stringBuilder.append(";");
+				stringBuilder.append(file.getAbsoluteFile());
+			}
+			return stringBuilder.toString().substring(1).split(";");
+		}
+		Error.setErrorMessage("None selected and chosen file!");
+		return null;
+	}
+
+	private JFileChooser getJFileChooser(List<FileFilter> filters) {
 		JFileChooser fileChooser = new JFileChooser(Settings.
 			getOption("PathFilesFolder"));
-		fileChooser.setMultiSelectionEnabled(true);
 		fileChooser.setAcceptAllFileFilterUsed(false);
 		if (filters != null) {
 			for (FileFilter filter : filters) {
 				fileChooser.addChoosableFileFilter(filter);
 			}
 		}
-		int response = fileChooser.showOpenDialog(this);
-		if (response == 0) {
-			return fileChooser.getSelectedFiles();
-		}
-		Error.setErrorMessage("None selected and chosen file!");
-		return null;
+		return fileChooser;
 	}
 
 	abstract void initiation();

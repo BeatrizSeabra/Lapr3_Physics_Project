@@ -18,6 +18,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		try {
+			Error.clearLog();
 			new ApplicationGUI();
 		} catch (Exception ex) {
 			Error.setErrorMessage("ERROR: " + ex);

@@ -10,7 +10,6 @@ import Legacy.Legacy;
 import Model.RoadNetwork;
 import Model.Vehicle;
 import System.Error;
-import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -200,20 +199,20 @@ public class CreateProjectGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonRoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRoadActionPerformed
-		File file = this.getFile(Legacy.
+		String file = this.selectFile(Legacy.
 			getFiltersExtensionsImportRoadNetwork());
 		if (file != null) {
-			this.createProjectController.loadRoadNetwork(file.getAbsolutePath());
+			this.createProjectController.loadRoadNetwork(file);
 		}
 		this.update();
     }//GEN-LAST:event_jButtonRoadActionPerformed
 
     private void jButtonVehiclesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVehiclesActionPerformed
-		File[] files = this.getFiles(Legacy.getFiltersExtensionsImportVehicle());
+		String[] files = this.selectFiles(Legacy.
+			getFiltersExtensionsImportVehicle());
 		if (files != null) {
-			for (File file : files) {
-				this.createProjectController.
-					loadVehicles(file.getAbsolutePath());
+			for (String file : files) {
+				this.createProjectController.loadVehicles(file);
 			}
 		}
 		this.update();

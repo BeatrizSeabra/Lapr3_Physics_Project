@@ -1,0 +1,4 @@
+git config --global user.name 1131399
+git config --global user.email 1131399@isep.ipp.pt
+git config --global push.default simple
+git config --global credential.helper "cache --timeout=216000"
