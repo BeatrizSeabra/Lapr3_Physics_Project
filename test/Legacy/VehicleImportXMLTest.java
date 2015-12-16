@@ -6,6 +6,7 @@
 package Legacy;
 
 import Model.Vehicle;
+import Physics.Measure;
 import System.Settings;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,24 +41,24 @@ public class VehicleImportXMLTest {
 		this.vehicle1.setName("v01");
 		this.vehicle1.setType("truck");
 		this.vehicle1.setMotorization("combustion");
-		this.vehicle1.setMass(500.0);
-		this.vehicle1.setLoad(1.0);
+		this.vehicle1.setMass(new Measure(500.0, "kg"));
+		this.vehicle1.setLoad(new Measure(1.0, "kg"));
 		this.vehicle1.setDragCoefficient(4.0);
 		this.vehicle2 = new Vehicle();
 		this.vehicle2.setId(2);
 		this.vehicle2.setName("v02");
 		this.vehicle2.setType("motorcycle");
 		this.vehicle2.setMotorization("electric");
-		this.vehicle2.setMass(100.0);
-		this.vehicle2.setLoad(3.0);
+		this.vehicle2.setMass(new Measure(100.0, "kg"));
+		this.vehicle2.setLoad(new Measure(3.0, "kg"));
 		this.vehicle2.setDragCoefficient(1.0);
 		this.vehicle3 = new Vehicle();
 		this.vehicle3.setId(3);
 		this.vehicle3.setName("v03");
 		this.vehicle3.setType("car");
 		this.vehicle3.setMotorization("hybrid");
-		this.vehicle3.setMass(300.0);
-		this.vehicle3.setLoad(2.0);
+		this.vehicle3.setMass(new Measure(300.0, "kg"));
+		this.vehicle3.setLoad(new Measure(2.0, "kg"));
 		this.vehicle3.setDragCoefficient(3.0);
 		this.vehicles = new ArrayList();
 		this.vehicles.add(this.vehicle1);

@@ -58,6 +58,9 @@ public class ViewProjectGUI extends JPanel {
         jScrollPaneVeicles = new javax.swing.JScrollPane();
         jListVehicles = new javax.swing.JList();
         jLabelWithVehicles = new javax.swing.JLabel();
+        jLabelWithRoadNetwork = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         jLabelWothName.setText("Name:");
 
@@ -70,6 +73,12 @@ public class ViewProjectGUI extends JPanel {
 
         jLabelWithVehicles.setText("Vehicles:");
 
+        jLabelWithRoadNetwork.setText("Road Network:");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,6 +86,7 @@ public class ViewProjectGUI extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addComponent(jScrollPaneVeicles)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelWithDescription)
@@ -88,8 +98,9 @@ public class ViewProjectGUI extends JPanel {
                                 .addComponent(jLabelWothName)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelWithVehicles))
-                        .addGap(0, 76, Short.MAX_VALUE)))
+                            .addComponent(jLabelWithVehicles)
+                            .addComponent(jLabelWithRoadNetwork))
+                        .addGap(0, 135, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -103,7 +114,11 @@ public class ViewProjectGUI extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelWithDescription)
                     .addComponent(jLabelDescription))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelWithRoadNetwork)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabelWithVehicles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPaneVeicles, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,9 +130,12 @@ public class ViewProjectGUI extends JPanel {
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelWithDescription;
+    private javax.swing.JLabel jLabelWithRoadNetwork;
     private javax.swing.JLabel jLabelWithVehicles;
     private javax.swing.JLabel jLabelWothName;
     private javax.swing.JList jListVehicles;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneVeicles;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

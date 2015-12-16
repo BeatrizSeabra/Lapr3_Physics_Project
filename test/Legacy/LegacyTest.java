@@ -86,8 +86,8 @@ public class LegacyTest {
 		this.vehicle.setName("v01");
 		this.vehicle.setType("truck");
 		this.vehicle.setMotorization("combustion");
-		this.vehicle.setMass(500.0);
-		this.vehicle.setLoad(1.0);
+		this.vehicle.setMass(new Measure(500.0, "kg"));
+		this.vehicle.setLoad(new Measure(1.0, "kg"));
 		this.vehicle.setDragCoefficient(4.0);
 		this.vehicles = new ArrayList();
 		this.vehicles.add(vehicle);

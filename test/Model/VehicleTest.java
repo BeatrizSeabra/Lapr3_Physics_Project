@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Physics.Measure;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -24,11 +26,21 @@ public class VehicleTest {
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
 		this.vehicle.setName("Vehicle Name");
+		this.vehicle.setDescription("Vehicle Description");
 		this.vehicle.setType("Vehicle Type");
 		this.vehicle.setMotorization("Vehicle Motorization");
-		this.vehicle.setMass(100.0);
-		this.vehicle.setLoad(100.0);
+		this.vehicle.setFuel("Vehicle Fuel");
+		this.vehicle.setMass(new Measure(100.0, "kg"));
+		this.vehicle.setLoad(new Measure(100.0, "kg"));
 		this.vehicle.setDragCoefficient(100.0);
+		this.vehicle.setRollingCcoefficient(100.0);
+		this.vehicle.setWheelSize(100.0);
+		this.vehicle.setTorque(100.0);
+		this.vehicle.setRPM(100.0);
+		this.vehicle.setComsumption(100.0);
+		this.vehicle.setMinRPM(100.0);
+		this.vehicle.setMaxRPM(100.0);
+		this.vehicle.setFinalDriveRatio(100.0);
 	}
 
 	@BeforeClass
@@ -56,11 +68,31 @@ public class VehicleTest {
 		Integer expResult = 29 * this.vehicle.getClass().hashCode();
 		expResult += 11 * this.vehicle.getId().hashCode();
 		expResult += 11 * this.vehicle.getName().hashCode();
+		expResult += 11 * this.vehicle.getDescription().hashCode();
 		expResult += 11 * this.vehicle.getType().hashCode();
 		expResult += 11 * this.vehicle.getMotorization().hashCode();
+		expResult += 11 * this.vehicle.getFuel().hashCode();
 		expResult += 11 * this.vehicle.getMass().hashCode();
 		expResult += 11 * this.vehicle.getLoad().hashCode();
 		expResult += 11 * this.vehicle.getDragCoefficient().hashCode();
+		expResult += 11 * this.vehicle.getRollingCcoefficient().hashCode();
+		expResult += 11 * this.vehicle.getWheelSize().hashCode();
+		expResult += 11 * this.vehicle.getTorque().hashCode();
+		expResult += 11 * this.vehicle.getRPM().hashCode();
+		expResult += 11 * this.vehicle.getComsumption().hashCode();
+		expResult += 11 * this.vehicle.getMinRPM().hashCode();
+		expResult += 11 * this.vehicle.getMaxRPM().hashCode();
+		expResult += 11 * this.vehicle.getFinalDriveRatio().hashCode();
+		for (Map.Entry<String, Double> entity : this.vehicle.getVelocityLimits().
+			entrySet()) {
+			expResult += 7 * entity.getKey().hashCode();
+			expResult += 7 * entity.getValue().hashCode();
+		}
+		for (Map.Entry<Integer, Double> entity : this.vehicle.getGears().
+			entrySet()) {
+			expResult += 7 * entity.getKey().hashCode();
+			expResult += 7 * entity.getValue().hashCode();
+		}
 		Integer result = this.vehicle.hashCode();
 		assertEquals(expResult, result);
 	}

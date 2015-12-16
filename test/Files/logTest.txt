@@ -1,2 +1,8 @@
- 2015-12-16 15:31:22.573: Test error message!
+ 2015-12-16 20:49:30.846: 
+
+2015-12-16 20:49:30.891: 
+
+2015-12-16 20:49:30.910: The XML content contains errors that prevent the loading of data to the vehicles list!
+
+2015-12-16 20:51:05.840: The XML content contains errors that prevent the loading of data to the vehicles list!
 
