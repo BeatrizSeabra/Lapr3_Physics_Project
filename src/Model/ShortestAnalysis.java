@@ -13,11 +13,8 @@ import java.util.Deque;
  */
 public class ShortestAnalysis {
 
-	private Project project;
-
 	public String analyze(RoadNetwork roadNetwork, Node startNode, Node endNode) {
-		Deque<Node> nodes = project.getRoadNetwork().
-			shortestPath(startNode, endNode);
+		Deque<Node> nodes = roadNetwork.shortestPath(startNode, endNode);
 		StringBuilder string = new StringBuilder();
 		for (Node node : nodes) {
 			string.append(node.toString());
@@ -25,4 +22,5 @@ public class ShortestAnalysis {
 		}
 		return string.toString();
 	}
+
 }

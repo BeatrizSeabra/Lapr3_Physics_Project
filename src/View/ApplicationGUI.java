@@ -333,7 +333,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     }//GEN-LAST:event_bestPathActionPerformed
 
     private void fastestPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fastestPathActionPerformed
-		// TODO add your handling code here:
+		new ShortestAnalyzeGUI(this);
     }//GEN-LAST:event_fastestPathActionPerformed
 
     private void mostEfficientPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostEfficientPathActionPerformed

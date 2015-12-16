@@ -5,11 +5,19 @@
  */
 package Legacy;
 
+import javax.swing.filechooser.FileFilter;
+
 /**
  *
  * @author ruben
  */
 public interface Export {
+
+	String getExtension();
+
+	String getExtensionDescription();
+
+	FileFilter getExtensionFilter();
 
 	String export(String text);
 

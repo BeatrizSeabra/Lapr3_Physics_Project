@@ -5,11 +5,29 @@
  */
 package Legacy;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author ruben
  */
 public class ExportHTML implements Export {
+
+	@Override
+	public String getExtension() {
+		return "html";
+	}
+
+	@Override
+	public String getExtensionDescription() {
+		return "HTML Documents (*.html)";
+	}
+
+	@Override
+	public FileNameExtensionFilter getExtensionFilter() {
+		return new FileNameExtensionFilter(this.getExtensionDescription(), this.
+										   getExtension());
+	}
 
 	public String export(String text) {
 		String aux = this.begin();

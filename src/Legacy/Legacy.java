@@ -81,6 +81,19 @@ public abstract class Legacy {
 		return map;
 	}
 
+	public static List<FileFilter> getFiltersExtensionsExportAnalyze() {
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("AnalyzeExportClass"));
+		List<FileFilter> filters = new ArrayList();
+		for (Object object : objects) {
+			Export analyzeExport = (Export) object;
+			if (analyzeExport != null) {
+				filters.add(analyzeExport.getExtensionFilter());
+			}
+		}
+		return filters;
+	}
+
 	public static List<FileFilter> getFiltersExtensionsImportRoadNetwork() {
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions("RoadNetworkImportClass"));
@@ -159,6 +172,29 @@ public abstract class Legacy {
 			if (vehicleImport != null && vehicleImport.getExtension().
 				equals(extension)) {
 				return vehicleImport.importData(data);
+			}
+		}
+		Error.setErrorMessage("Could not load this extension: ");
+		return null;
+	}
+
+	public static Boolean export(String filePath, String data) {
+		filePath = filePath.trim();
+		String extension = Legacy.getExtension(filePath);
+		if (extension == null || extension.isEmpty()) {
+			Error.
+				setErrorMessage("Could not get the file extension: " + filePath);
+			return null;
+		}
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("AnalyzeExportClass"));
+		for (Object object : objects) {
+			Export export = (Export) object;
+			if (export != null && export.getExtension().
+				equals(extension)) {
+				String result = export.export(data);
+				Legacy.writeFile(filePath, result, false);
+				return true;
 			}
 		}
 		Error.setErrorMessage("Could not load this extension: ");
