@@ -19,15 +19,11 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jScrollPaneVeicles" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelWithDescription" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabelDescription" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPaneVeicles" min="-2" pref="170" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -36,11 +32,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabelName" min="-2" pref="254" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelWithRoadNetworks" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
-                              <Component id="jLabelWithVehicles" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabelWithVehicles" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="76" max="32767" attributes="0"/>
                   </Group>
@@ -63,15 +55,9 @@
                   <Component id="jLabelDescription" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="51" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelWithRoadNetworks" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabelWithVehicles" alignment="1" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jLabelWithVehicles" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" pref="177" max="32767" attributes="0"/>
-                  <Component id="jScrollPaneVeicles" max="32767" attributes="0"/>
-              </Group>
+              <Component id="jScrollPaneVeicles" min="-2" pref="177" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -95,23 +81,6 @@
         <Property name="text" type="java.lang.String" value="Description"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JList" name="jListRoadNetworks">
-          <Properties>
-            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-              <StringArray count="0"/>
-            </Property>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPaneVeicles">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -129,11 +98,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jLabelWithRoadNetworks">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Road Networks:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelWithVehicles">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vehicles:"/>

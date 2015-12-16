@@ -64,8 +64,10 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 						switch (reader.getLocalName()) {
 							case "Network":
 								roadNetwork = new RoadNetwork();
-								reader.getAttributeValue(0).trim();
-								reader.getAttributeValue(1).trim();
+								roadNetwork.setName(reader.getAttributeValue(0).
+									trim());
+								roadNetwork.setDescription(reader.
+									getAttributeValue(1).trim());
 								networks.add(roadNetwork);
 								break;
 							case "node":

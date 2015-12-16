@@ -18,7 +18,37 @@ import java.util.List;
  */
 public class RoadNetwork {
 
+	private String name;
+	private String description;
 	private Graph<Node, Section> graph = new Graph(true);
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	public Boolean addNode(Node node) {
 		return this.graph.insertVertex(node) != null;

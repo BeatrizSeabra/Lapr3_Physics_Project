@@ -17,8 +17,9 @@ public class Project {
 	private Integer id;
 	private String name;
 	private String description;
-	private List<RoadNetwork> roadNetworks = new ArrayList();
+	private RoadNetwork roadNetwork = new RoadNetwork();
 	private List<Vehicle> vehicles = new ArrayList();
+	private List<Simulation> simulations = new ArrayList();
 
 	/**
 	 * @return the id
@@ -38,36 +39,42 @@ public class Project {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return this.roadNetwork.getName();
 	}
 
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this.roadNetwork.setName(name);
 	}
 
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
-		return description;
+		return this.roadNetwork.getDescription();
 	}
 
 	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.roadNetwork.setDescription(description);
 	}
 
-	public Boolean addRoadNetwork(RoadNetwork roadNetwork) {
-		return this.roadNetworks.add(roadNetwork);
+	/**
+	 * @return the roadNetwork
+	 */
+	public RoadNetwork getRoadNetwork() {
+		return this.roadNetwork;
 	}
 
-	public List<RoadNetwork> getRoadNetworks() {
-		return new ArrayList(this.roadNetworks);
+	/**
+	 * @param roadNetwork the roadNetwork to set
+	 */
+	public void setRoadNetwork(RoadNetwork roadNetwork) {
+		this.roadNetwork = roadNetwork;
 	}
 
 	public Boolean addVehicle(Vehicle vehicle) {
@@ -76,6 +83,14 @@ public class Project {
 
 	public List<Vehicle> getVehicles() {
 		return new ArrayList(this.vehicles);
+	}
+
+	public Boolean addSimulation(Simulation simulation) {
+		return this.simulations.add(simulation);
+	}
+
+	public List<Simulation> getSimulations() {
+		return new ArrayList(this.simulations);
 	}
 
 	@Override
@@ -97,13 +112,14 @@ public class Project {
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
 		hash += 11 * this.id.hashCode();
-		hash += 11 * this.name.hashCode();
-		hash += 11 * this.description.hashCode();
-		for (RoadNetwork roadNetwork : this.roadNetworks) {
-			hash += 7 * roadNetwork.hashCode();
-		}
+		hash += 11 * this.getName().hashCode();
+		hash += 11 * this.getDescription().hashCode();
+		hash += 11 * this.roadNetwork.hashCode();
 		for (Vehicle vehicle : this.vehicles) {
 			hash += 7 * vehicle.hashCode();
+		}
+		for (Simulation simulation : this.simulations) {
+			hash += 7 * simulation.hashCode();
 		}
 		return hash;
 	}
@@ -111,7 +127,7 @@ public class Project {
 	@Override
 	public String toString() {
 		return new StringBuilder(this.id.toString()).append(" - ").
-			append(this.name).toString();
+			append(this.getName()).toString();
 	}
 
 	@Override
@@ -120,9 +136,7 @@ public class Project {
 		project.setId(this.id);
 		project.setName(this.name);
 		project.setDescription(this.description);
-		for (RoadNetwork roadNetwork : this.roadNetworks) {
-			project.addRoadNetwork(roadNetwork);
-		}
+		project.setRoadNetwork(this.roadNetwork);
 		for (Vehicle vehicle : this.vehicles) {
 			project.addVehicle(vehicle);
 		}

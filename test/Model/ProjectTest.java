@@ -89,11 +89,12 @@ public class ProjectTest {
 		expResult += 11 * this.project.getId().hashCode();
 		expResult += 11 * this.project.getName().hashCode();
 		expResult += 11 * this.project.getDescription().hashCode();
-		for (RoadNetwork roadNetwork : this.project.getRoadNetworks()) {
-			expResult += 7 * roadNetwork.hashCode();
-		}
+		expResult += 11 * this.project.getRoadNetwork().hashCode();
 		for (Vehicle vehicle : this.project.getVehicles()) {
 			expResult += 7 * vehicle.hashCode();
+		}
+		for (Simulation simulation : this.project.getSimulations()) {
+			expResult += 7 * simulation.hashCode();
 		}
 		Integer result = this.project.hashCode();
 		assertEquals(expResult, result);

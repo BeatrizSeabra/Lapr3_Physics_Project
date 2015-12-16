@@ -7,7 +7,6 @@ package View;
 
 import Controller.ContextController;
 import Model.Project;
-import Model.RoadNetwork;
 import Model.Vehicle;
 import javax.swing.DefaultListModel;
 import javax.swing.JPanel;
@@ -18,7 +17,6 @@ import javax.swing.JPanel;
  */
 public class ViewProjectGUI extends JPanel {
 
-	private DefaultListModel jModelListRoadNetworks = new DefaultListModel();
 	private DefaultListModel jModelListVehicles = new DefaultListModel();
 
 	/**
@@ -31,7 +29,6 @@ public class ViewProjectGUI extends JPanel {
 	}
 
 	public void initiation() {
-		this.jListRoadNetworks.setModel(this.jModelListRoadNetworks);
 		this.jListVehicles.setModel(jModelListVehicles);
 	}
 
@@ -39,10 +36,6 @@ public class ViewProjectGUI extends JPanel {
 		Project project = ContextController.getOpenProject();
 		this.jLabelName.setText(project.getName());
 		this.jLabelDescription.setText(project.getDescription());
-		this.jModelListRoadNetworks.removeAllElements();
-		for (RoadNetwork network : project.getRoadNetworks()) {
-			this.jModelListRoadNetworks.addElement(network);
-		}
 		this.jModelListVehicles.removeAllElements();
 		for (Vehicle vehicle : project.getVehicles()) {
 			this.jModelListVehicles.addElement(vehicle);
@@ -62,11 +55,8 @@ public class ViewProjectGUI extends JPanel {
         jLabelName = new javax.swing.JLabel();
         jLabelWithDescription = new javax.swing.JLabel();
         jLabelDescription = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListRoadNetworks = new javax.swing.JList();
         jScrollPaneVeicles = new javax.swing.JScrollPane();
         jListVehicles = new javax.swing.JList();
-        jLabelWithRoadNetworks = new javax.swing.JLabel();
         jLabelWithVehicles = new javax.swing.JLabel();
 
         jLabelWothName.setText("Name:");
@@ -75,13 +65,8 @@ public class ViewProjectGUI extends JPanel {
 
         jLabelDescription.setText("Description");
 
-        jListRoadNetworks.setEnabled(false);
-        jScrollPane1.setViewportView(jListRoadNetworks);
-
         jListVehicles.setEnabled(false);
         jScrollPaneVeicles.setViewportView(jListVehicles);
-
-        jLabelWithRoadNetworks.setText("Road Networks:");
 
         jLabelWithVehicles.setText("Vehicles:");
 
@@ -92,24 +77,18 @@ public class ViewProjectGUI extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneVeicles)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelWithDescription)
                         .addGap(18, 18, 18)
                         .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPaneVeicles, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelWothName)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelWithRoadNetworks)
-                                .addGap(119, 119, 119)
-                                .addComponent(jLabelWithVehicles)))
+                            .addComponent(jLabelWithVehicles))
                         .addGap(0, 76, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -125,13 +104,9 @@ public class ViewProjectGUI extends JPanel {
                     .addComponent(jLabelWithDescription)
                     .addComponent(jLabelDescription))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelWithRoadNetworks, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelWithVehicles, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(jLabelWithVehicles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                    .addComponent(jScrollPaneVeicles))
+                .addComponent(jScrollPaneVeicles, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -140,12 +115,9 @@ public class ViewProjectGUI extends JPanel {
     private javax.swing.JLabel jLabelDescription;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelWithDescription;
-    private javax.swing.JLabel jLabelWithRoadNetworks;
     private javax.swing.JLabel jLabelWithVehicles;
     private javax.swing.JLabel jLabelWothName;
-    private javax.swing.JList jListRoadNetworks;
     private javax.swing.JList jListVehicles;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneVeicles;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,6 +30,7 @@ public class CopyProjectGUI extends GraphicUserInterface {
 	@Override
 	public void initiation() {
 		this.copyProjectController = new CopyProjectController();
+		this.copyProjectController.initiation();
 	}
 
 	@Override
@@ -104,7 +105,8 @@ public class CopyProjectGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopyActionPerformed
-		if (this.copyProjectController.copyProject() && this.copyProjectController.saveProject()) {
+		if (this.copyProjectController.copyProject() && this.copyProjectController.
+			saveProject()) {
 			JOptionPane.showMessageDialog(this, "Successfully copied project!");
 			this.close();
 		} else {

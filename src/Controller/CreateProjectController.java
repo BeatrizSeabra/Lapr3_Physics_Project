@@ -22,23 +22,23 @@ public class CreateProjectController {
 
 	private ProjectData projectData;
 	private Project project;
-	private List<RoadNetwork> roadNetworks;
+	private RoadNetwork roadNetwork;
 	private List<Vehicle> vehicles;
 	private AddVehiclesController addVehiclesController;
 
 	public Boolean initiation() {
 		this.projectData = Data.getProjectData();
 		this.project = this.projectData.newInstance();
-		this.roadNetworks = new ArrayList();
+		this.roadNetwork = new RoadNetwork();
 		this.vehicles = new ArrayList();
 		this.addVehiclesController = new AddVehiclesController();
 		return this.project != null;
 	}
 
 	public Boolean setDataProject(String name, String description) {
-		project.setName(name);
-		project.setDescription(description);
-		return this.project.getName().equalsIgnoreCase(name) && this.project.
+		this.roadNetwork.setName(name);
+		this.roadNetwork.setDescription(description);
+		return this.roadNetwork.getName().equalsIgnoreCase(name) && this.roadNetwork.
 			getDescription().equalsIgnoreCase(description);
 	}
 
@@ -53,13 +53,12 @@ public class CreateProjectController {
 	}
 
 	public void loadRoadNetwork(String filePath) {
-		for (RoadNetwork roadNetwork : Legacy.importRoadNetwork(filePath)) {
-			this.roadNetworks.add(roadNetwork);
-		}
+		List<RoadNetwork> roadNetworks = Legacy.importRoadNetwork(filePath);
+		this.roadNetwork = roadNetworks.get(roadNetworks.size() - 1);
 	}
 
-	public List<RoadNetwork> getProjectRoadNetworks() {
-		return this.roadNetworks;
+	public RoadNetwork getProjectRoadNetwork() {
+		return this.roadNetwork;
 	}
 
 	public List<Vehicle> getProjectVehicles() {
@@ -67,9 +66,7 @@ public class CreateProjectController {
 	}
 
 	public Boolean saveProject() {
-		for (RoadNetwork roadNetwork : this.roadNetworks) {
-			this.project.addRoadNetwork(roadNetwork);
-		}
+		this.project.setRoadNetwork(this.roadNetwork);
 		for (Vehicle vehicle : this.vehicles) {
 			this.project.addVehicle(vehicle);
 		}

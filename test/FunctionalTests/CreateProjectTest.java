@@ -69,22 +69,21 @@ public class CreateProjectTest {
 		List<Project> projects = Data.getProjectData().all();
 		assertEquals(projects.size(), 0);
 		this.createProjectController.setDataProject("Name X", "Description X");
-		List<RoadNetwork> roadNetworks = this.createProjectController.
-			getProjectRoadNetworks();
-		assertEquals(roadNetworks.size(), 0);
 		List<Vehicle> vehicles = this.createProjectController.
 			getProjectVehicles();
 		assertEquals(vehicles.size(), 0);
 		this.createProjectController.loadRoadNetwork(this.filePathRoadNetwork);
-		roadNetworks = this.createProjectController.getProjectRoadNetworks();
-		assertEquals(roadNetworks.size(), 1);
+		RoadNetwork roadNetwork = this.createProjectController.
+			getProjectRoadNetwork();
+		assertEquals(roadNetwork.getName(), "TestSet01");
+		assertEquals(roadNetwork.getDescription(), "Simple test set to begin development");
 		this.createProjectController.loadVehicles(this.filePathVehicles);
 		vehicles = this.createProjectController.getProjectVehicles();
 		assertEquals(vehicles.size(), 3);
 		this.createProjectController.saveProject();
 		projects = Data.getProjectData().all();
 		assertEquals(projects.size(), 1);
-		assertEquals(projects.get(0).getName(), "Name X");
-		assertEquals(projects.get(0).getDescription(), "Description X");
+		assertEquals(projects.get(0).getName(), "TestSet01");
+		assertEquals(projects.get(0).getDescription(), "Simple test set to begin development");
 	}
 }
