@@ -80,7 +80,28 @@ public class RoadNetwork {
 
 	public Deque<Node> efficientPath(Node startNode, Node endNode,
 									 Vehicle vehicle) {
-		return shortestPath(startNode, endNode);
+		List<Deque<Node>> allPaths = GraphAlgorithms.
+			allPaths(this.getGraph(), startNode, endNode);
+		Deque<Node> finalPath = allPaths.get(0);
+		double lesser = this.calculateEficienty(finalPath, vehicle);
+		allPaths.remove(0);
+		for (Deque<Node> path : allPaths) {
+			double eficienty = this.calculateEficienty(path, vehicle);
+			if (lesser > eficienty) {
+				lesser = eficienty;
+				finalPath = path;
+			}
+		}
+		return finalPath;
+	}
+
+	private double calculateEficienty(Deque<Node> path, Vehicle vehicle) {
+		Deque<Section> sections = this.getSections(path);
+		double result = 0;
+		for (Section section : sections) {
+			result += section.getTotalForce(vehicle);
+		}
+		return result;
 	}
 
 	public Deque<Section> getSections(Deque<Node> nodes) {
