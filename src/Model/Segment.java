@@ -118,6 +118,12 @@ public class Segment {
 	public void setNumberVehicles(Double numberVehicles) {
 		this.numberVehicles = numberVehicles;
 	}
+        
+        public Double getSlopeForce(Vehicle vehicle){
+            Double frictionForce = Physics.Math.getFrictionForce(vehicle,this.getSlope());
+            Double vehicleForce = Physics.Math.getVehicleForce(vehicle);
+            return vehicleForce-frictionForce;
+        }
 
 	@Override
 	public String toString() {

@@ -127,6 +127,14 @@ public class Section {
 		return measure;
 	}
 
+        public Double getTotalForce(Vehicle vehicle) {
+		Double totalForce = 0.0;
+		for (Segment segment : this.segments) {
+                    totalForce = totalForce + segment.getSlopeForce(vehicle);
+		}
+		return totalForce;
+	}
+        
 	@Override
 	public String toString() {
 		return "Section for " + this.road;
