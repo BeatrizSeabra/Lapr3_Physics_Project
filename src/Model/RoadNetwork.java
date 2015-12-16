@@ -78,6 +78,26 @@ public class RoadNetwork {
 		return shortestPath;
 	}
 
+	public Deque<Node> efficientPath(Node startNode, Node endNode,
+									 Vehicle vehicle) {
+		return shortestPath(startNode, endNode);
+	}
+
+	public Deque<Section> getSections(Deque<Node> nodes) {
+		Deque<Section> sections = new ArrayDeque();
+		if (nodes.size() <= 1) {
+			return sections;
+		}
+		Section section;
+		for (int i = 0; i < nodes.size() - 1; i++) {
+			Node startNode = nodes.removeFirst();
+			Node endNode = nodes.removeFirst();
+			section = this.getSection(startNode, endNode);
+			sections.add(section);
+		}
+		return sections;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
