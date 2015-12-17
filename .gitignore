@@ -9,8 +9,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 .nb-gradle/
-nbproject/project.properties
-
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
