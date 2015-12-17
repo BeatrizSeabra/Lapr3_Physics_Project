@@ -91,7 +91,7 @@ public class LegacyTest {
 		this.vehicle.setMass(new Measure(1400.0, "Kg"));
 		this.vehicle.setLoad(new Measure(120.0, "kg"));
 		this.vehicle.setDragCoefficient(0.35);
-		this.vehicle.setRollingRcoefficient(0.01);
+		this.vehicle.setRollingRCoefficient(0.01);
 		this.vehicle.setWheelSize(0.5);
 		this.vehicle.getVelocityLimits().put("Highway", 100.0);
 		this.vehicle.setTorque(250.0);

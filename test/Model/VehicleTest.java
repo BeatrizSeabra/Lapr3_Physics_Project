@@ -33,7 +33,7 @@ public class VehicleTest {
 		this.vehicle.setMass(new Measure(100.0, "kg"));
 		this.vehicle.setLoad(new Measure(100.0, "kg"));
 		this.vehicle.setDragCoefficient(100.0);
-		this.vehicle.setRollingRcoefficient(100.0);
+		this.vehicle.setRollingRCoefficient(100.0);
 		this.vehicle.setWheelSize(100.0);
 		this.vehicle.setTorque(100.0);
 		this.vehicle.setRPM(100.0);
@@ -75,7 +75,7 @@ public class VehicleTest {
 		expResult += 11 * this.vehicle.getMass().hashCode();
 		expResult += 11 * this.vehicle.getLoad().hashCode();
 		expResult += 11 * this.vehicle.getDragCoefficient().hashCode();
-		expResult += 11 * this.vehicle.getRollingCcoefficient().hashCode();
+		expResult += 11 * this.vehicle.getRollingRCoefficient().hashCode();
 		expResult += 11 * this.vehicle.getWheelSize().hashCode();
 		expResult += 11 * this.vehicle.getTorque().hashCode();
 		expResult += 11 * this.vehicle.getRPM().hashCode();
