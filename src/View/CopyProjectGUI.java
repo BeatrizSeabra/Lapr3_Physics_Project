@@ -52,6 +52,7 @@ public class CopyProjectGUI extends GraphicUserInterface {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(250, 80));
 
         jLabelWithMessage.setText("You want to copy the active project?");
 
@@ -74,27 +75,27 @@ public class CopyProjectGUI extends GraphicUserInterface {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabelWithMessage))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
                         .addComponent(jButtonCopy)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButtonCancel)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelWithMessage)
+                        .addGap(0, 11, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addContainerGap()
                 .addComponent(jLabelWithMessage)
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCopy)
-                    .addComponent(jButtonCancel))
-                .addContainerGap(48, Short.MAX_VALUE))
+                    .addComponent(jButtonCancel)
+                    .addComponent(jButtonCopy))
+                .addContainerGap())
         );
 
         pack();

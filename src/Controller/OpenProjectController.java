@@ -15,8 +15,14 @@ import java.util.List;
  */
 public class OpenProjectController {
 
-	public List<Project> getAllProjects() {
-		return Data.getProjectData().all();
+	private List<Project> projects;
+
+	public void initiation() {
+		this.projects = Data.getProjectData().all();
+	}
+
+	public List<Project> getProjects() {
+		return this.projects;
 	}
 
 	public Boolean openProject(Project project) {

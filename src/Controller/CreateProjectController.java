@@ -20,26 +20,18 @@ import java.util.List;
  */
 public class CreateProjectController {
 
-	private ProjectData projectData;
+	private ProjectData projectData = Data.getProjectData();
 	private Project project;
 	private RoadNetwork roadNetwork;
 	private List<Vehicle> vehicles;
-	private AddVehiclesController addVehiclesController;
+	private AddVehiclesController addVehiclesController = new AddVehiclesController();
+	private String name;
+	private String description;
 
 	public Boolean initiation() {
-		this.projectData = Data.getProjectData();
-		this.project = this.projectData.newInstance();
-		this.roadNetwork = new RoadNetwork();
+		this.roadNetwork = null;
 		this.vehicles = new ArrayList();
-		this.addVehiclesController = new AddVehiclesController();
-		return this.project != null;
-	}
-
-	public Boolean setDataProject(String name, String description) {
-		this.roadNetwork.setName(name);
-		this.roadNetwork.setDescription(description);
-		return this.roadNetwork.getName().equalsIgnoreCase(name) && this.roadNetwork.
-			getDescription().equalsIgnoreCase(description);
+		return true;
 	}
 
 	public Boolean loadVehicles(String filePath) {
@@ -59,7 +51,7 @@ public class CreateProjectController {
 		}
 	}
 
-	public RoadNetwork getProjectRoadNetwork() {
+	public RoadNetwork getRoadNetwork() {
 		return this.roadNetwork;
 	}
 
@@ -67,8 +59,11 @@ public class CreateProjectController {
 		return this.vehicles;
 	}
 
-	public Boolean saveProject() {
+	public Boolean saveProject(String name, String description) {
+		this.project = this.projectData.newInstance();
 		this.project.setRoadNetwork(this.roadNetwork);
+		this.roadNetwork.setName(name);
+		this.roadNetwork.setDescription(description);
 		for (Vehicle vehicle : this.vehicles) {
 			this.project.addVehicle(vehicle);
 		}

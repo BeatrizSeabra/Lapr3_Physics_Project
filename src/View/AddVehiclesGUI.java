@@ -42,6 +42,7 @@ public class AddVehiclesGUI extends GraphicUserInterface {
 		for (Vehicle vehicle : this.addVehiclesController.getVehicles()) {
 			this.jModelListVehicles.addElement(vehicle);
 		}
+		this.jButtonSave.setEnabled(this.addVehiclesController.hasChanges());
 	}
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -53,8 +54,10 @@ public class AddVehiclesGUI extends GraphicUserInterface {
         jButtonLoadVehicles = new javax.swing.JButton();
         jScrollPaneList = new javax.swing.JScrollPane();
         jListVehicles = new javax.swing.JList();
+        jLabelWithVehicles = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(450, 250));
 
         jButtonSave.setText("Save");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -92,39 +95,42 @@ public class AddVehiclesGUI extends GraphicUserInterface {
         });
         jScrollPaneList.setViewportView(jListVehicles);
 
+        jLabelWithVehicles.setText("Vehicles:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPaneList)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSave)
-                        .addGap(123, 123, 123)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                         .addComponent(jButtonClean)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                        .addComponent(jButtonCancel)))
-                .addGap(84, 84, 84))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonLoadVehicles)
-                .addGap(267, 267, 267))
+                        .addGap(101, 101, 101)
+                        .addComponent(jButtonCancel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelWithVehicles)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonLoadVehicles)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(62, Short.MAX_VALUE)
-                .addComponent(jButtonLoadVehicles)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPaneList, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonLoadVehicles)
+                    .addComponent(jLabelWithVehicles))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneList, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
                     .addComponent(jButtonClean)
-                    .addComponent(jButtonCancel))
-                .addGap(49, 49, 49))
+                    .addComponent(jButtonCancel)))
         );
 
         pack();
@@ -166,6 +172,7 @@ public class AddVehiclesGUI extends GraphicUserInterface {
     private javax.swing.JButton jButtonClean;
     private javax.swing.JButton jButtonLoadVehicles;
     private javax.swing.JButton jButtonSave;
+    private javax.swing.JLabel jLabelWithVehicles;
     private javax.swing.JList jListVehicles;
     private javax.swing.JScrollPane jScrollPaneList;
     // End of variables declaration//GEN-END:variables

@@ -17,25 +17,31 @@ public class EditProjectController {
 
 	private ProjectData projectData;
 	private Project project;
+	private Project editProject;
 
 	public void initiation() {
 		this.projectData = Data.getProjectData();
 		this.project = ContextController.getOpenProject();
+		this.editProject = this.project.clone();
 	}
 
 	public Project getProject() {
-		return this.project;
+		return this.editProject;
 	}
 
 	public Boolean editProject(String name, String description) {
-		this.project = ContextController.getOpenProject();
-		this.project.setName(name);
-		this.project.setDescription(description);
-		return this.project.getName().equalsIgnoreCase(name) && this.project.
+		this.editProject.setName(name);
+		this.editProject.setDescription(description);
+		return this.editProject.getName().equalsIgnoreCase(name) && this.editProject.
 			getDescription().equalsIgnoreCase(description);
 	}
 
+	public Boolean hasChanges() {
+		return !this.editProject.getName().equals(this.project.getName()) || !this.editProject.
+			getDescription().equals(this.project.getDescription());
+	}
+
 	public Boolean saveProject() {
-		return this.projectData.save(this.project);
+		return this.projectData.save(this.editProject);
 	}
 }

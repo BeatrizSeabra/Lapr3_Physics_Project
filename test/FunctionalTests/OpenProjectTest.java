@@ -60,7 +60,8 @@ public class OpenProjectTest {
 	public void testOpenProjectFunctional() {
 		System.out.println("testOpenProjectFunctional");
 		assertEquals(ContextController.getOpenProject(), null);
-		List<Project> projects = this.openController.getAllProjects();
+		this.openController.initiation();
+		List<Project> projects = this.openController.getProjects();
 		assertEquals(projects.size(), 1);
 		this.openController.openProject(projects.get(0));
 		assertEquals(ContextController.getOpenProject(), projects.get(0));

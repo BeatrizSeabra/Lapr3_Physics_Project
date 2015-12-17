@@ -19,7 +19,6 @@ public class AddVehiclesController {
 
 	private Project project;
 	private List<Vehicle> vehicles;
-	private List<String> names;
 
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
@@ -64,6 +63,10 @@ public class AddVehiclesController {
 			}
 		}
 		return amount;
+	}
+
+	public Boolean hasChanges() {
+		return !this.vehicles.equals(this.project.getVehicles());
 	}
 
 	public Boolean saveProjectVehicles() {

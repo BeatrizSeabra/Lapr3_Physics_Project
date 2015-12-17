@@ -15,9 +15,9 @@ import Model.Project;
  */
 public class CopyProjectController {
 
+	private ProjectData projectData;
 	private Project project;
 	private Project projectCopy;
-	private ProjectData projectData;
 
 	public Boolean initiation() {
 		this.projectData = Data.getProjectData();
@@ -27,11 +27,13 @@ public class CopyProjectController {
 
 	public Boolean copyProject() {
 		this.projectCopy = this.projectData.clone(this.project);
+		String name = new StringBuilder(this.projectCopy.getName()).
+			append(" (copy)").toString();
+		this.projectCopy.setName(name);
 		return this.projectCopy != null;
 	}
 
 	public Boolean saveProject() {
-		this.projectData.save(this.projectCopy);
-		return true;
+		return this.projectData.save(this.projectCopy);
 	}
 }

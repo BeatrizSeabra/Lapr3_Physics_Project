@@ -33,14 +33,22 @@ public class OpenProjectGUI extends GraphicUserInterface {
 	@Override
 	public void initiation() {
 		this.jListProjects.setModel(jModelListProjects);
+		this.openProjectController.initiation();
 	}
 
 	@Override
 	public void update() {
 		this.jModelListProjects.removeAllElements();
-		for (Project object : this.openProjectController.getAllProjects()) {
-			jModelListProjects.addElement(object);
+		for (Project object : this.openProjectController.getProjects()) {
+			this.jModelListProjects.addElement(object);
 		}
+		this.active(!this.jModelListProjects.isEmpty());
+	}
+
+	public Boolean active(Boolean state) {
+		this.jListProjects.setEnabled(state);
+		this.jButtonOpen.setEnabled(this.jListProjects.getSelectedIndex() != -1);
+		return state;
 	}
 
 	/**
@@ -57,9 +65,16 @@ public class OpenProjectGUI extends GraphicUserInterface {
         jLabelProjects = new javax.swing.JLabel();
         jButtonOpen = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(420, 220));
 
+        jListProjects.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListProjectsValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListProjects);
 
         jLabelProjects.setText("List of Project:");
@@ -78,36 +93,44 @@ public class OpenProjectGUI extends GraphicUserInterface {
             }
         });
 
+        jButtonUpdate.setText("Update");
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1)
-                            .addComponent(jLabelProjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabelProjects, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
                         .addComponent(jButtonOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addComponent(jButtonUpdate)
+                        .addGap(62, 62, 62)
                         .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(jLabelProjects)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonOpen, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(jButtonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonOpen, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonUpdate)))
         );
 
         pack();
@@ -132,9 +155,19 @@ public class OpenProjectGUI extends GraphicUserInterface {
 		}
     }//GEN-LAST:event_jButtonOpenActionPerformed
 
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+		this.openProjectController.initiation();
+		this.update();
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jListProjectsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListProjectsValueChanged
+		this.jButtonOpen.setEnabled(this.jListProjects.getSelectedIndex() != -1);
+    }//GEN-LAST:event_jListProjectsValueChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonOpen;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JLabel jLabelProjects;
     private javax.swing.JList jListProjects;
     private javax.swing.JScrollPane jScrollPane1;

@@ -32,13 +32,17 @@ public class EditProjectGUI extends GraphicUserInterface {
 	public void initiation() {
 		this.editProjectController = new EditProjectController();
 		this.editProjectController.initiation();
+		Project project = this.editProjectController.getProject();
+		this.jTextFieldName.setText(project.getName());
+		this.jTextFieldDescription.setText(project.getDescription());
 	}
 
 	@Override
 	public void update() {
-		Project project = this.editProjectController.getProject();
-		this.jTextFieldName.setText(project.getName());
-		this.jTextFieldDescription.setText(project.getDescription());
+		this.editProjectController.
+			editProject(this.jTextFieldName.getText(), this.jTextFieldDescription.
+						getText());
+		this.jButtonSave.setEnabled(this.editProjectController.hasChanges());
 	}
 
 	/**
@@ -59,8 +63,21 @@ public class EditProjectGUI extends GraphicUserInterface {
         jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(450, 140));
 
         jLabelName.setText("Name:");
+
+        jTextFieldName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldNameKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldNameKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldNameKeyReleased(evt);
+            }
+        });
 
         jLabelDescription.setText("Description:");
 
@@ -90,41 +107,42 @@ public class EditProjectGUI extends GraphicUserInterface {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelDescription)
-                    .addComponent(jLabelName))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldName)
-                    .addComponent(jTextFieldDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(78, Short.MAX_VALUE)
-                .addComponent(jButtonSave)
-                .addGap(40, 40, 40)
-                .addComponent(jButtonClean)
-                .addGap(46, 46, 46)
-                .addComponent(jButtonCancel)
-                .addGap(55, 55, 55))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                        .addComponent(jButtonClean)
+                        .addGap(96, 96, 96)
+                        .addComponent(jButtonCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldName))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelDescription)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldDescription)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelName)
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDescription)
                     .addComponent(jTextFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSave)
+                    .addComponent(jButtonCancel)
                     .addComponent(jButtonClean)
-                    .addComponent(jButtonCancel))
-                .addGap(61, 61, 61))
+                    .addComponent(jButtonSave)))
         );
 
         pack();
@@ -151,6 +169,17 @@ public class EditProjectGUI extends GraphicUserInterface {
 								  getErrorMessage());
 		}
     }//GEN-LAST:event_jButtonSaveActionPerformed
+
+    private void jTextFieldNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNameKeyTyped
+    }//GEN-LAST:event_jTextFieldNameKeyTyped
+
+    private void jTextFieldNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNameKeyPressed
+
+    }//GEN-LAST:event_jTextFieldNameKeyPressed
+
+    private void jTextFieldNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNameKeyReleased
+		this.update();
+    }//GEN-LAST:event_jTextFieldNameKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;

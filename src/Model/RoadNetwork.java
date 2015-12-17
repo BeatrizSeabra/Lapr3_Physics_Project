@@ -18,9 +18,24 @@ import java.util.List;
  */
 public class RoadNetwork {
 
+	private Integer id;
 	private String name;
 	private String description;
 	private Graph<Node, Section> graph = new Graph(true);
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the name
@@ -147,22 +162,39 @@ public class RoadNetwork {
 	}
 
 	@Override
+	protected RoadNetwork clone() {
+		RoadNetwork roadNetwork = new RoadNetwork();
+		roadNetwork.setId(this.id);
+		roadNetwork.setName(this.name);
+		roadNetwork.setDescription(this.description);
+		for (Node node : this.graph.elements()) {
+			roadNetwork.addNode(node);
+		}
+		for (Edge<Node, Section> edge : this.graph.edges()) {
+			roadNetwork.
+				addSection(edge.getVOrig().getElement(), edge.getVDest().
+						   getElement(), edge.getElement());
+		}
+		return roadNetwork;
+	}
+
+	@Override
 	public String toString() {
-		StringBuilder string = new StringBuilder("Road Network: \n");
+		StringBuilder stringBuilder = new StringBuilder();
 		for (Node node : this.getNodes()) {
-			string.append("\tNode: " + node + "\n");
+			stringBuilder.append("Node: " + node + "\n");
 		}
 		for (Edge<Node, Section> edge : this.graph.edges()) {
 			Section section = edge.getElement();
-			string.append("\tSection: '" + edge.getVOrig().
+			stringBuilder.append("Section: '" + edge.getVOrig().
 				getElement().getName() + "' '" + edge.getVDest().
 				getElement().getName() + "' '" + section.getRoad() + "' '" + section.
 				getTypology() + "' '" + section.getDirection() + "' '" + section.
 				getToll() + "' '" + section.getWindDirection() + "' '" + section.
 				getWindSpeed() + "'\n");
 			for (Segment segment : edge.getElement().getSegments()) {
-				string.
-					append("\t\tSegment: '" + segment.getName() + "' '" + segment.
+				stringBuilder.
+					append("\tSegment: '" + segment.getName() + "' '" + segment.
 						getHeight() + "' '" + segment.getSlope() + "' '" + segment.
 						getLength() + "' '" + segment.
 						getMaxVelocity() + "' '" + segment.
@@ -170,7 +202,7 @@ public class RoadNetwork {
 						getNumberVehicles() + "'\n");
 			}
 		}
-		return string.toString();
+		return stringBuilder.toString();
 	}
 
 }

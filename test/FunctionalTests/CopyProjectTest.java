@@ -65,9 +65,13 @@ public class CopyProjectTest {
 		this.copyProjectController.copyProject();
 		this.copyProjectController.saveProject();
 		projects = Data.getProjectData().all();
+		String newName = new StringBuilder(projects.get(0).getName()).
+			append(" (copy)").toString();
+		assertEquals(projects.get(1).getName(), newName);
 		assertEquals(projects.get(0).getId() != projects.get(1).getId(), true);
-		assertEquals(projects.get(0).getName(), projects.get(1).getName());
 		assertEquals(projects.get(0).getDescription(), projects.get(1).
 					 getDescription());
+		assertEquals(projects.get(0).getRoadNetwork(), projects.get(1).
+					 getRoadNetwork());
 	}
 }

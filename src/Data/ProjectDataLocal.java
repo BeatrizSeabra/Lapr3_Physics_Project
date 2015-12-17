@@ -42,9 +42,10 @@ public class ProjectDataLocal implements ProjectData {
 
 	@Override
 	public Boolean save(Project project) {
-		for (int i = 0; i < this.size(); i++) {
-			if (this.list.get(i).getId() == project.getId()) {
-				return this.list.set(i, project.clone()) != null;
+		for (Project oldProject : this.list) {
+			if (oldProject.getId() == project.getId()) {
+				this.list.remove(oldProject);
+				return this.list.add(project);
 			}
 		}
 		return this.list.add(project);

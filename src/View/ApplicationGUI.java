@@ -100,9 +100,8 @@ public class ApplicationGUI extends GraphicUserInterface {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 400));
-        setMinimumSize(new java.awt.Dimension(500, 400));
-        setSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        setSize(new java.awt.Dimension(500, 500));
 
         jLabelWithWarning.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabelWithWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -282,16 +281,17 @@ public class ApplicationGUI extends GraphicUserInterface {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(155, Short.MAX_VALUE)
-                .addComponent(jLabelWithWarning)
-                .addGap(145, 145, 145))
             .addGroup(layout.createSequentialGroup()
-                .addGap(193, 193, 193)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelCreateProject)
-                    .addComponent(jLabelOpenProject))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabelWithWarning))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelOpenProject)
+                            .addComponent(jLabelCreateProject))))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +302,7 @@ public class ApplicationGUI extends GraphicUserInterface {
                 .addComponent(jLabelCreateProject)
                 .addGap(46, 46, 46)
                 .addComponent(jLabelOpenProject)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         pack();

@@ -39,18 +39,31 @@ public class CreateProjectGUI extends GraphicUserInterface {
 
 	@Override
 	public void update() {
-		RoadNetwork roadNetwork = this.createProjectController.
-			getProjectRoadNetwork();
-		if (this.jTextFieldName.getText().isEmpty()) {
-			this.jTextFieldName.setText(roadNetwork.getName());
-		}
-		if (this.jTextFieldDescription.getText().isEmpty()) {
-			this.jTextFieldDescription.setText(roadNetwork.getDescription());
+		RoadNetwork roadNetwork = this.createProjectController.getRoadNetwork();
+		if (this.active(roadNetwork != null)) {
+			if (this.jTextFieldName.getText().isEmpty()) {
+				this.jTextFieldName.setText(roadNetwork.getName());
+			}
+			if (this.jTextFieldDescription.getText().isEmpty()) {
+				this.jTextFieldDescription.setText(roadNetwork.getDescription());
+			}
+			this.jTextAreaRoadNetwork.setText(roadNetwork.toString());
+		} else {
+			this.jTextFieldName.setText("");
+			this.jTextFieldDescription.setText("");
+			this.jTextAreaRoadNetwork.setText("");
 		}
 		this.jModelListVehicles.removeAllElements();
 		for (Vehicle vehicle : this.createProjectController.getProjectVehicles()) {
 			this.jModelListVehicles.addElement(vehicle);
 		}
+	}
+
+	public Boolean active(Boolean state) {
+		this.jTextFieldName.setEnabled(state);
+		this.jTextFieldDescription.setEnabled(state);
+		this.jButtonSave.setEnabled(state);
+		return state;
 	}
 
 	/**
@@ -73,8 +86,13 @@ public class CreateProjectGUI extends GraphicUserInterface {
         jButtonVehicles = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListVehicles = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaRoadNetwork = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(400, 500));
 
         jButtonSave.setText("Save");
         jButtonSave.addActionListener(new java.awt.event.ActionListener() {
@@ -94,7 +112,7 @@ public class CreateProjectGUI extends GraphicUserInterface {
             }
         });
 
-        jButtonCancel.setText("Cancell");
+        jButtonCancel.setText("Cancel");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelActionPerformed(evt);
@@ -117,6 +135,16 @@ public class CreateProjectGUI extends GraphicUserInterface {
 
         jScrollPane1.setViewportView(jListVehicles);
 
+        jTextAreaRoadNetwork.setEditable(false);
+        jTextAreaRoadNetwork.setColumns(20);
+        jTextAreaRoadNetwork.setLineWrap(true);
+        jTextAreaRoadNetwork.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaRoadNetwork);
+
+        jLabel3.setText("Vehicles:");
+
+        jLabel4.setText("Road Network:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,51 +152,56 @@ public class CreateProjectGUI extends GraphicUserInterface {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldName)
-                                .addComponent(jTextFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSave)
-                        .addGap(99, 99, 99)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addComponent(jButtonClean)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(82, 82, 82)
                         .addComponent(jButtonCancel))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(149, 149, 149)
-                                .addComponent(jButtonVehicles))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(134, 134, 134)
-                                .addComponent(jButtonRoad)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldDescription))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldName))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonVehicles))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRoad)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonRoad)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(16, 16, 16)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(15, 15, 15)
-                .addComponent(jButtonVehicles)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonRoad)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonVehicles)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClean)
                     .addComponent(jButtonCancel)
@@ -184,10 +217,8 @@ public class CreateProjectGUI extends GraphicUserInterface {
 			JOptionPane.showMessageDialog(this, "Project needs a name!");
 		} else if (this.jTextFieldDescription.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Project needs a description!");
-		} else if (this.createProjectController.
-			setDataProject(this.jTextFieldName.getText(), this.jTextFieldDescription.
-						   getText()) && this.createProjectController.
-			saveProject()) {
+		} else if (this.createProjectController.saveProject(this.jTextFieldName.
+			getText(), this.jTextFieldDescription.getText())) {
 			JOptionPane.
 				showMessageDialog(this, "Creation project successfully!");
 			this.close();
@@ -224,8 +255,6 @@ public class CreateProjectGUI extends GraphicUserInterface {
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
 		this.createProjectController.initiation();
-		this.jTextFieldDescription.setText("");
-		this.jTextFieldName.setText("");
 		this.update();
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
@@ -237,8 +266,12 @@ public class CreateProjectGUI extends GraphicUserInterface {
     private javax.swing.JButton jButtonVehicles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList jListVehicles;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextAreaRoadNetwork;
     private javax.swing.JTextField jTextFieldDescription;
     private javax.swing.JTextField jTextFieldName;
     // End of variables declaration//GEN-END:variables

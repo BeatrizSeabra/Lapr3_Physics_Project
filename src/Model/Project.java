@@ -136,7 +136,7 @@ public class Project {
 		project.setId(this.id);
 		project.setName(this.name);
 		project.setDescription(this.description);
-		project.setRoadNetwork(this.roadNetwork);
+		project.setRoadNetwork(this.roadNetwork.clone());
 		for (Vehicle vehicle : this.vehicles) {
 			project.addVehicle(vehicle);
 		}
