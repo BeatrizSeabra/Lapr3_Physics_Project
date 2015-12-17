@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import Physics.Measurement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -25,7 +26,7 @@ public class Vehicle {
 	private Measure mass;
 	private Measure load;
 	private Double dragCoefficient;
-	private Double rollingCcoefficient;
+	private Double rollingRCoefficient;
 	private Double wheelSize;
 	private Map<String, Double> velocityLimits = new HashMap();
 	private Double torque;
@@ -181,15 +182,15 @@ public class Vehicle {
 	/**
 	 * @return the rollingCcoefficient
 	 */
-	public Double getRollingCcoefficient() {
-		return rollingCcoefficient;
+	public Double getRollingRCoefficient() {
+		return rollingRCoefficient;
 	}
 
 	/**
-	 * @param rollingCcoefficient the rollingCcoefficient to set
+         * @param rollingRcoefficient
 	 */
-	public void setRollingRcoefficient(Double rollingCcoefficient) {
-		this.rollingCcoefficient = rollingCcoefficient;
+	public void setRollingRCoefficient(Double rollingRcoefficient) {
+		this.rollingRCoefficient = rollingRcoefficient;
 	}
 
 	/**
@@ -331,7 +332,7 @@ public class Vehicle {
 		hash += 11 * this.mass.hashCode();
 		hash += 11 * this.load.hashCode();
 		hash += 11 * this.dragCoefficient.hashCode();
-		hash += 11 * this.rollingCcoefficient.hashCode();
+		hash += 11 * this.rollingRCoefficient.hashCode();
 		hash += 11 * this.wheelSize.hashCode();
 		hash += 11 * this.torque.hashCode();
 		hash += 11 * this.RPM.hashCode();
@@ -362,7 +363,7 @@ public class Vehicle {
 		vehicle.setMass(this.mass);
 		vehicle.setLoad(this.load);
 		vehicle.setDragCoefficient(this.dragCoefficient);
-		vehicle.setRollingRcoefficient(this.rollingCcoefficient);
+		vehicle.setRollingRCoefficient(this.rollingRCoefficient);
 		vehicle.setWheelSize(this.wheelSize);
 		vehicle.setTorque(this.torque);
 		vehicle.setRPM(this.RPM);
@@ -383,5 +384,15 @@ public class Vehicle {
 	public String toString() {
 		return this.name;
 	}
+
+    public Integer getCurrentGear() {
+        return 1;
+    }
+    public Double getFrontalArea(){
+        return 1.0;
+    }
+    public Measure getCurrentVelocity(){
+        return Measurement.convert(new Measure(60.0, "km/h"), "m/s");
+    }
 
 }

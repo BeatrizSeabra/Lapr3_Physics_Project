@@ -120,8 +120,8 @@ public class Segment {
 	}
         
         public Double getSlopeForce(Vehicle vehicle){
-            Double frictionForce = Physics.Math.getFrictionForce(vehicle,this);
-            Double vehicleForce = Physics.Math.getVehicleForce(vehicle);
+            Double frictionForce = Physics.PhysicsMath.getFrictionForce(vehicle,this);
+            Double vehicleForce = Physics.PhysicsMath.getVehicleForce(vehicle);
             if(this.getSlope()>0){
                 vehicleForce = vehicleForce-frictionForce;
             }

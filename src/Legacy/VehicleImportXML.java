@@ -108,7 +108,7 @@ public class VehicleImportXML implements Import<Vehicle> {
 								vehicle.setDragCoefficient(Util.toDouble(text));
 								break;
 							case "rrc":
-								vehicle.setRollingRcoefficient(Util.
+								vehicle.setRollingRCoefficient(Util.
 									toDouble(text));
 								break;
 							case "wheel_size":
