@@ -23,8 +23,19 @@ public class PhysicsMath {
         }
 
 	public static Double getFrictionForce(Vehicle vehicle, Segment segment) {
-            Double sinAngle = segment.getSlope() * (Measurement.convert(segment.getLength(), "m").getValue() / 100);
+            System.out.println(segment.getSlope());
+            System.out.println(segment.getLength());
+            
+            Double sinAngle = segment.getSlope();
+            System.out.println(sinAngle);
+            Measure convert;
+            System.out.println(segment.getLength());
+            convert = Measurement.convert(segment.getLength(), "m");
+            System.out.println(convert);
+            sinAngle = sinAngle * (convert.getValue() / 100);
+            System.out.println(sinAngle);
             sinAngle = sinAngle / Measurement.convert(segment.getLength(), "m").getValue();
+            System.out.println(sinAngle);
             Double frictionForce = PhysicsMath.getNormal(vehicle) * sinAngle;
             return frictionForce;
 	}

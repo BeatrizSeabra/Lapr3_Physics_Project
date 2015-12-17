@@ -23,17 +23,22 @@ public abstract class Measurement {
 
 	static public Measure convert(Measure measure, String unit) {
 		if (measure.getUnit().equalsIgnoreCase(unit)) {
+                    System.out.println(measure.getUnit());
+                    System.out.println(measure);
+                    System.out.println(unit);
 			return new Measure(measure.getValue(), unit);
 		}
 		Double ratio = Legacy.
 			importScalesMeasures(Measurement.getScalesMeasuresFilePath()).
 			get(measure.getUnit() + unit);
+                System.out.println("Ratio: " + ratio);
 		if (ratio == null) {
 			Error.
 				setErrorMessage("The conversion was not possible because there is no file in the relationship between units!");
 			return null;
 		}
-		return new Measure(measure.getValue() * ratio, unit);
+                ratio = ratio * measure.getValue();
+		return new Measure(ratio, unit);
 	}
 
 	static public Measure sum(Measure measureA, Measure measureB) {

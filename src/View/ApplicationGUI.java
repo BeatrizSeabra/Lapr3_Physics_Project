@@ -341,7 +341,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     }//GEN-LAST:event_mostEfficientPathActionPerformed
 
     private void vehicleComparisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleComparisonActionPerformed
-		// TODO add your handling code here:
+		new VehicleComparisonGUI(this);
     }//GEN-LAST:event_vehicleComparisonActionPerformed
 
     private void openProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openProjectActionPerformed
