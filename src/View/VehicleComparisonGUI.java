@@ -5,22 +5,36 @@
  */
 package View;
 
+import Controller.ContextController;
+import Controller.VehicleComparisonController;
+import Model.Node;
+import Model.Vehicle;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Eduardo
  */
-public class VehicleComparisonGUI extends javax.swing.JFrame {
+public class VehicleComparisonGUI extends GraphicUserInterface {
+
+	private DefaultComboBoxModel jModelListStarts = new DefaultComboBoxModel();
+	private DefaultListModel jModelListEndNodes = new DefaultListModel();
+	private DefaultListModel jModelListVehicles = new DefaultListModel();
+	private VehicleComparisonController vehicleComparisonController = new VehicleComparisonController();
 
 	/**
 	 * Creates new form VehicleComparisonGUI
 	 */
-	public VehicleComparisonGUI() {
+	public VehicleComparisonGUI(GraphicUserInterface orign) {
 		initComponents();
-//		jComboBox2.add("aelezz", this);
-		jComboBox2.setSelectedIndex(-1);
-		if (jComboBox2.getSelectedIndex() != -1) {
-			jList2.setEnabled(true);
+		this.creation(orign);
+		jList1.setModel(jModelListVehicles);
+		for (Vehicle vec : ContextController.getOpenProject().getVehicles()) {
+			jModelListVehicles.addElement(vec);
 		}
+		jList1.setEnabled(true);
 //		}
 		setVisible(true);
 	}
@@ -70,6 +84,11 @@ public class VehicleComparisonGUI extends javax.swing.JFrame {
         jLabel5.setText("Select a Vehicle from the List: ");
 
         jButton1.setText("Compare Vehicle Stats");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancel");
 
@@ -152,48 +171,22 @@ public class VehicleComparisonGUI extends javax.swing.JFrame {
 		if (jComboBox2.getSelectedIndex() != -1) {
 			jList2.setEnabled(true);
 		}
+		this.update();
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		vehicleComparisonController.
+			setNodes((Node) jComboBox2.getSelectedItem(), (List<Node>) jList2.
+					 getSelectedValuesList(), (List<Vehicle>) jList1.
+					 getSelectedValuesList());
+		for (String result : vehicleComparisonController.result()) {
+			new ResultsGUI(null, result);
+		}
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-		 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.
-				getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
-			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(VehicleComparisonGUI.class.
-				getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(VehicleComparisonGUI.class.
-				getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(VehicleComparisonGUI.class.
-				getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(VehicleComparisonGUI.class.
-				getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		}
-		//</editor-fold>
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new VehicleComparisonGUI().setVisible(true);
-			}
-		});
-	}
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -207,4 +200,28 @@ public class VehicleComparisonGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+	@Override
+	void initiation() {
+		this.vehicleComparisonController = new VehicleComparisonController();
+		this.vehicleComparisonController.initiation();
+		this.jComboBox2.setModel(this.jModelListStarts);
+		this.jList2.setModel(this.jModelListEndNodes);
+		for (Node node : this.vehicleComparisonController.getNodes()) {
+			this.jModelListStarts.addElement(node);
+		}
+
+	}
+
+	@Override
+	void update() {
+		this.jModelListEndNodes.removeAllElements();
+		for (Node node : this.vehicleComparisonController.getNodes()) {
+			if (!node.equals((Node) this.jComboBox2.
+				getSelectedItem())) {
+				this.jModelListEndNodes.addElement(node);
+			}
+		}
+
+	}
 }
