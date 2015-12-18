@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -116,21 +117,27 @@ public class GraphAlgorithms {
 	private static <V, E> void allPaths(Graph<V, E> g, Vertex<V, E> vOrig,
 										Vertex<V, E> vDest,
 										boolean[] visited, Deque<V> path,
-										ArrayList<Deque<V>> paths) {
-
+										List<Deque<V>> paths,
+										Deque<E> edgePath,
+										List<Deque<E>> edgePaths) {
 		path.push(vOrig.getElement());
 		int vKey = vOrig.getKey();
 		visited[vKey] = true;
-
 		for (Edge<V, E> edge : g.outgoingEdges(vOrig)) {
 			Vertex<V, E> vAdj = g.opposite(vOrig, edge);
 			if (vAdj.getElement() == vDest.getElement()) {
+				edgePath.push(edge.getElement());
+				edgePaths.add(new LinkedList(revPath(edgePath)));
+				edgePath.pop();
 				path.push(vAdj.getElement());
-				Deque<V> revpath = revPath(path);
-				paths.add(new LinkedList(revpath));  //save clone of reverse path
+				paths.add(new LinkedList(revPath(path)));
 				path.pop();
-			} else if (!visited[vAdj.getKey()]) {
-				allPaths(g, vAdj, vDest, visited, path, paths);
+			} else {
+				edgePath.push(edge.getElement());
+				if (!visited[vAdj.getKey()]) {
+					allPaths(g, vAdj, vDest, visited, path, paths, edgePath, edgePaths);
+				}
+				edgePath.pop();
 			}
 		}
 		visited[vKey] = false;
@@ -143,20 +150,23 @@ public class GraphAlgorithms {
 	 * @param vdInf information of the Vertex destination
 	 * @return paths ArrayList with all paths from voInf to vdInf
 	 */
-	public static <V, E> ArrayList<Deque<V>> allPaths(Graph<V, E> g, V voInf,
-													  V vdInf) {
-
+	public static <V, E> List<Deque<V>> allPaths(Graph<V, E> g, V voInf,
+												 V vdInf,
+												 List<Deque<E>> edgePaths) {
+		Deque<E> edgePath = new LinkedList<>();
+		if (edgePaths == null) {
+			edgePaths = new ArrayList<>();
+		} else {
+			edgePaths.clear();
+		}
 		Deque<V> path = new LinkedList<>();
 		ArrayList<Deque<V>> paths = new ArrayList<>();
 		boolean[] visited = new boolean[g.numVertices()];
-
 		Vertex<V, E> vOrig = g.getVertex(voInf);
 		Vertex<V, E> vDest = g.getVertex(vdInf);
-
 		if (vOrig != null && vDest != null) {
-			allPaths(g, vOrig, vDest, visited, path, paths);
+			allPaths(g, vOrig, vDest, visited, path, paths, edgePath, edgePaths);
 		}
-
 		return paths;
 	}
 
@@ -290,27 +300,4 @@ public class GraphAlgorithms {
 		return pathrev;
 	}
 
-	public static <V, E> ArrayList<Deque<E>> allEdgesPaths(Graph<V, E> g,
-														   V voInf,
-														   V vdInf) {
-		ArrayList<Deque<V>> allPaths = allPaths(g, voInf, vdInf);
-		return allEdgesPaths(g, allPaths);
-	}
-
-	private static <V, E> ArrayList<Deque<E>> allEdgesPaths(Graph<V, E> g,
-															ArrayList<Deque<V>> allPaths) {
-		ArrayList<Deque<E>> result = new ArrayList();
-		for (Deque<V> path : allPaths) {
-			Deque<E> deque = new ArrayDeque();
-			while (!path.isEmpty()) {
-				V startVertex = path.removeFirst();
-				if (!path.isEmpty()) {
-					deque.add(g.getEdge(startVertex, path.element()).
-						getElement());
-				}
-			}
-			result.add(deque);
-		}
-		return result;
-	}
 }

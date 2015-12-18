@@ -149,7 +149,6 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 		if (this.pathAnalysisController.setNodes((Node) jComboBoxStartNodes.
 			getSelectedItem(), (List<Node>) jListEndNodes.
 												 getSelectedValuesList())) {
-			List<List<String[]>> results = this.pathAnalysisController.analyze();
 			for (List<String[]> result : this.pathAnalysisController.analyze()) {
 				new ResultsGUI(null, result);
 			}

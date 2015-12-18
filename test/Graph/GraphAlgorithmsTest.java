@@ -1,13 +1,14 @@
 package Graph;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -128,19 +129,104 @@ public class GraphAlgorithmsTest {
 	 */
 	@Test
 	public void testAllPaths() {
-		System.out.println("Test of all paths");
+		System.out.println("Test of all edge paths");
 
-		ArrayList<Deque<String>> paths = new ArrayList<Deque<String>>();
+		int hascode = 0;
+		List<Deque<String>> edgePaths = new ArrayList();
+		List<Deque<String>> paths = GraphAlgorithms.
+			allPaths(this.completeMap, "Porto", "LX", edgePaths);
+		System.out.println("V Porto -> LX: " + paths.size());
+		for (Deque<String> line : paths) {
+			System.out.print("vertex: ");
+			for (String column : line) {
+				System.out.print(column + " ");
+			}
+			System.out.println("\n");
+		}
+		System.out.println("E Porto -> LX: " + edgePaths.size());
+		for (Deque<String> line : edgePaths) {
+			System.out.print("edges: ");
+			for (String column : line) {
+				System.out.print(column + " ");
+				hascode += column.hashCode();
+			}
+			System.out.println("\n");
+		}
+		assertEquals(hascode, 0);
+		assertEquals(edgePaths.size(), paths.size());
+		for (int i = 0; i < paths.size(); i++) {
+			if (!paths.get(i).isEmpty()) {
+				assertEquals(edgePaths.get(i).size(), paths.get(i).size() - 1);
+			} else {
+				assertEquals(edgePaths.get(i).size(), paths.get(i).size());
+			}
+		}
 
-		assertFalse("There should not be paths if vertex does not exist", GraphAlgorithms.
-					allPaths(completeMap, "Porto", "LX") == null);
+		hascode = 0;
+		paths = GraphAlgorithms.
+			allPaths(completeMap, "Porto", "Lisboa", edgePaths);
+		System.out.println("V Porto -> Lisboa: " + paths.size());
+		for (Deque<String> line : paths) {
+			System.out.print("vertex: ");
+			for (String column : line) {
+				System.out.print(column + " ");
+			}
+			System.out.println("\n");
+		}
+		System.out.println("E Porto -> Lisboa: " + edgePaths.size());
+		for (Deque<String> line : edgePaths) {
+			System.out.print("edges: ");
+			for (String column : line) {
+				System.out.print(column + " ");
+				hascode += column.hashCode();
+			}
+			System.out.println("\n");
+		}
+		int outher = "A1".hashCode() + "A17".hashCode() + "A8".hashCode();
+		outher += "A1".hashCode() + "A17".hashCode() + "A34".hashCode() + "A1".
+			hashCode();
+		outher += "A1".hashCode() + "A1".hashCode() + "A34".hashCode() + "A8".
+			hashCode();
+		outher += "A1".hashCode() + "A1".hashCode() + "A1".hashCode();
+		assertEquals(hascode, outher);
+		assertEquals(edgePaths.size(), paths.size());
+		for (int i = 0; i < paths.size(); i++) {
+			if (!paths.get(i).isEmpty()) {
+				assertEquals(edgePaths.get(i).size(), paths.get(i).size() - 1);
+			} else {
+				assertEquals(edgePaths.get(i).size(), paths.get(i).size());
+			}
+		}
 
-		paths = GraphAlgorithms.allPaths(completeMap, "Porto", "Lisboa");
-		assertTrue("There should be 4 paths", paths.size() == 4);
-
-		paths = GraphAlgorithms.allPaths(completeMap, "Porto", "Faro");
-		assertTrue("There should not be paths between Porto and Faro in the incomplete map", paths.
-				   size() == 0);
+		hascode = 0;
+		paths = GraphAlgorithms.
+			allPaths(completeMap, "Porto", "Faro", edgePaths);
+		System.out.println("V Porto -> Faro: " + paths.size());
+		for (Deque<String> line : paths) {
+			System.out.print("vertex: ");
+			for (String column : line) {
+				System.out.print(column + " ");
+			}
+			System.out.println("\n");
+		}
+		System.out.println("E Porto -> Faro: " + edgePaths.size());
+		for (Deque<String> line : edgePaths) {
+			System.out.print("edges: ");
+			for (String column : line) {
+				System.out.print(column + " ");
+				hascode += column.hashCode();
+			}
+			System.out.println("\n");
+		}
+		assertEquals(hascode, 0);
+		assertEquals(edgePaths.size(), paths.size());
+		for (int i = 0; i < paths.size(); i++) {
+			if (!paths.get(i).isEmpty()) {
+				assertEquals(edgePaths.get(i).size(), paths.get(i).size() - 1);
+			} else {
+				assertEquals(edgePaths.get(i).size(), paths.get(i).size());
+			}
+		}
 	}
 
 	/**
@@ -233,47 +319,6 @@ public class GraphAlgorithmsTest {
 		assertTrue("then Aveiro", it.next().compareTo("Aveiro") == 0);
 		assertTrue("then Leiria", it.next().compareTo("Leiria") == 0);
 		assertTrue("then Castelo Branco", it.next().compareTo("Castelo Branco") == 0);
-	}
-
-	/**
-	 * Test of allEdgesPaths method, of class GraphAlgorithms.
-	 */
-	@Test
-	public void testAllEdgesPaths() {
-		System.out.println("testAllEdgesPaths");
-		ArrayList<Deque<String>> expResult = new ArrayList();
-		Deque<String> deque1 = new ArrayDeque();
-		deque1.add("A1");
-		deque1.add("A1");
-		deque1.add("A1");
-		deque1.add("A8");
-		Deque<String> deque2 = new ArrayDeque();
-		deque2.add("A1");
-		deque2.add("A1");
-		deque2.add("A34");
-		Deque<String> deque3 = new ArrayDeque();
-		deque3.add("A1");
-		deque3.add("A17");
-		expResult.add(deque1);
-		expResult.add(deque2);
-		expResult.add(deque3);
-		ArrayList<Deque<String>> result = GraphAlgorithms.
-			allEdgesPaths(completeMap, "Porto", "Leiria");
-
-		Deque<String> resultPath = result.get(2);
-		for (String edgeInfo : resultPath) {
-			assertEquals(deque1.removeFirst(), edgeInfo);
-		}
-
-		resultPath = result.get(1);
-		for (String edgeInfo : resultPath) {
-			assertEquals(deque2.removeFirst(), edgeInfo);
-		}
-
-		resultPath = result.get(0);
-		for (String edgeInfo : resultPath) {
-			assertEquals(deque3.removeFirst(), edgeInfo);
-		}
 	}
 
 }
