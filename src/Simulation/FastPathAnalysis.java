@@ -51,22 +51,18 @@ public class FastPathAnalysis implements PathAnalysis {
 		for (Deque<Object> path : paths) {
 			Double total = 0.0;
 			List<String[]> result = new ArrayList();
-			result.add(";lenght;total".toString().split(";"));
+			result.add(";Lenght;Total".toString().split(";"));
 			for (Object object : path) {
 				if (object instanceof Node) {
 					Node node = (Node) object;
 					StringBuilder stringBuilder = new StringBuilder();
 					stringBuilder.append("Node;");
 					stringBuilder.append(node.getName());
-					stringBuilder.append(";");
-					stringBuilder.append(0.0);
-					stringBuilder.append(";");
+					stringBuilder.append(";0;");
 					stringBuilder.append(total);
 					result.add(stringBuilder.toString().split(";"));
 				} else if (object instanceof Section) {
-					Section section = (Section) object;
-					List<Segment> segments = section.getSegments();
-					for (Segment segment : segments) {
+					for (Segment segment : ((Section) object).getSegments()) {
 						StringBuilder stringBuilder = new StringBuilder();
 						total += segment.getLength().getValue();
 						stringBuilder.append("Segment;");
