@@ -9,6 +9,7 @@ import Model.Node;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
@@ -32,27 +33,53 @@ public class LevelPathAnalysis implements PathAnalysis {
 		List<Deque<Section>> sectionPaths = new ArrayList();
 		List<Deque<Node>> nodesPaths = roadNetwork.
 			getAllPaths(startNode, endNode, sectionPaths);
-		for (Deque<Section> sectionPath : sectionPaths) {
-			Double total = 0.0;
-			List<String[]> result = new ArrayList();
-			result.add("Segment;Slope of Segment;Total Slope;".split(";"));
-			for (Section section : sectionPath) {
-				for (Segment segment : section.getSegments()) {
-					total += (segment.getSlope());
-					StringBuilder stringBuilder = new StringBuilder();
 
-					stringBuilder.append(segment.toString());
-
-					stringBuilder.append(segment.getSlope());
-
-					stringBuilder.append(total);
-					result.add(stringBuilder.toString().split(";"));
-
+		List<Deque<Object>> paths = new ArrayList();
+		for (int iList = 0; iList < nodesPaths.size(); iList++) {
+			Deque<Object> deque = new ArrayDeque();
+			List<Object> nodes = (List) nodesPaths.get(iList);
+			List<Object> sections = (List) sectionPaths.get(iList);
+			for (int iDeque = 0; iDeque < nodes.size(); iDeque++) {
+				deque.add(nodes.get(iDeque));
+				if (iDeque < sections.size()) {
+					deque.add(sections.get(iDeque));
 				}
 			}
+			paths.add(deque);
+		}
+
+		for (Deque<Object> path : paths) {
+			Double total = 0.0;
+			List<String[]> result = new ArrayList();
+			result.add(";Name;Slope;Total".toString().split(";"));
+			for (Object object : path) {
+				if (object instanceof Node) {
+					Node node = (Node) object;
+					StringBuilder stringBuilder = new StringBuilder();
+					stringBuilder.append("Node;");
+					stringBuilder.append(node.getName());
+					stringBuilder.append(";0;");
+					stringBuilder.append(total);
+					result.add(stringBuilder.toString().split(";"));
+				} else if (object instanceof Section) {
+					for (Segment segment : ((Section) object).getSegments()) {
+						StringBuilder stringBuilder = new StringBuilder();
+						stringBuilder.append("Segment;");
+						stringBuilder.append(segment.getName());
+						stringBuilder.append(";");
+						stringBuilder.append(segment.getSlope());
+						stringBuilder.append(";");
+						stringBuilder.append(total);
+						result.add(stringBuilder.toString().split(";"));
+						total += (segment.getSlope());
+					}
+				}
+
+			}
+
 			results.put(total, result);
 		}
+
 		return results.get(Collections.min(results.keySet()));
 	}
-
 }
