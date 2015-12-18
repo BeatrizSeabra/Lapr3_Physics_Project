@@ -5,11 +5,12 @@
  */
 package Legacy;
 
+import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author ruben
+ * @author LAPR3_20152016_G27
  */
 public class ExportHTML implements Export {
 
@@ -29,25 +30,61 @@ public class ExportHTML implements Export {
 										   getExtension());
 	}
 
-	public String export(String text) {
-		String aux = this.begin();
-		aux += this.addText(text);
-		aux += this.endFile();
-		return aux;
+	public String export(List<String[]> data) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(this.start());
+		stringBuilder.append(this.tabela(data));
+		stringBuilder.append(this.end());
+		return stringBuilder.toString();
 	}
 
-	private static String begin() {
-		return "<!DOCTYPE> <html>   <head>       <title>Project LAPR3</title>       <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">       <link rel=\"icon\" type=\"image/ico\" href=\"http://www.isep.ipp.pt/favicon.ico\">   </head>   <body>       <div align=\"center\">       <img src=\"http://www.dei.isep.ipp.pt/images/topo_index.png\" alt=\"Logotipo ISEP\" >       </div>";
+	private String start() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("<!DOCTYPE html>");
+		stringBuilder.append("<html>");
+		stringBuilder.append("    <head>");
+		stringBuilder.append("        <title>");
+		stringBuilder.append("            Export File HTML");
+		stringBuilder.append("        </title>\n");
+		stringBuilder.
+			append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+		stringBuilder.
+			append("        <link rel=\"icon\" type=\"image/ico\" href=\"http://www.isep.ipp.pt/favicon.ico\">");
+		stringBuilder.append("    </head>");
+		stringBuilder.append("    <body>");
+		stringBuilder.append("        <div>");
+		stringBuilder.
+			append("            <img src=\"http://www.dei.isep.ipp.pt/images/topo_index.png\" alt=\"Logotipo ISEP\">");
+		stringBuilder.append("        </div>");
+		stringBuilder.append("        <hr>");
+		stringBuilder.append("        <div>");
+		return stringBuilder.toString();
 	}
 
-	private String addText(String text) {
-		String aux = " <div align=\"center\">  " + text + "   </div>";
-
-		return aux;
+	private String tabela(List<String[]> data) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("            <TABLE>");
+		for (String[] line : data) {
+			stringBuilder.append("                <TR>");
+			for (String column : line) {
+				stringBuilder.
+					append("                    <TD align='center'>&nbsp;").
+					append(column).append("&nbsp;</TD>");
+			}
+			stringBuilder.append("                </TR>");
+		}
+		stringBuilder.append("            </TABLE>");
+		stringBuilder.append("            <br>");
+		return stringBuilder.toString();
 	}
 
-	private String endFile() {
-		return "</body></html>";
+	private String end() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("        </div>");
+		stringBuilder.append("        <hr>");
+		stringBuilder.append("    </body>");
+		stringBuilder.append("</html>");
+		return stringBuilder.toString();
 	}
 
 }

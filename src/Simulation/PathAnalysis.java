@@ -3,23 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Legacy;
+package Simulation;
 
+import Model.Node;
+import Model.RoadNetwork;
 import java.util.List;
-import javax.swing.filechooser.FileFilter;
 
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public interface Export {
+public interface PathAnalysis extends Analysis {
 
-	String getExtension();
-
-	String getExtensionDescription();
-
-	FileFilter getExtensionFilter();
-
-	String export(List<String[]> data);
+	List<String[]> analyze(RoadNetwork roadNetwork, Node startNode, Node endNode);
 
 }

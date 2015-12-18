@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Simulation;
 
 /**
  *
- * @author ruben
+ * @author LAPR3_20152016_G27
  */
-public interface Analyze {
+public interface Analysis {
 
-	String analyze(RoadNetwork roadNetwork, Node startNode, Node endNode);
+	String getName();
+
 }

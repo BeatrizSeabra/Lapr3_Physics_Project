@@ -74,40 +74,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Analysis"/>
           </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="bestPath">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Best Path"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bestPathActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="fastestPath">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Fastest Path"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fastestPathActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mostEfficientPath">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Most Efficient Path"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mostEfficientPathActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="vehicleComparison">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Vehicle Comparison"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vehicleComparisonActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="simulation">
           <Properties>
@@ -144,40 +110,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="runSimulation">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Run"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="results">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Results"/>
-          </Properties>
-          <SubComponents>
-            <Menu class="javax.swing.JMenu" name="globalResults">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Global"/>
-              </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="resultsSummary">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Show summary"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="resultsExport">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Export to HTML"/>
-                  </Properties>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="filterResults">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Filter"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="gnuplot">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Gnuplot File"/>
               </Properties>
             </MenuItem>
           </SubComponents>

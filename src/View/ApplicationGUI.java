@@ -6,7 +6,14 @@
 package View;
 
 import Controller.ContextController;
+import Simulation.Analysis;
+import Simulation.PathAnalysis;
+import Simulation.VehicleAnalysis;
+import System.Settings;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.util.List;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -38,6 +45,7 @@ public class ApplicationGUI extends GraphicUserInterface {
 			this.initComponents();
 			this.accessMenu(false);
 		}
+		this.loadMenuAnalysis();
 		this.repaint();
 		this.revalidate();
 	}
@@ -48,8 +56,28 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.editProject.setEnabled(state);
 		this.jMenuItemCloseProject.setEnabled(state);
 		this.analysis.setEnabled(state);
-		this.simulation.setEnabled(state);
-		this.results.setEnabled(state);
+		this.simulation.setEnabled(false);
+	}
+
+	private void loadMenuAnalysis() {
+		this.analysis.removeAll();
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("PathAnalysisClass"));
+		objects.addAll(Settings.loadAllClass(Settings.
+			getOptions("VehicleAnalysisClass")));
+		for (Object object : objects) {
+			Analysis analysis = (Analysis) object;
+			if (analysis != null) {
+				JMenuItem menuItem = new javax.swing.JMenuItem();
+				menuItem.setText(analysis.getName());
+				menuItem.addActionListener(new java.awt.event.ActionListener() {
+					public void actionPerformed(java.awt.event.ActionEvent evt) {
+						jMenuAnalysisActionPerformed(evt, analysis);
+					}
+				});
+				this.analysis.add(menuItem);
+			}
+		}
 	}
 
 	/**
@@ -75,10 +103,6 @@ public class ApplicationGUI extends GraphicUserInterface {
         addVehicle = new javax.swing.JMenuItem();
         jMenuItemCloseProject = new javax.swing.JMenuItem();
         analysis = new javax.swing.JMenu();
-        bestPath = new javax.swing.JMenuItem();
-        fastestPath = new javax.swing.JMenuItem();
-        mostEfficientPath = new javax.swing.JMenuItem();
-        vehicleComparison = new javax.swing.JMenuItem();
         simulation = new javax.swing.JMenu();
         createSimulation = new javax.swing.JMenu();
         newSimulation = new javax.swing.JMenuItem();
@@ -86,12 +110,6 @@ public class ApplicationGUI extends GraphicUserInterface {
         editSimulation = new javax.swing.JMenuItem();
         deleteSimulation = new javax.swing.JMenuItem();
         runSimulation = new javax.swing.JMenuItem();
-        results = new javax.swing.JMenu();
-        globalResults = new javax.swing.JMenu();
-        resultsSummary = new javax.swing.JMenuItem();
-        resultsExport = new javax.swing.JMenuItem();
-        filterResults = new javax.swing.JMenuItem();
-        gnuplot = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemLog = new javax.swing.JMenuItem();
 
@@ -185,39 +203,6 @@ public class ApplicationGUI extends GraphicUserInterface {
         jMenuBar1.add(closeProject);
 
         analysis.setText("Analysis");
-
-        bestPath.setText("Best Path");
-        bestPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bestPathActionPerformed(evt);
-            }
-        });
-        analysis.add(bestPath);
-
-        fastestPath.setText("Fastest Path");
-        fastestPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fastestPathActionPerformed(evt);
-            }
-        });
-        analysis.add(fastestPath);
-
-        mostEfficientPath.setText("Most Efficient Path");
-        mostEfficientPath.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostEfficientPathActionPerformed(evt);
-            }
-        });
-        analysis.add(mostEfficientPath);
-
-        vehicleComparison.setText("Vehicle Comparison");
-        vehicleComparison.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vehicleComparisonActionPerformed(evt);
-            }
-        });
-        analysis.add(vehicleComparison);
-
         jMenuBar1.add(analysis);
 
         simulation.setText("Simulation");
@@ -242,26 +227,6 @@ public class ApplicationGUI extends GraphicUserInterface {
         simulation.add(runSimulation);
 
         jMenuBar1.add(simulation);
-
-        results.setText("Results");
-
-        globalResults.setText("Global");
-
-        resultsSummary.setText("Show summary");
-        globalResults.add(resultsSummary);
-
-        resultsExport.setText("Export to HTML");
-        globalResults.add(resultsExport);
-
-        results.add(globalResults);
-
-        filterResults.setText("Filter");
-        results.add(filterResults);
-
-        gnuplot.setText("Gnuplot File");
-        results.add(gnuplot);
-
-        jMenuBar1.add(results);
 
         jMenuHelp.setText("Help");
 
@@ -328,22 +293,6 @@ public class ApplicationGUI extends GraphicUserInterface {
 		new AddVehiclesGUI(this);
     }//GEN-LAST:event_addVehicleActionPerformed
 
-    private void bestPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bestPathActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_bestPathActionPerformed
-
-    private void fastestPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fastestPathActionPerformed
-		new ShortestAnalyzeGUI(this);
-    }//GEN-LAST:event_fastestPathActionPerformed
-
-    private void mostEfficientPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostEfficientPathActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_mostEfficientPathActionPerformed
-
-    private void vehicleComparisonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleComparisonActionPerformed
-		new VehicleComparisonGUI(this);
-    }//GEN-LAST:event_vehicleComparisonActionPerformed
-
     private void openProjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openProjectActionPerformed
 		new OpenProjectGUI(this);
     }//GEN-LAST:event_openProjectActionPerformed
@@ -365,10 +314,17 @@ public class ApplicationGUI extends GraphicUserInterface {
 		new LogGUI(null);
     }//GEN-LAST:event_jMenuItemLogActionPerformed
 
+	private void jMenuAnalysisActionPerformed(ActionEvent evt, Analysis analysis) {
+		if (analysis instanceof PathAnalysis) {
+			new PathAnalysisGUI(this, (PathAnalysis) analysis);
+		} else if (analysis instanceof VehicleAnalysis) {
+			new VehicleAnalysisGUI(this, (VehicleAnalysis) analysis);
+		}
+	}
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addVehicle;
     private javax.swing.JMenu analysis;
-    private javax.swing.JMenuItem bestPath;
     private javax.swing.JMenu closeProject;
     private javax.swing.JMenuItem copyProject;
     private javax.swing.JMenuItem copySimulation;
@@ -377,10 +333,6 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JMenuItem deleteSimulation;
     private javax.swing.JMenuItem editProject;
     private javax.swing.JMenuItem editSimulation;
-    private javax.swing.JMenuItem fastestPath;
-    private javax.swing.JMenuItem filterResults;
-    private javax.swing.JMenu globalResults;
-    private javax.swing.JMenuItem gnuplot;
     private javax.swing.JLabel jLabelCreateProject;
     private javax.swing.JLabel jLabelOpenProject;
     private javax.swing.JLabel jLabelWithWarning;
@@ -390,14 +342,9 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCloseProject;
     private javax.swing.JMenuItem jMenuItemLog;
-    private javax.swing.JMenuItem mostEfficientPath;
     private javax.swing.JMenuItem newSimulation;
     private javax.swing.JMenuItem openProject;
-    private javax.swing.JMenu results;
-    private javax.swing.JMenuItem resultsExport;
-    private javax.swing.JMenuItem resultsSummary;
     private javax.swing.JMenuItem runSimulation;
     private javax.swing.JMenu simulation;
-    private javax.swing.JMenuItem vehicleComparison;
     // End of variables declaration//GEN-END:variables
 }

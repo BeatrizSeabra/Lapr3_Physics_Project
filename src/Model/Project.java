@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Simulation.VehicleAnalysis;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Project {
 	private String description;
 	private RoadNetwork roadNetwork = new RoadNetwork();
 	private List<Vehicle> vehicles = new ArrayList();
-	private List<Simulation> simulations = new ArrayList();
+	private List<VehicleAnalysis> simulations = new ArrayList();
 
 	/**
 	 * @return the id
@@ -85,11 +86,11 @@ public class Project {
 		return new ArrayList(this.vehicles);
 	}
 
-	public Boolean addSimulation(Simulation simulation) {
+	public Boolean addSimulation(VehicleAnalysis simulation) {
 		return this.simulations.add(simulation);
 	}
 
-	public List<Simulation> getSimulations() {
+	public List<VehicleAnalysis> getSimulations() {
 		return new ArrayList(this.simulations);
 	}
 
@@ -118,7 +119,7 @@ public class Project {
 		for (Vehicle vehicle : this.vehicles) {
 			hash += 7 * vehicle.hashCode();
 		}
-		for (Simulation simulation : this.simulations) {
+		for (VehicleAnalysis simulation : this.simulations) {
 			hash += 7 * simulation.hashCode();
 		}
 		return hash;

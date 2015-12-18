@@ -5,6 +5,8 @@
  */
 package Legacy;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -43,9 +45,13 @@ public class ExportHTMLTest {
 	@Test
 	public void testExport() {
 		System.out.println("export");
-		String text = "PROJECT";
+		List<String[]> text = new ArrayList();
+		text.add("1;2;3".split(";"));
+		text.add("4;5;6".split(";"));
+		text.add("7;8;9".split(";"));
+		String expResult = "<!DOCTYPE html><html>    <head>        <title>            Export File HTML        </title>\n"
+			+ "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">        <link rel=\"icon\" type=\"image/ico\" href=\"http://www.isep.ipp.pt/favicon.ico\">    </head>    <body>        <div>            <img src=\"http://www.dei.isep.ipp.pt/images/topo_index.png\" alt=\"Logotipo ISEP\">        </div>        <hr>        <div>            <TABLE>                <TR>                    <TD align='center'>&nbsp;1&nbsp;</TD>                    <TD align='center'>&nbsp;2&nbsp;</TD>                    <TD align='center'>&nbsp;3&nbsp;</TD>                </TR>                <TR>                    <TD align='center'>&nbsp;4&nbsp;</TD>                    <TD align='center'>&nbsp;5&nbsp;</TD>                    <TD align='center'>&nbsp;6&nbsp;</TD>                </TR>                <TR>                    <TD align='center'>&nbsp;7&nbsp;</TD>                    <TD align='center'>&nbsp;8&nbsp;</TD>                    <TD align='center'>&nbsp;9&nbsp;</TD>                </TR>            </TABLE>            <br>        </div>        <hr>    </body></html>";
 		ExportHTML instance = new ExportHTML();
-		String expResult = "<!DOCTYPE> <html>   <head>       <title>Project LAPR3</title>       <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">       <link rel=\"icon\" type=\"image/ico\" href=\"http://www.isep.ipp.pt/favicon.ico\">   </head>   <body>       <div align=\"center\">       <img src=\"http://www.dei.isep.ipp.pt/images/topo_index.png\" alt=\"Logotipo ISEP\" >       </div>" + " <div align=\"center\">  " + text + "   </div>" + "</body></html>";
 		String result = instance.export(text);
 		assertEquals(expResult, result);
 

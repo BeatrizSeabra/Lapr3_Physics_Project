@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Simulation.VehicleAnalysis;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -93,7 +94,7 @@ public class ProjectTest {
 		for (Vehicle vehicle : this.project.getVehicles()) {
 			expResult += 7 * vehicle.hashCode();
 		}
-		for (Simulation simulation : this.project.getSimulations()) {
+		for (VehicleAnalysis simulation : this.project.getSimulations()) {
 			expResult += 7 * simulation.hashCode();
 		}
 		Integer result = this.project.hashCode();

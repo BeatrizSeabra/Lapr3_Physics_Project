@@ -6,6 +6,9 @@
 package Model;
 
 import Physics.Measure;
+import Simulation.FastPathAnalysis;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -132,7 +135,7 @@ public class ShortestAnalysisTest {
 	}
 
 	/**
-	 * Test of analyze method, of class ShortestAnalysis.
+	 * Test of analyze method, of class FastPathAnalysis.
 	 */
 	@Test
 	public void testAnalyze() {
@@ -140,10 +143,23 @@ public class ShortestAnalysisTest {
 		RoadNetwork roadNetwork = this.roadNetwork;
 		Node startNode = this.node0;
 		Node endNode = this.node2;
-		ShortestAnalysis instance = new ShortestAnalysis();
-		String expResult = "n0 n2 ";
-		String result = instance.analyze(roadNetwork, startNode, endNode);
-		System.out.println(result);
+		List<String[]> list = new ArrayList();
+		list.add("Fast;Path;Analysis".split(";"));
+		list.add("1;2;3".split(";"));
+		list.add("4;5;6".split(";"));
+		int expResult = 0;
+		for (String[] line : list) {
+			for (String column : line) {
+				expResult += column.hashCode();
+			}
+		}
+		int result = 0;
+		for (String[] line : new FastPathAnalysis().
+			analyze(roadNetwork, startNode, endNode)) {
+			for (String column : line) {
+				result += column.hashCode();
+			}
+		}
 		assertEquals(expResult, result);
 	}
 

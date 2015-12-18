@@ -81,19 +81,6 @@ public abstract class Legacy {
 		return map;
 	}
 
-	public static List<FileFilter> getFiltersExtensionsExportAnalyze() {
-		List<Object> objects = Settings.loadAllClass(Settings.
-			getOptions("AnalyzeExportClass"));
-		List<FileFilter> filters = new ArrayList();
-		for (Object object : objects) {
-			Export analyzeExport = (Export) object;
-			if (analyzeExport != null) {
-				filters.add(analyzeExport.getExtensionFilter());
-			}
-		}
-		return filters;
-	}
-
 	public static List<FileFilter> getFiltersExtensionsImportRoadNetwork() {
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions("RoadNetworkImportClass"));
@@ -178,7 +165,7 @@ public abstract class Legacy {
 		return null;
 	}
 
-	public static Boolean export(String filePath, String data) {
+	public static Boolean export(String filePath, List<String[]> data) {
 		filePath = filePath.trim();
 		String extension = Legacy.getExtension(filePath);
 		if (extension == null || extension.isEmpty()) {
@@ -187,7 +174,7 @@ public abstract class Legacy {
 			return null;
 		}
 		List<Object> objects = Settings.loadAllClass(Settings.
-			getOptions("AnalyzeExportClass"));
+			getOptions("ExportClass"));
 		for (Object object : objects) {
 			Export export = (Export) object;
 			if (export != null && export.getExtension().
@@ -199,6 +186,19 @@ public abstract class Legacy {
 		}
 		Error.setErrorMessage("Could not load this extension: ");
 		return null;
+	}
+
+	public static List<FileFilter> getFiltersExtensionsExport() {
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("ExportClass"));
+		List<FileFilter> filters = new ArrayList();
+		for (Object object : objects) {
+			Export analyzeExport = (Export) object;
+			if (analyzeExport != null) {
+				filters.add(analyzeExport.getExtensionFilter());
+			}
+		}
+		return filters;
 	}
 
 }

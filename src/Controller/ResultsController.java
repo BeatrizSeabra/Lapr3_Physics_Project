@@ -5,26 +5,47 @@
  */
 package Controller;
 
+import Legacy.Legacy;
+import java.util.List;
+
 /**
  *
- * @author Eduardo
+ * @author LAPR3_20152016_G27
  */
 public class ResultsController {
 
-	private String results;
+	private List<String[]> results;
 
 	/**
 	 * @return the results
 	 */
-	public String getResults() {
-		return results;
+	public List<String[]> getResults() {
+		return this.results;
 	}
 
 	/**
 	 * @param results the results to set
 	 */
-	public void setResults(String results) {
+	public void setResults(List<String[]> results) {
 		this.results = results;
+	}
+
+	/**
+	 * @return the results
+	 */
+	public String getResultsString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (String[] line : this.results) {
+			for (String column : line) {
+				stringBuilder.append(column).append(" ");
+			}
+			stringBuilder.append("\n");
+		}
+		return stringBuilder.toString();
+	}
+
+	public Boolean export(String filePath) {
+		return Legacy.export(filePath, this.results);
 	}
 
 }

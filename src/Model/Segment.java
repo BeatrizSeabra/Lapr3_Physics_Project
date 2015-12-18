@@ -118,18 +118,18 @@ public class Segment {
 	public void setNumberVehicles(Double numberVehicles) {
 		this.numberVehicles = numberVehicles;
 	}
-        
-        public Double getSlopeForce(Vehicle vehicle){
-            Double frictionForce = Physics.PhysicsMath.getFrictionForce(vehicle,this);
-            Double vehicleForce = Physics.PhysicsMath.getVehicleForce(vehicle);
-            if(this.getSlope()>0){
-                vehicleForce = vehicleForce-frictionForce;
-            }
-            else{
-                vehicleForce = vehicleForce+frictionForce;
-            }
-            return vehicleForce;
-        }
+
+	public Double getSlopeForce(Vehicle vehicle) {
+		Double frictionForce = Physics.PhysicsMath.
+			getFrictionForce(vehicle, this);
+		Double vehicleForce = Physics.PhysicsMath.getVehicleForce(vehicle);
+		if (this.getSlope() > 0) {
+			vehicleForce = vehicleForce - frictionForce;
+		} else {
+			vehicleForce = vehicleForce + frictionForce;
+		}
+		return vehicleForce;
+	}
 
 	@Override
 	public String toString() {
