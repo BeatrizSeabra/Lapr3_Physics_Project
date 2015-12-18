@@ -17,11 +17,13 @@ public class Main {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
+
 		try {
 			Error.clearLog();
 			new ApplicationGUI();
 		} catch (Exception ex) {
 			Error.setErrorMessage("ERROR: " + ex);
 		}
+
 	}
 }
