@@ -17,6 +17,10 @@ hp;W;745,7
 metrichp;hp;0,986
 metrichp;W;735,5
 
+rpm;rps;0,01666666667
+rps;rpm;60
+ratio;ratio;1
+
 m/s2;m/s2;1
 m/s2;grav;0,1019716213
 
@@ -49,7 +53,6 @@ s;min;0,0166666667
 
 km;km;1
 km;m;1000
-Km;m;1000
 km;cm;100000
 
 m;m;1
@@ -79,8 +82,3 @@ mg;mg;1
 mg;t;0,000000001
 mg;kg;0,000001
 mg;g;0,001
-
-
-
-
-

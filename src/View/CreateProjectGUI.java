@@ -7,7 +7,6 @@ package View;
 
 import Controller.CreateProjectController;
 import Legacy.Legacy;
-import Model.RoadNetwork;
 import Model.Vehicle;
 import System.Error;
 import javax.swing.DefaultListModel;
@@ -39,15 +38,17 @@ public class CreateProjectGUI extends GraphicUserInterface {
 
 	@Override
 	public void update() {
-		RoadNetwork roadNetwork = this.createProjectController.getRoadNetwork();
-		if (this.active(roadNetwork != null)) {
+		if (this.active(this.createProjectController.hasProject())) {
 			if (this.jTextFieldName.getText().isEmpty()) {
-				this.jTextFieldName.setText(roadNetwork.getName());
+				this.jTextFieldName.setText(this.createProjectController.
+					getName());
 			}
 			if (this.jTextFieldDescription.getText().isEmpty()) {
-				this.jTextFieldDescription.setText(roadNetwork.getDescription());
+				this.jTextFieldDescription.setText(this.createProjectController.
+					getDescription());
 			}
-			this.jTextAreaRoadNetwork.setText(roadNetwork.toString());
+			this.jTextAreaRoadNetwork.setText(this.createProjectController.
+				getToString());
 		} else {
 			this.jTextFieldName.setText("");
 			this.jTextFieldDescription.setText("");

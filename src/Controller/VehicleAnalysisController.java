@@ -48,8 +48,11 @@ public class VehicleAnalysisController {
 		List<List<String[]>> results = new ArrayList();
 		for (Node endNode : this.endNodes) {
 			for (Vehicle vehicle : this.vehicles) {
-				results.add(this.vehicleAnalysis.
-					analyze(vehicle, this.roadNetwork, this.startNode, endNode));
+				List<String[]> result = this.vehicleAnalysis.
+					analyze(vehicle, this.roadNetwork, this.startNode, endNode);
+				if (result != null && !result.isEmpty()) {
+					results.add(result);
+				}
 			}
 		}
 		return results;

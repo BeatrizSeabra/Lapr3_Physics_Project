@@ -11,6 +11,7 @@ import Simulation.PathAnalysis;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,6 +41,7 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 		for (Node node : this.pathAnalysisController.getNodes()) {
 			this.jModelComboBoxStartNodes.addElement(node);
 		}
+		this.jButtonCleanActionPerformed(null);
 	}
 
 	@Override
@@ -54,6 +56,13 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 		if (jComboBoxStartNodes.getSelectedIndex() != -1) {
 			jListEndNodes.setEnabled(true);
 		}
+		this.active(true);
+	}
+
+	public Boolean active(Boolean state) {
+		this.jButtonAnalyze.setEnabled(this.jComboBoxStartNodes.
+			getSelectedIndex() != -1 && this.jListEndNodes.getSelectedIndex() != -1);
+		return state;
 	}
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -80,6 +89,11 @@ public class PathAnalysisGUI extends GraphicUserInterface {
         });
 
         jButtonClean.setLabel("Clean");
+        jButtonClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCleanActionPerformed(evt);
+            }
+        });
 
         jButtonAnalyze.setText("Analyze");
         jButtonAnalyze.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +103,11 @@ public class PathAnalysisGUI extends GraphicUserInterface {
         });
 
         jListEndNodes.setEnabled(false);
+        jListEndNodes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListEndNodesValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListEndNodes);
 
         jLabelWithEndNodes.setText("Select End Nodes:");
@@ -149,8 +168,14 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 		if (this.pathAnalysisController.setNodes((Node) jComboBoxStartNodes.
 			getSelectedItem(), (List<Node>) jListEndNodes.
 												 getSelectedValuesList())) {
-			for (List<String[]> result : this.pathAnalysisController.analyze()) {
-				new ResultsGUI(null, result);
+			List<List<String[]>> results = this.pathAnalysisController.analyze();
+			if (results != null && !results.isEmpty()) {
+				for (List<String[]> result : results) {
+					new ResultsGUI(null, result);
+				}
+			} else {
+				JOptionPane.
+					showMessageDialog(this, "There is no link between selected data!");
 			}
 		}
     }//GEN-LAST:event_jButtonAnalyzeActionPerformed
@@ -162,6 +187,16 @@ public class PathAnalysisGUI extends GraphicUserInterface {
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
 		this.close();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
+		this.jComboBoxStartNodes.setSelectedIndex(-1);
+		this.jListEndNodes.setSelectedIndex(-1);
+		this.update();
+    }//GEN-LAST:event_jButtonCleanActionPerformed
+
+    private void jListEndNodesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListEndNodesValueChanged
+		this.active(true);
+    }//GEN-LAST:event_jListEndNodesValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnalyze;

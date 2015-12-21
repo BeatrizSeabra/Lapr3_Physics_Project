@@ -10,7 +10,7 @@ import Model.Vehicle;
 
 /**
  *
- * @author Biia
+ * @author LAPR3_20152016_G27
  */
 public class PhysicsMath {
 
@@ -26,7 +26,7 @@ public class PhysicsMath {
 	}
 
 	public static Double getFrictionForce(Vehicle vehicle, Segment segment) {
-		Double sinAngle = segment.getSlope();
+		Double sinAngle = segment.getSlope().getValue();
 		Measure convert;
 		convert = Measurement.convert(segment.getLength(), "m");
 		sinAngle = sinAngle * (convert.getValue() / 100);
@@ -50,12 +50,13 @@ public class PhysicsMath {
 
 	public static Double getVehicleForce(Vehicle vehicle) {
 		Double force = PhysicsMath.getTorque(vehicle) * vehicle.
-			getFinalDriveRatio() * vehicle.getGear(vehicle.getCurrentGear());
-		force = force / vehicle.getWheelSize();
-		Double aux1 = vehicle.getRollingRCoefficient() * PhysicsMath.
+			getFinalDriveRatio().getValue() * vehicle.getGear(vehicle.
+				getCurrentGear()).getValue();
+		force = force / vehicle.getWheelSize().getValue();
+		Double aux1 = vehicle.getRollingRCoefficient().getValue() * PhysicsMath.
 			getNormal(vehicle);
-		Double aux2 = 0.5 * vehicle.getDragCoefficient() * vehicle.
-			getFrontalArea() * PhysicsMath.getAirDensity().getValue() * Math.
+		Double aux2 = 0.5 * vehicle.getDragCoefficient().getValue() * vehicle.
+			getFrontalArea().getValue() * PhysicsMath.getAirDensity().getValue() * Math.
 			pow(vehicle.getCurrentVelocity().getValue(), 2.0);
 		force = force - aux1 - aux2;
 		return force;
@@ -63,8 +64,9 @@ public class PhysicsMath {
 
 	public static Double getTorque(Vehicle vehicle) {
 		Double frictionTorque = PhysicsMath.getNormal(vehicle) * vehicle.
-			getRollingRCoefficient() * vehicle.getWheelSize();
-		Double totalTorque = vehicle.getTorque() - frictionTorque;
+			getRollingRCoefficient().getValue() * vehicle.getWheelSize().
+			getValue();
+		Double totalTorque = vehicle.getTorque().getValue() - frictionTorque;
 		return totalTorque;
 	}
 

@@ -6,6 +6,7 @@
 package Legacy;
 
 import Model.Node;
+import Model.Project;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
@@ -25,7 +26,7 @@ import javax.xml.stream.XMLStreamReader;
  *
  * @author LAPR3_20152016_G27
  */
-public class RoadNetworkImportXML implements Import<RoadNetwork> {
+public class RoadNetworkImportXML implements Import<Project> {
 
 	@Override
 	public String getExtension() {
@@ -44,12 +45,16 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 	}
 
 	@Override
-	public List<RoadNetwork> importData(String data) {
-		List<RoadNetwork> networks = new ArrayList();
+	public List<Project> importData(String data) {
+		List<Project> projects = new ArrayList();
 		try {
+			Project project = null;
 			RoadNetwork roadNetwork = null;
-			String text = null, road = null, typology = null, direction = null, windSpeedUnit = null, lengthUnit = null, maxVelocityUnit = null, minVelocityUnit = null;
-			Double toll = null, windDirection = null, windSpeed = null, height = null, slope = null, length = null, rrc = null, maxVelocity = null, minVelocity = null, numberVehicles = null;
+			Double value = null;
+			String[] info = null;
+			Integer numberVehicles = null;
+			String text = null, unit = null, road = null, typology = null, direction = null;
+			Measure toll = null, windDirection = null, windSpeed = null, height = null, slope = null, length = null, maxVelocity = null, minVelocity = null;
 			Node nodeBegin = null, nodeEnd = null;
 			Section section = null;
 			Segment segment = null;
@@ -64,11 +69,13 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 						switch (reader.getLocalName()) {
 							case "Network":
 								roadNetwork = new RoadNetwork();
-								roadNetwork.setName(reader.getAttributeValue(0).
+								project = new Project();
+								project.setName(reader.getAttributeValue(0).
 									trim());
-								roadNetwork.setDescription(reader.
+								project.setDescription(reader.
 									getAttributeValue(1).trim());
-								networks.add(roadNetwork);
+								project.setRoadNetwork(roadNetwork);
+								projects.add(project);
 								break;
 							case "node":
 								roadNetwork.addNode(new Node(reader.
@@ -110,16 +117,31 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 								direction = text;
 								break;
 							case "toll":
-								toll = Util.toDouble(text);
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									toll = new Measure(value, unit);
+								} else {
+									toll = new Measure(value, "€");
+								}
 								break;
 							case "wind_direction":
-								windDirection = Util.toDouble(text);
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									windDirection = new Measure(value, unit);
+								} else {
+									windDirection = new Measure(value, "°");
+								}
 								break;
 							case "wind_speed":
-								String windSpeedData[] = text.split(" ");
-								windSpeed = Util.toDouble(windSpeedData[0].
-									trim());
-								windSpeedUnit = windSpeedData[1].trim();
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									windSpeed = new Measure(value, unit);
+								} else {
+									windSpeed = new Measure(value, "km/h");
+								}
 								break;
 							case "road_section":
 								section.setRoad(road);
@@ -127,44 +149,70 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 								section.setDirection(direction);
 								section.setToll(toll);
 								section.setWindDirection(windDirection);
-								section.
-									setWindSpeed(new Measure(windSpeed, windSpeedUnit));
+								section.setWindSpeed(windSpeed);
 								roadNetwork.
 									addSection(nodeBegin, nodeEnd, section);
+								if (section.getDirection().
+									equals("bidirectional")) {
+									roadNetwork.
+										addSection(nodeEnd, nodeBegin, section.
+												   reverse());
+								}
 								break;
 							case "height":
-								height = Util.toDouble(text);
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									height = new Measure(value, unit);
+								} else {
+									height = new Measure(value, "km");
+								}
 								break;
 							case "slope":
-								slope = Util.toDouble(text.split("%")[0]);
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									slope = new Measure(value, unit);
+								} else {
+									slope = new Measure(value, "%");
+								}
 								break;
 							case "length":
-								String lengthData[] = text.split(" ");
-								length = Util.toDouble(lengthData[0]);
-								lengthUnit = lengthData[1].trim();
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									length = new Measure(value, unit);
+								} else {
+									length = new Measure(value, "km");
+								}
 								break;
 							case "max_velocity":
-								String maxVelocityData[] = text.split(" ");
-								maxVelocity = Util.toDouble(maxVelocityData[0]);
-								maxVelocityUnit = maxVelocityData[1].trim();
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									maxVelocity = new Measure(value, unit);
+								} else {
+									maxVelocity = new Measure(value, "km/h");
+								}
 								break;
 							case "min_velocity":
-								String minVelocityData[] = text.split(" ");
-								minVelocity = Util.toDouble(minVelocityData[0]);
-								minVelocityUnit = minVelocityData[1].trim();
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									minVelocity = new Measure(value, unit);
+								} else {
+									minVelocity = new Measure(value, "km/h");
+								}
 								break;
 							case "number_vehicles":
-								numberVehicles = Util.toDouble(text);
+								numberVehicles = Util.toInteger(text);
 								break;
 							case "segment":
 								segment.setHeight(height);
 								segment.setSlope(slope);
-								segment.
-									setLength(new Measure(length, lengthUnit));
-								segment.
-									setMaxVelocity(new Measure(maxVelocity, maxVelocityUnit));
-								segment.
-									setMinVelocity(new Measure(minVelocity, minVelocityUnit));
+								segment.setLength(length);
+								segment.setMaxVelocity(maxVelocity);
+								segment.setMinVelocity(minVelocity);
 								segment.setNumberVehicles(numberVehicles);
 								segments.add(segment);
 								break;
@@ -184,11 +232,12 @@ public class RoadNetworkImportXML implements Import<RoadNetwork> {
 				}
 			}
 		} catch (Exception ex) {
+			System.out.println(ex);
 			Error.
 				setErrorMessage("The XML content contains errors that prevent the loading of data to the road networks list: " + ex);
 			return null;
 		}
-		return networks;
+		return projects;
 	}
 
 }

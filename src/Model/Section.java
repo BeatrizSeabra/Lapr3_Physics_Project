@@ -8,6 +8,7 @@ package Model;
 import Physics.Measure;
 import Physics.Measurement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,8 +20,8 @@ public class Section {
 	private String road;
 	private String typology;
 	private String direction;
-	private Double toll;
-	private Double windDirection;
+	private Measure toll;
+	private Measure windDirection;
 	private Measure windSpeed;
 	private List<Segment> segments = new ArrayList();
 
@@ -69,28 +70,28 @@ public class Section {
 	/**
 	 * @return the toll
 	 */
-	public Double getToll() {
+	public Measure getToll() {
 		return toll;
 	}
 
 	/**
 	 * @param toll the toll to set
 	 */
-	public void setToll(Double toll) {
+	public void setToll(Measure toll) {
 		this.toll = toll;
 	}
 
 	/**
 	 * @return the windDirection
 	 */
-	public Double getWindDirection() {
+	public Measure getWindDirection() {
 		return windDirection;
 	}
 
 	/**
 	 * @param windDirection the windDirection to set
 	 */
-	public void setWindDirection(Double windDirection) {
+	public void setWindDirection(Measure windDirection) {
 		this.windDirection = windDirection;
 	}
 
@@ -127,17 +128,17 @@ public class Section {
 		return measure;
 	}
 
-        public Double getTotalForce(Vehicle vehicle) {
-		Double totalForce = 0.0;
+	public Measure getTotalForce(Vehicle vehicle) {
+		Measure totalForce = new Measure(0.0, "N");
 		for (Segment segment : this.segments) {
-                    totalForce = totalForce + segment.getSlopeForce(vehicle);
+			Measurement.sum(totalForce, segment.getSlopeForce(vehicle));
 		}
 		return totalForce;
 	}
-        
+
 	@Override
 	public String toString() {
-		return "Section for " + this.road;
+		return "Section | road: " + this.road + " | typology: " + this.typology + " | direction: " + this.direction + " | toll: " + this.toll + " | windDirection: " + this.windDirection + " | windSpeed: " + this.windSpeed;
 	}
 
 	@Override
@@ -168,6 +169,22 @@ public class Section {
 			hash += 11 * segment.hashCode();
 		}
 		return hash;
+	}
+
+	public Section reverse() {
+		Section section = new Section();
+		section.setRoad(this.road);
+		section.setTypology(this.typology);
+		section.setDirection(this.direction);
+		section.setToll(this.toll);
+		section.setWindDirection(this.windDirection);
+		section.setWindSpeed(Measurement.neg(this.windSpeed));
+		List<Segment> segments = new ArrayList(this.segments);
+		Collections.reverse(segments);
+		for (Segment segment : segments) {
+			section.addSegment(segment.reverse());
+		}
+		return section;
 	}
 
 }

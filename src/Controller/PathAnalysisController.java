@@ -44,8 +44,11 @@ public class PathAnalysisController {
 	public List<List<String[]>> analyze() {
 		List<List<String[]>> results = new ArrayList();
 		for (Node endNode : this.endNodes) {
-			results.add(this.pathAnalysis.
-				analyze(this.roadNetwork, this.startNode, endNode));
+			List<String[]> result = this.pathAnalysis.
+				analyze(this.roadNetwork, this.startNode, endNode);
+			if (result != null && !result.isEmpty()) {
+				results.add(result);
+			}
 		}
 		return results;
 	}

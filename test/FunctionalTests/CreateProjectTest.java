@@ -9,7 +9,6 @@ import Controller.ContextController;
 import Controller.CreateProjectController;
 import Data.Data;
 import Model.Project;
-import Model.RoadNetwork;
 import Model.Vehicle;
 import System.Settings;
 import java.util.List;
@@ -22,16 +21,11 @@ import org.junit.Test;
 
 /**
  *
- * @author ruben
- */
-/**
- *
  * @author LAPR3_20152016_G27
  */
 public class CreateProjectTest {
 
 	private CreateProjectController createProjectController;
-	private Project project;
 	private String filePathRoadNetwork;
 	private String filePathVehicles;
 
@@ -72,9 +66,8 @@ public class CreateProjectTest {
 			getProjectVehicles();
 		assertEquals(vehicles.size(), 0);
 		this.createProjectController.loadRoadNetwork(this.filePathRoadNetwork);
-		RoadNetwork roadNetwork = this.createProjectController.getRoadNetwork();
-		assertEquals(roadNetwork.getName(), "TestSet01");
-		assertEquals(roadNetwork.getDescription(), "Simple test set to begin development");
+		assertEquals(this.createProjectController.getName(), "TestSet01");
+		assertEquals(this.createProjectController.getDescription(), "Simple test set to begin development");
 		this.createProjectController.loadVehicles(this.filePathVehicles);
 		vehicles = this.createProjectController.getProjectVehicles();
 		assertEquals(vehicles.size(), 1);

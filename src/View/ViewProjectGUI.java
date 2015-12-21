@@ -63,6 +63,7 @@ public class ViewProjectGUI extends JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
+        setMaximumSize(new java.awt.Dimension(470, 440));
         setMinimumSize(new java.awt.Dimension(470, 440));
 
         jLabelWothName.setText("Name:");
@@ -71,7 +72,9 @@ public class ViewProjectGUI extends JPanel {
 
         jLabelDescription.setText("Description");
 
-        jListVehicles.setEnabled(false);
+        jListVehicles.setMaximumSize(new java.awt.Dimension(430, 140));
+        jListVehicles.setMinimumSize(new java.awt.Dimension(430, 140));
+        jListVehicles.setPreferredSize(new java.awt.Dimension(430, 140));
         jScrollPaneVeicles.setViewportView(jListVehicles);
 
         jLabelWithVehicles.setText("Vehicles:");
@@ -81,22 +84,23 @@ public class ViewProjectGUI extends JPanel {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        jTextArea1.setMaximumSize(new java.awt.Dimension(240, 80));
+        jTextArea1.setMinimumSize(new java.awt.Dimension(240, 80));
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
-                    .addComponent(jScrollPaneVeicles)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabelWithDescription)
                         .addGap(18, 18, 18)
                         .addComponent(jLabelDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelWothName)
@@ -104,7 +108,8 @@ public class ViewProjectGUI extends JPanel {
                                 .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabelWithVehicles)
                             .addComponent(jLabelWithRoadNetwork))
-                        .addGap(0, 146, Short.MAX_VALUE)))
+                        .addGap(0, 146, Short.MAX_VALUE))
+                    .addComponent(jScrollPaneVeicles, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

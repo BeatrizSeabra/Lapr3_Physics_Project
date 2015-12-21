@@ -134,6 +134,9 @@
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListVehiclesValueChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -175,6 +178,9 @@
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value=""/>
           </AccessibilityProperties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="jListEndNodesValueChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -182,6 +188,9 @@
       <Properties>
         <Property name="label" type="java.lang.String" value="Clean"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCleanActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

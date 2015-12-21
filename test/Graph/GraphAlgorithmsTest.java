@@ -74,7 +74,7 @@ public class GraphAlgorithmsTest {
 	 */
 	@Test
 	public void testBreadthFirstSearch() {
-		System.out.println("Test BreadthFirstSearch");
+		System.out.println("testBreadthFirstSearch");
 
 		assertTrue("Should be null if vertex does not exist", GraphAlgorithms.
 				   BreadthFirstSearch(completeMap, "LX") == null);
@@ -98,7 +98,7 @@ public class GraphAlgorithmsTest {
 	 */
 	@Test
 	public void testDepthFirstSearch() {
-		System.out.println("Test of DepthFirstSearch");
+		System.out.println("testDepthFirstSearch");
 
 		Deque<String> path;
 
@@ -129,28 +129,16 @@ public class GraphAlgorithmsTest {
 	 */
 	@Test
 	public void testAllPaths() {
-		System.out.println("Test of all edge paths");
+		System.out.println("testAllPaths");
 
 		int hascode = 0;
 		List<Deque<String>> edgePaths = new ArrayList();
 		List<Deque<String>> paths = GraphAlgorithms.
 			allPaths(this.completeMap, "Porto", "LX", edgePaths);
-		System.out.println("V Porto -> LX: " + paths.size());
-		for (Deque<String> line : paths) {
-			System.out.print("vertex: ");
-			for (String column : line) {
-				System.out.print(column + " ");
-			}
-			System.out.println("\n");
-		}
-		System.out.println("E Porto -> LX: " + edgePaths.size());
 		for (Deque<String> line : edgePaths) {
-			System.out.print("edges: ");
 			for (String column : line) {
-				System.out.print(column + " ");
 				hascode += column.hashCode();
 			}
-			System.out.println("\n");
 		}
 		assertEquals(hascode, 0);
 		assertEquals(edgePaths.size(), paths.size());
@@ -165,22 +153,10 @@ public class GraphAlgorithmsTest {
 		hascode = 0;
 		paths = GraphAlgorithms.
 			allPaths(completeMap, "Porto", "Lisboa", edgePaths);
-		System.out.println("V Porto -> Lisboa: " + paths.size());
-		for (Deque<String> line : paths) {
-			System.out.print("vertex: ");
-			for (String column : line) {
-				System.out.print(column + " ");
-			}
-			System.out.println("\n");
-		}
-		System.out.println("E Porto -> Lisboa: " + edgePaths.size());
 		for (Deque<String> line : edgePaths) {
-			System.out.print("edges: ");
 			for (String column : line) {
-				System.out.print(column + " ");
 				hascode += column.hashCode();
 			}
-			System.out.println("\n");
 		}
 		int outher = "A1".hashCode() + "A17".hashCode() + "A8".hashCode();
 		outher += "A1".hashCode() + "A17".hashCode() + "A34".hashCode() + "A1".
@@ -201,22 +177,10 @@ public class GraphAlgorithmsTest {
 		hascode = 0;
 		paths = GraphAlgorithms.
 			allPaths(completeMap, "Porto", "Faro", edgePaths);
-		System.out.println("V Porto -> Faro: " + paths.size());
-		for (Deque<String> line : paths) {
-			System.out.print("vertex: ");
-			for (String column : line) {
-				System.out.print(column + " ");
-			}
-			System.out.println("\n");
-		}
-		System.out.println("E Porto -> Faro: " + edgePaths.size());
 		for (Deque<String> line : edgePaths) {
-			System.out.print("edges: ");
 			for (String column : line) {
-				System.out.print(column + " ");
 				hascode += column.hashCode();
 			}
-			System.out.println("\n");
 		}
 		assertEquals(hascode, 0);
 		assertEquals(edgePaths.size(), paths.size());
@@ -243,7 +207,7 @@ public class GraphAlgorithmsTest {
 	 */
 	@Test
 	public void testShortestPath() {
-		System.out.println("Test of shortest path");
+		System.out.println("testShortestPath");
 
 		Deque<String> shortPath = new LinkedList<String>();
 		double lenpath = 0;
@@ -264,7 +228,7 @@ public class GraphAlgorithmsTest {
 
 		lenpath = GraphAlgorithms.
 			shortestPath(completeMap, "Porto", "Lisboa", shortPath);
-		assertTrue("Path between Porto and Lisboa should be 335 Km", lenpath == 335);
+		assertTrue("Path between Porto and Lisboa should be 335 km", lenpath == 335);
 
 		Iterator<String> it = shortPath.iterator();
 
@@ -275,7 +239,7 @@ public class GraphAlgorithmsTest {
 
 		lenpath = GraphAlgorithms.
 			shortestPath(completeMap, "Braga", "Leiria", shortPath);
-		assertTrue("Path between Braga and Leiria should be 255 Km", lenpath == 255);
+		assertTrue("Path between Braga and Leiria should be 255 km", lenpath == 255);
 
 		it = shortPath.iterator();
 
@@ -290,7 +254,7 @@ public class GraphAlgorithmsTest {
 		shortPath.clear();
 		lenpath = GraphAlgorithms.
 			shortestPath(completeMap, "Porto", "Castelo Branco", shortPath);
-		assertTrue("Path between Porto and Castelo Branco should be 335 Km", lenpath == 335);
+		assertTrue("Path between Porto and Castelo Branco should be 335 km", lenpath == 335);
 		assertTrue("Path between Porto and Castelo Branco should be 5 cities", shortPath.
 				   size() == 5);
 
@@ -309,7 +273,7 @@ public class GraphAlgorithmsTest {
 		shortPath.clear();
 		lenpath = GraphAlgorithms.
 			shortestPath(completeMap, "Porto", "Castelo Branco", shortPath);
-		assertTrue("Path between Porto and Castelo Branco should now be 365 Km", lenpath == 365);
+		assertTrue("Path between Porto and Castelo Branco should now be 365 km", lenpath == 365);
 		assertTrue("Path between Porto and Castelo Branco should be 4 cities", shortPath.
 				   size() == 4);
 

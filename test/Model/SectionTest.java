@@ -25,9 +25,9 @@ public class SectionTest {
 		this.section = new Section();
 		this.section.setDirection("Section Diretion");
 		this.section.setRoad("Section road");
-		this.section.setToll(1.0);
+		this.section.setToll(new Measure(1.0, "€"));
 		this.section.setTypology("Section typology");
-		this.section.setWindDirection(2.0);
+		this.section.setWindDirection(new Measure(2.0, "°"));
 		this.section.setWindSpeed(new Measure(3.0, "km"));
 	}
 
@@ -86,7 +86,7 @@ public class SectionTest {
 	@Test
 	public void testSetGetToll() {
 		System.out.println("testSetGetToll");
-		Double expResult = 2.0;
+		Measure expResult = new Measure(2.0, "€");
 		this.section.setToll(expResult);
 		assertEquals(expResult, this.section.getToll());
 	}
@@ -97,7 +97,7 @@ public class SectionTest {
 	@Test
 	public void testSetGetWindDirection() {
 		System.out.println("testSetGetWindDirection");
-		Double expResult = 19.5;
+		Measure expResult = new Measure(19.5, "°");
 		this.section.setWindDirection(expResult);
 		assertEquals(expResult, this.section.getWindDirection());
 	}
@@ -142,9 +142,9 @@ public class SectionTest {
 		Section section = new Section();
 		section.setDirection("Section Diretion");
 		section.setRoad("Section road");
-		section.setToll(1.0);
+		section.setToll(new Measure(1.0, "€"));
 		section.setTypology("Section typology");
-		section.setWindDirection(2.0);
+		section.setWindDirection(new Measure(2.0, "°"));
 		section.setWindSpeed(new Measure(3.0, "km"));
 		assertEquals(true, this.section.equals(section));
 	}
@@ -158,9 +158,9 @@ public class SectionTest {
 		Section section = new Section();
 		section.setDirection("Section");
 		section.setRoad("Section road");
-		section.setToll(1.0);
+		section.setToll(new Measure(1.0, "€"));
 		section.setTypology("Section typology");
-		section.setWindDirection(2.0);
+		section.setWindDirection(new Measure(2.0, "°"));
 		section.setWindSpeed(new Measure(3.0, "km"));
 		assertEquals(false, this.section.equals(section));
 	}

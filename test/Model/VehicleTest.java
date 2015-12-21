@@ -25,22 +25,28 @@ public class VehicleTest {
 	public VehicleTest() {
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
-		this.vehicle.setName("Vehicle Name");
-		this.vehicle.setDescription("Vehicle Description");
-		this.vehicle.setType("Vehicle Type");
-		this.vehicle.setMotorization("Vehicle Motorization");
-		this.vehicle.setFuel("Vehicle Fuel");
-		this.vehicle.setMass(new Measure(100.0, "kg"));
-		this.vehicle.setLoad(new Measure(100.0, "kg"));
-		this.vehicle.setDragCoefficient(100.0);
-		this.vehicle.setRollingRCoefficient(100.0);
-		this.vehicle.setWheelSize(100.0);
-		this.vehicle.setTorque(100.0);
-		this.vehicle.setRPM(100.0);
-		this.vehicle.setComsumption(100.0);
-		this.vehicle.setMinRPM(100.0);
-		this.vehicle.setMaxRPM(100.0);
-		this.vehicle.setFinalDriveRatio(100.0);
+		this.vehicle.setName("Nissan Skyline 2001");
+		this.vehicle.setDescription("2001 Nissan Skyline GT-R R34 V-spec II N1");
+		this.vehicle.setType("car");
+		this.vehicle.setMotorization("combustion");
+		this.vehicle.setFuel("gasoline");
+		this.vehicle.setMass(new Measure(1550.0, "kg"));
+		this.vehicle.setLoad(new Measure(0.0, "kg"));
+		this.vehicle.setDragCoefficient(new Measure(0.34, "ratio"));
+		this.vehicle.setRollingRCoefficient(new Measure(0.01, "ratio"));
+		this.vehicle.setWheelSize(new Measure(0.3266, "m"));
+		this.vehicle.setTorque(new Measure(392.0, "Nm"));
+		this.vehicle.setRPM(new Measure(8500.0, "rpm"));
+		this.vehicle.setComsumption(new Measure(8.1, "km/l"));
+		this.vehicle.setMinRPM(new Measure(8500.0, "rpm"));
+		this.vehicle.setMaxRPM(new Measure(1000.0, "rpm"));
+		this.vehicle.setFinalDriveRatio(new Measure(3.545, "ratio"));
+		this.vehicle.setGear(1, new Measure(3.827, "ratio"));
+		this.vehicle.setGear(2, new Measure(2.36, "ratio"));
+		this.vehicle.setGear(3, new Measure(1.685, "ratio"));
+		this.vehicle.setGear(4, new Measure(1.312, "ratio"));
+		this.vehicle.setGear(5, new Measure(1.0, "ratio"));
+		this.vehicle.setGear(6, new Measure(0.793, "ratio"));
 	}
 
 	@BeforeClass
@@ -83,12 +89,13 @@ public class VehicleTest {
 		expResult += 11 * this.vehicle.getMinRPM().hashCode();
 		expResult += 11 * this.vehicle.getMaxRPM().hashCode();
 		expResult += 11 * this.vehicle.getFinalDriveRatio().hashCode();
-		for (Map.Entry<String, Double> entity : this.vehicle.getVelocityLimits().
+		for (Map.Entry<String, Measure> entity : this.vehicle.
+			getVelocityLimits().
 			entrySet()) {
 			expResult += 7 * entity.getKey().hashCode();
 			expResult += 7 * entity.getValue().hashCode();
 		}
-		for (Map.Entry<Integer, Double> entity : this.vehicle.getGears().
+		for (Map.Entry<Integer, Measure> entity : this.vehicle.getGears().
 			entrySet()) {
 			expResult += 7 * entity.getKey().hashCode();
 			expResult += 7 * entity.getValue().hashCode();
@@ -145,6 +152,29 @@ public class VehicleTest {
 	public void testEqualsFalseClass() {
 		System.out.println("testEqualsFalseClass");
 		assertEquals(this.vehicle.equals(new String()), false);
+	}
+
+	/**
+	 * Test of getVelocity method, of class Vehicle.
+	 */
+	@Test
+	public void testGetVelocity() {
+		System.out.println("testGetVelocity");
+		assertEquals(this.vehicle.getVelocity(1).getValue(), 77.14, 0.01);
+		assertEquals(this.vehicle.getVelocity(2).getValue(), 125.09, 0.01);
+		assertEquals(this.vehicle.getVelocity(3).getValue(), 175.21, 0.01);
+		assertEquals(this.vehicle.getVelocity(4).getValue(), 225.02, 0.01);
+		assertEquals(this.vehicle.getVelocity(5).getValue(), 295.22, 0.01);
+		assertEquals(this.vehicle.getVelocity(6).getValue(), 372.29, 0.01);
+	}
+
+	/**
+	 * Test of getMaxVelocity method, of class Vehicle.
+	 */
+	@Test
+	public void testGetMaxVelocity() {
+		System.out.println("testGetMaxVelocity");
+		assertEquals(this.vehicle.getMaxVelocity().getValue(), 372.29, 0.01);
 	}
 
 }

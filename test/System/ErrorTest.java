@@ -14,7 +14,7 @@ import org.junit.Test;
 
 /**
  *
- * @author valhalla
+ * @author LAPR3_20152016_G27
  */
 public class ErrorTest {
 
@@ -56,7 +56,7 @@ public class ErrorTest {
 	public void testSetGetErrorMessage() {
 		System.out.println("testSetGetErrorMessage");
 		Error.clearLog();
-		String errorMessage = "Test error message!";
+		String errorMessage = "testSetGetErrorMessage";
 		Error.setErrorMessage(errorMessage);
 		assertEquals(Error.getErrorMessage(), errorMessage);
 	}

@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class Project {
 
-	private Integer id;
-	private String name;
-	private String description;
+	private Integer id = 0;
+	private String name = "";
+	private String description = "";
 	private RoadNetwork roadNetwork = new RoadNetwork();
 	private List<Vehicle> vehicles = new ArrayList();
 	private List<VehicleAnalysis> simulations = new ArrayList();
@@ -40,28 +40,28 @@ public class Project {
 	 * @return the name
 	 */
 	public String getName() {
-		return this.roadNetwork.getName();
+		return this.name;
 	}
 
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.roadNetwork.setName(name);
+		this.name = name;
 	}
 
 	/**
 	 * @return the description
 	 */
 	public String getDescription() {
-		return this.roadNetwork.getDescription();
+		return this.description;
 	}
 
 	/**
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
-		this.roadNetwork.setDescription(description);
+		this.description = description;
 	}
 
 	/**
@@ -127,8 +127,8 @@ public class Project {
 
 	@Override
 	public String toString() {
-		return new StringBuilder(this.id.toString()).append(" - ").
-			append(this.getName()).toString();
+		return new StringBuilder("Project | name: ").append(this.name).
+			append(" | description: ").append(this.description).toString();
 	}
 
 	@Override

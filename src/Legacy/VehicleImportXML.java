@@ -43,12 +43,10 @@ public class VehicleImportXML implements Import<Vehicle> {
 	@Override
 	public List<Vehicle> importData(String data) {
 		List<Vehicle> vehicles = new ArrayList();
+		String[] info = null;
 		Vehicle vehicle = null;
-		String text = null;
-		Double mass = null;
-		String massType = null;
-		Double load = null;
-		String loadType = null;
+		String text = null, unit = null;
+		Double value = null;
 		String segmentType = null;
 		Integer gearId = null;
 		try {
@@ -93,54 +91,138 @@ public class VehicleImportXML implements Import<Vehicle> {
 								vehicle.setFuel(text);
 								break;
 							case "mass":
-								String massData[] = text.split(" ");
-								mass = Util.toDouble(massData[0].trim());
-								massType = massData[1].trim();
-								vehicle.setMass(new Measure(mass, massType));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.setMass(new Measure(value, unit));
+								} else {
+									vehicle.setMass(new Measure(value, "kg"));
+								}
 								break;
 							case "load":
-								String loadData[] = text.split(" ");
-								load = Util.toDouble(loadData[0].trim());
-								loadType = loadData[1].trim();
-								vehicle.setLoad(new Measure(load, loadType));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.setLoad(new Measure(value, unit));
+								} else {
+									vehicle.setLoad(new Measure(value, "kg"));
+								}
 								break;
 							case "drag":
-								vehicle.setDragCoefficient(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setDragCoefficient(new Measure(value, unit));
+								} else {
+									vehicle.
+										setDragCoefficient(new Measure(value, "ratio"));
+								}
 								break;
 							case "rrc":
-								vehicle.setRollingRCoefficient(Util.
-									toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setRollingRCoefficient(new Measure(value, unit));
+								} else {
+									vehicle.
+										setRollingRCoefficient(new Measure(value, "ratio"));
+								}
 								break;
 							case "wheel_size":
-								vehicle.setWheelSize(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setWheelSize(new Measure(value, unit));
+								} else {
+									vehicle.
+										setWheelSize(new Measure(value, "m"));
+								}
 								break;
 							case "segment_type":
 								segmentType = text;
 								break;
 							case "limit":
-								vehicle.setVelocityLimits(segmentType, Util.
-														  toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setVelocityLimits(segmentType, new Measure(value, unit));
+								} else {
+									vehicle.
+										setVelocityLimits(segmentType, new Measure(value, "km/h"));
+								}
 								break;
 							case "torque":
-								vehicle.setTorque(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.setTorque(new Measure(value, unit));
+								} else {
+									vehicle.setTorque(new Measure(value, "Nm"));
+								}
 								break;
 							case "rpm":
-								vehicle.setRPM(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.setRPM(new Measure(value, unit));
+								} else {
+									vehicle.setRPM(new Measure(value, "rpm"));
+								}
 								break;
 							case "consumption":
-								vehicle.setComsumption(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setComsumption(new Measure(value, unit));
+								} else {
+									vehicle.
+										setComsumption(new Measure(value, "km/l"));
+								}
 								break;
 							case "min_rpm":
-								vehicle.setMinRPM(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.setMinRPM(new Measure(value, unit));
+								} else {
+									vehicle.setMinRPM(new Measure(value, "rpm"));
+								}
 								break;
 							case "max_rpm":
-								vehicle.setMaxRPM(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.setMaxRPM(new Measure(value, unit));
+								} else {
+									vehicle.setMaxRPM(new Measure(value, "rpm"));
+								}
 								break;
 							case "final_drive_ratio":
-								vehicle.setFinalDriveRatio(Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setFinalDriveRatio(new Measure(value, unit));
+								} else {
+									vehicle.
+										setFinalDriveRatio(new Measure(value, "ratio"));
+								}
 								break;
 							case "ratio":
-								vehicle.setGear(gearId, Util.toDouble(text));
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setGear(gearId, new Measure(value, unit));
+								} else {
+									vehicle.
+										setGear(gearId, new Measure(value, "ratio"));
+								}
 								break;
 							default:
 								break;

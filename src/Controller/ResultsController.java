@@ -33,15 +33,32 @@ public class ResultsController {
 	/**
 	 * @return the results
 	 */
-	public String getResultsString() {
-		StringBuilder stringBuilder = new StringBuilder();
-		for (String[] line : this.results) {
-			for (String column : line) {
-				stringBuilder.append(column).append(" ");
-			}
-			stringBuilder.append("\n");
+	public String[] getResultsLegend() {
+		if (!this.hasResults()) {
+			return new String[0];
 		}
-		return stringBuilder.toString();
+		return this.results.get(0);
+	}
+
+	public String[][] getResultsValues() {
+		if (!this.hasResults()) {
+			return new String[0][0];
+		}
+		String[][] values = new String[this.results.size()][this.results.get(0).length + 1];
+		for (int i = 1; i < this.results.size(); i++) {
+			String[] line = this.results.get(i);
+			for (int j = 0; j < line.length; j++) {
+				values[i][j] = this.results.get(i)[j];
+			}
+		}
+		return values;
+	}
+
+	public Boolean hasResults() {
+		if (this.results == null || this.results.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 
 	public Boolean export(String filePath) {

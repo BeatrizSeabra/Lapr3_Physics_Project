@@ -24,12 +24,12 @@ public class SegmentTest {
 	public SegmentTest() {
 		this.segment = new Segment();
 		this.segment.setName("Segment name");
-		this.segment.setHeight(1.0);
+		this.segment.setHeight(new Measure(1.0, "km"));
 		this.segment.setLength(new Measure(3.0, "km"));
 		this.segment.setMaxVelocity(new Measure(4.0, "km"));
 		this.segment.setMinVelocity(new Measure(5.0, "km"));
-		this.segment.setSlope(6.0);
-		this.segment.setNumberVehicles(8.0);
+		this.segment.setSlope(new Measure(6.0, "°"));
+		this.segment.setNumberVehicles(8);
 	}
 
 	@BeforeClass
@@ -65,7 +65,7 @@ public class SegmentTest {
 	@Test
 	public void testSetGetHeight() {
 		System.out.println("testSetGetHeight");
-		Double expResult = 12.4;
+		Measure expResult = new Measure(12.4, "km");
 		this.segment.setHeight(expResult);
 		assertEquals(expResult, this.segment.getHeight());
 	}
@@ -109,7 +109,7 @@ public class SegmentTest {
 	@Test
 	public void testSetGetSlope() {
 		System.out.println("testSetGetSlope");
-		Double expResult = 15.0;
+		Measure expResult = new Measure(15.0, "°");
 		this.segment.setSlope(expResult);
 		assertEquals(expResult, this.segment.getSlope());
 	}
@@ -120,7 +120,7 @@ public class SegmentTest {
 	@Test
 	public void testSetGetNumberVehicles() {
 		System.out.println("testSetGetNumberVehicles");
-		Double expResult = 15.0;
+		Integer expResult = 15;
 		this.segment.setNumberVehicles(expResult);
 		assertEquals(expResult, this.segment.getNumberVehicles());
 	}
@@ -151,12 +151,12 @@ public class SegmentTest {
 		System.out.println("testEquals");
 		Segment segment = new Segment();
 		segment.setName("Segment name");
-		segment.setHeight(1.0);
+		segment.setHeight(new Measure(1.0, "km"));
 		segment.setLength(new Measure(3.0, "km"));
 		segment.setMaxVelocity(new Measure(4.0, "km"));
 		segment.setMinVelocity(new Measure(5.0, "km"));
-		segment.setSlope(6.0);
-		segment.setNumberVehicles(8.0);
+		segment.setSlope(new Measure(6.0, "°"));
+		segment.setNumberVehicles(8);
 		assertEquals(true, this.segment.equals(segment));
 	}
 
@@ -168,12 +168,12 @@ public class SegmentTest {
 		System.out.println("testEqualsFalseHash");
 		Segment segment = new Segment();
 		segment.setName("name");
-		segment.setHeight(1.0);
+		segment.setHeight(new Measure(1.0, "km"));
 		segment.setLength(new Measure(3.0, "km"));
 		segment.setMaxVelocity(new Measure(4.0, "km"));
 		segment.setMinVelocity(new Measure(5.0, "km"));
-		segment.setSlope(6.0);
-		segment.setNumberVehicles(8.0);
+		segment.setSlope(new Measure(6.0, "°"));
+		segment.setNumberVehicles(8);
 		assertEquals(false, this.segment.equals(segment));
 	}
 

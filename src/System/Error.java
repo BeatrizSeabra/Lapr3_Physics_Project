@@ -23,6 +23,7 @@ public abstract class Error {
 
 	static public void setErrorMessage(String errorMessage) {
 		//Error.log(errorMessage);
+		System.out.println("LOG: " + errorMessage);
 		Error.errorMessage = errorMessage;
 	}
 

@@ -19,7 +19,7 @@ import org.junit.Test;
 
 /**
  *
- * @author valhalla
+ * @author LAPR3_20152016_G27
  */
 public class VehicleImportXMLTest {
 
@@ -43,23 +43,23 @@ public class VehicleImportXMLTest {
 		this.vehicle.setFuel("gasoline");
 		this.vehicle.setMass(new Measure(1400.0, "Kg"));
 		this.vehicle.setLoad(new Measure(120.0, "kg"));
-		this.vehicle.setDragCoefficient(0.35);
-		this.vehicle.setRollingRCoefficient(0.01);
-		this.vehicle.setWheelSize(0.5);
-		this.vehicle.getVelocityLimits().put("Highway", 100.0);
-		this.vehicle.setTorque(250.0);
-		this.vehicle.setRPM(2500.0);
-		this.vehicle.setComsumption(8.2);
-		this.vehicle.setMinRPM(1000.0);
-		this.vehicle.setMaxRPM(5500.0);
-		this.vehicle.setFinalDriveRatio(2.6);
-		this.vehicle.getGears().put(01, 3.5);
-		this.vehicle.getGears().put(02, 2.5);
-		this.vehicle.getGears().put(03, 1.25);
-		this.vehicle.getGears().put(04, 0.9);
+		this.vehicle.setDragCoefficient(new Measure(0.35, "ratio"));
+		this.vehicle.setRollingRCoefficient(new Measure(0.01, "ratio"));
+		this.vehicle.setWheelSize(new Measure(0.5, "m"));
+		this.vehicle.getVelocityLimits().
+			put("Highway", new Measure(100.0, "km/h"));
+		this.vehicle.setTorque(new Measure(250.0, "Nm"));
+		this.vehicle.setRPM(new Measure(2500.0, "rpm"));
+		this.vehicle.setComsumption(new Measure(8.2, "km/l"));
+		this.vehicle.setMinRPM(new Measure(1000.0, "rpm"));
+		this.vehicle.setMaxRPM(new Measure(5500.0, "rpm"));
+		this.vehicle.setFinalDriveRatio(new Measure(2.6, "ratio"));
+		this.vehicle.getGears().put(01, new Measure(3.5, "ratio"));
+		this.vehicle.getGears().put(02, new Measure(2.5, "ratio"));
+		this.vehicle.getGears().put(03, new Measure(1.25, "ratio"));
+		this.vehicle.getGears().put(04, new Measure(0.9, "ratio"));
 		this.vehicles = new ArrayList();
 		this.vehicles.add(vehicle);
-
 	}
 
 	@BeforeClass

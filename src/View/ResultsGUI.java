@@ -8,7 +8,11 @@ package View;
 import Controller.ResultsController;
 import Legacy.Legacy;
 import java.util.List;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -35,7 +39,12 @@ public class ResultsGUI extends GraphicUserInterface {
 
 	@Override
 	public void update() {
-		this.jTextAreaResults.setText(this.resultsController.getResultsString());
+		TableModel tableModel = new DefaultTableModel(this.resultsController.
+			getResultsValues(), this.resultsController.getResultsLegend());
+		this.jTableResults.setModel(tableModel);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+		this.jTableResults.setDefaultRenderer(Object.class, centerRenderer);
 	}
 
 	/**
@@ -49,11 +58,12 @@ public class ResultsGUI extends GraphicUserInterface {
 
         jLabelWithResults = new javax.swing.JLabel();
         jButtonExport = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaResults = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableResults = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(380, 400));
+        setMinimumSize(new java.awt.Dimension(400, 400));
+        setPreferredSize(new java.awt.Dimension(400, 400));
 
         jLabelWithResults.setText("Results of Analysis:");
 
@@ -64,10 +74,8 @@ public class ResultsGUI extends GraphicUserInterface {
             }
         });
 
-        jTextAreaResults.setEditable(false);
-        jTextAreaResults.setColumns(20);
-        jTextAreaResults.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaResults);
+        jTableResults.setEnabled(false);
+        jScrollPane2.setViewportView(jTableResults);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,11 +84,11 @@ public class ResultsGUI extends GraphicUserInterface {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelWithResults, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelWithResults, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonExport)))
+                        .addComponent(jButtonExport))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -91,7 +99,7 @@ public class ResultsGUI extends GraphicUserInterface {
                     .addComponent(jButtonExport)
                     .addComponent(jLabelWithResults))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -112,7 +120,7 @@ public class ResultsGUI extends GraphicUserInterface {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonExport;
     private javax.swing.JLabel jLabelWithResults;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreaResults;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableResults;
     // End of variables declaration//GEN-END:variables
 }

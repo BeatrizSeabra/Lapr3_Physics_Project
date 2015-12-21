@@ -13,6 +13,7 @@ import Simulation.VehicleAnalysis;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,6 +49,7 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
 		for (Node node : this.vehicleComparisonController.getNodes()) {
 			this.jModelComboBoxStartNodes.addElement(node);
 		}
+		this.jButtonCleanActionPerformed(null);
 	}
 
 	@Override
@@ -59,6 +61,14 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
 				this.jModelListEndNodes.addElement(node);
 			}
 		}
+		this.active(true);
+	}
+
+	public Boolean active(Boolean state) {
+		this.jButtonAnalyze.setEnabled(this.jComboBoxStartNodes.
+			getSelectedIndex() != -1 && this.jListEndNodes.getSelectedIndex() != -1 && this.jListVehicles.
+			getSelectedIndex() != -1);
+		return state;
 	}
 
 	/**
@@ -97,6 +107,11 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
         jLabelWithEndNodes.setText("Select End Nodes:");
 
         jListVehicles.setEnabled(false);
+        jListVehicles.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListVehiclesValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListVehicles);
 
         jLabelWithVehicles.setText("Select Vehicles: ");
@@ -116,10 +131,20 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
         });
 
         jListEndNodes.setEnabled(false);
+        jListEndNodes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListEndNodesValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListEndNodes);
         jListEndNodes.getAccessibleContext().setAccessibleName("");
 
         jButtonClean.setLabel("Clean");
+        jButtonClean.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCleanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,12 +224,30 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
 			for (List<String[]> result : results) {
 				new ResultsGUI(null, result);
 			}
+		} else {
+			JOptionPane.
+				showMessageDialog(this, "There is no link between selected data!");
 		}
     }//GEN-LAST:event_jButtonAnalyzeActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
 		this.close();
     }//GEN-LAST:event_jButtonCancelActionPerformed
+
+    private void jListVehiclesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListVehiclesValueChanged
+		this.active(true);
+    }//GEN-LAST:event_jListVehiclesValueChanged
+
+    private void jListEndNodesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListEndNodesValueChanged
+		this.active(true);
+    }//GEN-LAST:event_jListEndNodesValueChanged
+
+    private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
+		this.jComboBoxStartNodes.setSelectedIndex(-1);
+		this.jListEndNodes.setSelectedIndex(-1);
+		this.jListVehicles.setSelectedIndex(-1);
+		this.update();
+    }//GEN-LAST:event_jButtonCleanActionPerformed
 
 	/**
 	 * @param args the command line arguments

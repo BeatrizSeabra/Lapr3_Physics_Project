@@ -118,6 +118,7 @@ public class ApplicationGUI extends GraphicUserInterface {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(500, 500));
         setMinimumSize(new java.awt.Dimension(500, 500));
         setSize(new java.awt.Dimension(500, 500));
 

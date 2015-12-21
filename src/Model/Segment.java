@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import Physics.Measurement;
 
 /**
  *
@@ -14,12 +15,12 @@ import Physics.Measure;
 public class Segment {
 
 	private String name;
-	private Double height;
-	private Double slope;
+	private Measure height;
+	private Measure slope;
 	private Measure length;
 	private Measure maxVelocity;
 	private Measure minVelocity;
-	private Double numberVehicles;
+	private Integer numberVehicles;
 
 	/**
 	 * @return the name
@@ -38,28 +39,28 @@ public class Segment {
 	/**
 	 * @return the height
 	 */
-	public Double getHeight() {
+	public Measure getHeight() {
 		return height;
 	}
 
 	/**
 	 * @param height the height to set
 	 */
-	public void setHeight(Double height) {
+	public void setHeight(Measure height) {
 		this.height = height;
 	}
 
 	/**
 	 * @return the slope
 	 */
-	public Double getSlope() {
+	public Measure getSlope() {
 		return slope;
 	}
 
 	/**
 	 * @param slope the slope to set
 	 */
-	public void setSlope(Double slope) {
+	public void setSlope(Measure slope) {
 		this.slope = slope;
 	}
 
@@ -108,32 +109,33 @@ public class Segment {
 	/**
 	 * @return the numberVehicles
 	 */
-	public Double getNumberVehicles() {
+	public Integer getNumberVehicles() {
 		return numberVehicles;
 	}
 
 	/**
 	 * @param numberVehicles the numberVehicles to set
 	 */
-	public void setNumberVehicles(Double numberVehicles) {
+	public void setNumberVehicles(Integer numberVehicles) {
 		this.numberVehicles = numberVehicles;
 	}
 
-	public Double getSlopeForce(Vehicle vehicle) {
-		Double frictionForce = Physics.PhysicsMath.
-			getFrictionForce(vehicle, this);
-		Double vehicleForce = Physics.PhysicsMath.getVehicleForce(vehicle);
-		if (this.getSlope() > 0) {
-			vehicleForce = vehicleForce - frictionForce;
+	public Measure getSlopeForce(Vehicle vehicle) {
+		Measure frictionForce = new Measure(Physics.PhysicsMath.
+			getFrictionForce(vehicle, this), "N");
+		Measure vehicleForce = new Measure(Physics.PhysicsMath.
+			getVehicleForce(vehicle), "N");
+		if (this.getSlope().getValue() > 0) {
+			vehicleForce = Measurement.minus(vehicleForce, frictionForce);
 		} else {
-			vehicleForce = vehicleForce + frictionForce;
+			vehicleForce = Measurement.sum(vehicleForce, frictionForce);
 		}
 		return vehicleForce;
 	}
 
 	@Override
 	public String toString() {
-		return "Segment " + this.name;
+		return "Segment | name: " + this.name + " | height: " + this.height + " | slope: " + this.slope + " | length: " + this.length + " | maxVelocity: " + this.maxVelocity + " | minVelocity: " + this.minVelocity + " | numberVehicles: " + this.numberVehicles;
 	}
 
 	@Override
@@ -162,6 +164,18 @@ public class Segment {
 		hash += 11 * this.minVelocity.hashCode();
 		hash += 11 * this.numberVehicles.hashCode();
 		return hash;
+	}
+
+	public Segment reverse() {
+		Segment segment = new Segment();
+		segment.setName(this.name);
+		segment.setHeight(this.height);
+		segment.setSlope(Measurement.neg(this.slope));
+		segment.setLength(this.length);
+		segment.setMaxVelocity(this.maxVelocity);
+		segment.setMinVelocity(this.minVelocity);
+		segment.setNumberVehicles(this.numberVehicles);
+		return segment;
 	}
 
 }

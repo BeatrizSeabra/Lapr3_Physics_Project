@@ -49,9 +49,9 @@ public abstract class Settings {
 		return option.split(";");
 	}
 
-	public static Object loadClass(String name) {
+	public static <T> T loadClass(String name) {
 		try {
-			return (Object) Class.forName(name).newInstance();
+			return (T) Class.forName(name).newInstance();
 		} catch (Exception ex) {
 			Error.setErrorMessage(new StringBuilder("Class no load: ").
 				append(ex).toString());
@@ -59,18 +59,14 @@ public abstract class Settings {
 		}
 	}
 
-	public static List<Object> loadAllClass(String[] names) {
-		List<Object> objects = new ArrayList();
-		StringBuilder error = new StringBuilder();
+	public static <T> List<T> loadAllClass(String[] names) {
+		List<T> objects = new ArrayList();
 		for (String name : names) {
-			Object instanceClass = Settings.loadClass(name);
+			T instanceClass = Settings.loadClass(name);
 			if (instanceClass != null) {
 				objects.add(instanceClass);
-			} else {
-				error.append(Error.getErrorMessage()).append("\n");
 			}
 		}
-		Error.setErrorMessage(error.toString());
 		return objects;
 	}
 

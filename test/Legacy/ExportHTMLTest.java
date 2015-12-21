@@ -16,7 +16,7 @@ import org.junit.Test;
 
 /**
  *
- * @author ruben
+ * @author LAPR3_20152016_G27
  */
 public class ExportHTMLTest {
 
@@ -44,7 +44,7 @@ public class ExportHTMLTest {
 	 */
 	@Test
 	public void testExport() {
-		System.out.println("export");
+		System.out.println("testExport");
 		List<String[]> text = new ArrayList();
 		text.add("1;2;3".split(";"));
 		text.add("4;5;6".split(";"));

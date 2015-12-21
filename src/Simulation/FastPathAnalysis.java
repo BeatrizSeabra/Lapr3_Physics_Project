@@ -9,6 +9,8 @@ import Model.Node;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
+import Physics.Measure;
+import Physics.Measurement;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,33 +51,37 @@ public class FastPathAnalysis implements PathAnalysis {
 		}
 
 		for (Deque<Object> path : paths) {
-			Double total = 0.0;
+			Measure total = new Measure(0.0, "km");
 			List<String[]> result = new ArrayList();
-			result.add(";Lenght;Total".toString().split(";"));
+			result.add(";Name;Lenght;Total".toString().split(";"));
 			for (Object object : path) {
 				if (object instanceof Node) {
 					Node node = (Node) object;
 					StringBuilder stringBuilder = new StringBuilder();
 					stringBuilder.append("Node;");
 					stringBuilder.append(node.getName());
-					stringBuilder.append(";0;");
+					stringBuilder.append(";;");
 					stringBuilder.append(total);
 					result.add(stringBuilder.toString().split(";"));
 				} else if (object instanceof Section) {
 					for (Segment segment : ((Section) object).getSegments()) {
 						StringBuilder stringBuilder = new StringBuilder();
-						total += segment.getLength().getValue();
 						stringBuilder.append("Segment;");
 						stringBuilder.append(segment.getName());
 						stringBuilder.append(";");
-						stringBuilder.append(segment.getLength().getValue());
+						Measure length = segment.getLength();
+						stringBuilder.append(length);
 						stringBuilder.append(";");
 						stringBuilder.append(total);
 						result.add(stringBuilder.toString().split(";"));
+						total = Measurement.sum(total, length);
 					}
 				}
 			}
-			results.put(total, result);
+			results.put(total.getValue(), result);
+		}
+		if (results.isEmpty()) {
+			return new ArrayList();
 		}
 		return results.get(Collections.min(results.keySet()));
 	}

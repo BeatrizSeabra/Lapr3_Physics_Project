@@ -9,21 +9,29 @@ package Physics;
  *
  * @author LAPR3_20152016_G27
  */
-public class Measure {
+public class Measure implements Comparable<Measure> {
 
-	private Double value;
-	private String unit;
+	private Double value = 0.0;
+	private String unit = "ratio";
 
 	public Measure(Double value, String unit) {
-		this.value = value;
-		this.unit = unit;
+		if (value == null) {
+			this.value = 0.0;
+		} else {
+			this.value = value;
+		}
+		if (unit.isEmpty()) {
+			this.unit = "ratio";
+		} else {
+			this.unit = unit;
+		}
 	}
 
 	/**
 	 * @return the value
 	 */
 	public Double getValue() {
-		return value;
+		return this.value;
 	}
 
 	/**
@@ -37,7 +45,7 @@ public class Measure {
 	 * @return the unit
 	 */
 	public String getUnit() {
-		return unit;
+		return this.unit;
 	}
 
 	/**
@@ -72,8 +80,14 @@ public class Measure {
 
 	@Override
 	public String toString() {
-		return new StringBuilder(this.value.toString()).append(" ").append(unit).
-			toString();
+		return new StringBuilder(String.format("%.2f", this.value)).append(" ").
+			append(unit).toString();
+	}
+
+	@Override
+	public int compareTo(Measure measure) {
+		measure = Measurement.convert(measure, this.unit);
+		return this.value.compareTo(measure.getValue());
 	}
 
 }

@@ -76,9 +76,9 @@ public class RoadNetworkTest {
 		Section section = new Section();
 		section.setDirection("Section Diretion");
 		section.setRoad("Section road");
-		section.setToll(1.0);
+		section.setToll(new Measure(1.0, "€"));
 		section.setTypology("Section typology");
-		section.setWindDirection(2.0);
+		section.setWindDirection(new Measure(2.0, "°"));
 		section.setWindSpeed(new Measure(3.0, "km"));
 		this.roadNetwork.addSection(startNode, endNode, section);
 		assertEquals(section, this.roadNetwork.getGraph().
@@ -108,9 +108,9 @@ public class RoadNetworkTest {
 		Section section = new Section();
 		section.setDirection("Section Diretion");
 		section.setRoad("Section road");
-		section.setToll(1.0);
+		section.setToll(new Measure(1.0, "€"));
 		section.setTypology("Section typology");
-		section.setWindDirection(2.0);
+		section.setWindDirection(new Measure(2.0, "°"));
 		section.setWindSpeed(new Measure(3.0, "km"));
 		this.roadNetwork.addSection(node1, node2, section);
 		assertEquals(section, this.roadNetwork.getSection(node1, node2));

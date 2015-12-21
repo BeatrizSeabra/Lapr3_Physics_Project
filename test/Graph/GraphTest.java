@@ -27,7 +27,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testNumVertices() {
-		System.out.println("Test numVertices");
+		System.out.println("testNumVertices");
 
 		assertTrue("result should be zero", (instance.numVertices() == 0));
 
@@ -47,7 +47,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testVertices() {
-		System.out.println("Test vertices");
+		System.out.println("testVertices");
 
 		Iterator<Vertex<String, String>> itVerts = instance.vertices().
 			iterator();
@@ -81,7 +81,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testNumEdges() {
-		System.out.println("Test numEdges");
+		System.out.println("testNumEdges");
 
 		assertTrue("result should be zero", (instance.numEdges() == 0));
 
@@ -103,7 +103,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testEdges() {
-		System.out.println("Test Edges");
+		System.out.println("testEdges");
 
 		Iterator<Edge<String, String>> itEdge = instance.edges().iterator();
 
@@ -149,7 +149,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testGetEdge() {
-		System.out.println("Test getEdge");
+		System.out.println("testGetEdge");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -184,7 +184,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testEndVertices() {
-		System.out.println("Test endVertices");
+		System.out.println("testEndVertices");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -221,7 +221,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testOpposite() {
-		System.out.println("Test opposite");
+		System.out.println("testOpposite");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -253,7 +253,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testOutDegree() {
-		System.out.println("Test outDegree");
+		System.out.println("testOutDegree");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -289,7 +289,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testInDegree() {
-		System.out.println("Test inDegree");
+		System.out.println("testInDegree");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -325,7 +325,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testOutgoingEdges() {
-		System.out.println("Test outgoingEdges");
+		System.out.println("testOutgoingEdges");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -374,6 +374,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testIncomingEdges() {
+		System.out.println("testIncomingEdges");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -419,7 +420,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testInsertVertex() {
-		System.out.println("Test insertVertex");
+		System.out.println("testInsertVertex");
 
 		assertTrue("num. vertices should be zero", (instance.numVertices() == 0));
 
@@ -448,7 +449,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testInsertEdge() {
-		System.out.println("Test insertEdge");
+		System.out.println("testInsertEdge");
 
 		assertTrue("num. edges should be zero", (instance.numEdges() == 0));
 
@@ -492,7 +493,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testRemoveVertex() {
-		System.out.println("Test removeVertex");
+		System.out.println("testRemoveVertex");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -549,7 +550,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testRemoveEdge() {
-		System.out.println("Test removeEdge");
+		System.out.println("testRemoveEdge");
 
 		assertTrue("num. edges should be zero", (instance.numEdges() == 0));
 
@@ -593,7 +594,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testGetVertex_GenericType() {
-		System.out.println("Test getVertex Generic");
+		System.out.println("testGetVertex_GenericType");
 
 		assertTrue("vert should be null", (instance.getVertex("C") == null));
 
@@ -615,7 +616,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testGetVertex_int() {
-		System.out.println("Test getVertex indice");
+		System.out.println("testGetVertex_int");
 
 		assertTrue("vert should be null", (instance.getVertex(1) == null));
 
@@ -637,7 +638,7 @@ public class GraphTest {
 	 */
 	@Test
 	public void testClone() {
-		System.out.println("Test Clone");
+		System.out.println("testClone");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");
@@ -689,7 +690,7 @@ public class GraphTest {
 
 	@Test
 	public void testEquals() {
-		System.out.println("Test Equals");
+		System.out.println("testEquals");
 
 		Vertex<String, String> vert1 = instance.insertVertex("A");
 		Vertex<String, String> vert2 = instance.insertVertex("B");

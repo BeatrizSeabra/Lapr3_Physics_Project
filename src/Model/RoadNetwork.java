@@ -19,8 +19,6 @@ import java.util.List;
 public class RoadNetwork {
 
 	private Integer id;
-	private String name;
-	private String description;
 	private Graph<Node, Section> graph = new Graph(true);
 
 	/**
@@ -35,34 +33,6 @@ public class RoadNetwork {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public Boolean addNode(Node node) {
@@ -97,7 +67,7 @@ public class RoadNetwork {
 		Deque<Section> sections = this.getSections(path);
 		double result = 0;
 		for (Section section : sections) {
-			result += section.getTotalForce(vehicle);
+			result += section.getTotalForce(vehicle).getValue();
 		}
 		return result;
 	}
@@ -154,8 +124,6 @@ public class RoadNetwork {
 	protected RoadNetwork clone() {
 		RoadNetwork roadNetwork = new RoadNetwork();
 		roadNetwork.setId(this.id);
-		roadNetwork.setName(this.name);
-		roadNetwork.setDescription(this.description);
 		for (Node node : this.graph.elements()) {
 			roadNetwork.addNode(node);
 		}
@@ -170,26 +138,17 @@ public class RoadNetwork {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (Node node : this.getNodes()) {
-			stringBuilder.append("Node: " + node + "\n");
-		}
 		for (Edge<Node, Section> edge : this.graph.edges()) {
 			Section section = edge.getElement();
-			stringBuilder.append("Section: '" + edge.getVOrig().
-				getElement().getName() + "' '" + edge.getVDest().
-				getElement().getName() + "' '" + section.getRoad() + "' '" + section.
-				getTypology() + "' '" + section.getDirection() + "' '" + section.
-				getToll() + "' '" + section.getWindDirection() + "' '" + section.
-				getWindSpeed() + "'\n");
+			stringBuilder.append("Start ").append(edge.getVOrig().getElement()).
+				append("\n");
+			stringBuilder.append("End ").append(edge.getVDest().getElement()).
+				append("\n");
+			stringBuilder.append(section).append("\n");
 			for (Segment segment : edge.getElement().getSegments()) {
-				stringBuilder.
-					append("\tSegment: '" + segment.getName() + "' '" + segment.
-						getHeight() + "' '" + segment.getSlope() + "' '" + segment.
-						getLength() + "' '" + segment.
-						getMaxVelocity() + "' '" + segment.
-						getMinVelocity() + "' '" + segment.
-						getNumberVehicles() + "'\n");
+				stringBuilder.append(segment).append("\n");
 			}
+			stringBuilder.append("\n");
 		}
 		return stringBuilder.toString();
 	}

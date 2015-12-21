@@ -9,6 +9,8 @@ import Model.Node;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
+import Physics.Measure;
+import Physics.Measurement;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -49,7 +51,7 @@ public class LevelPathAnalysis implements PathAnalysis {
 		}
 
 		for (Deque<Object> path : paths) {
-			Double total = 0.0;
+			Measure total = new Measure(0.0, "°");
 			List<String[]> result = new ArrayList();
 			result.add(";Name;Slope;Total".toString().split(";"));
 			for (Object object : path) {
@@ -58,7 +60,7 @@ public class LevelPathAnalysis implements PathAnalysis {
 					StringBuilder stringBuilder = new StringBuilder();
 					stringBuilder.append("Node;");
 					stringBuilder.append(node.getName());
-					stringBuilder.append(";0;");
+					stringBuilder.append(";;");
 					stringBuilder.append(total);
 					result.add(stringBuilder.toString().split(";"));
 				} else if (object instanceof Section) {
@@ -67,19 +69,22 @@ public class LevelPathAnalysis implements PathAnalysis {
 						stringBuilder.append("Segment;");
 						stringBuilder.append(segment.getName());
 						stringBuilder.append(";");
-						stringBuilder.append(segment.getSlope());
+						Measure slope = segment.getSlope();
+						stringBuilder.append(slope);
 						stringBuilder.append(";");
 						stringBuilder.append(total);
 						result.add(stringBuilder.toString().split(";"));
-						total += (segment.getSlope());
+						total = Measurement.sum(total, slope);
 					}
 				}
 
 			}
 
-			results.put(total, result);
+			results.put(total.getValue(), result);
 		}
-
+		if (results.isEmpty()) {
+			return new ArrayList();
+		}
 		return results.get(Collections.min(results.keySet()));
 	}
 }

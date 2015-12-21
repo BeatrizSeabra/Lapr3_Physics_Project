@@ -5,7 +5,7 @@
  */
 package Legacy;
 
-import Model.RoadNetwork;
+import Model.Project;
 import Model.Vehicle;
 import System.Error;
 import System.Settings;
@@ -107,7 +107,7 @@ public abstract class Legacy {
 		return string.toString().substring(1).split(";");
 	}
 
-	public static List<RoadNetwork> importRoadNetwork(String filePath) {
+	public static List<Project> importRoadNetwork(String filePath) {
 		filePath = filePath.trim();
 		String extension = Legacy.getExtension(filePath);
 		if (extension == null || extension.isEmpty()) {

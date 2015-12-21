@@ -22,6 +22,11 @@ public abstract class Measurement {
 	}
 
 	static public Measure convert(Measure measure, String unit) {
+		if (measure == null || unit == null) {
+			Error.
+				setErrorMessage("The conversion '" + measure + "' to '" + unit + "' was not possible data null!");
+			return null;
+		}
 		if (measure.getUnit().equalsIgnoreCase(unit)) {
 			return new Measure(measure.getValue(), unit);
 		}
@@ -30,7 +35,7 @@ public abstract class Measurement {
 			get(measure.getUnit() + unit);
 		if (ratio == null) {
 			Error.
-				setErrorMessage("The conversion was not possible because there is no file in the relationship between units!");
+				setErrorMessage("The conversion '" + measure + "' to '" + unit + "' was not possible because there is no file in the relationship between units!");
 			return null;
 		}
 		ratio = ratio * measure.getValue();
@@ -42,9 +47,24 @@ public abstract class Measurement {
 		if (measureB == null) {
 			return null;
 		}
-		measureA.setValue(measureA.getValue() + measureB.getValue());
 		return new Measure(measureA.getValue() + measureB.getValue(), measureA.
 						   getUnit());
+	}
+
+	public static Measure minus(Measure measureA, Measure measureB) {
+		measureB = Measurement.convert(measureB, measureA.getUnit());
+		if (measureB == null) {
+			return null;
+		}
+		return new Measure(measureA.getValue() - measureB.getValue(), measureA.
+						   getUnit());
+	}
+
+	public static Measure neg(Measure measure) {
+		if (measure == null) {
+			return null;
+		}
+		return new Measure(measure.getValue() * -1, measure.getUnit());
 	}
 
 }

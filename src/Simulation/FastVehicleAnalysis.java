@@ -10,6 +10,8 @@ import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
 import Model.Vehicle;
+import Physics.Measure;
+import Physics.Measurement;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,48 +52,61 @@ public class FastVehicleAnalysis implements VehicleAnalysis {
 		}
 
 		for (Deque<Object> path : paths) {
-			Double total = 0.0;
+			Measure total = new Measure(0.0, "s");
 			List<String[]> result = new ArrayList();
 			result.
-				add(";MaxVelocity;MaxVehicleVelocity;VelocityUsed;Lenght;Total".
+				add(";Name;Segment maxVelocity;Restricted maxVelocity;Vehicle Gear;Gear maxVelocity;Used maxVelocity;Lenght;Time;Total".
 					split(";"));
 			for (Object object : path) {
 				if (object instanceof Node) {
 					Node node = (Node) object;
 					StringBuilder stringBuilder = new StringBuilder();
 					stringBuilder.append("Node;");
-					stringBuilder.append(node.getName());
-					stringBuilder.append(";0;0;0;");
+					stringBuilder.append(node.getName()).append(";;;;;;;;");
 					stringBuilder.append(total);
 					result.add(stringBuilder.toString().split(";"));
 				} else if (object instanceof Section) {
 					Section section = (Section) object;
 					for (Segment segment : section.getSegments()) {
 						StringBuilder stringBuilder = new StringBuilder();
-						List<Double> maxVelocity = new ArrayList();
-						maxVelocity.add(segment.getMaxVelocity().getValue());
-						Double velocityTypology = vehicle.getVelocityLimits().
-							get(section.getTypology());
-						if (velocityTypology != null) {
-							maxVelocity.add(velocityTypology);
-						}
+						List<Measure> velocities = new ArrayList();
 						stringBuilder.append("Segment;");
-						stringBuilder.append(segment.getName());
+						stringBuilder.append(segment.getName()).append(";");
+						Measure segmentVelocity = Measurement.convert(segment.
+							getMaxVelocity(), "km/h");
+						velocities.add(segmentVelocity);
+						stringBuilder.append(segmentVelocity).append(";");
+						Measure typologyVelocity = Measurement.convert(vehicle.
+							getVelocityLimits().get(section.getTypology()), "km/h");
+						if (typologyVelocity != null) {
+							velocities.add(typologyVelocity);
+							stringBuilder.append(typologyVelocity);
+						}
 						stringBuilder.append(";");
-						stringBuilder.
-							append(segment.getMaxVelocity().getValue());
-						stringBuilder.append(";");
-						stringBuilder.append(Collections.min(maxVelocity));
-						stringBuilder.append(";");
-						stringBuilder.append(segment.getLength().getValue());
-						stringBuilder.append(";");
+						stringBuilder.append(Collections.max(vehicle.getGears().
+							keySet())).append(";");
+						Measure vehicleVelocity = Measurement.convert(vehicle.
+							getMaxVelocity(), "km/h");
+						velocities.add(vehicleVelocity);
+						stringBuilder.append(vehicleVelocity).append(";");
+						Measure usedVelocity = Collections.min(velocities);
+						stringBuilder.append(usedVelocity).append(";");
+						Measure lenght = Measurement.
+							convert(segment.getLength(), "km");
+						stringBuilder.append(lenght).append(";");
+						Measure time = new Measure(lenght.getValue() / usedVelocity.
+							getValue() * 3600, "s");
+						stringBuilder.append(time).append(";");
 						stringBuilder.append(total);
-						total += segment.getLength().getValue();
+						total = Measurement.sum(total, time);
 						result.add(stringBuilder.toString().split(";"));
 					}
 				}
 			}
-			results.put(total, result);
+			results.put(total.getValue(), result);
+		}
+		if (results.isEmpty()) {
+			return new ArrayList();
 		}
 		return results.get(Collections.min(results.keySet()));
 	}

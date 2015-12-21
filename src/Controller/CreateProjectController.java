@@ -9,7 +9,6 @@ import Data.Data;
 import Data.ProjectData;
 import Legacy.Legacy;
 import Model.Project;
-import Model.RoadNetwork;
 import Model.Vehicle;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +21,11 @@ public class CreateProjectController {
 
 	private ProjectData projectData = Data.getProjectData();
 	private Project project;
-	private RoadNetwork roadNetwork;
 	private List<Vehicle> vehicles;
 	private AddVehiclesController addVehiclesController = new AddVehiclesController();
-	private String name;
-	private String description;
 
 	public Boolean initiation() {
-		this.roadNetwork = null;
+		this.project = null;
 		this.vehicles = new ArrayList();
 		return true;
 	}
@@ -44,15 +40,38 @@ public class CreateProjectController {
 		return false;
 	}
 
-	public void loadRoadNetwork(String filePath) {
-		List<RoadNetwork> roadNetworks = Legacy.importRoadNetwork(filePath);
-		if (roadNetworks != null && !roadNetworks.isEmpty()) {
-			this.roadNetwork = roadNetworks.get(roadNetworks.size() - 1);
+	public Boolean loadRoadNetwork(String filePath) {
+		List<Project> projects = Legacy.importRoadNetwork(filePath);
+		if (projects != null && !projects.isEmpty()) {
+			this.project = projects.get(projects.size() - 1);
+			return true;
 		}
+		return false;
 	}
 
-	public RoadNetwork getRoadNetwork() {
-		return this.roadNetwork;
+	public String getName() {
+		if (this.hasProject()) {
+			return this.project.getName();
+		}
+		return "";
+	}
+
+	public String getDescription() {
+		if (this.hasProject()) {
+			return this.project.getDescription();
+		}
+		return "";
+	}
+
+	public String getToString() {
+		if (this.hasProject()) {
+			return this.project.getRoadNetwork().toString();
+		}
+		return "";
+	}
+
+	public Boolean hasProject() {
+		return this.project != null;
 	}
 
 	public List<Vehicle> getProjectVehicles() {
@@ -60,14 +79,16 @@ public class CreateProjectController {
 	}
 
 	public Boolean saveProject(String name, String description) {
-		this.project = this.projectData.newInstance();
-		this.project.setRoadNetwork(this.roadNetwork);
-		this.roadNetwork.setName(name);
-		this.roadNetwork.setDescription(description);
-		for (Vehicle vehicle : this.vehicles) {
-			this.project.addVehicle(vehicle);
+		if (this.hasProject()) {
+			this.project.setId(this.projectData.newInstance().getId());
+			this.project.setName(name);
+			this.project.setDescription(description);
+			for (Vehicle vehicle : this.vehicles) {
+				this.project.addVehicle(vehicle);
+			}
+			return this.projectData.save(this.project);
 		}
-		return this.projectData.save(this.project);
+		return false;
 	}
 
 }
