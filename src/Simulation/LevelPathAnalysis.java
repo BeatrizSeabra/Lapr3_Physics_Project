@@ -51,7 +51,7 @@ public class LevelPathAnalysis implements PathAnalysis {
 		}
 
 		for (Deque<Object> path : paths) {
-			Measure total = new Measure(0.0, "°");
+			Measure total = new Measure(0.0, "%");
 			List<String[]> result = new ArrayList();
 			result.add(";Name;Slope;Total".toString().split(";"));
 			for (Object object : path) {
