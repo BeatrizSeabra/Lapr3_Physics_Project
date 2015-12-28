@@ -6,6 +6,8 @@
 package Legacy;
 
 import Data.Data;
+import Model.Regime;
+import Model.Throttle;
 import Model.Vehicle;
 import Physics.Measure;
 import System.Error;
@@ -48,7 +50,9 @@ public class VehicleImportXML implements Import<Vehicle> {
 		String text = null, unit = null;
 		Double value = null;
 		String segmentType = null;
-		Integer gearId = null;
+		Integer gearId = null, throttleId = null;
+		Throttle throttle = null;
+		Regime regime = null;
 		try {
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = factory.
@@ -68,6 +72,11 @@ public class VehicleImportXML implements Import<Vehicle> {
 								break;
 							case "gear":
 								gearId = Integer.parseInt(reader.
+									getAttributeValue(0).trim());
+								break;
+							case "throttle":
+								throttle = new Throttle();
+								throttleId = Integer.parseInt(reader.
 									getAttributeValue(0).trim());
 								break;
 							default:
@@ -119,6 +128,17 @@ public class VehicleImportXML implements Import<Vehicle> {
 										setDragCoefficient(new Measure(value, "ratio"));
 								}
 								break;
+							case "frontal_area":
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setFrontalArea(new Measure(value, unit));
+								} else {
+									vehicle.
+										setFrontalArea(new Measure(value, "m2"));
+								}
+								break;
 							case "rrc":
 								value = Util.toValue(text);
 								unit = Util.toUnit(text);
@@ -153,35 +173,6 @@ public class VehicleImportXML implements Import<Vehicle> {
 								} else {
 									vehicle.
 										setVelocityLimits(segmentType, new Measure(value, "km/h"));
-								}
-								break;
-							case "torque":
-								value = Util.toValue(text);
-								unit = Util.toUnit(text);
-								if (!unit.isEmpty()) {
-									vehicle.setTorque(new Measure(value, unit));
-								} else {
-									vehicle.setTorque(new Measure(value, "Nm"));
-								}
-								break;
-							case "rpm":
-								value = Util.toValue(text);
-								unit = Util.toUnit(text);
-								if (!unit.isEmpty()) {
-									vehicle.setRPM(new Measure(value, unit));
-								} else {
-									vehicle.setRPM(new Measure(value, "rpm"));
-								}
-								break;
-							case "consumption":
-								value = Util.toValue(text);
-								unit = Util.toUnit(text);
-								if (!unit.isEmpty()) {
-									vehicle.
-										setComsumption(new Measure(value, unit));
-								} else {
-									vehicle.
-										setComsumption(new Measure(value, "km/l"));
 								}
 								break;
 							case "min_rpm":
@@ -223,6 +214,51 @@ public class VehicleImportXML implements Import<Vehicle> {
 									vehicle.
 										setGear(gearId, new Measure(value, "ratio"));
 								}
+								break;
+							case "torque":
+								regime = new Regime();
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									regime.setTorque(new Measure(value, unit));
+								} else {
+									regime.setTorque(new Measure(value, "Nm"));
+								}
+								break;
+							case "rpm_low":
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									regime.setRpmLow(new Measure(value, unit));
+								} else {
+									regime.setRpmLow(new Measure(value, "rpm"));
+								}
+								break;
+							case "rpm_high":
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									regime.setRpmHigh(new Measure(value, unit));
+								} else {
+									regime.setRpmHigh(new Measure(value, "rpm"));
+								}
+								break;
+							case "SFC":
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									regime.
+										setFuelConsumption(new Measure(value, unit));
+								} else {
+									regime.
+										setFuelConsumption(new Measure(value, "km/l"));
+								}
+								break;
+							case "regime":
+								throttle.addRegime(regime);
+								break;
+							case "throttle":
+								vehicle.setThrottle(throttleId, throttle);
 								break;
 							default:
 								break;

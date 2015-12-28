@@ -6,9 +6,11 @@
 package Simulation;
 
 import Model.Node;
+import Model.Regime;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
+import Model.Throttle;
 import Model.Vehicle;
 import Physics.Measure;
 import java.util.List;
@@ -32,18 +34,20 @@ public class FastVehicleAnalysisTest {
 	private Section section0;
 	private Section section1;
 	private Section section2;
+	private Section section3;
 	private Segment segment0;
 	private Segment segment1;
 	private Segment segment2;
 	private Segment segment3;
 	private Segment segment4;
+	private Segment segment5;
 	private Vehicle vehicle;
 
 	public FastVehicleAnalysisTest() {
 		this.segment0 = new Segment();
 		this.segment0.setName("01");
 		this.segment0.setHeight(new Measure(100.0, "km"));
-		this.segment0.setSlope(new Measure(1.5, "°"));
+		this.segment0.setSlope(new Measure(1.5, "%"));
 		this.segment0.setLength(new Measure(3.2, "km"));
 		this.segment0.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment0.setMinVelocity(new Measure(0.0, "km/h"));
@@ -51,7 +55,7 @@ public class FastVehicleAnalysisTest {
 		this.segment1 = new Segment();
 		this.segment1.setName("02");
 		this.segment1.setHeight(new Measure(148.0, "km"));
-		this.segment1.setSlope(new Measure(-1.5, "°"));
+		this.segment1.setSlope(new Measure(-1.5, "%"));
 		this.segment1.setLength(new Measure(3.2, "km"));
 		this.segment1.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment1.setMinVelocity(new Measure(0.0, "km/h"));
@@ -69,7 +73,7 @@ public class FastVehicleAnalysisTest {
 		this.segment2 = new Segment();
 		this.segment2.setName("01");
 		this.segment2.setHeight(new Measure(100.0, "km"));
-		this.segment2.setSlope(new Measure(0.0, "°"));
+		this.segment2.setSlope(new Measure(0.0, "%"));
 		this.segment2.setLength(new Measure(10.0, "km"));
 		this.segment2.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment2.setMinVelocity(new Measure(0.0, "km/h"));
@@ -77,7 +81,7 @@ public class FastVehicleAnalysisTest {
 		this.segment3 = new Segment();
 		this.segment3.setName("02");
 		this.segment3.setHeight(new Measure(100.0, "km"));
-		this.segment3.setSlope(new Measure(0.5, "°"));
+		this.segment3.setSlope(new Measure(0.5, "%"));
 		this.segment3.setLength(new Measure(5.0, "km"));
 		this.segment3.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment3.setMinVelocity(new Measure(0.0, "km/h"));
@@ -95,19 +99,36 @@ public class FastVehicleAnalysisTest {
 		this.segment4 = new Segment();
 		this.segment4.setName("01");
 		this.segment4.setHeight(new Measure(100.0, "km"));
-		this.segment4.setSlope(new Measure(0.125, "°"));
+		this.segment4.setSlope(new Measure(0.0, "%"));
 		this.segment4.setLength(new Measure(20.0, "km"));
 		this.segment4.setMaxVelocity(new Measure(120.0, "km/h"));
 		this.segment4.setMinVelocity(new Measure(50.0, "km/h"));
 		this.segment4.setNumberVehicles(100);
 		this.section2 = new Section();
-		this.section2.setRoad("E01");
-		this.section2.setTypology("regular road");
+		this.section2.setRoad("A01");
+		this.section2.setTypology("highway");
 		this.section2.setDirection("bidirectional");
 		this.section2.setToll(new Measure(12.0, "€"));
 		this.section2.setWindDirection(new Measure(-5.0, "°"));
 		this.section2.setWindSpeed(new Measure(3.0, "m/s"));
 		this.section2.addSegment(this.segment4);
+
+		this.segment5 = new Segment();
+		this.segment5.setName("01");
+		this.segment5.setHeight(new Measure(100.0, "km"));
+		this.segment5.setSlope(new Measure(0.125, "%"));
+		this.segment5.setLength(new Measure(20.0, "km"));
+		this.segment5.setMaxVelocity(new Measure(120.0, "km/h"));
+		this.segment5.setMinVelocity(new Measure(50.0, "km/h"));
+		this.segment5.setNumberVehicles(100);
+		this.section3 = new Section();
+		this.section3.setRoad("A03");
+		this.section3.setTypology("highway");
+		this.section3.setDirection("bidirectional");
+		this.section3.setToll(new Measure(4.0, "€"));
+		this.section3.setWindDirection(new Measure(-5.0, "°"));
+		this.section3.setWindSpeed(new Measure(3.0, "m/s"));
+		this.section3.addSegment(this.segment5);
 
 		this.node0 = new Node("n0");
 		this.node1 = new Node("n1");
@@ -120,7 +141,37 @@ public class FastVehicleAnalysisTest {
 		this.roadNetwork.addSection(this.node0, this.node1, this.section0);
 		this.roadNetwork.addSection(this.node1, this.node2, this.section1);
 		this.roadNetwork.addSection(this.node0, this.node2, this.section2);
+		this.roadNetwork.addSection(this.node1, this.node2, this.section3);
+		this.roadNetwork.addSection(this.node1, this.node0, this.section0.
+									reverse());
+		this.roadNetwork.addSection(this.node2, this.node1, this.section1.
+									reverse());
+		this.roadNetwork.addSection(this.node2, this.node0, this.section2.
+									reverse());
+		this.roadNetwork.addSection(this.node2, this.node1, this.section3.
+									reverse());
 
+		Throttle throttle1 = new Throttle();
+		throttle1.
+			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "km/l")));
+		throttle1.
+			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "km/l")));
+		throttle1.
+			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "km/l")));
+		Throttle throttle2 = new Throttle();
+		throttle2.
+			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "km/l")));
+		Throttle throttle3 = new Throttle();
+		throttle2.
+			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "km/l")));
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
 		this.vehicle.setName("Dummy01");
@@ -131,13 +182,11 @@ public class FastVehicleAnalysisTest {
 		this.vehicle.setMass(new Measure(1400.0, "Kg"));
 		this.vehicle.setLoad(new Measure(120.0, "kg"));
 		this.vehicle.setDragCoefficient(new Measure(0.35, "ratio"));
+		this.vehicle.setFrontalArea(new Measure(1.8, "m2"));
 		this.vehicle.setRollingRCoefficient(new Measure(0.01, "ratio"));
 		this.vehicle.setWheelSize(new Measure(0.5, "m"));
 		this.vehicle.getVelocityLimits().
 			put("Highway", new Measure(100.0, "km/h"));
-		this.vehicle.setTorque(new Measure(250.0, "Nm"));
-		this.vehicle.setRPM(new Measure(2500.0, "rpm"));
-		this.vehicle.setComsumption(new Measure(8.2, "km/l"));
 		this.vehicle.setMinRPM(new Measure(1000.0, "rpm"));
 		this.vehicle.setMaxRPM(new Measure(5500.0, "rpm"));
 		this.vehicle.setFinalDriveRatio(new Measure(2.6, "ratio"));
@@ -145,6 +194,10 @@ public class FastVehicleAnalysisTest {
 		this.vehicle.getGears().put(02, new Measure(2.5, "ratio"));
 		this.vehicle.getGears().put(03, new Measure(1.25, "ratio"));
 		this.vehicle.getGears().put(04, new Measure(0.9, "ratio"));
+		this.vehicle.getGears().put(04, new Measure(0.9, "ratio"));
+		this.vehicle.setThrottle(25, throttle1);
+		this.vehicle.setThrottle(50, throttle2);
+		this.vehicle.setThrottle(100, throttle3);
 	}
 
 	@BeforeClass
@@ -189,7 +242,7 @@ public class FastVehicleAnalysisTest {
 				stringBuilder.append(column);
 			}
 		}
-		String expResult = "NameSegment maxVelocityRestricted maxVelocityVehicle GearGear maxVelocityUsed maxVelocityLenghtTimeTotalNoden00,00 sSegment01120,00 km/h4201,38 km/h120,00 km/h20,00 km600,00 s0,00 sNoden2600,00 s";
+		String expResult = "NameSegment maxVelocityRestricted maxVelocityVehicle GearGear maxVelocityUsed maxVelocityLenghtTimeTotalNoden00,00 sSegment01120,00 km/h4443,05 km/h120,00 km/h20,00 km600,00 s0,00 sNoden2600,00 s";
 		assertEquals(expResult, stringBuilder.toString());
 	}
 }

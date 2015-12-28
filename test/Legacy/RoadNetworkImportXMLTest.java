@@ -39,11 +39,13 @@ public class RoadNetworkImportXMLTest {
 	private Section section0;
 	private Section section1;
 	private Section section2;
+	private Section section3;
 	private Segment segment0;
 	private Segment segment1;
 	private Segment segment2;
 	private Segment segment3;
 	private Segment segment4;
+	private Segment segment5;
 
 	public RoadNetworkImportXMLTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
@@ -106,19 +108,36 @@ public class RoadNetworkImportXMLTest {
 		this.segment4 = new Segment();
 		this.segment4.setName("01");
 		this.segment4.setHeight(new Measure(100.0, "km"));
-		this.segment4.setSlope(new Measure(0.125, "%"));
+		this.segment4.setSlope(new Measure(0.0, "%"));
 		this.segment4.setLength(new Measure(20.0, "km"));
 		this.segment4.setMaxVelocity(new Measure(120.0, "km/h"));
 		this.segment4.setMinVelocity(new Measure(50.0, "km/h"));
 		this.segment4.setNumberVehicles(100);
 		this.section2 = new Section();
-		this.section2.setRoad("E01");
-		this.section2.setTypology("regular road");
+		this.section2.setRoad("A01");
+		this.section2.setTypology("highway");
 		this.section2.setDirection("bidirectional");
 		this.section2.setToll(new Measure(12.0, "€"));
 		this.section2.setWindDirection(new Measure(-5.0, "°"));
 		this.section2.setWindSpeed(new Measure(3.0, "m/s"));
 		this.section2.addSegment(this.segment4);
+
+		this.segment5 = new Segment();
+		this.segment5.setName("01");
+		this.segment5.setHeight(new Measure(100.0, "km"));
+		this.segment5.setSlope(new Measure(0.125, "%"));
+		this.segment5.setLength(new Measure(20.0, "km"));
+		this.segment5.setMaxVelocity(new Measure(120.0, "km/h"));
+		this.segment5.setMinVelocity(new Measure(50.0, "km/h"));
+		this.segment5.setNumberVehicles(100);
+		this.section3 = new Section();
+		this.section3.setRoad("A03");
+		this.section3.setTypology("highway");
+		this.section3.setDirection("bidirectional");
+		this.section3.setToll(new Measure(4.0, "€"));
+		this.section3.setWindDirection(new Measure(-5.0, "°"));
+		this.section3.setWindSpeed(new Measure(3.0, "m/s"));
+		this.section3.addSegment(this.segment5);
 
 		this.node0 = new Node("n0");
 		this.node1 = new Node("n1");
@@ -131,11 +150,14 @@ public class RoadNetworkImportXMLTest {
 		this.roadNetwork.addSection(this.node0, this.node1, this.section0);
 		this.roadNetwork.addSection(this.node1, this.node2, this.section1);
 		this.roadNetwork.addSection(this.node0, this.node2, this.section2);
+		this.roadNetwork.addSection(this.node1, this.node2, this.section3);
 		this.roadNetwork.addSection(this.node1, this.node0, this.section0.
 									reverse());
 		this.roadNetwork.addSection(this.node2, this.node1, this.section1.
 									reverse());
 		this.roadNetwork.addSection(this.node2, this.node0, this.section2.
+									reverse());
+		this.roadNetwork.addSection(this.node2, this.node1, this.section3.
 									reverse());
 
 		this.project = new Project();

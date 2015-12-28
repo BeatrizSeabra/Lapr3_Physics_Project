@@ -18,6 +18,8 @@ import java.util.Map.Entry;
  */
 public class Vehicle {
 
+	public final Measure airDensity = new Measure(1.225, "kg/m3");
+
 	private Integer id;
 	private String name;
 	private String description;
@@ -27,16 +29,15 @@ public class Vehicle {
 	private Measure mass;
 	private Measure load;
 	private Measure dragCoefficient;
+	private Measure frontalArea;
 	private Measure rollingRCoefficient;
 	private Measure wheelSize;
-	private Map<String, Measure> velocityLimits = new HashMap();
-	private Measure torque;
-	private Measure RPM;
-	private Measure comsumption;
 	private Measure minRPM;
 	private Measure maxRPM;
 	private Measure finalDriveRatio;
+	private Map<String, Measure> velocityLimits = new HashMap();
 	private Map<Integer, Measure> gears = new HashMap();
+	private Map<Integer, Throttle> throttles = new HashMap();
 
 	public Boolean setVelocityLimits(String segmentType, Measure velocityLimit) {
 		return this.getVelocityLimits().put(segmentType, velocityLimit) != null;
@@ -54,9 +55,17 @@ public class Vehicle {
 		return this.getGears().get(number);
 	}
 
+	public Boolean setThrottle(Integer number, Throttle throttle) {
+		return this.getThrottles().put(number, throttle) != null;
+	}
+
+	public Throttle getThrottle(Integer number) {
+		return this.getThrottles().get(number);
+	}
+
 	public Measure getVelocity(Integer gear) {
 		Double wheelSize = Measurement.convert(this.wheelSize, "m").getValue();
-		Double RPM = Measurement.convert(this.RPM, "rps").getValue();
+		Double RPM = Measurement.convert(this.maxRPM, "rps").getValue();
 		Double finalDriveRatio = Measurement.
 			convert(this.finalDriveRatio, "ratio").getValue();
 		Double gearValue = Measurement.convert(this.getGear(gear), "ratio").
@@ -196,6 +205,20 @@ public class Vehicle {
 	}
 
 	/**
+	 * @return the frontalArea
+	 */
+	public Measure getFrontalArea() {
+		return frontalArea;
+	}
+
+	/**
+	 * @param frontalArea the frontalArea to set
+	 */
+	public void setFrontalArea(Measure frontalArea) {
+		this.frontalArea = frontalArea;
+	}
+
+	/**
 	 * @return the rollingCcoefficient
 	 */
 	public Measure getRollingRCoefficient() {
@@ -221,48 +244,6 @@ public class Vehicle {
 	 */
 	public void setWheelSize(Measure wheelSize) {
 		this.wheelSize = wheelSize;
-	}
-
-	/**
-	 * @return the torque
-	 */
-	public Measure getTorque() {
-		return torque;
-	}
-
-	/**
-	 * @param torque the torque to set
-	 */
-	public void setTorque(Measure torque) {
-		this.torque = torque;
-	}
-
-	/**
-	 * @return the RPM
-	 */
-	public Measure getRPM() {
-		return RPM;
-	}
-
-	/**
-	 * @param RPM the RPM to set
-	 */
-	public void setRPM(Measure RPM) {
-		this.RPM = RPM;
-	}
-
-	/**
-	 * @return the comsumption
-	 */
-	public Measure getComsumption() {
-		return comsumption;
-	}
-
-	/**
-	 * @param comsumption the comsumption to set
-	 */
-	public void setComsumption(Measure comsumption) {
-		this.comsumption = comsumption;
 	}
 
 	/**
@@ -321,6 +302,21 @@ public class Vehicle {
 		return gears;
 	}
 
+	/**
+	 * @return the throttles
+	 */
+	public Map<Integer, Throttle> getThrottles() {
+		return throttles;
+	}
+
+	/**
+	 * @param throttles the throttles to set
+	 */
+	public void setThrottles(
+		Map<Integer, Throttle> throttles) {
+		this.throttles = throttles;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -348,11 +344,9 @@ public class Vehicle {
 		hash += 11 * this.mass.hashCode();
 		hash += 11 * this.load.hashCode();
 		hash += 11 * this.dragCoefficient.hashCode();
+		hash += 11 * this.frontalArea.hashCode();
 		hash += 11 * this.rollingRCoefficient.hashCode();
 		hash += 11 * this.wheelSize.hashCode();
-		hash += 11 * this.torque.hashCode();
-		hash += 11 * this.RPM.hashCode();
-		hash += 11 * this.comsumption.hashCode();
 		hash += 11 * this.minRPM.hashCode();
 		hash += 11 * this.maxRPM.hashCode();
 		hash += 11 * this.finalDriveRatio.hashCode();
@@ -361,6 +355,10 @@ public class Vehicle {
 			hash += 7 * entity.getValue().hashCode();
 		}
 		for (Entry<Integer, Measure> entity : this.gears.entrySet()) {
+			hash += 7 * entity.getKey().hashCode();
+			hash += 7 * entity.getValue().hashCode();
+		}
+		for (Entry<Integer, Throttle> entity : this.throttles.entrySet()) {
 			hash += 7 * entity.getKey().hashCode();
 			hash += 7 * entity.getValue().hashCode();
 		}
@@ -379,11 +377,9 @@ public class Vehicle {
 		vehicle.setMass(this.mass);
 		vehicle.setLoad(this.load);
 		vehicle.setDragCoefficient(this.dragCoefficient);
+		vehicle.setFrontalArea(this.frontalArea);
 		vehicle.setRollingRCoefficient(this.rollingRCoefficient);
 		vehicle.setWheelSize(this.wheelSize);
-		vehicle.setTorque(this.torque);
-		vehicle.setRPM(this.RPM);
-		vehicle.setComsumption(this.comsumption);
 		vehicle.setMinRPM(this.minRPM);
 		vehicle.setMaxRPM(this.maxRPM);
 		vehicle.setFinalDriveRatio(this.finalDriveRatio);
@@ -393,12 +389,15 @@ public class Vehicle {
 		for (Entry<Integer, Measure> entity : this.getGears().entrySet()) {
 			vehicle.setGear(entity.getKey(), entity.getValue());
 		}
+		for (Entry<Integer, Throttle> entity : this.getThrottles().entrySet()) {
+			vehicle.setThrottle(entity.getKey(), entity.getValue().clone());
+		}
 		return vehicle;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder("Vehicle | name: " + this.name + " | description: " + this.description + " | type: " + this.type + " | motorization: " + this.motorization + " | fuel: " + this.fuel + " | mass: " + this.mass + " | load: " + this.load + " | drag: " + this.dragCoefficient + " | rrc: " + this.rollingRCoefficient + " | wheelSize: " + this.wheelSize + " | torque: " + this.torque + " | RPM: " + this.RPM + " | comsumption: " + this.comsumption + " | minRPM: " + this.minRPM + " | maxRPM: " + this.maxRPM + " | finalDrive: " + this.finalDriveRatio);
+		StringBuilder stringBuilder = new StringBuilder("Vehicle | name: " + this.name + " | description: " + this.description + " | type: " + this.type + " | motorization: " + this.motorization + " | fuel: " + this.fuel + " | mass: " + this.mass + " | load: " + this.load + " | drag: " + this.dragCoefficient + " | rrc: " + this.rollingRCoefficient + " | wheelSize: " + this.wheelSize + " | minRPM: " + this.minRPM + " | maxRPM: " + this.maxRPM + " | finalDrive: " + this.finalDriveRatio);
 		for (Entry<Integer, Measure> entry : this.gears.entrySet()) {
 			stringBuilder.append(" | gear" + entry.getKey() + ": " + entry.
 				getValue());
@@ -410,36 +409,13 @@ public class Vehicle {
 		return stringBuilder.toString();
 	}
 
-	/*
-	 private Integer id;
-	 private String name;
-	 private String description;
-	 private String type;
-	 private String motorization;
-	 private String fuel;
-	 private Measure mass;
-	 private Measure load;
-	 private Measure dragCoefficient;
-	 private Measure rollingRCoefficient;
-	 private Measure wheelSize;
-	 private Map<String, Measure> velocityLimits = new HashMap();
-	 private Measure torque;
-	 private Measure RPM;
-	 private Measure comsumption;
-	 private Measure minRPM;
-	 private Measure maxRPM;
-	 private Measure finalDriveRatio;
-	 */
 	public Integer getCurrentGear() {
 		return 1;
 	}
 
-	public Measure getFrontalArea() {
-		return new Measure(100.0, "m2");
-	}
-
 	public Measure getCurrentVelocity() {
 		return Measurement.convert(new Measure(60.0, "km/h"), "m/s");
+
 	}
 
 }

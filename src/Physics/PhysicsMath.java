@@ -5,8 +5,11 @@
  */
 package Physics;
 
+import Model.Regime;
 import Model.Segment;
 import Model.Vehicle;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -66,7 +69,16 @@ public class PhysicsMath {
 		Double frictionTorque = PhysicsMath.getNormal(vehicle) * vehicle.
 			getRollingRCoefficient().getValue() * vehicle.getWheelSize().
 			getValue();
-		Double totalTorque = vehicle.getTorque().getValue() - frictionTorque;
+		Integer throttleId = Collections.max(vehicle.getThrottles().keySet());
+		Comparator<Regime> comparator = new Comparator<Regime>() {
+			public int compare(Regime regimeA, Regime regimeB) {
+				return Double.compare(regimeA.getTorque().getValue(), regimeB.
+									  getTorque().getValue());
+			}
+		};
+		Regime regime = Collections.max(vehicle.getThrottle(throttleId).
+			getRegimes(), comparator);
+		Double totalTorque = regime.getTorque().getValue() - frictionTorque;
 		return totalTorque;
 	}
 

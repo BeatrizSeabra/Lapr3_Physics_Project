@@ -46,7 +46,7 @@ public class LevelPathAnalysisTest {
 		this.segment0 = new Segment();
 		this.segment0.setName("01");
 		this.segment0.setHeight(new Measure(100.0, "km"));
-		this.segment0.setSlope(new Measure(1.5, "°"));
+		this.segment0.setSlope(new Measure(1.5, "%"));
 		this.segment0.setLength(new Measure(3.2, "km"));
 		this.segment0.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment0.setMinVelocity(new Measure(0.0, "km/h"));
@@ -54,7 +54,7 @@ public class LevelPathAnalysisTest {
 		this.segment1 = new Segment();
 		this.segment1.setName("02");
 		this.segment1.setHeight(new Measure(148.0, "km"));
-		this.segment1.setSlope(new Measure(-1.5, "°"));
+		this.segment1.setSlope(new Measure(-1.5, "%"));
 		this.segment1.setLength(new Measure(3.2, "km"));
 		this.segment1.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment1.setMinVelocity(new Measure(0.0, "km/h"));
@@ -72,7 +72,7 @@ public class LevelPathAnalysisTest {
 		this.segment2 = new Segment();
 		this.segment2.setName("01");
 		this.segment2.setHeight(new Measure(100.0, "km"));
-		this.segment2.setSlope(new Measure(0.0, "°"));
+		this.segment2.setSlope(new Measure(0.0, "%"));
 		this.segment2.setLength(new Measure(10.0, "km"));
 		this.segment2.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment2.setMinVelocity(new Measure(0.0, "km/h"));
@@ -80,7 +80,7 @@ public class LevelPathAnalysisTest {
 		this.segment3 = new Segment();
 		this.segment3.setName("02");
 		this.segment3.setHeight(new Measure(100.0, "km"));
-		this.segment3.setSlope(new Measure(0.5, "°"));
+		this.segment3.setSlope(new Measure(0.5, "%"));
 		this.segment3.setLength(new Measure(5.0, "km"));
 		this.segment3.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment3.setMinVelocity(new Measure(0.0, "km/h"));
@@ -98,7 +98,7 @@ public class LevelPathAnalysisTest {
 		this.segment4 = new Segment();
 		this.segment4.setName("01");
 		this.segment4.setHeight(new Measure(100.0, "km"));
-		this.segment4.setSlope(new Measure(0.125, "°"));
+		this.segment4.setSlope(new Measure(0.125, "%"));
 		this.segment4.setLength(new Measure(20.0, "km"));
 		this.segment4.setMaxVelocity(new Measure(120.0, "km/h"));
 		this.segment4.setMinVelocity(new Measure(50.0, "km/h"));
@@ -169,7 +169,7 @@ public class LevelPathAnalysisTest {
 				stringBuilder.append(column);
 			}
 		}
-		String expResult = "NameSlopeTotalNoden00,00 °Segment010,13 °0,00 °Noden20,13 °";
+		String expResult = "NameSlopeTotalNoden00,00 %Segment010,13 %0,00 %Noden20,13 %";
 		assertEquals(expResult, stringBuilder.toString());
 	}
 }

@@ -7,9 +7,11 @@ package Legacy;
 
 import Model.Node;
 import Model.Project;
+import Model.Regime;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
+import Model.Throttle;
 import Model.Vehicle;
 import Physics.Measure;
 import System.Settings;
@@ -90,6 +92,27 @@ public class LegacyTest {
 		this.projects = new ArrayList();
 		this.projects.add(this.project);
 
+		Throttle throttle1 = new Throttle();
+		throttle1.
+			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "km/l")));
+		throttle1.
+			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "km/l")));
+		throttle1.
+			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "km/l")));
+		Throttle throttle2 = new Throttle();
+		throttle2.
+			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "km/l")));
+		Throttle throttle3 = new Throttle();
+		throttle2.
+			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "km/l")));
+		throttle2.
+			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "km/l")));
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
 		this.vehicle.setName("Dummy01");
@@ -100,13 +123,11 @@ public class LegacyTest {
 		this.vehicle.setMass(new Measure(1400.0, "Kg"));
 		this.vehicle.setLoad(new Measure(120.0, "kg"));
 		this.vehicle.setDragCoefficient(new Measure(0.35, "ratio"));
+		this.vehicle.setFrontalArea(new Measure(1.8, "m2"));
 		this.vehicle.setRollingRCoefficient(new Measure(0.01, "ratio"));
 		this.vehicle.setWheelSize(new Measure(0.5, "m"));
 		this.vehicle.getVelocityLimits().
 			put("Highway", new Measure(100.0, "km/h"));
-		this.vehicle.setTorque(new Measure(250.0, "Nm"));
-		this.vehicle.setRPM(new Measure(2500.0, "rpm"));
-		this.vehicle.setComsumption(new Measure(8.2, "km/l"));
 		this.vehicle.setMinRPM(new Measure(1000.0, "rpm"));
 		this.vehicle.setMaxRPM(new Measure(5500.0, "rpm"));
 		this.vehicle.setFinalDriveRatio(new Measure(2.6, "ratio"));
@@ -114,6 +135,11 @@ public class LegacyTest {
 		this.vehicle.getGears().put(02, new Measure(2.5, "ratio"));
 		this.vehicle.getGears().put(03, new Measure(1.25, "ratio"));
 		this.vehicle.getGears().put(04, new Measure(0.9, "ratio"));
+		this.vehicle.getGears().put(04, new Measure(0.9, "ratio"));
+		this.vehicle.setThrottle(25, throttle1);
+		this.vehicle.setThrottle(50, throttle2);
+		this.vehicle.setThrottle(100, throttle3);
+
 		this.vehicles = new ArrayList();
 		this.vehicles.add(vehicle);
 	}
