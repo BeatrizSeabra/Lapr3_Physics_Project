@@ -10,6 +10,7 @@ import Model.Segment;
 import Model.Vehicle;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 /**
  *
@@ -17,15 +18,12 @@ import java.util.Comparator;
  */
 public class PhysicsMath {
 
-	private static final Measure gravity = new Measure(9.80665, "m/s2");
-	private static final Measure airDensity = new Measure(1.225, "kg/m3");
+	public static final Measure gravity = new Measure(9.80665, "m/s2");
+	public static final Measure airDensity = new Measure(1.225, "kg/m3");
+	private static Random random = new Random();
 
-	private static Measure getGravity() {
-		return gravity;
-	}
-
-	private static Measure getAirDensity() {
-		return airDensity;
+	public static Double exponentialDistributionRandom(int averagePerPeriod) {
+		return -Math.log(PhysicsMath.random.nextDouble()) / (1.0 / averagePerPeriod);
 	}
 
 	public static Double getFrictionForce(Vehicle vehicle, Segment segment) {
@@ -46,8 +44,8 @@ public class PhysicsMath {
 	}
 
 	public static Double getNormal(Vehicle vehicle) {
-		Double normal = PhysicsMath.getTotalMass(vehicle) * PhysicsMath.
-			getGravity().getValue();
+		Double normal = PhysicsMath.getTotalMass(vehicle) * PhysicsMath.gravity.
+			getValue();
 		return normal;
 	}
 
@@ -59,7 +57,7 @@ public class PhysicsMath {
 		Double aux1 = vehicle.getRollingRCoefficient().getValue() * PhysicsMath.
 			getNormal(vehicle);
 		Double aux2 = 0.5 * vehicle.getDragCoefficient().getValue() * vehicle.
-			getFrontalArea().getValue() * PhysicsMath.getAirDensity().getValue() * Math.
+			getFrontalArea().getValue() * PhysicsMath.airDensity.getValue() * Math.
 			pow(vehicle.getCurrentVelocity().getValue(), 2.0);
 		force = force - aux1 - aux2;
 		return force;

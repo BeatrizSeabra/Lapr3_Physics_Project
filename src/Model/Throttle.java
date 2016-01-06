@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Physics.Measure;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +13,27 @@ import java.util.List;
  *
  * @author LAPR3_20152016_G27
  */
-public class Throttle {
+public class Throttle implements Comparable<Throttle> {
 
+	private Measure percentage;
 	private List<Regime> regimes = new ArrayList();
 
 	public Boolean addRegime(Regime regime) {
 		return this.regimes.add(regime);
+	}
+
+	/**
+	 * @return the percentage
+	 */
+	public Measure getPercentage() {
+		return percentage;
+	}
+
+	/**
+	 * @param percentage the percentage to set
+	 */
+	public void setPercentage(Measure percentage) {
+		this.percentage = percentage;
 	}
 
 	/**
@@ -65,6 +81,11 @@ public class Throttle {
 			throttle.addRegime(regime.clone());
 		}
 		return throttle;
+	}
+
+	@Override
+	public int compareTo(Throttle throttle) {
+		return this.percentage.compareTo(throttle.percentage);
 	}
 
 }

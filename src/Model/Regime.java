@@ -11,7 +11,7 @@ import Physics.Measure;
  *
  * @author LAPR3_20152016_G27
  */
-public class Regime {
+public class Regime implements Comparable<Regime> {
 
 	private Measure torque;
 	private Measure rpmLow;
@@ -113,6 +113,11 @@ public class Regime {
 	@Override
 	public Regime clone() {
 		return new Regime(this.torque, this.rpmLow, this.rpmHigh, this.fuelConsumption);
+	}
+
+	@Override
+	public int compareTo(Regime regime) {
+		return this.rpmHigh.compareTo(regime.rpmHigh);
 	}
 
 }
