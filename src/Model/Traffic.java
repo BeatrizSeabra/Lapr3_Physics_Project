@@ -13,6 +13,8 @@ import Physics.Measure;
  */
 public class Traffic {
 
+	private Node nodeStart;
+	private Node nodeEnd;
 	private Vehicle vehicle;
 	private Measure arrivalRate;
 
@@ -21,6 +23,22 @@ public class Traffic {
 	 */
 	public Vehicle getVehicle() {
 		return vehicle;
+	}
+
+	public Node getNodeStart() {
+		return nodeStart;
+	}
+
+	public Node getNodeEnd() {
+		return nodeEnd;
+	}
+
+	public void setNodeStart(Node nodeStart) {
+		this.nodeStart = nodeStart;
+	}
+
+	public void setNodeEnd(Node nodeEnd) {
+		this.nodeEnd = nodeEnd;
 	}
 
 	/**
@@ -42,6 +60,38 @@ public class Traffic {
 	 */
 	public void setArrivalRate(Measure arrivalRate) {
 		this.arrivalRate = arrivalRate;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Traffic other = (Traffic) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.nodeStart.hashCode();
+		hash += 11 * this.nodeEnd.hashCode();
+		hash += 11 * this.vehicle.hashCode();
+		hash += 11 * this.arrivalRate.hashCode();
+		return hash;
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder("Traffic - " + this.nodeStart + " - " + this.nodeEnd + " - " + this.arrivalRate + " - " + this.vehicle.
+			getName()).
+			toString();
 	}
 
 }

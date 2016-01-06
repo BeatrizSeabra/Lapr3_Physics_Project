@@ -84,8 +84,44 @@ public class Simulation {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Simulation other = (Simulation) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.id.hashCode();
+		hash += 11 * this.getName().hashCode();
+		hash += 11 * this.getDescription().hashCode();
+		for (Traffic traffic : this.traffics) {
+			hash += 7 * traffic.hashCode();
+		}
+		return hash;
+	}
+
+	@Override
 	public Simulation clone() {
 		return new Simulation();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder("Simulation - " + this.name + " - " + this.description + "\n");
+		for (Traffic traffic : this.traffics) {
+			stringBuilder.append(traffic + "\n");
+		}
+		return stringBuilder.toString();
 	}
 
 }

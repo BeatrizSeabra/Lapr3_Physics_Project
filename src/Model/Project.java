@@ -85,6 +85,15 @@ public class Project {
 		return new ArrayList(this.vehicles);
 	}
 
+	public Vehicle getVehicle(String name) {
+		for (Vehicle vehicle : vehicles) {
+			if (vehicle.getName().equalsIgnoreCase(name)) {
+				return vehicle;
+			}
+		}
+		return null;
+	}
+
 	public Boolean addSimulation(Simulation simulation) {
 		return this.simulations.add(simulation);
 	}
@@ -139,6 +148,9 @@ public class Project {
 		project.setRoadNetwork(this.roadNetwork.clone());
 		for (Vehicle vehicle : this.vehicles) {
 			project.addVehicle(vehicle);
+		}
+		for (Simulation simulation : this.simulations) {
+			project.addSimulation(simulation);
 		}
 		return project;
 	}

@@ -50,7 +50,8 @@ public abstract class Util {
 	}
 
 	public static Double toValue(String string) {
-		Double value = Util.toDouble(string.replaceAll("[^0-9\\.\\,\\-]+", "").
+		Double value = Util.toDouble(string.replaceAll("[^0-9\\.\\,\\- ]+", "").
+			split(" ")[0].
 			replaceAll(",", ".").trim());
 		if (value == null) {
 			return 0.0;

@@ -44,6 +44,15 @@ public class RoadNetwork {
 									 getTotalLength().getValue()) != null;
 	}
 
+	public Node getNode(String name) {
+		for (Node node : this.getNodes()) {
+			if (node.getName().equalsIgnoreCase(name)) {
+				return node;
+			}
+		}
+		return null;
+	}
+
 	public List<Node> getNodes() {
 		return this.graph.elements();
 	}
