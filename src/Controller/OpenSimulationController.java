@@ -26,6 +26,6 @@ public class OpenSimulationController {
 
 	public Boolean openSimulation(Simulation simulation) {
 		ContextController.setOpenSimulation(simulation);
-		return ContextController.getOpenProject().equals(simulation);
+		return ContextController.getOpenSimulation().equals(simulation);
 	}
 }

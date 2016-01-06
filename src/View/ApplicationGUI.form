@@ -80,37 +80,37 @@
             <Property name="text" type="java.lang.String" value="Simulation"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="createSimulation">
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOpenSimulation">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Open"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemOpenSimulationActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCreateSimulation">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Create"/>
               </Properties>
-              <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="newSimulation">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="From Scratch"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="copySimulation">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Copy"/>
-                  </Properties>
-                </MenuItem>
-              </SubComponents>
-            </Menu>
-            <MenuItem class="javax.swing.JMenuItem" name="editSimulation">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCreateSimulationActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="JMenuItemCopySimulation">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Copy"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItemCopySimulationActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemEditSimulation">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit"/>
               </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="deleteSimulation">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Delete"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="runSimulation">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Run"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemEditSimulationActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

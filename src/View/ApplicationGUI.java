@@ -56,7 +56,7 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.editProject.setEnabled(state);
 		this.jMenuItemCloseProject.setEnabled(state);
 		this.analysis.setEnabled(state);
-		this.simulation.setEnabled(false);
+		this.simulation.setEnabled(state);
 	}
 
 	private void loadMenuAnalysis() {
@@ -104,12 +104,10 @@ public class ApplicationGUI extends GraphicUserInterface {
         jMenuItemCloseProject = new javax.swing.JMenuItem();
         analysis = new javax.swing.JMenu();
         simulation = new javax.swing.JMenu();
-        createSimulation = new javax.swing.JMenu();
-        newSimulation = new javax.swing.JMenuItem();
-        copySimulation = new javax.swing.JMenuItem();
-        editSimulation = new javax.swing.JMenuItem();
-        deleteSimulation = new javax.swing.JMenuItem();
-        runSimulation = new javax.swing.JMenuItem();
+        jMenuItemOpenSimulation = new javax.swing.JMenuItem();
+        jMenuItemCreateSimulation = new javax.swing.JMenuItem();
+        JMenuItemCopySimulation = new javax.swing.JMenuItem();
+        jMenuItemEditSimulation = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemLog = new javax.swing.JMenuItem();
 
@@ -208,24 +206,37 @@ public class ApplicationGUI extends GraphicUserInterface {
 
         simulation.setText("Simulation");
 
-        createSimulation.setText("Create");
+        jMenuItemOpenSimulation.setText("Open");
+        jMenuItemOpenSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOpenSimulationActionPerformed(evt);
+            }
+        });
+        simulation.add(jMenuItemOpenSimulation);
 
-        newSimulation.setText("From Scratch");
-        createSimulation.add(newSimulation);
+        jMenuItemCreateSimulation.setText("Create");
+        jMenuItemCreateSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCreateSimulationActionPerformed(evt);
+            }
+        });
+        simulation.add(jMenuItemCreateSimulation);
 
-        copySimulation.setText("Copy");
-        createSimulation.add(copySimulation);
+        JMenuItemCopySimulation.setText("Copy");
+        JMenuItemCopySimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItemCopySimulationActionPerformed(evt);
+            }
+        });
+        simulation.add(JMenuItemCopySimulation);
 
-        simulation.add(createSimulation);
-
-        editSimulation.setText("Edit");
-        simulation.add(editSimulation);
-
-        deleteSimulation.setText("Delete");
-        simulation.add(deleteSimulation);
-
-        runSimulation.setText("Run");
-        simulation.add(runSimulation);
+        jMenuItemEditSimulation.setText("Edit");
+        jMenuItemEditSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEditSimulationActionPerformed(evt);
+            }
+        });
+        simulation.add(jMenuItemEditSimulation);
 
         jMenuBar1.add(simulation);
 
@@ -315,6 +326,22 @@ public class ApplicationGUI extends GraphicUserInterface {
 		new LogGUI(null);
     }//GEN-LAST:event_jMenuItemLogActionPerformed
 
+    private void jMenuItemCreateSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCreateSimulationActionPerformed
+		new CreateSimulationGUI(this);
+    }//GEN-LAST:event_jMenuItemCreateSimulationActionPerformed
+
+    private void jMenuItemOpenSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenSimulationActionPerformed
+		new OpenSimulationGUI(this);
+    }//GEN-LAST:event_jMenuItemOpenSimulationActionPerformed
+
+    private void JMenuItemCopySimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemCopySimulationActionPerformed
+		new CopySimulationGUI(this);
+    }//GEN-LAST:event_JMenuItemCopySimulationActionPerformed
+
+    private void jMenuItemEditSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEditSimulationActionPerformed
+		// new EditSimulationGUI(this);
+    }//GEN-LAST:event_jMenuItemEditSimulationActionPerformed
+
 	private void jMenuAnalysisActionPerformed(ActionEvent evt, Analysis analysis) {
 		if (analysis instanceof PathAnalysis) {
 			new PathAnalysisGUI(this, (PathAnalysis) analysis);
@@ -324,16 +351,13 @@ public class ApplicationGUI extends GraphicUserInterface {
 	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem JMenuItemCopySimulation;
     private javax.swing.JMenuItem addVehicle;
     private javax.swing.JMenu analysis;
     private javax.swing.JMenu closeProject;
     private javax.swing.JMenuItem copyProject;
-    private javax.swing.JMenuItem copySimulation;
     private javax.swing.JMenuItem createProject;
-    private javax.swing.JMenu createSimulation;
-    private javax.swing.JMenuItem deleteSimulation;
     private javax.swing.JMenuItem editProject;
-    private javax.swing.JMenuItem editSimulation;
     private javax.swing.JLabel jLabelCreateProject;
     private javax.swing.JLabel jLabelOpenProject;
     private javax.swing.JLabel jLabelWithWarning;
@@ -342,10 +366,11 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCloseProject;
+    private javax.swing.JMenuItem jMenuItemCreateSimulation;
+    private javax.swing.JMenuItem jMenuItemEditSimulation;
     private javax.swing.JMenuItem jMenuItemLog;
-    private javax.swing.JMenuItem newSimulation;
+    private javax.swing.JMenuItem jMenuItemOpenSimulation;
     private javax.swing.JMenuItem openProject;
-    private javax.swing.JMenuItem runSimulation;
     private javax.swing.JMenu simulation;
     // End of variables declaration//GEN-END:variables
 }

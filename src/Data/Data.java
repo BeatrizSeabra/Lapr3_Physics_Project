@@ -20,7 +20,7 @@ public abstract class Data {
 		loadClass(Settings.getOption("VehicleData"));
 
 	static private SimulationData simulationData = (SimulationData) Settings.
-		loadClass(Settings.getOption("ProjectData"));
+		loadClass(Settings.getOption("SimulationData"));
 
 	static public ProjectData getProjectData() {
 		return Data.projectData;
