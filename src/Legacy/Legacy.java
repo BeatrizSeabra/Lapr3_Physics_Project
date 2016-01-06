@@ -201,4 +201,8 @@ public abstract class Legacy {
 		return filters;
 	}
 
+	public static List<FileFilter> getFiltersExtensionsImportSimulations() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
 }
