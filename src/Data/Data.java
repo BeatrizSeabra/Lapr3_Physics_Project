@@ -19,12 +19,19 @@ public abstract class Data {
 	static private VehicleData vehicleData = (VehicleData) Settings.
 		loadClass(Settings.getOption("VehicleData"));
 
+	static private SimulationData simulationData = (SimulationData) Settings.
+		loadClass(Settings.getOption("ProjectData"));
+
 	static public ProjectData getProjectData() {
 		return Data.projectData;
 	}
 
 	static public VehicleData getVehicleData() {
 		return Data.vehicleData;
+	}
+
+	public static SimulationData getSimulationData() {
+		return Data.simulationData;
 	}
 
 }

@@ -6,6 +6,7 @@
 package Legacy;
 
 import Model.Project;
+import Model.Simulation;
 import Model.Vehicle;
 import System.Error;
 import System.Settings;
@@ -202,6 +203,10 @@ public abstract class Legacy {
 	}
 
 	public static List<FileFilter> getFiltersExtensionsImportSimulations() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public static List<Simulation> importSimulation(String filePath) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 

@@ -83,4 +83,9 @@ public class Simulation {
 		this.traffics = traffics;
 	}
 
+	@Override
+	public Simulation clone() {
+		return new Simulation();
+	}
+
 }

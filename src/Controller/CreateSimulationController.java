@@ -5,38 +5,69 @@
  */
 package Controller;
 
+import Data.Data;
+import Data.SimulationData;
+import Legacy.Legacy;
+import Model.Simulation;
+import java.util.List;
+
 /**
  *
  * @author ruben
  */
 public class CreateSimulationController {
 
-	public void initiation() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	private SimulationData simulationData = Data.getSimulationData();
+	private Simulation simulation;
+
+	public boolean initiation() {
+		this.simulation = null;
+		return true;
 	}
 
 	public String getName() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		if (this.hasSimulation()) {
+			return this.simulation.getName();
+		}
+		return "";
 	}
 
 	public String getDescription() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		if (this.hasSimulation()) {
+			return this.simulation.getDescription();
+		}
+		return "";
 	}
 
 	public String getToString() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		if (this.hasSimulation()) {
+			return this.simulation.toString();
+		}
+		return "";
 	}
 
-	public boolean saveSimulation(String text, String text0) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+	public Boolean saveSimulation(String name, String description) {
+		if (this.hasSimulation()) {
+			this.simulation.setId(this.simulationData.newInstance().getId());
+			this.simulation.setName(name);
+			this.simulation.setDescription(description);
 
-	public void loadSimulations(String file) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+			return this.simulationData.save(this.simulation);
+		}
+		return false;
 	}
 
 	public Boolean hasSimulation() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return this.simulation != null;
+	}
+
+	public Boolean loadSimulation(String filePath) {
+		List<Simulation> simulations = Legacy.importSimulation(filePath);
+		if (simulations != null && !simulations.isEmpty()) {
+			this.simulation = simulations.get(simulations.size() - 1);
+			return true;
+		}
+		return false;
 	}
 
 }
