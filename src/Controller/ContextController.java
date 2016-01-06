@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Project;
+import Model.Simulation;
 
 /**
  *
@@ -14,12 +15,21 @@ import Model.Project;
 public abstract class ContextController {
 
 	static private Project currentProject;
+	static private Simulation currentSimulation;
 
 	static public Project getOpenProject() {
 		return ContextController.currentProject;
 	}
 
+	static public Simulation getOpenSimulation() {
+		return ContextController.currentSimulation;
+	}
+
 	static public void setOpenProject(Project project) {
 		ContextController.currentProject = project;
+	}
+
+	static public void setOpenSimulation(Simulation simulation) {
+		ContextController.currentSimulation = simulation;
 	}
 }

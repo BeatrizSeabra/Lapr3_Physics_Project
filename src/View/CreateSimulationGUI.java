@@ -206,7 +206,7 @@ public class CreateSimulationGUI extends GraphicUserInterface {
 		String file = this.selectFile(Legacy.
 			getFiltersExtensionsImportSimulations());
 		if (file != null) {
-			this.createSimulationController.loadSimulations(file);
+			this.createSimulationController.loadSimulation(file);
 		}
 		this.update();
     }//GEN-LAST:event_jButtonRoadActionPerformed
