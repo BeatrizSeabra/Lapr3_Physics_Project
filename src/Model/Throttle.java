@@ -68,6 +68,7 @@ public class Throttle implements Comparable<Throttle> {
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.percentage.hashCode();
 		for (Regime regime : this.getRegimes()) {
 			hash += 7 * regime.hashCode();
 		}

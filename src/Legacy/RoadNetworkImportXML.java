@@ -232,7 +232,6 @@ public class RoadNetworkImportXML implements Import<Project> {
 				}
 			}
 		} catch (Exception ex) {
-			System.out.println(ex);
 			Error.
 				setErrorMessage("The XML content contains errors that prevent the loading of data to the road networks list: " + ex);
 			return null;

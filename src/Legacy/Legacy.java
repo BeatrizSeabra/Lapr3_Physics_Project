@@ -144,6 +144,33 @@ public abstract class Legacy {
 		return filters;
 	}
 
+	public static List<FileFilter> getFiltersExtensionsImportSimulations() {
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("SimulationImportClass"));
+		List<FileFilter> filters = new ArrayList();
+		for (Object object : objects) {
+			Import imports = (Import) object;
+			if (imports != null) {
+				filters.add(imports.getExtensionFilter());
+			}
+		}
+		return filters;
+	}
+
+	public static List<FileFilter> getFiltersExtensionsImportObjects(
+		String importClassName) {
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions(importClassName));
+		List<FileFilter> filters = new ArrayList();
+		for (Object object : objects) {
+			Import imports = (Import) object;
+			if (imports != null) {
+				filters.add(imports.getExtensionFilter());
+			}
+		}
+		return filters;
+	}
+
 	public static List<Vehicle> importVehicles(String filePath) {
 		filePath = filePath.trim();
 		String extension = Legacy.getExtension(filePath);
@@ -163,6 +190,51 @@ public abstract class Legacy {
 			}
 		}
 		Error.setErrorMessage("Could not load this extension: ");
+		return null;
+	}
+
+	public static List<Simulation> importSimulation(String filePath) {
+		filePath = filePath.trim();
+		String extension = Legacy.getExtension(filePath);
+		if (extension == null || extension.isEmpty()) {
+			Error.
+				setErrorMessage("Could not get the file extension: " + filePath);
+			return null;
+		}
+		String data = Legacy.readFile(filePath);
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("SimulationImportClass"));
+		for (Object object : objects) {
+			Import importClass = (Import) object;
+			if (importClass != null && importClass.getExtension().
+				equals(extension)) {
+				return importClass.importData(data);
+			}
+		}
+		Error.setErrorMessage("Could not load this extension: ");
+		return null;
+	}
+
+	public static List<Object> importObjects(String filePath,
+											 String importClassName) {
+		filePath = filePath.trim();
+		String extension = Legacy.getExtension(filePath);
+		if (extension == null || extension.isEmpty()) {
+			Error.
+				setErrorMessage("Could not get the file extension: " + filePath);
+			return null;
+		}
+		String data = Legacy.readFile(filePath);
+		List<Object> objects = Settings.loadAllClass(Settings.
+			getOptions("SimulationImportClass"));
+		for (Object object : objects) {
+			Import importClass = (Import) object;
+			if (importClass != null && importClass.getExtension().
+				equals(extension)) {
+				return importClass.importData(data);
+			}
+		}
+		Error.setErrorMessage("Could not load this extension: " + extension);
 		return null;
 	}
 
@@ -200,14 +272,6 @@ public abstract class Legacy {
 			}
 		}
 		return filters;
-	}
-
-	public static List<FileFilter> getFiltersExtensionsImportSimulations() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	public static List<Simulation> importSimulation(String filePath) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 }

@@ -51,10 +51,6 @@ public class CreateSimulationGUI extends GraphicUserInterface {
 			this.jTextFieldDescription.setText("");
 			this.jTextAreaSimulations.setText("");
 		}
-		/*this.jModelListVehicles.removeAllElements();
-		 for (Vehicle vehicle : this.createSimulationController.getProjectVehicles()) {
-		 this.jModelListVehicles.addElement(vehicle);
-		 }*/
 	}
 
 	public Boolean active(Boolean state) {
@@ -186,18 +182,19 @@ public class CreateSimulationGUI extends GraphicUserInterface {
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
 		if (this.jTextFieldName.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Project needs a name!");
+			JOptionPane.showMessageDialog(this, "Simulation needs a name!");
 		} else if (this.jTextFieldDescription.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Project needs a description!");
+			JOptionPane.
+				showMessageDialog(this, "Simulation needs a description!");
 		} else if (this.createSimulationController.
 			saveSimulation(this.jTextFieldName.
 				getText(), this.jTextFieldDescription.getText())) {
 			JOptionPane.
-				showMessageDialog(this, "Creation project successfully!");
+				showMessageDialog(this, "Creation simulation successfully!");
 			this.close();
 		} else {
 			JOptionPane.
-				showMessageDialog(this, "Error create project: " + Error.
+				showMessageDialog(this, "Error create simulation: " + Error.
 								  getErrorMessage());
 		}
     }//GEN-LAST:event_jButtonSaveActionPerformed

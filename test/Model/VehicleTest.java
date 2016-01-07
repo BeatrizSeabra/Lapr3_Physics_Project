@@ -24,6 +24,7 @@ public class VehicleTest {
 
 	public VehicleTest() {
 		Throttle throttle1 = new Throttle();
+		throttle1.setPercentage(new Measure(25.0, "%"));
 		throttle1.
 			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "km/l")));
 		throttle1.
@@ -31,6 +32,7 @@ public class VehicleTest {
 		throttle1.
 			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "km/l")));
 		Throttle throttle2 = new Throttle();
+		throttle2.setPercentage(new Measure(50.0, "%"));
 		throttle2.
 			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "km/l")));
 		throttle2.
@@ -38,11 +40,12 @@ public class VehicleTest {
 		throttle2.
 			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "km/l")));
 		Throttle throttle3 = new Throttle();
-		throttle2.
+		throttle3.setPercentage(new Measure(100.0, "%"));
+		throttle3.
 			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "km/l")));
-		throttle2.
+		throttle3.
 			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "km/l")));
-		throttle2.
+		throttle3.
 			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "km/l")));
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
@@ -66,9 +69,9 @@ public class VehicleTest {
 		this.vehicle.setGear(4, new Measure(1.312, "ratio"));
 		this.vehicle.setGear(5, new Measure(1.0, "ratio"));
 		this.vehicle.setGear(6, new Measure(0.793, "ratio"));
-		this.vehicle.setThrottle(25, throttle1);
-		this.vehicle.setThrottle(50, throttle2);
-		this.vehicle.setThrottle(100, throttle3);
+		this.vehicle.addThrottle(throttle1);
+		this.vehicle.addThrottle(throttle2);
+		this.vehicle.addThrottle(throttle3);
 	}
 
 	@BeforeClass
@@ -120,10 +123,8 @@ public class VehicleTest {
 			expResult += 7 * entity.getKey().hashCode();
 			expResult += 7 * entity.getValue().hashCode();
 		}
-		for (Map.Entry<Integer, Throttle> entity : this.vehicle.getThrottles().
-			entrySet()) {
-			expResult += 7 * entity.getKey().hashCode();
-			expResult += 7 * entity.getValue().hashCode();
+		for (Throttle throttle : this.vehicle.getThrottles()) {
+			expResult += 7 * throttle.hashCode();
 		}
 		Integer result = this.vehicle.hashCode();
 		assertEquals(expResult, result);

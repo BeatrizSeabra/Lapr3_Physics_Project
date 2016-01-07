@@ -7,8 +7,10 @@ package Model;
 
 import Physics.Measure;
 import Physics.Measurement;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -37,7 +39,7 @@ public class Vehicle {
 	private Measure finalDriveRatio;
 	private Map<String, Measure> velocityLimits = new HashMap();
 	private Map<Integer, Measure> gears = new HashMap();
-	private Map<Integer, Throttle> throttles = new HashMap();
+	private List<Throttle> throttles = new ArrayList();
 
 	public Boolean setVelocityLimits(String segmentType, Measure velocityLimit) {
 		return this.getVelocityLimits().put(segmentType, velocityLimit) != null;
@@ -55,12 +57,12 @@ public class Vehicle {
 		return this.getGears().get(number);
 	}
 
-	public Boolean setThrottle(Integer number, Throttle throttle) {
-		return this.getThrottles().put(number, throttle) != null;
+	public Boolean addThrottle(Throttle throttle) {
+		return this.throttles.add(throttle);
 	}
 
-	public Throttle getThrottle(Integer number) {
-		return this.getThrottles().get(number);
+	public Throttle getThrottle(Integer index) {
+		return this.getThrottles().get(index);
 	}
 
 	public Measure getVelocity(Integer gear) {
@@ -305,15 +307,14 @@ public class Vehicle {
 	/**
 	 * @return the throttles
 	 */
-	public Map<Integer, Throttle> getThrottles() {
+	public List<Throttle> getThrottles() {
 		return throttles;
 	}
 
 	/**
 	 * @param throttles the throttles to set
 	 */
-	public void setThrottles(
-		Map<Integer, Throttle> throttles) {
+	public void setThrottles(List<Throttle> throttles) {
 		this.throttles = throttles;
 	}
 
@@ -358,9 +359,8 @@ public class Vehicle {
 			hash += 7 * entity.getKey().hashCode();
 			hash += 7 * entity.getValue().hashCode();
 		}
-		for (Entry<Integer, Throttle> entity : this.throttles.entrySet()) {
-			hash += 7 * entity.getKey().hashCode();
-			hash += 7 * entity.getValue().hashCode();
+		for (Throttle throttle : this.throttles) {
+			hash += 7 * throttle.hashCode();
 		}
 		return hash;
 	}
@@ -389,22 +389,35 @@ public class Vehicle {
 		for (Entry<Integer, Measure> entity : this.getGears().entrySet()) {
 			vehicle.setGear(entity.getKey(), entity.getValue());
 		}
-		for (Entry<Integer, Throttle> entity : this.getThrottles().entrySet()) {
-			vehicle.setThrottle(entity.getKey(), entity.getValue().clone());
+		for (Throttle throttle : this.getThrottles()) {
+			vehicle.addThrottle(throttle);
 		}
 		return vehicle;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder("Vehicle | name: " + this.name + " | description: " + this.description + " | type: " + this.type + " | motorization: " + this.motorization + " | fuel: " + this.fuel + " | mass: " + this.mass + " | load: " + this.load + " | drag: " + this.dragCoefficient + " | rrc: " + this.rollingRCoefficient + " | wheelSize: " + this.wheelSize + " | minRPM: " + this.minRPM + " | maxRPM: " + this.maxRPM + " | finalDrive: " + this.finalDriveRatio);
+		StringBuilder stringBuilder = new StringBuilder("Vehicle | name: ").
+			append(this.name).append(" | description: ").
+			append(this.description).append(" | type: ").append(this.type).
+			append(" | motorization: ").append(this.motorization).
+			append(" | fuel: ").append(this.fuel).append(" | mass: ").
+			append(this.mass).append(" | load: ").append(this.load).
+			append(" | drag: ").append(this.dragCoefficient).append(" | rrc: ").
+			append(this.rollingRCoefficient).append(" | wheelSize: ").
+			append(this.wheelSize).append(" | minRPM: ").append(this.minRPM).
+			append(" | maxRPM: ").append(this.maxRPM).append(" | finalDrive: ").
+			append(this.finalDriveRatio);
 		for (Entry<Integer, Measure> entry : this.gears.entrySet()) {
-			stringBuilder.append(" | gear" + entry.getKey() + ": " + entry.
-				getValue());
+			stringBuilder.append(" | gear").append(entry.getKey()).append(": ").
+				append(entry.getValue());
 		}
 		for (Entry<String, Measure> entry : this.velocityLimits.entrySet()) {
-			stringBuilder.append(" | limit" + entry.getKey() + ": " + entry.
-				getValue());
+			stringBuilder.append(" | limit").append(entry.getKey()).append(": ").
+				append(entry.getValue());
+		}
+		for (Throttle throttle : this.getThrottles()) {
+			stringBuilder.append(" | throttle" + throttle);
 		}
 		return stringBuilder.toString();
 	}

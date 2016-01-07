@@ -6,7 +6,7 @@
 package Controller;
 
 import Data.Data;
-import Data.SimulationData;
+import Model.Project;
 import Model.Simulation;
 
 /**
@@ -15,24 +15,25 @@ import Model.Simulation;
  */
 public class CopySimulationController {
 
-	private SimulationData simulationData;
+	private Project project;
 	private Simulation simulation;
 	private Simulation simulationCopy;
 
 	public Boolean initiation() {
-		this.simulationData = Data.getSimulationData();
+		this.project = ContextController.getOpenProject();
 		this.simulation = ContextController.getOpenSimulation();
 		return this.simulation != null;
 	}
 
-	public Boolean copySimulation(String simulationName, String simulationDescription) {
-		this.simulationCopy = this.simulationData.clone(this.simulation);
-		this.simulationCopy.setName(simulationName);
-                this.simulationCopy.setDescription(simulationDescription);
-		return this.simulationCopy != null;
+	public Boolean copySimulation(String name, String description) {
+		if (name.equalsIgnoreCase(this.simulation.getName())) {
+			name += " (copy)";
+		}
+		this.simulationCopy = Data.getSimulationData().clone(this.simulation);
+		this.simulationCopy.setName(name);
+		this.simulationCopy.setDescription(description);
+		return project.addSimulation(this.simulationCopy) && Data.
+			getProjectData().save(this.project);
 	}
 
-	public Boolean saveSimulation() {
-		return this.simulationData.save(this.simulationCopy);
-	}
 }

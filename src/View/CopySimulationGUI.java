@@ -5,7 +5,9 @@
  */
 package View;
 
+import Controller.ContextController;
 import Controller.CopySimulationController;
+import Model.Simulation;
 import System.Error;
 import javax.swing.JOptionPane;
 
@@ -31,6 +33,9 @@ public class CopySimulationGUI extends GraphicUserInterface {
 	public void initiation() {
 		this.copySimulationController = new CopySimulationController();
 		this.copySimulationController.initiation();
+		Simulation simulation = ContextController.getOpenSimulation();
+		this.jTextFieldName.setText(simulation.getName());
+		this.jTextFieldDescription.setText(simulation.getDescription());
 	}
 
 	@Override
@@ -152,7 +157,7 @@ public class CopySimulationGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jTextFieldNameKeyPressed
 
     private void jTextFieldNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNameKeyReleased
-        this.update();
+		this.update();
     }//GEN-LAST:event_jTextFieldNameKeyReleased
 
     private void jTextFieldNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNameKeyTyped
@@ -160,24 +165,25 @@ public class CopySimulationGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jTextFieldNameKeyTyped
 
     private void jButtonCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCopyActionPerformed
-        if (this.copySimulationController.copySimulation(this.jTextFieldName.getText(), this.jTextFieldDescription.
-                getText()) && this.copySimulationController.saveSimulation()) {
-            JOptionPane.showMessageDialog(this, "Simulation copied successfully!");
-            this.close();
-        } else {
-            JOptionPane.
-            showMessageDialog(this, "Could not copy the current simulation: " + Error.
-                getErrorMessage());
-        }
+		if (this.copySimulationController.copySimulation(this.jTextFieldName.
+			getText(), this.jTextFieldDescription.getText())) {
+			JOptionPane.
+				showMessageDialog(this, "Simulation copied successfully!");
+			this.close();
+		} else {
+			JOptionPane.
+				showMessageDialog(this, "Could not copy the current simulation: " + Error.
+								  getErrorMessage());
+		}
     }//GEN-LAST:event_jButtonCopyActionPerformed
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-        this.copySimulationController.initiation();
-        this.update();
+		this.copySimulationController.initiation();
+		this.update();
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-        this.close();
+		this.close();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

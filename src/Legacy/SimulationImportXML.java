@@ -5,6 +5,7 @@
  */
 package Legacy;
 
+import Controller.ContextController;
 import Model.Node;
 import Model.Project;
 import Model.Simulation;
@@ -28,8 +29,6 @@ import javax.xml.stream.XMLStreamReader;
  */
 public class SimulationImportXML implements Import<Simulation> {
 
-	private Project project;
-
 	@Override
 	public String getExtension() {
 		return "xml";
@@ -46,12 +45,9 @@ public class SimulationImportXML implements Import<Simulation> {
 										   getExtension());
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
 	@Override
 	public List<Simulation> importData(String data) {
+		Project project = ContextController.getOpenProject();
 		List<Simulation> simulations = new ArrayList();
 		try {
 			Simulation simulation = null;
@@ -75,16 +71,12 @@ public class SimulationImportXML implements Import<Simulation> {
 								simulation.setDescription(reader.
 									getAttributeValue(1).trim());
 								simulations.add(simulation);
-								System.out.println(reader.getAttributeValue(0));
-								System.out.println(reader.getAttributeValue(1));
 								break;
 							case "traffic_pattern":
-								nodeStart = this.project.getRoadNetwork().
+								nodeStart = project.getRoadNetwork().
 									getNode(reader.getAttributeValue(0));
-								nodeEnd = this.project.getRoadNetwork().
+								nodeEnd = project.getRoadNetwork().
 									getNode(reader.getAttributeValue(1));
-								System.out.println(reader.getAttributeValue(0));
-								System.out.println(reader.getAttributeValue(1));
 								break;
 							default:
 								break;
@@ -93,15 +85,12 @@ public class SimulationImportXML implements Import<Simulation> {
 					}
 					case XMLStreamConstants.CHARACTERS: {
 						text = reader.getText().replaceAll("\"", "").trim();
-						if (!text.isEmpty()) {
-							System.out.println(text);
-						}
 						break;
 					}
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
 							case "vehicle":
-								vehicle = this.project.getVehicle(text);
+								vehicle = project.getVehicle(text);
 								break;
 							case "arrival_rate":
 								value = Util.toValue(text);
@@ -132,7 +121,6 @@ public class SimulationImportXML implements Import<Simulation> {
 				}
 			}
 		} catch (Exception ex) {
-			System.out.println(ex);
 			Error.
 				setErrorMessage("The XML content contains errors that prevent the loading of data to the road networks list: " + ex);
 			return null;

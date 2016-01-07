@@ -40,23 +40,26 @@ public class ApplicationGUI extends GraphicUserInterface {
 		if (ContextController.getOpenProject() != null) {
 			this.rootPane.getContentPane().setLayout(new FlowLayout());
 			this.rootPane.getContentPane().add(new ViewProjectGUI());
-			this.accessMenu(true);
+			this.accessMenu(true, ContextController.getOpenSimulation() != null);
 		} else {
 			this.initComponents();
-			this.accessMenu(false);
+			this.accessMenu(false, false);
 		}
 		this.loadMenuAnalysis();
 		this.repaint();
 		this.revalidate();
 	}
 
-	private void accessMenu(Boolean state) {
-		this.addVehicle.setEnabled(state);
-		this.copyProject.setEnabled(state);
-		this.editProject.setEnabled(state);
-		this.jMenuItemCloseProject.setEnabled(state);
-		this.analysis.setEnabled(state);
-		this.simulation.setEnabled(state);
+	private void accessMenu(Boolean stateProject, Boolean stateSimulation) {
+		this.addVehicle.setEnabled(stateProject);
+		this.copyProject.setEnabled(stateProject);
+		this.editProject.setEnabled(stateProject);
+		this.jMenuItemCloseProject.setEnabled(stateProject);
+		this.analysis.setEnabled(stateProject);
+		this.simulation.setEnabled(stateProject);
+		this.JMenuItemCopySimulation.setEnabled(stateSimulation);
+		this.jMenuItemEditSimulation.setEnabled(stateSimulation);
+		this.jMenuItemCloseSimulation.setEnabled(stateSimulation);
 	}
 
 	private void loadMenuAnalysis() {
@@ -108,6 +111,7 @@ public class ApplicationGUI extends GraphicUserInterface {
         jMenuItemCreateSimulation = new javax.swing.JMenuItem();
         JMenuItemCopySimulation = new javax.swing.JMenuItem();
         jMenuItemEditSimulation = new javax.swing.JMenuItem();
+        jMenuItemCloseSimulation = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemLog = new javax.swing.JMenuItem();
 
@@ -116,9 +120,10 @@ public class ApplicationGUI extends GraphicUserInterface {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 500));
-        setMinimumSize(new java.awt.Dimension(500, 500));
-        setSize(new java.awt.Dimension(500, 500));
+        setMaximumSize(new java.awt.Dimension(500, 630));
+        setMinimumSize(new java.awt.Dimension(500, 630));
+        setPreferredSize(new java.awt.Dimension(500, 630));
+        setSize(new java.awt.Dimension(500, 630));
 
         jLabelWithWarning.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabelWithWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -191,7 +196,7 @@ public class ApplicationGUI extends GraphicUserInterface {
         });
         closeProject.add(addVehicle);
 
-        jMenuItemCloseProject.setText("Close Project");
+        jMenuItemCloseProject.setText("Close");
         jMenuItemCloseProject.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCloseProjectActionPerformed(evt);
@@ -238,6 +243,14 @@ public class ApplicationGUI extends GraphicUserInterface {
         });
         simulation.add(jMenuItemEditSimulation);
 
+        jMenuItemCloseSimulation.setText("Close");
+        jMenuItemCloseSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCloseSimulationActionPerformed(evt);
+            }
+        });
+        simulation.add(jMenuItemCloseSimulation);
+
         jMenuBar1.add(simulation);
 
         jMenuHelp.setText("Help");
@@ -279,7 +292,7 @@ public class ApplicationGUI extends GraphicUserInterface {
                 .addComponent(jLabelCreateProject)
                 .addGap(46, 46, 46)
                 .addComponent(jLabelOpenProject)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
 
         pack();
@@ -342,6 +355,11 @@ public class ApplicationGUI extends GraphicUserInterface {
 		// new EditSimulationGUI(this);
     }//GEN-LAST:event_jMenuItemEditSimulationActionPerformed
 
+    private void jMenuItemCloseSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCloseSimulationActionPerformed
+		ContextController.setOpenSimulation(null);
+		this.update();
+    }//GEN-LAST:event_jMenuItemCloseSimulationActionPerformed
+
 	private void jMenuAnalysisActionPerformed(ActionEvent evt, Analysis analysis) {
 		if (analysis instanceof PathAnalysis) {
 			new PathAnalysisGUI(this, (PathAnalysis) analysis);
@@ -366,6 +384,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCloseProject;
+    private javax.swing.JMenuItem jMenuItemCloseSimulation;
     private javax.swing.JMenuItem jMenuItemCreateSimulation;
     private javax.swing.JMenuItem jMenuItemEditSimulation;
     private javax.swing.JMenuItem jMenuItemLog;

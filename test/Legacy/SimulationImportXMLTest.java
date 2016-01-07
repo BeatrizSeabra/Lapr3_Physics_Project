@@ -5,6 +5,7 @@
  */
 package Legacy;
 
+import Controller.ContextController;
 import Model.Node;
 import Model.Project;
 import Model.Regime;
@@ -71,6 +72,7 @@ public class SimulationImportXMLTest {
 		this.dataXML = Legacy.readFile(this.filePathSimulation);
 
 		Throttle throttle1 = new Throttle();
+		throttle1.setPercentage(new Measure(25.0, "%"));
 		throttle1.
 			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "km/l")));
 		throttle1.
@@ -78,6 +80,7 @@ public class SimulationImportXMLTest {
 		throttle1.
 			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "km/l")));
 		Throttle throttle2 = new Throttle();
+		throttle2.setPercentage(new Measure(50.0, "%"));
 		throttle2.
 			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "km/l")));
 		throttle2.
@@ -85,11 +88,12 @@ public class SimulationImportXMLTest {
 		throttle2.
 			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "km/l")));
 		Throttle throttle3 = new Throttle();
-		throttle2.
+		throttle3.setPercentage(new Measure(100.0, "%"));
+		throttle3.
 			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "km/l")));
-		throttle2.
+		throttle3.
 			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "km/l")));
-		throttle2.
+		throttle3.
 			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "km/l")));
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
@@ -114,9 +118,9 @@ public class SimulationImportXMLTest {
 		this.vehicle.getGears().put(03, new Measure(1.25, "ratio"));
 		this.vehicle.getGears().put(04, new Measure(0.9, "ratio"));
 		this.vehicle.getGears().put(04, new Measure(0.9, "ratio"));
-		this.vehicle.setThrottle(25, throttle1);
-		this.vehicle.setThrottle(50, throttle2);
-		this.vehicle.setThrottle(100, throttle3);
+		this.vehicle.addThrottle(throttle1);
+		this.vehicle.addThrottle(throttle2);
+		this.vehicle.addThrottle(throttle3);
 
 		this.segment0 = new Segment();
 		this.segment0.setName("01");
@@ -238,6 +242,9 @@ public class SimulationImportXMLTest {
 		vehicle2.setName("Dummy02");
 		this.project.addVehicle(this.vehicle);
 		this.project.addVehicle(vehicle2);
+
+		ContextController.setOpenProject(this.project);
+
 		this.simulation = new Simulation();
 		this.simulation.setName("TestSet02");
 		this.simulation.
@@ -300,10 +307,7 @@ public class SimulationImportXMLTest {
 		this.simulation.addTraffic(traffic8);
 
 		this.simulations = new ArrayList();
-		this.project.addSimulation(simulation);
 		this.simulations.add(this.simulation);
-
-		this.simulationImportXML.setProject(this.project);
 	}
 
 	@BeforeClass

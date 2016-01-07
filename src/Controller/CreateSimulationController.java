@@ -6,8 +6,10 @@
 package Controller;
 
 import Data.Data;
+import Data.ProjectData;
 import Data.SimulationData;
 import Legacy.Legacy;
+import Model.Project;
 import Model.Simulation;
 import java.util.List;
 
@@ -17,10 +19,13 @@ import java.util.List;
  */
 public class CreateSimulationController {
 
+	private ProjectData projectData = Data.getProjectData();
 	private SimulationData simulationData = Data.getSimulationData();
+	private Project project;
 	private Simulation simulation;
 
 	public boolean initiation() {
+		this.project = ContextController.getOpenProject();
 		this.simulation = null;
 		return true;
 	}
@@ -51,8 +56,8 @@ public class CreateSimulationController {
 			this.simulation.setId(this.simulationData.newInstance().getId());
 			this.simulation.setName(name);
 			this.simulation.setDescription(description);
-
-			return this.simulationData.save(this.simulation);
+			return this.project.addSimulation(this.simulation) && this.projectData.
+				save(this.project);
 		}
 		return false;
 	}

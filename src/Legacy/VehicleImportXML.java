@@ -76,8 +76,16 @@ public class VehicleImportXML implements Import<Vehicle> {
 								break;
 							case "throttle":
 								throttle = new Throttle();
-								throttleId = Integer.parseInt(reader.
-									getAttributeValue(0).trim());
+								text = reader.getAttributeValue(0).trim();
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									throttle.
+										setPercentage(new Measure(value, unit));
+								} else {
+									throttle.
+										setPercentage(new Measure(value, "%"));
+								}
 								break;
 							default:
 								break;
@@ -258,7 +266,7 @@ public class VehicleImportXML implements Import<Vehicle> {
 								throttle.addRegime(regime);
 								break;
 							case "throttle":
-								vehicle.setThrottle(throttleId, throttle);
+								vehicle.addThrottle(throttle);
 								break;
 							default:
 								break;

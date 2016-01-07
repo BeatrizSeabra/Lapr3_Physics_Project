@@ -102,8 +102,8 @@ public class Simulation {
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
 		hash += 11 * this.id.hashCode();
-		hash += 11 * this.getName().hashCode();
-		hash += 11 * this.getDescription().hashCode();
+		hash += 11 * this.name.hashCode();
+		hash += 11 * this.description.hashCode();
 		for (Traffic traffic : this.traffics) {
 			hash += 7 * traffic.hashCode();
 		}
@@ -112,14 +112,23 @@ public class Simulation {
 
 	@Override
 	public Simulation clone() {
-		return new Simulation();
+		Simulation simulation = new Simulation();
+		simulation.setId(this.id);
+		simulation.setName(this.name);
+		simulation.setDescription(this.description);
+		for (Traffic traffic : this.traffics) {
+			simulation.addTraffic(traffic);
+		}
+		return simulation;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder stringBuilder = new StringBuilder("Simulation - " + this.name + " - " + this.description + "\n");
+		StringBuilder stringBuilder = new StringBuilder("Simulation - ").
+			append(this.name).append(" - ").append(this.description).
+			append("\n");
 		for (Traffic traffic : this.traffics) {
-			stringBuilder.append(traffic + "\n");
+			stringBuilder.append(traffic).append("\n");
 		}
 		return stringBuilder.toString();
 	}
