@@ -49,11 +49,12 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.repaint();
 		this.revalidate();
 	}
-
+	
 	private void accessMenu(Boolean stateProject, Boolean stateSimulation) {
 		this.addVehicle.setEnabled(stateProject);
 		this.copyProject.setEnabled(stateProject);
 		this.editProject.setEnabled(stateProject);
+		this.jMenuItemAddRoads.setEnabled(stateProject);
 		this.jMenuItemCloseProject.setEnabled(stateProject);
 		this.analysis.setEnabled(stateProject);
 		this.simulation.setEnabled(stateProject);
@@ -104,6 +105,7 @@ public class ApplicationGUI extends GraphicUserInterface {
         copyProject = new javax.swing.JMenuItem();
         editProject = new javax.swing.JMenuItem();
         addVehicle = new javax.swing.JMenuItem();
+        jMenuItemAddRoads = new javax.swing.JMenuItem();
         jMenuItemCloseProject = new javax.swing.JMenuItem();
         analysis = new javax.swing.JMenu();
         simulation = new javax.swing.JMenu();
@@ -194,6 +196,14 @@ public class ApplicationGUI extends GraphicUserInterface {
             }
         });
         closeProject.add(addVehicle);
+
+        jMenuItemAddRoads.setText("Add Roads");
+        jMenuItemAddRoads.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAddRoadsActionPerformed(evt);
+            }
+        });
+        closeProject.add(jMenuItemAddRoads);
 
         jMenuItemCloseProject.setText("Close");
         jMenuItemCloseProject.addActionListener(new java.awt.event.ActionListener() {
@@ -359,6 +369,10 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.update();
     }//GEN-LAST:event_jMenuItemCloseSimulationActionPerformed
 
+    private void jMenuItemAddRoadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAddRoadsActionPerformed
+		new AddRoadsGUI(this);
+    }//GEN-LAST:event_jMenuItemAddRoadsActionPerformed
+
 	private void jMenuAnalysisActionPerformed(ActionEvent evt, Analysis analysis) {
 		if (analysis instanceof PathAnalysis) {
 			new PathAnalysisGUI(this, (PathAnalysis) analysis);
@@ -382,6 +396,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemAddRoads;
     private javax.swing.JMenuItem jMenuItemCloseProject;
     private javax.swing.JMenuItem jMenuItemCloseSimulation;
     private javax.swing.JMenuItem jMenuItemCreateSimulation;
