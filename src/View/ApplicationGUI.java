@@ -122,7 +122,6 @@ public class ApplicationGUI extends GraphicUserInterface {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(500, 630));
         setMinimumSize(new java.awt.Dimension(500, 630));
-        setPreferredSize(new java.awt.Dimension(500, 630));
         setSize(new java.awt.Dimension(500, 630));
 
         jLabelWithWarning.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
@@ -352,7 +351,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     }//GEN-LAST:event_JMenuItemCopySimulationActionPerformed
 
     private void jMenuItemEditSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEditSimulationActionPerformed
-		// new EditSimulationGUI(this);
+		new EditSimulationGUI(this);
     }//GEN-LAST:event_jMenuItemEditSimulationActionPerformed
 
     private void jMenuItemCloseSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCloseSimulationActionPerformed
