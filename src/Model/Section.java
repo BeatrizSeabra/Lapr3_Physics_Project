@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class Section {
 
-	private Integer id;
+	private Integer id = 0;
 	private String road;
 	private String typology;
 	private String direction;

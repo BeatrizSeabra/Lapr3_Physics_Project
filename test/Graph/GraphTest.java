@@ -1,9 +1,16 @@
 package Graph;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Iterator;
+import java.util.List;
+import org.junit.After;
+import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -17,10 +24,22 @@ public class GraphTest {
 	public GraphTest() {
 	}
 
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
 	@Before
 	public void setUp() {
 
 	}
+
+    @After
+    public void tearDown() throws Exception {
+    }
 
 	/**
 	 * Test of numVertices method, of class Graph.
@@ -730,4 +749,31 @@ public class GraphTest {
 
 	}
 
+    /**
+     * Test of getExtremeVertexElements method, of class Graph.
+     */
+    @Test
+    public void testGetExtremeVertexElements() {
+        System.out.println("testGetExtremeVertexElements");
+		Edge<String, String> edge1 = instance.insertEdge("A", "B", "Edge1", 6);
+		Edge<String, String> edge2 = instance.insertEdge("A", "C", "Edge2", 1);
+		Edge<String, String> edge3 = instance.insertEdge("B", "D", "Edge3", 3);
+		Edge<String, String> edge4 = instance.insertEdge("C", "D", "Edge4", 4);
+		Edge<String, String> edge5 = instance.insertEdge("C", "E", "Edge5", 1);
+		Edge<String, String> edge6 = instance.insertEdge("D", "A", "Edge6", 2);
+		Edge<String, String> edge7 = instance.insertEdge("E", "D", "Edge7", 1);
+		Edge<String, String> edge8 = instance.insertEdge("E", "E", "Edge8", 1);
+        Deque expResult = new ArrayDeque();
+        expResult.add("A");
+        expResult.add("B");
+        Deque result = instance.getExtremeVertexElements("Edge1");
+        assertEquals(expResult.getFirst(), result.getFirst());  
+        assertEquals(expResult.getLast(), result.getLast()); 
+        expResult.clear();
+        expResult.add("D");
+        expResult.add("A");
+        result = instance.getExtremeVertexElements("Edge6");
+        assertEquals(expResult.getFirst(), result.getFirst());  
+        assertEquals(expResult.getLast(), result.getLast()); 
+    }
 }

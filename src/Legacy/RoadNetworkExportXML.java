@@ -10,6 +10,7 @@ import Model.Project;
 import Model.Section;
 import Model.Segment;
 import System.Error;
+import java.util.Deque;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -36,28 +37,31 @@ public class RoadNetworkExportXML implements Export {
 
 	public String export(Object data) {
 		Project project = (Project) data;
-		if (project == null) {
+		if (project != null) {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-			stringBuilder.append("<Network id=");
+			stringBuilder.append("<Network id=\"");
 			stringBuilder.append(project.getName());
-			stringBuilder.append("description=");
+			stringBuilder.append("\"description=\"");
 			stringBuilder.append(project.getDescription());
-			stringBuilder.append(">n");
-			stringBuilder.append("	<node_list>\n");
+			stringBuilder.append("\">\n");
+			stringBuilder.append("\t<node_list>\n");
 			for (Node node : project.getRoadNetwork().getNodes()) {
-				stringBuilder.append("		<node id=");
+				stringBuilder.append("\t\t<node id=\"");
 				stringBuilder.append(node.getName());
-				stringBuilder.append("/>\n");
+				stringBuilder.append("\"/>\n");
 			}
 			stringBuilder.append("	</node_list>");
 			stringBuilder.append("	<section_list>");
 			for (Section section : project.getRoadNetwork().getSections(project.
 				getRoadNetwork().getNodes())) {
-				stringBuilder.append("		<road_section begin=");
-				stringBuilder.append(" end=");
-				stringBuilder.append("end");
-				stringBuilder.append(">\n");
+				Deque<Node> nodes = project.getRoadNetwork().
+					getExtremeNodes(section);
+				stringBuilder.append("		<road_section begin=\"");
+				stringBuilder.append(nodes.getFirst().getName());
+				stringBuilder.append("\" end=\"");
+				stringBuilder.append(nodes.getLast().getName());
+				stringBuilder.append("\">\n");
 				stringBuilder.append("			<road>");
 				stringBuilder.append(section.getRoad());
 				stringBuilder.append("</road>\n");
@@ -84,9 +88,9 @@ public class RoadNetworkExportXML implements Export {
 				stringBuilder.append("</wind_speed>\n");
 				stringBuilder.append("			<segment_list>");
 				for (Segment segment : section.getSegments()) {
-					stringBuilder.append("			<segment id=");
+					stringBuilder.append("			<segment id=\"");
 					stringBuilder.append(segment.getName());
-					stringBuilder.append(">\n");
+					stringBuilder.append("\">\n");
 					stringBuilder.append("			<height>");
 					stringBuilder.append(segment.getHeight().getValue()).
 						append(" ");

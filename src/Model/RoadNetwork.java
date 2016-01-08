@@ -19,7 +19,8 @@ import java.util.List;
  */
 public class RoadNetwork {
 
-	private Integer id;
+	private Integer id = 0;
+	private Graph<Node, Section> graphOrigin = new Graph(true);
 	private Graph<Node, Section> graph = new Graph(true);
 
 	/**
@@ -62,6 +63,10 @@ public class RoadNetwork {
 		return this.graph;
 	}
 
+	public Graph<Node, Section> getGraphOrigin() {
+		return this.graphOrigin;
+	}
+
 	public Section getSection(Node startNode, Node endNode) {
 		return this.getGraph().getEdge(startNode, endNode).getElement();
 	}
@@ -74,7 +79,7 @@ public class RoadNetwork {
 	}
 
 	public List<Section> getSections(List<Node> nodes) {
-		Deque<Node> nodesDeque = (Deque<Node>) nodes;
+		Deque<Node> nodesDeque = new ArrayDeque(nodes);
 		List<Section> sections = new ArrayList();
 		if (nodesDeque.size() <= 1) {
 			return sections;
@@ -89,7 +94,7 @@ public class RoadNetwork {
 		return sections;
 	}
 
-	public Deque<Node> getSections(Section section) {
+	public Deque<Node> getExtremeNodes(Section section) {
 		return this.graph.getExtremeVertexElements(section);
 	}
 
