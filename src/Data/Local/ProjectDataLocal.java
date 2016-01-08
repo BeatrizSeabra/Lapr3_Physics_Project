@@ -35,7 +35,7 @@ public class ProjectDataLocal implements ProjectData {
 		if (project.getId() == 0) {
 			return this.list.add(project);
 		}
-		Project oldProject = this.get(project.getId());
+		Project oldProject = this.get(project);
 		project.setId(project.getId());
 		project.setName(project.getName());
 		project.setDescription(project.getDescription());
@@ -52,10 +52,10 @@ public class ProjectDataLocal implements ProjectData {
 	}
 
 	@Override
-	public Project get(Integer id) {
-		for (Project project : this.list) {
-			if (project.getId() == id) {
-				return project;
+	public Project get(Project project) {
+		for (Project projectList : this.list) {
+			if (projectList.getId() == project.getId()) {
+				return projectList;
 			}
 		}
 		return null;
@@ -63,7 +63,7 @@ public class ProjectDataLocal implements ProjectData {
 
 	@Override
 	public Boolean hasChanged(Project project) {
-		Project oldProject = this.get(project.getId());
+		Project oldProject = this.get(project);
 		return !oldProject.equals(project);
 	}
 

@@ -9,6 +9,7 @@ import Graph.Edge;
 import Graph.Graph;
 import Graph.GraphAlgorithms;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
@@ -72,28 +73,24 @@ public class RoadNetwork {
 		return shortestPath;
 	}
 
-	private double calculateEficienty(Deque<Node> path, Vehicle vehicle) {
-		Deque<Section> sections = this.getSections(path);
-		double result = 0;
-		for (Section section : sections) {
-			result += section.getTotalForce(vehicle).getValue();
-		}
-		return result;
-	}
-
-	public Deque<Section> getSections(Deque<Node> nodes) {
-		Deque<Section> sections = new ArrayDeque();
-		if (nodes.size() <= 1) {
+	public List<Section> getSections(List<Node> nodes) {
+		Deque<Node> nodesDeque = (Deque<Node>) nodes;
+		List<Section> sections = new ArrayList();
+		if (nodesDeque.size() <= 1) {
 			return sections;
 		}
 		Section section;
-		for (int i = 0; i < nodes.size() - 1; i++) {
-			Node startNode = nodes.removeFirst();
-			Node endNode = nodes.removeFirst();
+		for (int i = 0; i < nodesDeque.size() - 1; i++) {
+			Node startNode = nodesDeque.removeFirst();
+			Node endNode = nodesDeque.removeFirst();
 			section = this.getSection(startNode, endNode);
 			sections.add(section);
 		}
 		return sections;
+	}
+
+	public Deque<Node> getSections(Section section) {
+		return this.graph.getExtremeVertexElements(section);
 	}
 
 	public List<Deque<Node>> getAllPaths(Node starNode, Node endNode,

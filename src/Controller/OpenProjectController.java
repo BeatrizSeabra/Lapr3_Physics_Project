@@ -29,7 +29,7 @@ public class OpenProjectController {
 	}
 
 	public Boolean openProject(Project project) {
-		project = this.projectData.get(project.getId());
+		project = this.projectData.get(project);
 		ContextController.setOpenProject(project);
 		return project != null;
 	}

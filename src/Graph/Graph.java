@@ -1,6 +1,8 @@
 package Graph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -82,6 +84,20 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		}
 
 		return null;
+	}
+
+	public Deque<V> getExtremeVertexElements(E element) {
+		Deque<V> nodes = new ArrayDeque();
+		for (Vertex<V, E> vertex : listVert) {
+			for (Map.Entry<Vertex<V, E>, Edge<V, E>> entrySet : vertex.
+				getOutgoing().entrySet()) {
+				if (entrySet.getValue().getElement().equals(element)) {
+					nodes.add(vertex.getElement());
+					nodes.add(entrySet.getKey().getElement());
+				}
+			}
+		}
+		return nodes;
 	}
 
 	public Vertex<V, E>[] endVertices(Edge<V, E> e) {

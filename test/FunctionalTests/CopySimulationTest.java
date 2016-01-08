@@ -31,10 +31,10 @@ public class CopySimulationTest {
 
 	public CopySimulationTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
-		this.simulation = Data.getSimulationData().newInstance();
+		//this.simulation = Data.getSimulationData().newInstance();
 		this.simulation.setName("Simulation Name");
 		this.simulation.setDescription("Simulation Description");
-		Data.getSimulationData().save(simulation);
+		//Data.getSimulationData().save(simulation);
 		this.project = new Project();
 		this.project.addSimulation(this.simulation);
 		ContextController.setOpenProject(this.project);

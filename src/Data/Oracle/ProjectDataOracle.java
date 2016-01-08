@@ -63,15 +63,15 @@ public class ProjectDataOracle implements ProjectData {
 	}
 
 	@Override
-	public Project get(Integer id) {
-		for (Project project : this.all()) {
-			if (project.getId() == id) {
+	public Project get(Project project) {
+		for (Project projectList : this.all()) {
+			if (projectList.getId() == project.getId()) {
 				try {
 					CallableStatement callableStatement = connection.
 						prepareCall("BEGIN EXPORTXMLPROJECT(?,?); END;");
 					callableStatement.
 						registerOutParameter(1, OracleTypes.VARCHAR);
-					callableStatement.setInt(2, id);
+					callableStatement.setInt(2, project.getId());
 					callableStatement.execute();
 					RoadNetworkImportXML importClass = new RoadNetworkImportXML();
 					List<Project> projects = importClass.
@@ -87,13 +87,13 @@ public class ProjectDataOracle implements ProjectData {
 			}
 		}
 		Error.
-			setErrorMessage("Oracle database was not possible to execute the command: get(" + id);
+			setErrorMessage("Oracle database was not possible to execute the command: get " + project);
 		return null;
 	}
 
 	@Override
 	public Boolean hasChanged(Project project) {
-		Project oldProject = this.get(project.getId());
+		Project oldProject = this.get(project);
 		return !oldProject.equals(project);
 	}
 

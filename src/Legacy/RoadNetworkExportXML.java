@@ -10,8 +10,6 @@ import Model.Project;
 import Model.Section;
 import Model.Segment;
 import System.Error;
-import java.util.Deque;
-import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -54,9 +52,8 @@ public class RoadNetworkExportXML implements Export {
 			}
 			stringBuilder.append("	</node_list>");
 			stringBuilder.append("	<section_list>");
-			for (Section section : (List<Section>) project.getRoadNetwork().
-				getSections((Deque<Node>) (List<Node>) project.getRoadNetwork().
-					getNodes())) {
+			for (Section section : project.getRoadNetwork().getSections(project.
+				getRoadNetwork().getNodes())) {
 				stringBuilder.append("		<road_section begin=");
 				stringBuilder.append(" end=");
 				stringBuilder.append("end");

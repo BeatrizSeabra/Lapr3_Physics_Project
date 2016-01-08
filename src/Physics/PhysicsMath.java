@@ -27,8 +27,38 @@ public class PhysicsMath {
 		return -Math.log(PhysicsMath.random.nextDouble()) / (1.0 / averagePerPeriod);
 	}
 
-	public static Double airResistanceForce(Measure measure) {
-		return 0.0;
+	public static Measure engineCarForce(Measure torque, Measure finalDrive,
+										 Measure gearRatio, Measure radiusTire) {
+		torque = Measurement.convert(torque, "Nm");
+		finalDrive = Measurement.convert(finalDrive, "ratio");
+		gearRatio = Measurement.convert(gearRatio, "ratio");
+		radiusTire = Measurement.convert(radiusTire, "m");
+		Double value = (0.0) / radiusTire.getValue();
+		return new Measure(value, "N");
+	}
+
+	public static Measure rollingResistanceForce(Measure rollingResistance,
+												 Measure mass) {
+		rollingResistance = Measurement.convert(rollingResistance, "ratio");
+		mass = Measurement.convert(mass, "kg");
+		Measure gravity = Measurement.convert(PhysicsMath.gravity, "m/s2");
+		Double value = rollingResistance.getValue() * mass.getValue() * gravity.
+			getValue();
+		return new Measure(value, "N");
+	}
+
+	public static Measure airResistanceForce(Measure dragCoefficient,
+											 Measure frontalArea,
+											 Measure relativeSpeed) {
+		dragCoefficient = Measurement.convert(dragCoefficient, "ratio");
+		frontalArea = Measurement.convert(frontalArea, "m2");
+		relativeSpeed = Measurement.convert(relativeSpeed, "m/s");
+		Measure airDensity = Measurement.
+			convert(PhysicsMath.airDensity, "kg/m3");
+		Double value = 0.5 * dragCoefficient.getValue() * frontalArea.
+			getValue() * airDensity.getValue() * Math.pow(relativeSpeed.
+				getValue(), 2);
+		return new Measure(value, "N");
 	}
 
 	public static Measure relativeSpeed(Measure carSpeed, Measure windSpeed,
@@ -36,9 +66,9 @@ public class PhysicsMath {
 		carSpeed = Measurement.module(Measurement.convert(carSpeed, "m/s"));
 		windSpeed = Measurement.module(Measurement.convert(windSpeed, "m/s"));
 		windDirection = Measurement.convert(windDirection, "°");
-		Double speed = carSpeed.getValue() + windSpeed.getValue() * Math.
+		Double value = carSpeed.getValue() + windSpeed.getValue() * Math.
 			cos(windDirection.getValue());
-		return Measurement.module(new Measure(speed, "m/s"));
+		return Measurement.module(new Measure(value, "m/s"));
 	}
 
 	public static Double getFrictionForce(Vehicle vehicle, Segment segment) {

@@ -20,7 +20,7 @@ public interface ProjectData {
 
 	Boolean save(Project project);
 
-	Project get(Integer id);
+	Project get(Project project);
 
 	Boolean hasChanged(Project project);
 
