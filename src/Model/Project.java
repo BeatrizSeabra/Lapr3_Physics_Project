@@ -82,7 +82,7 @@ public class Project {
 	}
 
 	public List<Vehicle> getVehicles() {
-		return new ArrayList(this.vehicles);
+		return this.vehicles;
 	}
 
 	public Vehicle getVehicle(String name) {
@@ -99,7 +99,7 @@ public class Project {
 	}
 
 	public List<Simulation> getSimulations() {
-		return new ArrayList(this.simulations);
+		return this.simulations;
 	}
 
 	@Override
@@ -147,10 +147,10 @@ public class Project {
 		project.setDescription(this.description);
 		project.setRoadNetwork(this.roadNetwork.clone());
 		for (Vehicle vehicle : this.vehicles) {
-			project.addVehicle(vehicle);
+			project.addVehicle(vehicle.clone());
 		}
 		for (Simulation simulation : this.simulations) {
-			project.addSimulation(simulation);
+			project.addSimulation(simulation.clone());
 		}
 		return project;
 	}

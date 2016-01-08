@@ -26,7 +26,8 @@ public class CopyProjectController {
 	}
 
 	public Boolean copyProject() {
-		this.projectCopy = this.projectData.clone(this.project);
+		this.projectCopy = this.project.clone();
+		this.projectCopy.setId(0);
 		String name = new StringBuilder(this.projectCopy.getName()).
 			append(" (copy)").toString();
 		this.projectCopy.setName(name);

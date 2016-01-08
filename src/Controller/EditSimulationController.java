@@ -7,6 +7,7 @@ package Controller;
 
 import Data.Data;
 import Data.SimulationData;
+import Model.Project;
 import Model.Simulation;
 
 /**
@@ -15,13 +16,15 @@ import Model.Simulation;
  */
 public class EditSimulationController {
 
+	private Project project;
 	private SimulationData simulationData;
 	private Simulation simulation;
 	private Simulation editSimulation;
 
 	public void initiation() {
-		this.simulationData = Data.getSimulationData();
+		this.project = ContextController.getOpenProject();
 		this.simulation = ContextController.getOpenSimulation();
+		this.simulationData = Data.getSimulationData();
 		this.editSimulation = this.simulation.clone();
 	}
 
@@ -42,6 +45,6 @@ public class EditSimulationController {
 	}
 
 	public Boolean saveSimulation() {
-		return this.simulationData.save(this.editSimulation);
+		return this.simulationData.save(this.project, this.editSimulation);
 	}
 }

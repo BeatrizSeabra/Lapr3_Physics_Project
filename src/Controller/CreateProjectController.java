@@ -80,7 +80,6 @@ public class CreateProjectController {
 
 	public Boolean saveProject(String name, String description) {
 		if (this.hasProject()) {
-			this.project.setId(this.projectData.newInstance().getId());
 			this.project.setName(name);
 			this.project.setDescription(description);
 			for (Vehicle vehicle : this.vehicles) {

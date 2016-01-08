@@ -29,7 +29,8 @@ public class CopySimulationController {
 		if (name.equalsIgnoreCase(this.simulation.getName())) {
 			name += " (copy)";
 		}
-		this.simulationCopy = Data.getSimulationData().clone(this.simulation);
+		this.simulationCopy = this.simulation.clone();
+		this.simulationCopy.setId(0);
 		this.simulationCopy.setName(name);
 		this.simulationCopy.setDescription(description);
 		return project.addSimulation(this.simulationCopy) && Data.

@@ -29,7 +29,7 @@ public class CopyProjectTest {
 
 	public CopyProjectTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
-		this.project = Data.getProjectData().newInstance();
+		this.project = new Project();
 		this.project.setName("Project Name");
 		this.project.setDescription("Project Description");
 		Data.getProjectData().save(project);

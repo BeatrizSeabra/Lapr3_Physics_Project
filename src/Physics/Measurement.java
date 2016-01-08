@@ -67,4 +67,11 @@ public abstract class Measurement {
 		return new Measure(measure.getValue() * -1, measure.getUnit());
 	}
 
+	public static Measure module(Measure measure) {
+		if (measure.getValue() < 0) {
+			measure = Measurement.neg(measure);
+		}
+		return measure;
+	}
+
 }

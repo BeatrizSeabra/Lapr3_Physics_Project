@@ -53,11 +53,9 @@ public class CreateSimulationController {
 
 	public Boolean saveSimulation(String name, String description) {
 		if (this.hasSimulation()) {
-			this.simulation.setId(this.simulationData.newInstance().getId());
 			this.simulation.setName(name);
 			this.simulation.setDescription(description);
-			return this.project.addSimulation(this.simulation) && this.projectData.
-				save(this.project);
+			return this.simulationData.save(this.project, this.simulation);
 		}
 		return false;
 	}

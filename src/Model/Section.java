@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class Section {
 
+	private Integer id;
 	private String road;
 	private String typology;
 	private String direction;
@@ -24,6 +25,14 @@ public class Section {
 	private Measure windDirection;
 	private Measure windSpeed;
 	private List<Segment> segments = new ArrayList();
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the road
@@ -113,7 +122,7 @@ public class Section {
 	 * @return the segments
 	 */
 	public List<Segment> getSegments() {
-		return new ArrayList(this.segments);
+		return this.segments;
 	}
 
 	public Boolean addSegment(Segment segment) {
@@ -159,6 +168,7 @@ public class Section {
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.id.hashCode();
 		hash += 11 * this.road.hashCode();
 		hash += 11 * this.typology.hashCode();
 		hash += 11 * this.direction.hashCode();
@@ -171,19 +181,28 @@ public class Section {
 		return hash;
 	}
 
-	public Section reverse() {
+	@Override
+	public Section clone() {
 		Section section = new Section();
+		section.setId(this.id);
 		section.setRoad(this.road);
 		section.setTypology(this.typology);
 		section.setDirection(this.direction);
-		section.setToll(this.toll);
-		section.setWindDirection(this.windDirection);
-		section.setWindSpeed(Measurement.neg(this.windSpeed));
+		section.setToll(this.toll.clone());
+		section.setWindDirection(this.windDirection.clone());
+		section.setWindSpeed(this.windSpeed.clone());
 		List<Segment> segments = new ArrayList(this.segments);
 		Collections.reverse(segments);
 		for (Segment segment : segments) {
 			section.addSegment(segment.reverse());
 		}
+		return section;
+	}
+
+	public Section reverse() {
+		Section section = this.clone();
+		section.setWindSpeed(Measurement.neg(this.windSpeed));
+		Collections.reverse(section.getSegments());
 		return section;
 	}
 

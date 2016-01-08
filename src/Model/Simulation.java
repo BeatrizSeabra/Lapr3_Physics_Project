@@ -117,7 +117,7 @@ public class Simulation {
 		simulation.setName(this.name);
 		simulation.setDescription(this.description);
 		for (Traffic traffic : this.traffics) {
-			simulation.addTraffic(traffic);
+			simulation.addTraffic(traffic.clone());
 		}
 		return simulation;
 	}

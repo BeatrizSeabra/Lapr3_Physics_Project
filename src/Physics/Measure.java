@@ -90,4 +90,9 @@ public class Measure implements Comparable<Measure> {
 		return this.value.compareTo(measure.getValue());
 	}
 
+	@Override
+	public Measure clone() {
+		return new Measure(this.value, this.unit);
+	}
+
 }

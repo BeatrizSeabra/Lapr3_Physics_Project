@@ -22,7 +22,7 @@ public class Vehicle {
 
 	public final Measure airDensity = new Measure(1.225, "kg/m3");
 
-	private Integer id;
+	private Integer id = 0;
 	private String name;
 	private String description;
 	private String type;
@@ -374,23 +374,24 @@ public class Vehicle {
 		vehicle.setType(this.type);
 		vehicle.setMotorization(this.motorization);
 		vehicle.setFuel(this.fuel);
-		vehicle.setMass(this.mass);
-		vehicle.setLoad(this.load);
-		vehicle.setDragCoefficient(this.dragCoefficient);
-		vehicle.setFrontalArea(this.frontalArea);
-		vehicle.setRollingRCoefficient(this.rollingRCoefficient);
-		vehicle.setWheelSize(this.wheelSize);
-		vehicle.setMinRPM(this.minRPM);
-		vehicle.setMaxRPM(this.maxRPM);
-		vehicle.setFinalDriveRatio(this.finalDriveRatio);
+		vehicle.setMass(this.mass.clone());
+		vehicle.setLoad(this.load.clone());
+		vehicle.setDragCoefficient(this.dragCoefficient.clone());
+		vehicle.setFrontalArea(this.frontalArea.clone());
+		vehicle.setRollingRCoefficient(this.rollingRCoefficient.clone());
+		vehicle.setWheelSize(this.wheelSize.clone());
+		vehicle.setMinRPM(this.minRPM.clone());
+		vehicle.setMaxRPM(this.maxRPM.clone());
+		vehicle.setFinalDriveRatio(this.finalDriveRatio.clone());
 		for (Entry<String, Measure> entity : this.getVelocityLimits().entrySet()) {
-			vehicle.setVelocityLimits(entity.getKey(), entity.getValue());
+			vehicle.
+				setVelocityLimits(entity.getKey(), entity.getValue().clone());
 		}
 		for (Entry<Integer, Measure> entity : this.getGears().entrySet()) {
-			vehicle.setGear(entity.getKey(), entity.getValue());
+			vehicle.setGear(entity.getKey(), entity.getValue().clone());
 		}
 		for (Throttle throttle : this.getThrottles()) {
-			vehicle.addThrottle(throttle);
+			vehicle.addThrottle(throttle.clone());
 		}
 		return vehicle;
 	}

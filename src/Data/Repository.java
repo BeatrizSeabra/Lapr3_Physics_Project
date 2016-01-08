@@ -5,23 +5,18 @@
  */
 package Data;
 
-import Model.Project;
-import java.util.List;
-
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public interface ProjectData {
+public interface Repository {
 
-	Integer size();
+	Integer getNextIndex();
 
-	List<Project> all();
+	ProjectData getProjectData();
 
-	Boolean save(Project project);
+	VehicleData getVehicleData();
 
-	Project get(Integer id);
-
-	Boolean hasChanged(Project project);
+	SimulationData getSimulationData();
 
 }

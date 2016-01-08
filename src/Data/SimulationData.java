@@ -5,6 +5,7 @@
  */
 package Data;
 
+import Model.Project;
 import Model.Simulation;
 import java.util.List;
 
@@ -14,20 +15,14 @@ import java.util.List;
  */
 public interface SimulationData {
 
-	Simulation newInstance();
+	Integer size(Project project);
 
-	Integer size();
+	List<Simulation> all(Project project);
 
-	List<Simulation> all();
+	Boolean save(Project project, Simulation simulation);
 
-	Boolean save(Simulation simulation);
+	Simulation get(Project project, Simulation simulation);
 
-	Simulation copy(Simulation simulation);
-
-	Simulation clone(Simulation simulation);
-
-	Simulation get(Integer id);
-
-	Boolean hasChanged(Simulation simulation);
+	Boolean hasChanged(Project project, Simulation simulation);
 
 }

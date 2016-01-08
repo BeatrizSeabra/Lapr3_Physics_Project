@@ -6,9 +6,11 @@
 package Controller;
 
 import Data.Data;
+import Data.VehicleData;
 import Legacy.Legacy;
 import Model.Project;
 import Model.Vehicle;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,11 +20,13 @@ import java.util.List;
 public class AddVehiclesController {
 
 	private Project project;
+	private VehicleData vehicleData;
 	private List<Vehicle> vehicles;
 
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
-		this.vehicles = this.project.getVehicles();
+		this.vehicleData = Data.getVehicleData();
+		this.vehicles = new ArrayList(this.vehicleData.all(this.project));
 	}
 
 	public List<Vehicle> getVehicles() {
@@ -66,7 +70,7 @@ public class AddVehiclesController {
 	}
 
 	public Boolean hasChanges() {
-		return !this.vehicles.equals(this.project.getVehicles());
+		return this.vehicles.size() != this.vehicleData.size(this.project);
 	}
 
 	public Boolean saveProjectVehicles() {

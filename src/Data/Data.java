@@ -13,25 +13,23 @@ import System.Settings;
  */
 public abstract class Data {
 
-	static private ProjectData projectData = (ProjectData) Settings.
-		loadClass(Settings.getOption("ProjectData"));
+	static private Repository repository = (Repository) Settings.
+		loadClass(Settings.getOption("Repository"));
 
-	static private VehicleData vehicleData = (VehicleData) Settings.
-		loadClass(Settings.getOption("VehicleData"));
-
-	static private SimulationData simulationData = (SimulationData) Settings.
-		loadClass(Settings.getOption("SimulationData"));
+	static public Integer getNextIndex() {
+		return Data.repository.getNextIndex();
+	}
 
 	static public ProjectData getProjectData() {
-		return Data.projectData;
+		return Data.repository.getProjectData();
 	}
 
 	static public VehicleData getVehicleData() {
-		return Data.vehicleData;
+		return Data.repository.getVehicleData();
 	}
 
 	public static SimulationData getSimulationData() {
-		return Data.simulationData;
+		return Data.repository.getSimulationData();
 	}
 
 }

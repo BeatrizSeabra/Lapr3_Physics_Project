@@ -6,6 +6,7 @@
 package Controller;
 
 import Data.Data;
+import Data.ProjectData;
 import Model.Project;
 import java.util.List;
 
@@ -15,10 +16,12 @@ import java.util.List;
  */
 public class OpenProjectController {
 
+	private ProjectData projectData;
 	private List<Project> projects;
 
 	public void initiation() {
-		this.projects = Data.getProjectData().all();
+		this.projectData = Data.getProjectData();
+		this.projects = this.projectData.all();
 	}
 
 	public List<Project> getProjects() {
@@ -26,7 +29,8 @@ public class OpenProjectController {
 	}
 
 	public Boolean openProject(Project project) {
+		project = this.projectData.get(project.getId());
 		ContextController.setOpenProject(project);
-		return ContextController.getOpenProject().equals(project);
+		return project != null;
 	}
 }

@@ -5,6 +5,7 @@
  */
 package Data;
 
+import Model.Project;
 import Model.Vehicle;
 import java.util.List;
 
@@ -14,20 +15,14 @@ import java.util.List;
  */
 public interface VehicleData {
 
-	Vehicle newInstance();
+	Integer size(Project project);
 
-	Integer size();
+	List<Vehicle> all(Project project);
 
-	List<Vehicle> all();
+	Boolean save(Project project, Vehicle vehicle);
 
-	Boolean save(Vehicle vehicle);
+	Vehicle get(Project project, Vehicle vehicle);
 
-	Vehicle copy(Vehicle vehicle);
-
-	Vehicle clone(Vehicle vehicle);
-
-	Vehicle get(Integer id);
-
-	Boolean hasChanged(Vehicle vehicle);
+	Boolean hasChanged(Project project, Vehicle vehicle);
 
 }

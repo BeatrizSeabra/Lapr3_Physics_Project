@@ -13,10 +13,19 @@ import Physics.Measure;
  */
 public class Traffic {
 
+	private Integer id = 0;
 	private Node nodeStart;
 	private Node nodeEnd;
 	private Vehicle vehicle;
 	private Measure arrivalRate;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the vehicle
@@ -80,6 +89,7 @@ public class Traffic {
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.id.hashCode();
 		hash += 11 * this.nodeStart.hashCode();
 		hash += 11 * this.nodeEnd.hashCode();
 		hash += 11 * this.vehicle.hashCode();
@@ -88,10 +98,22 @@ public class Traffic {
 	}
 
 	@Override
+	public Traffic clone() {
+		Traffic traffic = new Traffic();
+		traffic.setId(this.id);
+		traffic.setNodeStart(this.nodeStart.clone());
+		traffic.setNodeEnd(this.nodeEnd.clone());
+		traffic.setVehicle(this.vehicle.clone());
+		traffic.setArrivalRate(this.arrivalRate.clone());
+		return traffic;
+	}
+
+	@Override
 	public String toString() {
-		return new StringBuilder("Traffic - " + this.nodeStart + " - " + this.nodeEnd + " - " + this.arrivalRate + " - " + this.vehicle.
-			getName()).
-			toString();
+		return new StringBuilder("Traffic - ").append(this.nodeStart).
+			append(" - ").append(this.nodeEnd).append(" - ").
+			append(this.arrivalRate).append(" - ").
+			append(this.vehicle.getName()).toString();
 	}
 
 }

@@ -5,6 +5,7 @@
  */
 package Legacy;
 
+import System.Error;
 import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -30,12 +31,18 @@ public class ExportHTML implements Export {
 										   getExtension());
 	}
 
-	public String export(List<String[]> data) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(this.start());
-		stringBuilder.append(this.tabela(data));
-		stringBuilder.append(this.end());
-		return stringBuilder.toString();
+	public String export(Object data) {
+		List<String[]> dataList = (List<String[]>) data;
+		if (dataList != null) {
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(this.start());
+			stringBuilder.append(this.tabela(dataList));
+			stringBuilder.append(this.end());
+			return stringBuilder.toString();
+		}
+		Error.
+			setErrorMessage("Could not export to HTML because the conversion Object to List<String[]> failed.");
+		return null;
 	}
 
 	private String start() {

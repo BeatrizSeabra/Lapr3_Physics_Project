@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Data;
+package Data.Local;
 
+import Data.ProjectData;
 import Model.Project;
+import Model.Simulation;
+import Model.Vehicle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,19 +19,6 @@ import java.util.List;
 public class ProjectDataLocal implements ProjectData {
 
 	private List<Project> list = new ArrayList();
-	private Integer currentIndex = 0;
-
-	private Integer getNextIndex() {
-		this.currentIndex++;
-		return this.currentIndex;
-	}
-
-	@Override
-	public Project newInstance() {
-		Project project = new Project();
-		project.setId(this.getNextIndex());
-		return project;
-	}
 
 	@Override
 	public Integer size() {
@@ -42,32 +32,30 @@ public class ProjectDataLocal implements ProjectData {
 
 	@Override
 	public Boolean save(Project project) {
-		for (Project oldProject : this.list) {
-			if (oldProject.getId() == project.getId()) {
-				this.list.remove(oldProject);
-				return this.list.add(project);
-			}
+		if (project.getId() == 0) {
+			return this.list.add(project);
 		}
-		return this.list.add(project);
-	}
-
-	@Override
-	public Project copy(Project project) {
-		return project.clone();
-	}
-
-	@Override
-	public Project clone(Project project) {
-		Project newProject = this.copy(project);
-		newProject.setId(this.getNextIndex());
-		return newProject;
+		Project oldProject = this.get(project.getId());
+		project.setId(project.getId());
+		project.setName(project.getName());
+		project.setDescription(project.getDescription());
+		project.setRoadNetwork(project.getRoadNetwork());
+		oldProject.getVehicles().clear();
+		oldProject.getSimulations().clear();
+		for (Vehicle vehicle : project.getVehicles()) {
+			oldProject.addVehicle(vehicle);
+		}
+		for (Simulation simulation : project.getSimulations()) {
+			oldProject.addSimulation(simulation);
+		}
+		return oldProject.equals(project);
 	}
 
 	@Override
 	public Project get(Integer id) {
 		for (Project project : this.list) {
 			if (project.getId() == id) {
-				return this.copy(project);
+				return project;
 			}
 		}
 		return null;

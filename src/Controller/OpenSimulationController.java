@@ -5,6 +5,9 @@
  */
 package Controller;
 
+import Data.Data;
+import Data.SimulationData;
+import Model.Project;
 import Model.Simulation;
 import java.util.List;
 
@@ -14,10 +17,14 @@ import java.util.List;
  */
 public class OpenSimulationController {
 
+	private Project project;
+	private SimulationData simulationData;
 	private List<Simulation> simulations;
 
 	public void initiation() {
-		this.simulations = ContextController.getOpenProject().getSimulations();
+		this.project = ContextController.getOpenProject();
+		this.simulationData = Data.getSimulationData();
+		this.simulations = this.simulationData.all(this.project);
 	}
 
 	public List<Simulation> getSimulations() {
@@ -25,7 +32,8 @@ public class OpenSimulationController {
 	}
 
 	public Boolean openSimulation(Simulation simulation) {
+		simulation = this.simulationData.get(this.project, simulation);
 		ContextController.setOpenSimulation(simulation);
-		return ContextController.getOpenSimulation().equals(simulation);
+		return simulation != null;
 	}
 }

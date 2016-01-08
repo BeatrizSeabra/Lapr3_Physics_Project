@@ -27,6 +27,20 @@ public class PhysicsMath {
 		return -Math.log(PhysicsMath.random.nextDouble()) / (1.0 / averagePerPeriod);
 	}
 
+	public static Double airResistanceForce(Measure measure) {
+		return 0.0;
+	}
+
+	public static Measure relativeSpeed(Measure carSpeed, Measure windSpeed,
+										Measure windDirection) {
+		carSpeed = Measurement.module(Measurement.convert(carSpeed, "m/s"));
+		windSpeed = Measurement.module(Measurement.convert(windSpeed, "m/s"));
+		windDirection = Measurement.convert(windDirection, "°");
+		Double speed = carSpeed.getValue() + windSpeed.getValue() * Math.
+			cos(windDirection.getValue());
+		return Measurement.module(new Measure(speed, "m/s"));
+	}
+
 	public static Double getFrictionForce(Vehicle vehicle, Segment segment) {
 		Double sinAngle = segment.getSlope().getValue();
 		Measure convert;

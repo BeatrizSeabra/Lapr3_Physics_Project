@@ -5,7 +5,6 @@
  */
 package Legacy;
 
-import Data.Data;
 import Model.Regime;
 import Model.Throttle;
 import Model.Vehicle;
@@ -63,7 +62,7 @@ public class VehicleImportXML implements Import<Vehicle> {
 					case XMLStreamConstants.START_ELEMENT: {
 						switch (reader.getLocalName()) {
 							case "vehicle":
-								vehicle = Data.getVehicleData().newInstance();
+								vehicle = new Vehicle();
 								vehicle.setName(reader.getAttributeValue(0).
 									trim());
 								vehicle.setDescription(reader.

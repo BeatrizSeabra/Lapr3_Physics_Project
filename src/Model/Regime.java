@@ -112,7 +112,8 @@ public class Regime implements Comparable<Regime> {
 
 	@Override
 	public Regime clone() {
-		return new Regime(this.torque, this.rpmLow, this.rpmHigh, this.fuelConsumption);
+		return new Regime(this.torque.clone(), this.rpmLow.clone(), this.rpmHigh.
+						  clone(), this.fuelConsumption.clone());
 	}
 
 	@Override

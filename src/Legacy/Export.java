@@ -5,7 +5,6 @@
  */
 package Legacy;
 
-import java.util.List;
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -20,6 +19,6 @@ public interface Export {
 
 	FileFilter getExtensionFilter();
 
-	String export(List<String[]> data);
+	String export(Object data);
 
 }

@@ -11,10 +11,19 @@ package Model;
  */
 public class Node {
 
+	private Integer id = 0;
 	private String name = "none";
 
 	public Node(String name) {
 		this.name = name;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	/**
@@ -49,8 +58,16 @@ public class Node {
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.id.hashCode();
 		hash += 11 * this.name.hashCode();
 		return hash;
+	}
+
+	@Override
+	public Node clone() {
+		Node node = new Node(name);
+		node.setId(this.id);
+		return node;
 	}
 
 	@Override
