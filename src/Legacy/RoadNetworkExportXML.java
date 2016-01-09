@@ -7,6 +7,7 @@ package Legacy;
 
 import Model.Node;
 import Model.Project;
+import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
 import System.Error;
@@ -37,6 +38,7 @@ public class RoadNetworkExportXML implements Export {
 
 	public String export(Object data) {
 		Project project = (Project) data;
+		RoadNetwork roadNetwork = project.getRoadNetwork().getOrigin();
 		if (project != null) {
 			StringBuilder stringBuilder = new StringBuilder();
 			stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -46,17 +48,15 @@ public class RoadNetworkExportXML implements Export {
 			stringBuilder.append(project.getDescription());
 			stringBuilder.append("\">\n");
 			stringBuilder.append("\t<node_list>\n");
-			for (Node node : project.getRoadNetwork().getNodes()) {
+			for (Node node : roadNetwork.getNodes()) {
 				stringBuilder.append("\t\t<node id=\"");
 				stringBuilder.append(node.getName());
 				stringBuilder.append("\"/>\n");
 			}
 			stringBuilder.append("	</node_list>");
 			stringBuilder.append("	<section_list>");
-			for (Section section : project.getRoadNetwork().getSections(project.
-				getRoadNetwork().getNodes())) {
-				Deque<Node> nodes = project.getRoadNetwork().
-					getExtremeNodes(section);
+			for (Section section : roadNetwork.getSections()) {
+				Deque<Node> nodes = roadNetwork.getExtremeNodes(section);
 				stringBuilder.append("		<road_section begin=\"");
 				stringBuilder.append(nodes.getFirst().getName());
 				stringBuilder.append("\" end=\"");

@@ -36,7 +36,7 @@ public class OpenSimulationTest {
 		this.simulation.setId(1);
 		this.simulation.setName("Project Name");
 		this.simulation.setDescription("Project Description");
-		Data.getSimulationData().save(simulation);
+		Data.getSimulationData().save(this.project, this.simulation);
 		this.project.addSimulation(simulation);
 		ContextController.setOpenProject(project);
 		this.openController = new OpenSimulationController();

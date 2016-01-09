@@ -5,12 +5,6 @@
  */
 package Physics;
 
-import Model.Regime;
-import Model.Segment;
-import Model.Throttle;
-import Model.Vehicle;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -21,29 +15,66 @@ public class PhysicsMath {
 
 	public static final Measure gravity = new Measure(9.80665, "m/s2");
 	public static final Measure airDensity = new Measure(1.225, "kg/m3");
+	public static final Measure specificEnergyGasoline = new Measure(44.4, "KJ/g");
+	public static final Measure specificEnergyDiesel = new Measure(44.4, "KJ/g");
 	private static Random random = new Random();
 
 	public static Double exponentialDistributionRandom(int averagePerPeriod) {
 		return -Math.log(PhysicsMath.random.nextDouble()) / (1.0 / averagePerPeriod);
 	}
 
+	public static Measure gravityForce(Measure mass, Measure slope) {
+		mass = Measurement.convert(mass, "kg");
+		Measure gravity = Measurement.convert(PhysicsMath.gravity, "m/s2");
+		Measure angle = PhysicsMath.angle(slope);
+		Double value = mass.getValue() * gravity.getValue() * Math.sin(angle.
+			getValue());
+		return new Measure(value, "N");
+	}
+
+	public static Measure engineCarPower(Measure torque, Measure rotations,
+										 Measure gearRatio) {
+		rotations = Measurement.convert(rotations, "rps");
+		Measure torqueEngineSpeed = PhysicsMath.
+			torqueEngineSpeed(torque, rotations, gearRatio);
+		Double value = 2 * Math.PI * torqueEngineSpeed.getValue() * rotations.
+			getValue();
+		return new Measure(value, "J/s");
+	}
+
 	public static Measure engineCarForce(Measure torque, Measure finalDrive,
-										 Measure gearRatio, Measure radiusTire) {
+										 Measure rotations, Measure gearRatio,
+										 Measure radiusTire) {
 		torque = Measurement.convert(torque, "Nm");
 		finalDrive = Measurement.convert(finalDrive, "ratio");
 		gearRatio = Measurement.convert(gearRatio, "ratio");
 		radiusTire = Measurement.convert(radiusTire, "m");
-		Double value = (0.0) / radiusTire.getValue();
+		Measure torqueEngineSpeed = PhysicsMath.
+			torqueEngineSpeed(torque, rotations, gearRatio);
+		Double value = (torqueEngineSpeed.getValue() * finalDrive.getValue() * gearRatio.
+			getValue()) / radiusTire.getValue();
 		return new Measure(value, "N");
 	}
 
+	public static Measure torqueEngineSpeed(Measure torque, Measure rotations,
+											Measure gearRatio) {
+		torque = Measurement.convert(torque, "Nm");
+		rotations = Measurement.convert(rotations, "rps");
+		gearRatio = Measurement.convert(gearRatio, "ratio");
+		Double value = (torque.getValue() / rotations.getValue()) * gearRatio.
+			getValue(); // Esta por cada 1 RPS
+		//Double value = (torque.getValue() / rotations.getValue()) * (gearRatio.getValue() * 1000 / 60); // Esta por cada 1000 RPM
+		return new Measure(value, "Nm");
+	}
+
 	public static Measure rollingResistanceForce(Measure rollingResistance,
-												 Measure mass) {
+												 Measure mass, Measure slope) {
 		rollingResistance = Measurement.convert(rollingResistance, "ratio");
 		mass = Measurement.convert(mass, "kg");
 		Measure gravity = Measurement.convert(PhysicsMath.gravity, "m/s2");
+		Measure angle = PhysicsMath.angle(slope);
 		Double value = rollingResistance.getValue() * mass.getValue() * gravity.
-			getValue();
+			getValue() * Math.cos(angle.getValue());
 		return new Measure(value, "N");
 	}
 
@@ -55,9 +86,19 @@ public class PhysicsMath {
 		relativeSpeed = Measurement.convert(relativeSpeed, "m/s");
 		Measure airDensity = Measurement.
 			convert(PhysicsMath.airDensity, "kg/m3");
-		Double value = 0.5 * dragCoefficient.getValue() * frontalArea.
-			getValue() * airDensity.getValue() * Math.pow(relativeSpeed.
-				getValue(), 2);
+		Double value = 0.5 * dragCoefficient.getValue() * frontalArea.getValue() * airDensity.
+			getValue() * Math.pow(relativeSpeed.getValue(), 2);
+		return new Measure(value, "N");
+	}
+
+	public static Measure inertiaResistanceForce(Measure acceleration,
+												 Measure mass,
+												 Measure coefficientInertial) {
+		acceleration = Measurement.convert(acceleration, "m/s2");
+		mass = Measurement.convert(mass, "kg");
+		coefficientInertial = Measurement.convert(coefficientInertial, "ratio");
+		Double value = acceleration.getValue() * mass.getValue() * coefficientInertial.
+			getValue();
 		return new Measure(value, "N");
 	}
 
@@ -71,57 +112,21 @@ public class PhysicsMath {
 		return Measurement.module(new Measure(value, "m/s"));
 	}
 
-	public static Double getFrictionForce(Vehicle vehicle, Segment segment) {
-		Double sinAngle = segment.getSlope().getValue();
-		Measure convert;
-		convert = Measurement.convert(segment.getLength(), "m");
-		sinAngle = sinAngle * (convert.getValue() / 100);
-		sinAngle = sinAngle / Measurement.convert(segment.getLength(), "m").
-			getValue();
-		Double frictionForce = PhysicsMath.getNormal(vehicle) * sinAngle;
-		return frictionForce;
+	public static Measure carSpeed(Measure radiusTire, Measure rotations,
+								   Measure finalDrive, Measure gearRatio) {
+		radiusTire = Measurement.module(Measurement.convert(radiusTire, "m"));
+		rotations = Measurement.module(Measurement.convert(rotations, "rps"));
+		finalDrive = Measurement.convert(finalDrive, "ratio");
+		gearRatio = Measurement.convert(gearRatio, "ratio");
+		Double value = (2 * Math.PI * radiusTire.getValue() * rotations.
+			getValue()) / (finalDrive.getValue() * gearRatio.getValue());
+		return Measurement.module(new Measure(value, "m/s"));
 	}
 
-	public static Double getTotalMass(Vehicle vehicle) {
-		Measure mass = Measurement.convert(vehicle.getMass(), "kg");
-		mass = Measurement.sum(mass, vehicle.getLoad());
-		return mass.getValue();
-	}
-
-	public static Double getNormal(Vehicle vehicle) {
-		Double normal = PhysicsMath.getTotalMass(vehicle) * PhysicsMath.gravity.
-			getValue();
-		return normal;
-	}
-
-	public static Double getVehicleForce(Vehicle vehicle) {
-		Double force = PhysicsMath.getTorque(vehicle) * vehicle.
-			getFinalDriveRatio().getValue() * vehicle.getGear(vehicle.
-				getCurrentGear()).getValue();
-		force = force / vehicle.getWheelSize().getValue();
-		Double aux1 = vehicle.getRollingRCoefficient().getValue() * PhysicsMath.
-			getNormal(vehicle);
-		Double aux2 = 0.5 * vehicle.getDragCoefficient().getValue() * vehicle.
-			getFrontalArea().getValue() * PhysicsMath.airDensity.getValue() * Math.
-			pow(vehicle.getCurrentVelocity().getValue(), 2.0);
-		force = force - aux1 - aux2;
-		return force;
-	}
-
-	public static Double getTorque(Vehicle vehicle) {
-		Double frictionTorque = PhysicsMath.getNormal(vehicle) * vehicle.
-			getRollingRCoefficient().getValue() * vehicle.getWheelSize().
-			getValue();
-		Throttle throttle = Collections.max(vehicle.getThrottles());
-		Comparator<Regime> comparator = new Comparator<Regime>() {
-			public int compare(Regime regimeA, Regime regimeB) {
-				return Double.compare(regimeA.getTorque().getValue(), regimeB.
-									  getTorque().getValue());
-			}
-		};
-		Regime regime = Collections.max(throttle.getRegimes(), comparator);
-		Double totalTorque = regime.getTorque().getValue() - frictionTorque;
-		return totalTorque;
+	public static Measure angle(Measure slope) {
+		slope = Measurement.convert(slope, "%");
+		Double value = Math.toDegrees(Math.atan(slope.getValue() / 100.0));
+		return Measurement.module(new Measure(value, "°"));
 	}
 
 }

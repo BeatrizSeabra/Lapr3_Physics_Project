@@ -151,14 +151,6 @@ public class RoadNetworkImportXMLTest {
 		this.roadNetwork.addSection(this.node1, this.node2, this.section1);
 		this.roadNetwork.addSection(this.node0, this.node2, this.section2);
 		this.roadNetwork.addSection(this.node1, this.node2, this.section3);
-		this.roadNetwork.addSection(this.node1, this.node0, this.section0.
-									reverse());
-		this.roadNetwork.addSection(this.node2, this.node1, this.section1.
-									reverse());
-		this.roadNetwork.addSection(this.node2, this.node0, this.section2.
-									reverse());
-		this.roadNetwork.addSection(this.node2, this.node1, this.section3.
-									reverse());
 
 		this.project = new Project();
 		this.project.setName("TestSet01");

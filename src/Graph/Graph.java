@@ -300,10 +300,18 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return null;
 	}
 
-	public List<V> elements() {
+	public List<V> vertexElements() {
 		List<V> elements = new ArrayList();
 		for (Vertex<V, E> vertex : this.listVert) {
 			elements.add(vertex.getElement());
+		}
+		return elements;
+	}
+
+	public List<E> edgesElements() {
+		List<E> elements = new ArrayList();
+		for (Edge<V, E> edge : this.edges()) {
+			elements.add(edge.getElement());
 		}
 		return elements;
 	}
@@ -366,6 +374,17 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		if (vertices != null) {
 			List<V> elements = new ArrayList();
 			for (Vertex<V, E> vertex : vertices) {
+				elements.add(vertex.getElement());
+			}
+			return elements;
+		}
+		return null;
+	}
+
+	public List<E> edgesToElement(List<Edge<V, E>> edges) {
+		if (edges != null) {
+			List<E> elements = new ArrayList();
+			for (Edge<V, E> vertex : edges) {
 				elements.add(vertex.getElement());
 			}
 			return elements;

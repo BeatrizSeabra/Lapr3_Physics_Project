@@ -20,7 +20,7 @@ import java.util.List;
 public class RoadNetwork {
 
 	private Integer id = 0;
-	private Graph<Node, Section> graphOrigin = new Graph(true);
+	private Graph<Node, Section> origin = new Graph(true);
 	private Graph<Node, Section> graph = new Graph(true);
 
 	/**
@@ -38,12 +38,18 @@ public class RoadNetwork {
 	}
 
 	public Boolean addNode(Node node) {
+		this.origin.insertVertex(node);
 		return this.graph.insertVertex(node) != null;
 	}
 
 	public Boolean addSection(Node startNode, Node endNode, Section section) {
-		return this.graph.insertEdge(startNode, endNode, section, section.
-									 getTotalLength().getValue()) != null;
+		Double totalLength = section.getTotalLength().getValue();
+		this.origin.insertEdge(startNode, endNode, section, totalLength);
+		if (section.getDirection().equalsIgnoreCase("bidirectional")) {
+			this.graph.
+				insertEdge(endNode, startNode, section.reverse(), totalLength);
+		}
+		return this.graph.insertEdge(startNode, endNode, section, totalLength) != null;
 	}
 
 	public Node getNode(String name) {
@@ -56,26 +62,30 @@ public class RoadNetwork {
 	}
 
 	public List<Node> getNodes() {
-		return this.graph.elements();
+		return this.graph.vertexElements();
 	}
 
 	public Graph<Node, Section> getGraph() {
 		return this.graph;
 	}
 
-	public Graph<Node, Section> getGraphOrigin() {
-		return this.graphOrigin;
+	public void setGraph(Graph<Node, Section> graph) {
+		this.graph = graph;
+	}
+
+	public RoadNetwork getOrigin() {
+		RoadNetwork roadNetwork = new RoadNetwork();
+		roadNetwork.setId(this.id);
+		roadNetwork.setGraph(this.origin);
+		return roadNetwork;
+	}
+
+	public List<Section> getSections() {
+		return this.graph.edgesElements();
 	}
 
 	public Section getSection(Node startNode, Node endNode) {
 		return this.getGraph().getEdge(startNode, endNode).getElement();
-	}
-
-	public Deque<Node> shortestPath(Node startNode, Node endNode) {
-		Deque<Node> shortestPath = new ArrayDeque();
-		GraphAlgorithms.
-			shortestPath(this.graph, startNode, endNode, shortestPath);
-		return shortestPath;
 	}
 
 	public List<Section> getSections(List<Node> nodes) {
@@ -122,7 +132,7 @@ public class RoadNetwork {
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
-		for (Node node : this.graph.elements()) {
+		for (Node node : this.graph.vertexElements()) {
 			hash += 11 * node.hashCode();
 		}
 		for (Edge<Node, Section> edge : this.graph.edges()) {
@@ -135,7 +145,7 @@ public class RoadNetwork {
 	protected RoadNetwork clone() {
 		RoadNetwork roadNetwork = new RoadNetwork();
 		roadNetwork.setId(this.id);
-		for (Node node : this.graph.elements()) {
+		for (Node node : this.graph.vertexElements()) {
 			roadNetwork.addNode(node);
 		}
 		for (Edge<Node, Section> edge : this.graph.edges()) {

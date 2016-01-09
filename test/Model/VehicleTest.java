@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import Physics.Measurement;
 import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,27 +27,27 @@ public class VehicleTest {
 		Throttle throttle1 = new Throttle();
 		throttle1.setPercentage(new Measure(25.0, "%"));
 		throttle1.
-			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "km/l")));
+			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "g/KWh")));
 		throttle1.
-			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "km/l")));
+			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "g/KWh")));
 		throttle1.
-			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "km/l")));
+			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "g/KWh")));
 		Throttle throttle2 = new Throttle();
 		throttle2.setPercentage(new Measure(50.0, "%"));
 		throttle2.
-			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "km/l")));
+			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "g/KWh")));
 		throttle2.
-			addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "km/l")));
+			addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "g/KWh")));
 		throttle2.
-			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "km/l")));
+			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "g/KWh")));
 		Throttle throttle3 = new Throttle();
 		throttle3.setPercentage(new Measure(100.0, "%"));
 		throttle3.
-			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "km/l")));
+			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "g/KWh")));
 		throttle3.
-			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "km/l")));
+			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "g/KWh")));
 		throttle3.
-			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "km/l")));
+			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "g/KWh")));
 		this.vehicle = new Vehicle();
 		this.vehicle.setId(1);
 		this.vehicle.setName("Nissan Skyline 2001");
@@ -205,6 +206,42 @@ public class VehicleTest {
 		/*
 		 assertEquals(this.vehicle.getMaxVelocity().getValue(), 372.29, 0.01);
 		 */
+		for (Map.Entry<Integer, Measure> entry : this.vehicle.getGears().
+			entrySet()) {
+			System.out.println("Gear " + entry.getKey() + ": " + entry.
+				getValue());
+			for (Throttle throttle : this.vehicle.getThrottles()) {
+				System.out.println("\tThrottle: " + throttle.getPercentage());
+				for (Regime regime : throttle.getRegimes()) {
+					System.out.
+						println("\t\tRegime: torque: " + regime.getTorque() + " - high: " + regime.
+							getRpmHigh() + " - fuel: " + regime.
+							getFuelConsumption());
+					System.out.println("\t\t\tminSpeed: " + Measurement.
+						convert(Physics.PhysicsMath.
+							carSpeed(vehicle.getWheelSize(), regime.getRpmLow(), vehicle.
+									 getFinalDriveRatio(), entry.getValue()), "km/h"));
+					System.out.println("\t\t\tmaxSpeed: " + Measurement.
+						convert(Physics.PhysicsMath.
+							carSpeed(vehicle.getWheelSize(), regime.getRpmHigh(), vehicle.
+									 getFinalDriveRatio(), entry.getValue()), "km/h"));
+					System.out.println("\t\t\tminForce: " + Physics.PhysicsMath.
+						engineCarForce(regime.getTorque(), vehicle.
+									   getFinalDriveRatio(), regime.getRpmLow(), entry.
+									   getValue(), vehicle.getWheelSize()));
+					System.out.println("\t\t\tmaxForce: " + Physics.PhysicsMath.
+						engineCarForce(regime.getTorque(), vehicle.
+									   getFinalDriveRatio(), regime.getRpmHigh(), entry.
+									   getValue(), vehicle.getWheelSize()));
+					System.out.println("\t\t\tminPower: " + Physics.PhysicsMath.
+						engineCarPower(regime.getTorque(), regime.getRpmLow(), entry.
+									   getValue()));
+					System.out.println("\t\t\tmaxPower: " + Physics.PhysicsMath.
+						engineCarPower(regime.getTorque(), regime.getRpmHigh(), entry.
+									   getValue()));
+				}
+			}
+		}
 	}
 
 }

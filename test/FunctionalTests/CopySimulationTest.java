@@ -65,7 +65,8 @@ public class CopySimulationTest {
 	public void testCopySimulationFunctional() {
 		System.out.println("testCopySimulationFunctional");
 		this.copySimulationController.initiation();
-		List<Simulation> simulations = Data.getSimulationData().all();
+		List<Simulation> simulations = Data.getSimulationData().
+			all(this.project);
 		assertEquals(simulations.size(), 1);
 		this.copySimulationController.
 			copySimulation("Simulation Name", "Simulation Description");

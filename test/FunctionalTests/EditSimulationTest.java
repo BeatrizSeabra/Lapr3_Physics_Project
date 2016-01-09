@@ -8,6 +8,7 @@ package FunctionalTests;
 import Controller.ContextController;
 import Controller.EditSimulationController;
 import Data.Data;
+import Model.Project;
 import Model.Simulation;
 import System.Settings;
 import java.util.List;
@@ -24,6 +25,7 @@ import org.junit.Test;
  */
 public class EditSimulationTest {
 
+	private Project project;
 	private EditSimulationController editController;
 	private Simulation simulation;
 
@@ -62,7 +64,8 @@ public class EditSimulationTest {
 		this.editController.initiation();
 		this.editController.editSimulation("Name X", "Description X");
 		this.editController.saveSimulation();
-		List<Simulation> simulations = Data.getSimulationData().all();
+		List<Simulation> simulations = Data.getSimulationData().
+			all(this.project);
 		assertEquals(simulations.size(), 1);
 		assertEquals(simulations.get(0).getName(), "Name X");
 		assertEquals(simulations.get(0).getDescription(), "Description X");

@@ -137,14 +137,6 @@ public class Section {
 		return measure;
 	}
 
-	public Measure getTotalForce(Vehicle vehicle) {
-		Measure totalForce = new Measure(0.0, "N");
-		for (Segment segment : this.segments) {
-			Measurement.sum(totalForce, segment.getSlopeForce(vehicle));
-		}
-		return totalForce;
-	}
-
 	@Override
 	public String toString() {
 		return "Section | road: " + this.road + " | typology: " + this.typology + " | direction: " + this.direction + " | toll: " + this.toll + " | windDirection: " + this.windDirection + " | windSpeed: " + this.windSpeed;

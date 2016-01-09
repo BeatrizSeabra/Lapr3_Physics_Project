@@ -120,19 +120,6 @@ public class Segment {
 		this.numberVehicles = numberVehicles;
 	}
 
-	public Measure getSlopeForce(Vehicle vehicle) {
-		Measure frictionForce = new Measure(Physics.PhysicsMath.
-			getFrictionForce(vehicle, this), "N");
-		Measure vehicleForce = new Measure(Physics.PhysicsMath.
-			getVehicleForce(vehicle), "N");
-		if (this.getSlope().getValue() > 0) {
-			vehicleForce = Measurement.minus(vehicleForce, frictionForce);
-		} else {
-			vehicleForce = Measurement.sum(vehicleForce, frictionForce);
-		}
-		return vehicleForce;
-	}
-
 	@Override
 	public String toString() {
 		return "Segment | name: " + this.name + " | height: " + this.height + " | slope: " + this.slope + " | length: " + this.length + " | maxVelocity: " + this.maxVelocity + " | minVelocity: " + this.minVelocity + " | numberVehicles: " + this.numberVehicles;

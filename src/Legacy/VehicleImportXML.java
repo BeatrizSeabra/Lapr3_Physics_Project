@@ -258,7 +258,7 @@ public class VehicleImportXML implements Import<Vehicle> {
 										setFuelConsumption(new Measure(value, unit));
 								} else {
 									regime.
-										setFuelConsumption(new Measure(value, "km/l"));
+										setFuelConsumption(new Measure(value, "g/KWh"));
 								}
 								break;
 							case "regime":
