@@ -9,7 +9,7 @@
 	</node_list>
 	<section_list>
 		<road_section begin="n0" end="n2">
-			<road>E01</road>
+			<road>"E01"</road>
 			<typology>regular road</typology>
 			<direction>bidirectional</direction>
 			<toll>0.0 €</toll>
@@ -35,7 +35,7 @@
 			</segment_list>
 		</road_section>
 		<road_section begin="n2" end="n3">
-			<road>E01</road>
+			<road>"E01"</road>
 			<typology>regular road</typology>
 			<direction>bidirectional</direction>
 			<toll>0.0 €</toll>
@@ -61,7 +61,7 @@
 			</segment_list>
 		</road_section>
 		<road_section begin="n3" end="n4">
-			<road>E01</road>
+			<road>"E01"</road>
 			<typology>regular road</typology>
 			<direction>bidirectional</direction>
 			<toll>0.0 €</toll>
@@ -123,7 +123,7 @@
 			</segment_list>
 		</road_section>
 		<road_section begin="n2" end="n4">
-			<road>E06</road>
+			<road>"E06"</road>
 			<typology>regular road</typology>
 			<direction>bidirectional</direction>
 			<toll>0.0 €</toll>

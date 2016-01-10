@@ -408,14 +408,6 @@ public class RoadNetworkTest {
 		expResult.add(this.section4);
 		expResult.add(this.section5);
 		List<Section> result = this.roadNetwork.getOrigin().getSections();
-		System.out.println("tamanho: " + result.size());
-		for (Section result1 : result) {
-			System.out.println(result1.getRoad());
-		}
-		System.out.println("tamanho: " + expResult.size());
-		for (Section result1 : expResult) {
-			System.out.println(result1.getRoad());
-		}
 		assertEquals(expResult, result);
 	}
 

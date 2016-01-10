@@ -44,7 +44,7 @@ public class RoadNetworkExportXML implements Export {
 			stringBuilder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 			stringBuilder.append("<Network id=\"");
 			stringBuilder.append(project.getName());
-			stringBuilder.append("\"description=\"");
+			stringBuilder.append("\" description=\"");
 			stringBuilder.append(project.getDescription());
 			stringBuilder.append("\">\n");
 			stringBuilder.append("\t<node_list>\n");
@@ -53,8 +53,8 @@ public class RoadNetworkExportXML implements Export {
 				stringBuilder.append(node.getName());
 				stringBuilder.append("\"/>\n");
 			}
-			stringBuilder.append("\t</node_list>");
-			stringBuilder.append("\t<section_list>");
+			stringBuilder.append("\t</node_list>\n");
+			stringBuilder.append("\t<section_list>\n");
 			for (Section section : roadNetwork.getSections()) {
 				Deque<Node> nodes = roadNetwork.getExtremeNodes(section);
 				stringBuilder.append("\t\t<road_section begin=\"");
@@ -62,9 +62,9 @@ public class RoadNetworkExportXML implements Export {
 				stringBuilder.append("\" end=\"");
 				stringBuilder.append(nodes.getLast().getName());
 				stringBuilder.append("\">\n");
-				stringBuilder.append("\t\t\t<road>");
+				stringBuilder.append("\t\t\t<road>\"");
 				stringBuilder.append(section.getRoad());
-				stringBuilder.append("</road>\n");
+				stringBuilder.append("\"</road>\n");
 				stringBuilder.append("\t\t\t<typology>");
 				stringBuilder.append(section.getTypology());
 				stringBuilder.append("</typology>\n");
@@ -86,7 +86,7 @@ public class RoadNetworkExportXML implements Export {
 					append(" ");
 				stringBuilder.append(section.getWindSpeed().getUnit());
 				stringBuilder.append("</wind_speed>\n");
-				stringBuilder.append("\t\t\t<segment_list>");
+				stringBuilder.append("\t\t\t<segment_list>\n");
 				for (Segment segment : section.getSegments()) {
 					stringBuilder.append("\t\t\t\t<segment id=\"");
 					stringBuilder.append(segment.getName());
@@ -122,8 +122,8 @@ public class RoadNetworkExportXML implements Export {
 					stringBuilder.append("\t\t\t\t</segment>\n");
 				}
 				stringBuilder.append("\t\t\t</segment_list>\n");
+				stringBuilder.append("\t\t</road_section>\n");
 			}
-			stringBuilder.append("\t\t</road_section>\n");
 			stringBuilder.append("\t</section_list>\n");
 			stringBuilder.append("</Network>");
 			return stringBuilder.toString();
@@ -132,5 +132,4 @@ public class RoadNetworkExportXML implements Export {
 			setErrorMessage("Could not export to XML because the conversion Object to Project failed.");
 		return null;
 	}
-
 }
