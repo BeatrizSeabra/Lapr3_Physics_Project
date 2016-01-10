@@ -14,11 +14,11 @@ public interface GraphInterface<V, E> {
 	// Returns all the vertices of the graph as an iterable collection
 	Iterable<Vertex<V, E>> vertices();
 
-	// Returns the number of edges of the graph
+	// Returns the number of getEdges of the graph
 	int numEdges();
 
-	// Returns all the edges of the graph as an iterable collection
-	Iterable<Edge<V, E>> edges();
+	// Returns all the getEdges of the graph as an iterable collection
+	Iterable<Edge<V, E>> getEdges();
 
 	/* Returns the edge from vorig to vdest, or null if vertices are not adjacent
 	 * @param vorig
@@ -44,34 +44,34 @@ public interface GraphInterface<V, E> {
 	Vertex<V, E> opposite(Vertex<V, E> v, Edge<V, E> e);
 
 	/**
-	 * Returns the number of edges leaving vertex v For an undirected graph,
-	 * this is the same result returned by inDegree
+	 * Returns the number of getEdges leaving vertex v For an undirected graph,
+ this is the same result returned by inDegree
 	 *
 	 * @param v
-	 * @return number of edges leaving vertex v, -1 if vertex doesn't exist
+	 * @return number of getEdges leaving vertex v, -1 if vertex doesn't exist
 	 */
 	int outDegree(Vertex<V, E> v);
 
 	/**
-	 * Returns the number of edges for which vertex v is the destination For an
-	 * undirected graph, this is the same result returned by outDegree
+	 * Returns the number of getEdges for which vertex v is the destination For an
+ undirected graph, this is the same result returned by outDegree
 	 *
 	 * @param v
-	 * @return number of edges leaving vertex v, -1 if vertex doesn't exist
+	 * @return number of getEdges leaving vertex v, -1 if vertex doesn't exist
 	 */
 	int inDegree(Vertex<V, E> v);
 
-	/* Returns an iterable collection of edges for which vertex v is the origin
+	/* Returns an iterable collection of getEdges for which vertex v is the origin
 	 * for an undirected graph, this is the same result returned by incomingEdges
 	 * @param v
-	 * @return iterable collection of edges, null if vertex doesn't exist
+	 * @return iterable collection of getEdges, null if vertex doesn't exist
 	 */
 	Iterable<Edge<V, E>> outgoingEdges(Vertex<V, E> v);
 
-	/* Returns an iterable collection of edges for which vertex v is the destination
+	/* Returns an iterable collection of getEdges for which vertex v is the destination
 	 * For an undirected graph this is the same result as returned by incomingEdges
 	 * @param v
-	 * @return iterable collection of edges reaching vertex, null if vertex doesn't exist
+	 * @return iterable collection of getEdges reaching vertex, null if vertex doesn't exist
 	 */
 	Iterable<Edge<V, E>> incomingEdges(Vertex<V, E> v);
 
@@ -92,7 +92,7 @@ public interface GraphInterface<V, E> {
 	 */
 	Edge<V, E> insertEdge(V vorigInf, V vdestInf, E eInf, double eWeight);
 
-	/* Removes a vertex and all its incident edges from the graph
+	/* Removes a vertex and all its incident getEdges from the graph
 	 * @param vInf Information of vertex source
 	 */
 	void removeVertex(V vInf);

@@ -242,6 +242,49 @@ public class VehicleTest {
 				}
 			}
 		}
+
+		Measure radiusTire = vehicle.getWheelSize();
+		Measure rotations = vehicle.getThrottles().get(0).getRegimes().get(0).
+			getRpmLow();
+		Measure finalDrive = vehicle.getFinalDriveRatio();
+		Measure gearRatio = vehicle.getGear(1);
+		Measure carSpeed = Physics.PhysicsMath.
+			carSpeed(radiusTire, rotations, finalDrive, gearRatio);
+		Measure windSpeed = new Measure(5.0, "m/s");
+		Measure windDirection = new Measure(20.0, "°");
+		Measure relativeSpeed = Physics.PhysicsMath.
+			relativeSpeed(carSpeed, windSpeed, windDirection);
+		Measure torque = vehicle.getThrottles().get(0).getRegimes().get(0).
+			getTorque();
+		Measure force = Physics.PhysicsMath.
+			engineCarForce(torque, finalDrive, rotations, gearRatio, radiusTire);
+		Measure power = Physics.PhysicsMath.
+			engineCarPower(torque, rotations, gearRatio);
+		Measure lenght = new Measure(1.0, "m");
+		Measure time = new Measure(1.0, "s");
+		Measure fuelConsumptionTime = Physics.PhysicsMath.
+			fuelConsumptionTime(power, time, vehicle.getFuel());
+		Measure fuelConsumptionLenght = Physics.PhysicsMath.
+			fuelConsumptionLenght(force, lenght, vehicle.getFuel());
+
+		System.out.println(radiusTire);
+		System.out.println(rotations);
+		System.out.println(finalDrive);
+		System.out.println(gearRatio);
+		System.out.println(carSpeed);
+		System.out.println(windSpeed);
+		System.out.println(windDirection);
+		System.out.println("aqui -> " + relativeSpeed);
+		System.out.println(torque);
+		System.out.println(force);
+		System.out.println(power);
+		System.out.println(lenght);
+		System.out.println(time);
+		System.out.println(fuelConsumptionTime);
+		System.out.println(fuelConsumptionLenght);
+
+		System.out.println("fuelConsumptionTime: " + fuelConsumptionTime);
+		System.out.println("fuelConsumptionLenght: " + fuelConsumptionLenght);
 	}
 
 }

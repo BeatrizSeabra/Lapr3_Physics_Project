@@ -15,21 +15,44 @@ public class PhysicsMath {
 
 	public static final Measure gravity = new Measure(9.80665, "m/s2");
 	public static final Measure airDensity = new Measure(1.225, "kg/m3");
-	public static final Measure specificEnergyGasoline = new Measure(44.4, "KJ/g");
-	public static final Measure specificEnergyDiesel = new Measure(44.4, "KJ/g");
+	public static final Measure specificEnergyGasoline = new Measure(44400.0, "J/g");
+	public static final Measure specificEnergyDiesel = new Measure(48000.0, "J/g");
+	public static final Measure densityGasoline = new Measure(755.0, "g/m3");
+	public static final Measure densityDiesel = new Measure(832.0, "g/m3");
 	private static Random random = new Random();
 
 	public static Double exponentialDistributionRandom(int averagePerPeriod) {
 		return -Math.log(PhysicsMath.random.nextDouble()) / (1.0 / averagePerPeriod);
 	}
 
-	public static Measure gravityForce(Measure mass, Measure slope) {
-		mass = Measurement.convert(mass, "kg");
-		Measure gravity = Measurement.convert(PhysicsMath.gravity, "m/s2");
-		Measure angle = PhysicsMath.angle(slope);
-		Double value = mass.getValue() * gravity.getValue() * Math.sin(angle.
-			getValue());
-		return new Measure(value, "N");
+	public static Measure fuelConsumptionTime(Measure power, Measure time,
+											  String fuel) {
+		power = Measurement.convert(power, "J/s");
+		time = Measurement.convert(time, "s");
+		Measure specificEnergy = new Measure(0.0, "J/g");
+		if (fuel.equalsIgnoreCase("gasoline")) {
+			specificEnergy = PhysicsMath.specificEnergyGasoline;
+		} else if (fuel.equalsIgnoreCase("diesel")) {
+			specificEnergy = PhysicsMath.specificEnergyDiesel;
+		}
+		Double value = power.getValue() * time.getValue() * specificEnergy.
+			getValue();
+		return new Measure(value, "g/s");
+	}
+
+	public static Measure fuelConsumptionLenght(Measure force, Measure lenght,
+												String fuel) {
+		force = Measurement.convert(force, "N");
+		lenght = Measurement.convert(lenght, "m");
+		Measure specificEnergy = new Measure(1.0, "J/g");
+		if (fuel.equalsIgnoreCase("gasoline")) {
+			specificEnergy = PhysicsMath.specificEnergyGasoline;
+		} else if (fuel.equalsIgnoreCase("diesel")) {
+			specificEnergy = PhysicsMath.specificEnergyDiesel;
+		}
+		Double value = force.getValue() * lenght.getValue() * specificEnergy.
+			getValue();
+		return new Measure(value, "g/m");
 	}
 
 	public static Measure engineCarPower(Measure torque, Measure rotations,
@@ -40,6 +63,15 @@ public class PhysicsMath {
 		Double value = 2 * Math.PI * torqueEngineSpeed.getValue() * rotations.
 			getValue();
 		return new Measure(value, "J/s");
+	}
+
+	public static Measure gravityForce(Measure mass, Measure slope) {
+		mass = Measurement.convert(mass, "kg");
+		Measure gravity = Measurement.convert(PhysicsMath.gravity, "m/s2");
+		Measure angle = PhysicsMath.angle(slope);
+		Double value = mass.getValue() * gravity.getValue() * Math.sin(angle.
+			getValue());
+		return new Measure(value, "N");
 	}
 
 	public static Measure engineCarForce(Measure torque, Measure finalDrive,

@@ -3,7 +3,6 @@ package Graph;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -24,22 +23,22 @@ public class GraphTest {
 	public GraphTest() {
 	}
 
-    @BeforeClass
-    public static void setUpClass() throws Exception {
-    }
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+	}
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-    }
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+	}
 
 	@Before
 	public void setUp() {
 
 	}
 
-    @After
-    public void tearDown() throws Exception {
-    }
+	@After
+	public void tearDown() throws Exception {
+	}
 
 	/**
 	 * Test of numVertices method, of class Graph.
@@ -118,13 +117,13 @@ public class GraphTest {
 	}
 
 	/**
-	 * Test of edges method, of class Graph.
+	 * Test of getEdges method, of class Graph.
 	 */
 	@Test
 	public void testEdges() {
 		System.out.println("testEdges");
 
-		Iterator<Edge<String, String>> itEdge = instance.edges().iterator();
+		Iterator<Edge<String, String>> itEdge = instance.getEdges().iterator();
 
 		assertTrue("edges should be empty", (itEdge.hasNext() == false));
 
@@ -137,7 +136,7 @@ public class GraphTest {
 		Edge<String, String> edge7 = instance.insertEdge("E", "D", "Edge7", 1);
 		Edge<String, String> edge8 = instance.insertEdge("E", "E", "Edge8", 1);
 
-		itEdge = instance.edges().iterator();
+		itEdge = instance.getEdges().iterator();
 
 		itEdge.next();
 		itEdge.next();
@@ -148,7 +147,7 @@ public class GraphTest {
 
 		instance.removeEdge(edge1);
 
-		itEdge = instance.edges().iterator();
+		itEdge = instance.getEdges().iterator();
 		assertTrue("first edge should now be edge2", (itEdge.next().
 				   equals(edge2) == true));
 
@@ -159,7 +158,7 @@ public class GraphTest {
 		instance.removeEdge(edge6);
 		instance.removeEdge(edge7);
 		instance.removeEdge(edge8);
-		itEdge = instance.edges().iterator();
+		itEdge = instance.getEdges().iterator();
 		assertTrue("vertices should now be empty", (itEdge.hasNext() == false));
 	}
 
@@ -496,7 +495,7 @@ public class GraphTest {
 		Edge<String, String> edge8 = instance.insertEdge("E", "E", "Edge8", 1);
 		assertTrue("num. edges should be 8", (instance.numEdges() == 8));
 
-		Iterator<Edge<String, String>> itEd = instance.edges().iterator();
+		Iterator<Edge<String, String>> itEd = instance.getEdges().iterator();
 
 		itEd.next();
 		itEd.next();
@@ -546,7 +545,8 @@ public class GraphTest {
 		instance.removeVertex("A");
 
 		assertTrue("Num vertices should be 3", (instance.numVertices() == 3));
-		assertTrue("Num edges should be 1", (instance.numEdges() == 1));
+		assertTrue("Num edges should be 1" + instance.numEdges(), (instance.
+				   numEdges() == 1));
 		itVert = instance.vertices().iterator();
 
 		assertTrue("first vertex should be vert2", (itVert.next().equals(vert2) == true));
@@ -587,7 +587,7 @@ public class GraphTest {
 		instance.removeEdge(edge8);
 		assertTrue("Num. edges should be 7", (instance.numEdges() == 7));
 
-		Iterator<Edge<String, String>> itEd = instance.edges().iterator();
+		Iterator<Edge<String, String>> itEd = instance.getEdges().iterator();
 
 		itEd.next();
 		itEd.next();
@@ -599,7 +599,7 @@ public class GraphTest {
 		instance.removeEdge(edge4);
 		assertTrue("Num. edges should be 6", (instance.numEdges() == 6));
 
-		itEd = instance.edges().iterator();
+		itEd = instance.getEdges().iterator();
 		itEd.next();
 		itEd.next();
 		assertTrue("third edge should be edge3", (itEd.next().equals(edge3) == true));
@@ -691,11 +691,11 @@ public class GraphTest {
 					   equals(itvertClone.next()) == true));
 		}
 
-		//and edges also
-		Iterator<Edge<String, String>> itedgeSource = instance.edges().
+		//and getEdges also
+		Iterator<Edge<String, String>> itedgeSource = instance.getEdges().
 			iterator();
 		while (itedgeSource.hasNext()) {
-			Iterator<Edge<String, String>> itedgeClone = instClone.edges().
+			Iterator<Edge<String, String>> itedgeClone = instClone.getEdges().
 				iterator();
 			boolean exists = false;
 			while (itedgeClone.hasNext()) {
@@ -749,12 +749,12 @@ public class GraphTest {
 
 	}
 
-    /**
-     * Test of getExtremeVertexElements method, of class Graph.
-     */
-    @Test
-    public void testGetExtremeVertexElements() {
-        System.out.println("testGetExtremeVertexElements");
+	/**
+	 * Test of getExtremeVertexElements method, of class Graph.
+	 */
+	@Test
+	public void testGetExtremeVertexElements() {
+		System.out.println("testGetExtremeVertexElements");
 		Edge<String, String> edge1 = instance.insertEdge("A", "B", "Edge1", 6);
 		Edge<String, String> edge2 = instance.insertEdge("A", "C", "Edge2", 1);
 		Edge<String, String> edge3 = instance.insertEdge("B", "D", "Edge3", 3);
@@ -763,17 +763,17 @@ public class GraphTest {
 		Edge<String, String> edge6 = instance.insertEdge("D", "A", "Edge6", 2);
 		Edge<String, String> edge7 = instance.insertEdge("E", "D", "Edge7", 1);
 		Edge<String, String> edge8 = instance.insertEdge("E", "E", "Edge8", 1);
-        Deque expResult = new ArrayDeque();
-        expResult.add("A");
-        expResult.add("B");
-        Deque result = instance.getExtremeVertexElements("Edge1");
-        assertEquals(expResult.getFirst(), result.getFirst());  
-        assertEquals(expResult.getLast(), result.getLast()); 
-        expResult.clear();
-        expResult.add("D");
-        expResult.add("A");
-        result = instance.getExtremeVertexElements("Edge6");
-        assertEquals(expResult.getFirst(), result.getFirst());  
-        assertEquals(expResult.getLast(), result.getLast()); 
-    }
+		Deque expResult = new ArrayDeque();
+		expResult.add("A");
+		expResult.add("B");
+		Deque result = instance.getExtremeVertexElements("Edge1");
+		assertEquals(expResult.getFirst(), result.getFirst());
+		assertEquals(expResult.getLast(), result.getLast());
+		expResult.clear();
+		expResult.add("D");
+		expResult.add("A");
+		result = instance.getExtremeVertexElements("Edge6");
+		assertEquals(expResult.getFirst(), result.getFirst());
+		assertEquals(expResult.getLast(), result.getLast());
+	}
 }

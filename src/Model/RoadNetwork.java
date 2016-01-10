@@ -10,6 +10,8 @@ import Graph.Graph;
 import Graph.GraphAlgorithms;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.List;
 
@@ -81,7 +83,26 @@ public class RoadNetwork {
 	}
 
 	public List<Section> getSections() {
-		return this.graph.edgesElements();
+		Comparator<Section> comparator = new Comparator<Section>() {
+			@Override
+			public int compare(Section sec1, Section sec2) {
+				if (!sec1.getRoad().equalsIgnoreCase(sec2.getRoad())) {
+					return sec1.getRoad().compareTo(sec2.getRoad());
+				}
+				Deque<Node> nodes1 = getExtremeNodes(sec1);
+				Deque<Node> nodes2 = getExtremeNodes(sec2);
+				if (!nodes1.getFirst().getName().equalsIgnoreCase(nodes2.
+					getFirst().getName())) {
+					return nodes1.getFirst().getName().compareTo(nodes2.
+						getFirst().getName());
+				}
+				return nodes1.getLast().getName().compareTo(nodes2.getLast().
+					getName());
+			}
+		};
+		List<Section> sections = this.graph.edgesElements();
+		Collections.sort(sections, comparator);
+		return sections;
 	}
 
 	public Section getSection(Node startNode, Node endNode) {
@@ -132,11 +153,12 @@ public class RoadNetwork {
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
-		for (Node node : this.graph.vertexElements()) {
+		hash += 11 * this.id.hashCode();
+		for (Node node : this.getNodes()) {
 			hash += 11 * node.hashCode();
 		}
-		for (Edge<Node, Section> edge : this.graph.edges()) {
-			hash += 11 * edge.getElement().hashCode();
+		for (Section section : this.getSections()) {
+			hash += 11 * section.hashCode();
 		}
 		return hash;
 	}
@@ -148,7 +170,7 @@ public class RoadNetwork {
 		for (Node node : this.graph.vertexElements()) {
 			roadNetwork.addNode(node);
 		}
-		for (Edge<Node, Section> edge : this.graph.edges()) {
+		for (Edge<Node, Section> edge : this.graph.getEdges()) {
 			roadNetwork.
 				addSection(edge.getVOrig().getElement(), edge.getVDest().
 						   getElement(), edge.getElement());
@@ -159,7 +181,7 @@ public class RoadNetwork {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (Edge<Node, Section> edge : this.graph.edges()) {
+		for (Edge<Node, Section> edge : this.graph.getEdges()) {
 			Section section = edge.getElement();
 			stringBuilder.append("Start ").append(edge.getVOrig().getElement()).
 				append("\n");

@@ -152,12 +152,6 @@ public class RoadNetworkImportXML implements Import<Project> {
 								section.setWindSpeed(windSpeed);
 								roadNetwork.
 									addSection(nodeBegin, nodeEnd, section);
-								if (section.getDirection().
-									equals("bidirectional")) {
-									roadNetwork.
-										addSection(nodeEnd, nodeBegin, section.
-												   reverse());
-								}
 								break;
 							case "height":
 								value = Util.toValue(text);
