@@ -5,6 +5,7 @@
  */
 package Data.Local;
 
+import Data.Data;
 import Data.ProjectData;
 import Model.Project;
 import Model.Simulation;
@@ -33,6 +34,7 @@ public class ProjectDataLocal implements ProjectData {
 	@Override
 	public Boolean save(Project project) {
 		if (project.getId() == 0) {
+			project.setId(Data.getNextIndex());
 			return this.list.add(project);
 		}
 		Project oldProject = this.get(project);

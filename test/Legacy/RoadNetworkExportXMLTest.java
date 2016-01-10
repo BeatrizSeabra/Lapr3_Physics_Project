@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -270,8 +271,9 @@ public class RoadNetworkExportXMLTest {
 		System.out.println("testGetExtensionFilter");
 		FileNameExtensionFilter result = this.roadNetworkExportXML.
 			getExtensionFilter();
-		FileNameExtensionFilter expResult = new FileNameExtensionFilter("xml", "XML Documents (*.xml)");
-
+		FileNameExtensionFilter expResult = new FileNameExtensionFilter("XML Documents (*.xml)", "xml");
+		assertEquals(result.getDescription(), expResult.getDescription());
+		assertArrayEquals(result.getExtensions(), expResult.getExtensions());
 	}
 
 	/**
@@ -282,7 +284,7 @@ public class RoadNetworkExportXMLTest {
 		System.out.println("testExport");
 		String result = this.roadNetworkExportXML.export(this.project).
 			replaceAll("\\s+", "");
-		String expResult = dataXML.replaceAll("\\s+", "");
-		assertEquals(result.length(), expResult.length());
+		String expResult = dataXML.trim().replaceAll("\\s+", "");
+		assertEquals(result, expResult);
 	}
 }

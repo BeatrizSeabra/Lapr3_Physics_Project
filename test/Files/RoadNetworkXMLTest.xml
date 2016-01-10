@@ -8,6 +8,42 @@
 		<node id="n4"/>
 	</node_list>
 	<section_list>
+		<road_section begin="n0" end="n1">
+			<road>"A01"</road>
+			<typology>highway</typology>
+			<direction>bidirectional</direction>
+			<toll>12.0 €</toll>
+			<wind_direction>-5.0 °</wind_direction>
+			<wind_speed>3.0 m/s</wind_speed>
+			<segment_list>
+				<segment id="01">
+					<height>100.0 km</height>
+					<slope>0.0 %</slope>
+					<length>25.0 km</length>
+					<max_velocity>120.0 km/h</max_velocity>
+					<min_velocity>50.0 km/h</min_velocity>
+					<number_vehicles>200</number_vehicles>
+				</segment>
+			</segment_list>
+		</road_section>
+		<road_section begin="n1" end="n3">
+			<road>"A01"</road>
+			<typology>highway</typology>
+			<direction>bidirectional</direction>
+			<toll>4.0 €</toll>
+			<wind_direction>-5.0 °</wind_direction>
+			<wind_speed>3.0 m/s</wind_speed>
+			<segment_list>
+				<segment id="01">
+					<height>100.0 km</height>
+					<slope>0.5 %</slope>
+					<length>20.0 km</length>
+					<max_velocity>120.0 km/h</max_velocity>
+					<min_velocity>50.0 km/h</min_velocity>
+					<number_vehicles>1500</number_vehicles>
+				</segment>
+			</segment_list>
+		</road_section>
 		<road_section begin="n0" end="n2">
 			<road>"E01"</road>
 			<typology>regular road</typology>
@@ -83,42 +119,6 @@
 					<max_velocity>90.0 km/h</max_velocity>
 					<min_velocity>0.0 km/h</min_velocity>
 					<number_vehicles>250</number_vehicles>
-				</segment>
-			</segment_list>
-		</road_section>
-		<road_section begin="n0" end="n1">
-			<road>"A01"</road>
-			<typology>highway</typology>
-			<direction>bidirectional</direction>
-			<toll>12.0 €</toll>
-			<wind_direction>-5.0 °</wind_direction>
-			<wind_speed>3.0 m/s</wind_speed>
-			<segment_list>
-				<segment id="01">
-					<height>100.0 km</height>
-					<slope>0.0 %</slope>
-					<length>25.0 km</length>
-					<max_velocity>120.0 km/h</max_velocity>
-					<min_velocity>50.0 km/h</min_velocity>
-					<number_vehicles>200</number_vehicles>
-				</segment>
-			</segment_list>
-		</road_section>
-		<road_section begin="n1" end="n3">
-			<road>"A01"</road>
-			<typology>highway</typology>
-			<direction>bidirectional</direction>
-			<toll>4.0 €</toll>
-			<wind_direction>-5.0 °</wind_direction>
-			<wind_speed>3.0 m/s</wind_speed>
-			<segment_list>
-				<segment id="01">
-					<height>100.0 km</height>
-					<slope>0.5 %</slope>
-					<length>20.0 km</length>
-					<max_velocity>120.0 km/h</max_velocity>
-					<min_velocity>50.0 km/h</min_velocity>
-					<number_vehicles>1500</number_vehicles>
 				</segment>
 			</segment_list>
 		</road_section>

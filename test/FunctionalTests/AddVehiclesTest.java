@@ -7,6 +7,7 @@ package FunctionalTests;
 
 import Controller.AddVehiclesController;
 import Controller.ContextController;
+import Data.Data;
 import Model.Project;
 import Model.Vehicle;
 import System.Settings;
@@ -33,7 +34,7 @@ public class AddVehiclesTest {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.filePathVehicles = Settings.getOption("VehiclesFilePath");
 		this.project = new Project();
-		this.project.setId(1);
+		this.project.setId(Data.getNextIndex());
 		this.project.setName("Project Name");
 		this.project.setDescription("Project Description");
 		ContextController.setOpenProject(this.project);

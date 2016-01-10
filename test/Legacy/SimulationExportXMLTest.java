@@ -23,6 +23,7 @@ import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -353,7 +354,9 @@ public class SimulationExportXMLTest {
 		System.out.println("testGetExtensionFilter");
 		FileNameExtensionFilter result = this.simulationExportXML.
 			getExtensionFilter();
-		FileNameExtensionFilter expResult = new FileNameExtensionFilter("xml", "XML Documents (*.xml)");
+		FileNameExtensionFilter expResult = new FileNameExtensionFilter("XML Documents (*.xml)", "xml");
+		assertEquals(result.getDescription(), expResult.getDescription());
+		assertArrayEquals(result.getExtensions(), expResult.getExtensions());
 	}
 
 	/**
