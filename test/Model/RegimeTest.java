@@ -20,6 +20,7 @@ import org.junit.Test;
 public class RegimeTest {
 
 	private Regime regime;
+	private Regime r;
 
 	public RegimeTest() {
 
@@ -133,10 +134,16 @@ public class RegimeTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		Regime instance = new Regime();
+
+		Measure mesureTorque = new Measure(2.0, "teste");
+		Measure rmpLow = new Measure(4.0, "teste3");
+		Measure rmpHigh = new Measure(3.0, "teste2");
+		Measure fuel = new Measure(6.0, "teste4");
+		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
+
 		Regime expResult = this.regime.clone();
-		Regime result = instance.clone();
-		assertEquals(expResult, result);
+
+		assertEquals(expResult, this.regime);
 
 	}
 
@@ -147,13 +154,14 @@ public class RegimeTest {
 	public void testCompareTo() {
 		System.out.println("compareTo");
 
-		Regime o = new Regime();
+		Measure mesureTorque = new Measure(2.0, "teste");
+		Measure rmpLow = new Measure(4.0, "teste3");
+		Measure rmpHigh = new Measure(3.0, "teste2");
+		Measure fuel = new Measure(6.0, "teste4");
+		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
 
-		Measure mea = new Measure(30.1, "teste4");
-		this.regime.setRpmHigh(mea);
-
-		int result = this.regime.compareTo(o);
-		int expResult = 1;
+		int result = this.regime.compareTo(regime);
+		int expResult = 0;
 
 		assertEquals(expResult, result);
 
