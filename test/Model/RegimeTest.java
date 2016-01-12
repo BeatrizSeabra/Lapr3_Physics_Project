@@ -20,7 +20,6 @@ import org.junit.Test;
 public class RegimeTest {
 
 	private Regime regime;
-	private Regime r;
 
 	public RegimeTest() {
 
