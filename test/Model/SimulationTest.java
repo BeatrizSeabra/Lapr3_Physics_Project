@@ -11,7 +11,6 @@ import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -98,7 +97,6 @@ public class SimulationTest {
 	public void testGetTraffics() {
 		System.out.println("getTraffics");
 		Traffic traffic = new Traffic();
-
 		traffic.setId(1);
 		traffic.setNodeStart(new Node("test"));
 		traffic.setNodeEnd(new Node("test2"));
@@ -106,8 +104,8 @@ public class SimulationTest {
 		traffic.setArrivalRate(new Measure(2.0, "test3"));
 		List<Traffic> traf = new ArrayList<Traffic>();
 		traf.add(traffic);
+		this.simulation.setTraffics(traf);
 		List<Traffic> expResult = traf;
-
 		List<Traffic> result = this.simulation.getTraffics();
 		assertEquals(expResult, result);
 
@@ -120,7 +118,6 @@ public class SimulationTest {
 	public void testSetTraffics() {
 		System.out.println("setTraffics");
 		Traffic traffic = new Traffic();
-
 		traffic.setId(1);
 		traffic.setNodeStart(new Node("test1"));
 		traffic.setNodeEnd(new Node("test22"));
@@ -128,8 +125,8 @@ public class SimulationTest {
 		traffic.setArrivalRate(new Measure(6.0, "test33"));
 		List<Traffic> traf = new ArrayList<Traffic>();
 		traf.add(traffic);
+		this.simulation.setTraffics(traf);
 		List<Traffic> expResult = traf;
-
 		List<Traffic> result = this.simulation.getTraffics();
 		assertEquals(expResult, result);
 	}
@@ -144,7 +141,6 @@ public class SimulationTest {
 		this.simulation.setDescription("test");
 		this.simulation.setName("test2");
 		this.simulation.setId(1);
-
 		assertEquals(true, this.simulation.equals(simulation));
 
 	}
@@ -186,11 +182,9 @@ public class SimulationTest {
 	 */
 	@Test
 	public void testToString() {
-		System.out.println("toString");
-		Simulation instance = new Simulation();
-
-		String expResult = "Simulation -  - ";
-		String result = instance.toString();
+		System.out.println("testToString");
+		String expResult = "Simulation - test2 - test\n";
+		String result = this.simulation.toString();
 		assertEquals(expResult, result);
 
 	}
@@ -223,13 +217,11 @@ public class SimulationTest {
 	@Test
 	public void testAddTraffic() {
 		System.out.println("addTraffic");
-		Traffic traffic = null;
+		Traffic traffic = new Traffic();
 		Simulation instance = new Simulation();
-		Boolean expResult = null;
+		Boolean expResult = true;
 		Boolean result = instance.addTraffic(traffic);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -240,11 +232,42 @@ public class SimulationTest {
 		System.out.println("getTraffic");
 		int index = 0;
 		Simulation instance = new Simulation();
-		Traffic expResult = null;
+		Traffic obj = new Traffic();
+		Vehicle vec = new Vehicle();
+		ArrayList<Traffic> traf = new ArrayList<>();
+		obj.setId(0);
+		vec.setId(1);
+		vec.setName("Tommy");
+		vec.setDescription("Audi");
+		vec.setType("Sub");
+		vec.setMotorization("VEC");
+		vec.setFuel("Gasoline");
+		Measure rmpLow = new Measure(1.2, "MeasureTorque");
+		vec.setMass(rmpLow);
+		vec.setLoad(rmpLow);
+		vec.setDragCoefficient(rmpLow);
+		vec.setFrontalArea(rmpLow);
+		vec.setRollingRCoefficient(rmpLow);
+		vec.setWheelSize(rmpLow);
+		vec.setMinRPM(rmpLow);
+		vec.setMaxRPM(rmpLow);
+		vec.setFinalDriveRatio(rmpLow);
+		obj.setVehicle(vec);
+		Node nodeEnd = new Node("Anta");
+		nodeEnd.setId(0);
+		nodeEnd.setName("Anta");
+		Node nodeStart = new Node("Espinho");
+		nodeStart.setId(1);
+		nodeEnd.setName("Espinho");
+		obj.setNodeEnd(nodeEnd);
+		obj.setNodeStart(nodeStart);
+		obj.setArrivalRate(rmpLow);
+		instance.addTraffic(obj);
+		traf.add(obj);
+		Traffic expResult = traf.get(0);
+		instance.setTraffics(traf);
 		Traffic result = instance.getTraffic(index);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -254,11 +277,10 @@ public class SimulationTest {
 	public void testGetId() {
 		System.out.println("getId");
 		Simulation instance = new Simulation();
-		Integer expResult = null;
+		instance.setId(1);
+		Integer expResult = 1;
 		Integer result = instance.getId();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -270,8 +292,6 @@ public class SimulationTest {
 		Integer id = null;
 		Simulation instance = new Simulation();
 		instance.setId(id);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -284,8 +304,6 @@ public class SimulationTest {
 		String expResult = "";
 		String result = instance.getName();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -297,8 +315,6 @@ public class SimulationTest {
 		String name = "";
 		Simulation instance = new Simulation();
 		instance.setName(name);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -307,12 +323,10 @@ public class SimulationTest {
 	@Test
 	public void testGetDescription() {
 		System.out.println("getDescription");
-		Simulation instance = new Simulation();
-		String expResult = "";
-		String result = instance.getDescription();
+		this.simulation.setDescription("Descript");
+		String expResult = "Descript";
+		String result = this.simulation.getDescription();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -321,11 +335,9 @@ public class SimulationTest {
 	@Test
 	public void testSetDescription() {
 		System.out.println("setDescription");
-		String description = "";
-		Simulation instance = new Simulation();
-		instance.setDescription(description);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String description = "Descript";
+		this.simulation.setDescription(description);
+		assertEquals(description, this.simulation.getDescription());
 	}
 
 }
