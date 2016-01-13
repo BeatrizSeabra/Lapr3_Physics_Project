@@ -21,6 +21,8 @@ public interface VehicleData {
 
 	Boolean save(Project project, Vehicle vehicle);
 
+	Boolean save(Project project, List<Vehicle> vehicles);
+
 	Vehicle get(Project project, Vehicle vehicle);
 
 	Boolean hasChanged(Project project, Vehicle vehicle);

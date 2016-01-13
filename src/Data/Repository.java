@@ -11,8 +11,6 @@ package Data;
  */
 public interface Repository {
 
-	Integer getNextIndex();
-
 	ProjectData getProjectData();
 
 	VehicleData getVehicleData();

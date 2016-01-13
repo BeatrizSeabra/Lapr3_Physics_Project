@@ -40,6 +40,14 @@ public class VehicleDataLocal implements VehicleData {
 	}
 
 	@Override
+	public Boolean save(Project project, List<Vehicle> vehicles) {
+		for (Vehicle vehicle : vehicles) {
+			this.save(project, vehicle);
+		}
+		return true;
+	}
+
+	@Override
 	public Vehicle get(Project project, Vehicle vehicle) {
 		for (Vehicle vehicleList : this.list) {
 			if (vehicleList.getId() == vehicle.getId()) {

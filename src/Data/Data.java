@@ -16,10 +16,6 @@ public abstract class Data {
 	static private Repository repository = (Repository) Settings.
 		loadClass(Settings.getOption("Repository"));
 
-	static public Integer getNextIndex() {
-		return Data.repository.getNextIndex();
-	}
-
 	static public ProjectData getProjectData() {
 		return Data.repository.getProjectData();
 	}

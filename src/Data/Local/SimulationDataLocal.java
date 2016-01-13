@@ -29,7 +29,6 @@ public class SimulationDataLocal implements SimulationData {
 		return project.getSimulations();
 	}
 
-	@Override
 	public Boolean save(Project project, Simulation simulation) {
 		for (Simulation oldSimulation : this.list) {
 			if (oldSimulation.getId() == simulation.getId()) {
@@ -54,6 +53,14 @@ public class SimulationDataLocal implements SimulationData {
 	public Boolean hasChanged(Project project, Simulation simulation) {
 		Simulation oldSimulation = this.get(project, simulation);
 		return !oldSimulation.equals(simulation);
+	}
+
+	@Override
+	public Boolean save(Project project, List<Simulation> simulations) {
+		for (Simulation simulation : simulations) {
+			this.save(project, simulation);
+		}
+		return true;
 	}
 
 }

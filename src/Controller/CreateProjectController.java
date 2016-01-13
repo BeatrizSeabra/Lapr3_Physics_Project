@@ -82,10 +82,13 @@ public class CreateProjectController {
 		if (this.hasProject()) {
 			this.project.setName(name);
 			this.project.setDescription(description);
-			for (Vehicle vehicle : this.vehicles) {
-				this.project.addVehicle(vehicle);
+			Boolean idProject = this.projectData.save(this.project);
+			if (idProject == true) {
+				for (Vehicle vehicle : this.vehicles) {
+					//if (!this.project.addVehicle(vehicle)) return false;
+				}
+				return true;
 			}
-			return this.projectData.save(this.project);
 		}
 		return false;
 	}

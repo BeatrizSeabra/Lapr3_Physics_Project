@@ -42,7 +42,6 @@ public class RepositoryOracle implements Repository {
 		}
 	}
 
-	@Override
 	public Integer getNextIndex() {
 		try {
 			CallableStatement callableStatement = connection.

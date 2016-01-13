@@ -15,7 +15,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
+import oracle.sql.ARRAY;
+import oracle.sql.ArrayDescriptor;
 
 /**
  *
@@ -24,9 +27,11 @@ import oracle.jdbc.OracleTypes;
 public class SimulationDataOracle implements SimulationData {
 
 	private Connection connection;
+	private TrafficDataOracle trafficDataOracle;
 
 	public SimulationDataOracle(Connection connection) {
 		this.connection = connection;
+		this.trafficDataOracle = new TrafficDataOracle(connection);
 	}
 
 	@Override
@@ -61,7 +66,60 @@ public class SimulationDataOracle implements SimulationData {
 
 	@Override
 	public Boolean save(Project project, Simulation simulation) {
-		return false;
+		List<Simulation> simulations = new ArrayList();
+		simulations.add(simulation);
+		return this.save(project, simulations);
+	}
+
+	@Override
+	public Boolean save(Project project, List<Simulation> simulations) {
+		try {
+			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.
+				createDescriptor("STRINGTABLE", this.connection);
+			ArrayDescriptor oracleNumberCollection = ArrayDescriptor.
+				createDescriptor("NUMBERTABLE", this.connection);
+			CallableStatement callableStatement = connection.
+				prepareCall("{ call saveSimulations(?,?,?,?) }");
+			int size = simulations.size();
+			double[] param01 = new double[size];
+			double[] param02 = new double[size];
+			String[] param03 = new String[size];
+			String[] param04 = new String[size];
+			for (int i = 0; i < size; i++) {
+				param01[i] = simulations.get(i).getId();
+				param02[i] = project.getId();
+				param03[i] = simulations.get(i).getName();
+				param04[i] = simulations.get(i).getDescription();
+			}
+			ARRAY param01O = new ARRAY(oracleNumberCollection, this.connection, param01);
+			ARRAY param02O = new ARRAY(oracleNumberCollection, this.connection, param02);
+			ARRAY param03O = new ARRAY(oracleVarchar2Collection, this.connection, param03);
+			ARRAY param04O = new ARRAY(oracleVarchar2Collection, this.connection, param04);
+			callableStatement.
+				registerOutParameter(1, OracleTypes.ARRAY, "NUMBERTABLE");
+			callableStatement.setObject(1, param01O, OracleTypes.ARRAY);
+			callableStatement.setObject(2, param02O, OracleTypes.ARRAY);
+			callableStatement.setObject(3, param03O, OracleTypes.ARRAY);
+			callableStatement.setObject(4, param04O, OracleTypes.ARRAY);
+			callableStatement.execute();
+			ARRAY arrayIndex = ((OracleCallableStatement) callableStatement).
+				getARRAY(1);
+			int index[] = arrayIndex.getIntArray();
+			callableStatement.close();
+			for (int i = 0; i < size; i++) {
+				System.out.println("SIULATION INDEX: " + index[i]);
+				simulations.get(i).setId(index[i]);
+				if (index[i] != 0 && !simulations.get(i).getTraffics().isEmpty()) {
+					this.trafficDataOracle.save(simulations.get(i), simulations.
+												get(i).getTraffics());
+				}
+			}
+			return true;
+		} catch (Exception ex) {
+			Error.
+				setErrorMessage("Oracle database was not possible to execute the command: " + ex);
+			return false;
+		}
 	}
 
 	@Override

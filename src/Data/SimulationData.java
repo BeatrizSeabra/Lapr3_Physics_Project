@@ -21,6 +21,8 @@ public interface SimulationData {
 
 	Boolean save(Project project, Simulation simulation);
 
+	Boolean save(Project project, List<Simulation> simulations);
+
 	Simulation get(Project project, Simulation simulation);
 
 	Boolean hasChanged(Project project, Simulation simulation);

@@ -5,7 +5,6 @@
  */
 package Data.Local;
 
-import Data.Data;
 import Data.ProjectData;
 import Model.Project;
 import Model.Simulation;
@@ -20,6 +19,12 @@ import java.util.List;
 public class ProjectDataLocal implements ProjectData {
 
 	private List<Project> list = new ArrayList();
+	private Integer currentIndex = 0;
+
+	private Integer getNextIndex() {
+		currentIndex++;
+		return this.currentIndex;
+	}
 
 	@Override
 	public Integer size() {
@@ -34,7 +39,7 @@ public class ProjectDataLocal implements ProjectData {
 	@Override
 	public Boolean save(Project project) {
 		if (project.getId() == 0) {
-			project.setId(Data.getNextIndex());
+			project.setId(this.getNextIndex());
 			return this.list.add(project);
 		}
 		Project oldProject = this.get(project);
@@ -51,6 +56,14 @@ public class ProjectDataLocal implements ProjectData {
 			oldProject.addSimulation(simulation);
 		}
 		return oldProject.equals(project);
+	}
+
+	@Override
+	public Boolean save(List<Project> projects) {
+		for (Project project : projects) {
+			this.save(project);
+		}
+		return true;
 	}
 
 	@Override

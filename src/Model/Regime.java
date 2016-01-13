@@ -16,7 +16,7 @@ public class Regime implements Comparable<Regime> {
 	private Measure torque;
 	private Measure rpmLow;
 	private Measure rpmHigh;
-	private Measure fuelConsumption;
+	private Measure fuelConsumption = new Measure(0.0, "");
 
 	public Regime() {
 	}

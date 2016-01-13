@@ -20,6 +20,8 @@ public interface ProjectData {
 
 	Boolean save(Project project);
 
+	Boolean save(List<Project> projects);
+
 	Project get(Project project);
 
 	Boolean hasChanged(Project project);

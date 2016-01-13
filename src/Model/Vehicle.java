@@ -20,8 +20,6 @@ import java.util.Map.Entry;
  */
 public class Vehicle {
 
-	public final Measure airDensity = new Measure(1.225, "kg/m3");
-
 	private Integer id = 0;
 	private String name;
 	private String description;
@@ -37,6 +35,7 @@ public class Vehicle {
 	private Measure minRPM;
 	private Measure maxRPM;
 	private Measure finalDriveRatio;
+	private Measure energyRegeneration = new Measure(0.0, "ratio");
 	private Map<String, Measure> velocityLimits = new HashMap();
 	private Map<Integer, Measure> gears = new HashMap();
 	private List<Throttle> throttles = new ArrayList();
@@ -290,6 +289,14 @@ public class Vehicle {
 		this.finalDriveRatio = finalDriveRatio;
 	}
 
+	public Measure getEnergyRegeneration() {
+		return energyRegeneration;
+	}
+
+	public void setEnergyRegeneration(Measure energyRegeneration) {
+		this.energyRegeneration = energyRegeneration;
+	}
+
 	/**
 	 * @return the velocityLimits
 	 */
@@ -351,6 +358,7 @@ public class Vehicle {
 		hash += 11 * this.minRPM.hashCode();
 		hash += 11 * this.maxRPM.hashCode();
 		hash += 11 * this.finalDriveRatio.hashCode();
+		hash += 11 * this.energyRegeneration.hashCode();
 		for (Entry<String, Measure> entity : this.velocityLimits.entrySet()) {
 			hash += 7 * entity.getKey().hashCode();
 			hash += 7 * entity.getValue().hashCode();
@@ -383,6 +391,7 @@ public class Vehicle {
 		vehicle.setMinRPM(this.minRPM.clone());
 		vehicle.setMaxRPM(this.maxRPM.clone());
 		vehicle.setFinalDriveRatio(this.finalDriveRatio.clone());
+		vehicle.setFinalDriveRatio(this.finalDriveRatio.clone());
 		for (Entry<String, Measure> entity : this.getVelocityLimits().entrySet()) {
 			vehicle.
 				setVelocityLimits(entity.getKey(), entity.getValue().clone());
@@ -408,7 +417,8 @@ public class Vehicle {
 			append(this.rollingRCoefficient).append(" | wheelSize: ").
 			append(this.wheelSize).append(" | minRPM: ").append(this.minRPM).
 			append(" | maxRPM: ").append(this.maxRPM).append(" | finalDrive: ").
-			append(this.finalDriveRatio);
+			append(this.finalDriveRatio).append(" | energyRegeneration: ").
+			append(this.energyRegeneration);
 		for (Entry<Integer, Measure> entry : this.gears.entrySet()) {
 			stringBuilder.append(" | gear").append(entry.getKey()).append(": ").
 				append(entry.getValue());

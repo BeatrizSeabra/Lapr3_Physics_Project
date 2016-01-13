@@ -19,13 +19,6 @@ public class RepositoryLocal implements Repository {
 	private ProjectData projactData = new ProjectDataLocal();
 	private VehicleData vehicleData = new VehicleDataLocal();
 	private SimulationData simulationData = new SimulationDataLocal();
-	private Integer currentIndex = 0;
-
-	@Override
-	public Integer getNextIndex() {
-		this.currentIndex++;
-		return this.currentIndex;
-	}
 
 	@Override
 	public ProjectData getProjectData() {
