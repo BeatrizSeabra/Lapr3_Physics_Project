@@ -8,9 +8,12 @@ package Legacy;
 import javax.swing.filechooser.FileFilter;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 
 /**
  *
@@ -112,24 +115,4 @@ public class ExportTest {
 			return "";
 		}
 	}
-
-	public class ExportImpl implements Export {
-
-		public String getExtension() {
-			return "";
-		}
-
-		public String getExtensionDescription() {
-			return "";
-		}
-
-		public FileFilter getExtensionFilter() {
-			return null;
-		}
-
-		public String export(Object data) {
-			return "";
-		}
-	}
-
 }

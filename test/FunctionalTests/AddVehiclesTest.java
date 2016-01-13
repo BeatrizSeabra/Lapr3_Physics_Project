@@ -34,7 +34,6 @@ public class AddVehiclesTest {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.filePathVehicles = Settings.getOption("VehiclesFilePath");
 		this.project = new Project();
-		this.project.setId(Data.getNextIndex());
 		this.project.setName("Project Name");
 		this.project.setDescription("Project Description");
 		ContextController.setOpenProject(this.project);
