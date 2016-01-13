@@ -144,10 +144,13 @@ public class MeasureTest {
 	@Test
 	public void testCompareTo() {
 		System.out.println("compareTo");
-		Measure measure = null;
-		Measure instance = null;
+		String unit = "test5";
+		double value = 15.0;
+		Measure measure = new Measure(value, unit);
+
+		int result = this.measure.compareTo(measure);
 		int expResult = 0;
-		int result = instance.compareTo(measure);
+
 		assertEquals(expResult, result);
 
 	}
