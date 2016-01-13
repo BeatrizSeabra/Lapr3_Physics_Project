@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -419,12 +418,9 @@ public class RoadNetworkTest {
 	@Test
 	public void testGetId() {
 		System.out.println("getId");
-		RoadNetwork instance = new RoadNetwork();
-		Integer expResult = null;
-		Integer result = instance.getId();
+		Integer expResult = 0;
+		Integer result = this.roadNetwork.getId();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -433,11 +429,9 @@ public class RoadNetworkTest {
 	@Test
 	public void testSetId() {
 		System.out.println("setId");
-		Integer id = null;
-		RoadNetwork instance = new RoadNetwork();
-		instance.setId(id);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Integer id = this.roadNetwork.getId();
+		this.roadNetwork.setId(id);
+		assertEquals(id, this.roadNetwork.getId());
 	}
 
 	/**
@@ -446,13 +440,10 @@ public class RoadNetworkTest {
 	@Test
 	public void testGetNode() {
 		System.out.println("getNode");
-		String name = "";
-		RoadNetwork instance = new RoadNetwork();
-		Node expResult = null;
-		Node result = instance.getNode(name);
+		String name = "n0";
+		Node expResult = node0;
+		Node result = this.roadNetwork.getNode(name);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -461,11 +452,9 @@ public class RoadNetworkTest {
 	@Test
 	public void testSetGraph() {
 		System.out.println("setGraph");
-		Graph<Node, Section> graph = null;
-		RoadNetwork instance = new RoadNetwork();
-		instance.setGraph(graph);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Graph<Node, Section> graph = new Graph<>(true);
+		graph.insertVertex(node0);
+		this.roadNetwork.setGraph(graph);
 	}
 
 	/**
@@ -474,12 +463,9 @@ public class RoadNetworkTest {
 	@Test
 	public void testGetOrigin() {
 		System.out.println("getOrigin");
-		RoadNetwork instance = new RoadNetwork();
-		RoadNetwork expResult = null;
-		RoadNetwork result = instance.getOrigin();
+		RoadNetwork expResult = this.roadNetwork;
+		RoadNetwork result = this.roadNetwork.getOrigin();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -488,13 +474,19 @@ public class RoadNetworkTest {
 	@Test
 	public void testGetSections_List() {
 		System.out.println("getSections");
-		List<Node> nodes = null;
-		RoadNetwork instance = new RoadNetwork();
-		List<Section> expResult = null;
-		List<Section> result = instance.getSections(nodes);
+		List<Node> nodes = this.roadNetwork.getNodes();
+		Deque<Node> nodesDeque = new ArrayDeque(nodes);
+		List<Section> sections = new ArrayList();
+		Section section;
+		for (int i = 0; i < nodesDeque.size() - 1; i++) {
+			Node startNode = nodesDeque.removeFirst();
+			Node endNode = nodesDeque.removeFirst();
+			section = this.roadNetwork.getSection(startNode, endNode);
+			sections.add(section);
+		}
+		List<Section> expResult = sections;
+		List<Section> result = this.roadNetwork.getSections(nodes);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -503,15 +495,13 @@ public class RoadNetworkTest {
 	@Test
 	public void testGetAllPaths() {
 		System.out.println("getAllPaths");
-		Node starNode = null;
-		Node endNode = null;
+		Node starNode = this.node0;
+		Node endNode = this.node3;
 		List<Deque<Section>> sectionPaths = null;
-		RoadNetwork instance = new RoadNetwork();
 		List<Deque<Node>> expResult = null;
-		List<Deque<Node>> result = instance.getAllPaths(starNode, endNode, sectionPaths);
+		List<Deque<Node>> result = this.roadNetwork.
+			getAllPaths(starNode, endNode, sectionPaths);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -520,12 +510,9 @@ public class RoadNetworkTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		RoadNetwork instance = new RoadNetwork();
-		RoadNetwork expResult = null;
-		RoadNetwork result = instance.clone();
+		RoadNetwork expResult = this.roadNetwork;
+		RoadNetwork result = this.roadNetwork.clone();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -534,12 +521,10 @@ public class RoadNetworkTest {
 	@Test
 	public void testToString() {
 		System.out.println("toString");
-		RoadNetwork instance = new RoadNetwork();
-		String expResult = "";
-		String result = instance.toString();
+
+		String expResult = this.roadNetwork.toString();
+		String result = this.roadNetwork.toString();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 }

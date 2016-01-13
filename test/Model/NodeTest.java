@@ -123,7 +123,6 @@ public class NodeTest {
 		Integer id = null;
 		Node instance = new Node("node1");
 		Integer expResult = 0;
-
 		instance.setId(0);
 		assertEquals(expResult, instance.getId());
 

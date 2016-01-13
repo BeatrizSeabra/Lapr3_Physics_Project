@@ -9,7 +9,6 @@ import Physics.Measure;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -196,11 +195,10 @@ public class RegimeTest {
 	public void testGetTorque() {
 		System.out.println("getTorque");
 		Regime instance = new Regime();
-		Measure expResult = null;
-		Measure result = instance.getTorque();
+		Measure expResult = new Measure(89.2, "Random");
+		this.regime.setTorque(expResult);
+		Measure result = this.regime.getTorque();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -209,11 +207,9 @@ public class RegimeTest {
 	@Test
 	public void testSetTorque() {
 		System.out.println("setTorque");
-		Measure torque = null;
-		Regime instance = new Regime();
-		instance.setTorque(torque);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure torque = new Measure(22.2, "Randomize");
+		this.regime.setTorque(torque);
+		assertEquals(torque, this.regime.getTorque());
 	}
 
 	/**
@@ -222,12 +218,10 @@ public class RegimeTest {
 	@Test
 	public void testGetRpmLow() {
 		System.out.println("getRpmLow");
-		Regime instance = new Regime();
-		Measure expResult = null;
-		Measure result = instance.getRpmLow();
+		Measure expResult = new Measure(111.2, "Random");
+		this.regime.setRpmLow(expResult);
+		Measure result = this.regime.getRpmLow();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -236,11 +230,9 @@ public class RegimeTest {
 	@Test
 	public void testSetRpmLow() {
 		System.out.println("setRpmLow");
-		Measure rpmLow = null;
-		Regime instance = new Regime();
-		instance.setRpmLow(rpmLow);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure rpmLow = new Measure(11.1, "Randomize");
+		this.regime.setRpmLow(rpmLow);
+		assertEquals(rpmLow, this.regime.getRpmLow());
 	}
 
 	/**
@@ -249,12 +241,10 @@ public class RegimeTest {
 	@Test
 	public void testGetRpmHigh() {
 		System.out.println("getRpmHigh");
-		Regime instance = new Regime();
-		Measure expResult = null;
-		Measure result = instance.getRpmHigh();
+		Measure expResult = new Measure(22.2, "Macro");
+		this.regime.setRpmHigh(expResult);
+		Measure result = this.regime.getRpmHigh();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -263,11 +253,8 @@ public class RegimeTest {
 	@Test
 	public void testSetRpmHigh() {
 		System.out.println("setRpmHigh");
-		Measure rpmHigh = null;
-		Regime instance = new Regime();
-		instance.setRpmHigh(rpmHigh);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure rpmHigh = new Measure(2.2, "Nissan");
+		this.regime.setRpmHigh(rpmHigh);
 	}
 
 	/**
@@ -276,12 +263,10 @@ public class RegimeTest {
 	@Test
 	public void testGetFuelConsumption() {
 		System.out.println("getFuelConsumption");
-		Regime instance = new Regime();
-		Measure expResult = null;
-		Measure result = instance.getFuelConsumption();
+		Measure expResult = new Measure(2.0, "Eco");
+		this.regime.setFuelConsumption(expResult);
+		Measure result = this.regime.getFuelConsumption();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -290,11 +275,8 @@ public class RegimeTest {
 	@Test
 	public void testSetFuelConsumption() {
 		System.out.println("setFuelConsumption");
-		Measure espFuelConsumption = null;
-		Regime instance = new Regime();
-		instance.setFuelConsumption(espFuelConsumption);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure espFuelConsumption = new Measure(2.2, "Ecolize");
+		this.regime.setFuelConsumption(espFuelConsumption);
 	}
 
 }
