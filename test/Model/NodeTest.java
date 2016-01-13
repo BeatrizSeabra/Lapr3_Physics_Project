@@ -8,7 +8,6 @@ package Model;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -108,12 +107,11 @@ public class NodeTest {
 	@Test
 	public void testGetId() {
 		System.out.println("getId");
-		Node instance = null;
-		Integer expResult = null;
+		Node instance = new Node("node");
+		Integer expResult = 0;
 		Integer result = instance.getId();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -123,10 +121,12 @@ public class NodeTest {
 	public void testSetId() {
 		System.out.println("setId");
 		Integer id = null;
-		Node instance = null;
-		instance.setId(id);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Node instance = new Node("node1");
+		Integer expResult = 0;
+
+		instance.setId(0);
+		assertEquals(expResult, instance.getId());
+
 	}
 
 	/**
@@ -135,12 +135,11 @@ public class NodeTest {
 	@Test
 	public void testGetName() {
 		System.out.println("getName");
-		Node instance = null;
-		String expResult = "";
+		Node instance = new Node("test");
+		String expResult = "test";
 		String result = instance.getName();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -150,10 +149,11 @@ public class NodeTest {
 	public void testSetName() {
 		System.out.println("setName");
 		String name = "";
-		Node instance = null;
-		instance.setName(name);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Node instance = new Node("test");
+		String expResult = "test2";
+
+		instance.setName("test2");
+		assertEquals(expResult, instance.getName());
 	}
 
 	/**
@@ -162,12 +162,11 @@ public class NodeTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		Node instance = null;
-		Node expResult = null;
-		Node result = instance.clone();
+		Node instance = new Node("test");
+
+		String expResult = instance.toString();
+		String result = instance.clone().toString();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -176,11 +175,10 @@ public class NodeTest {
 	@Test
 	public void testToString() {
 		System.out.println("toString");
-		Node instance = null;
-		String expResult = "";
+		Node instance = new Node("test");
+		String expResult = "test";
 		String result = instance.toString();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(expResult.getClass(), result.getClass());
+
 	}
 }
