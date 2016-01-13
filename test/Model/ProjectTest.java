@@ -155,87 +155,6 @@ public class ProjectTest {
 	}
 
 	/**
-	 * Test of getId method, of class Project.
-	 */
-	@Test
-	public void testGetId() {
-		System.out.println("getId");
-		Project instance = new Project();
-		Integer expResult = null;
-		Integer result = instance.getId();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of setId method, of class Project.
-	 */
-	@Test
-	public void testSetId() {
-		System.out.println("setId");
-		Integer id = null;
-		Project instance = new Project();
-		instance.setId(id);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of getName method, of class Project.
-	 */
-	@Test
-	public void testGetName() {
-		System.out.println("getName");
-		Project instance = new Project();
-		String expResult = "";
-		String result = instance.getName();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of setName method, of class Project.
-	 */
-	@Test
-	public void testSetName() {
-		System.out.println("setName");
-		String name = "";
-		Project instance = new Project();
-		instance.setName(name);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of getDescription method, of class Project.
-	 */
-	@Test
-	public void testGetDescription() {
-		System.out.println("getDescription");
-		Project instance = new Project();
-		String expResult = "";
-		String result = instance.getDescription();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of setDescription method, of class Project.
-	 */
-	@Test
-	public void testSetDescription() {
-		System.out.println("setDescription");
-		String description = "";
-		Project instance = new Project();
-		instance.setDescription(description);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
 	 * Test of getRoadNetwork method, of class Project.
 	 */
 	@Test
@@ -268,13 +187,12 @@ public class ProjectTest {
 	@Test
 	public void testAddVehicle() {
 		System.out.println("addVehicle");
-		Vehicle vehicle = null;
-		Project instance = new Project();
-		Boolean expResult = null;
-		Boolean result = instance.addVehicle(vehicle);
+		Vehicle vehicle = new Vehicle();
+
+		Boolean expResult = true;
+		Boolean result = this.project.addVehicle(vehicle);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
