@@ -256,4 +256,10 @@ public class RoadNetwork {
 		return stringBuilder.toString();
 	}
 
+        public void addRoadNetwork(RoadNetwork road){
+            for(Section section : road.getSections()){
+                Deque<Node> nodes = road.getExtremeNodes(section);
+                this.addSection(nodes.getFirst(), nodes.getLast(), section);
+            }
+        }
 }

@@ -43,8 +43,8 @@ public class CopySimulationController {
 		this.simulationCopy.setId(0);
 		this.simulationCopy.setName(name);
 		this.simulationCopy.setDescription(description);
-		return project.addSimulation(this.simulationCopy) && Data.
-			getProjectData().save(this.project);
+                
+                return Data.getSimulationData().save(this.project, this.simulationCopy);
 	}
 
 }

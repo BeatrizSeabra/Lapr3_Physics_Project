@@ -31,12 +31,14 @@ public class CopySimulationTest {
 
 	public CopySimulationTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
-		//this.simulation = Data.getSimulationData().newInstance();
+		this.project = new Project();
+		this.project.setName("Project Name");
+		this.project.setDescription("Project Description");
+                this.simulation = new Simulation();
 		this.simulation.setName("Simulation Name");
 		this.simulation.setDescription("Simulation Description");
-		//Data.getSimulationData().save(simulation);
-		this.project = new Project();
-		this.project.addSimulation(this.simulation);
+                Data.getProjectData().save(this.project);
+                Data.getSimulationData().save(this.project, this.simulation);
 		ContextController.setOpenProject(this.project);
 		ContextController.setOpenSimulation(this.simulation);
 		this.copySimulationController = new CopySimulationController();
@@ -64,19 +66,13 @@ public class CopySimulationTest {
 	@Test
 	public void testCopySimulationFunctional() {
 		System.out.println("testCopySimulationFunctional");
-		this.copySimulationController.initiation();
-		List<Simulation> simulations = Data.getSimulationData().
-			all(this.project);
-		assertEquals(simulations.size(), 1);
+                List<Simulation> simulations = Data.getSimulationData().all(ContextController.getOpenProject());
+                assertEquals(simulations.size(), 1);
+                this.copySimulationController.initiation();
 		this.copySimulationController.
 			copySimulation("Simulation Name", "Simulation Description");
-		simulations = this.project.getSimulations();
-		String newName = new StringBuilder(simulations.get(0).getName()).
-			append(" (copy)").toString();
-		assertEquals(simulations.get(1).getName(), newName);
-		assertEquals(simulations.get(0).getId() != simulations.get(1).getId(), true);
-		assertEquals(simulations.get(0).getDescription(), simulations.get(1).
-					 getDescription());
-
+                
+		List<Simulation> newSimulations = Data.getSimulationData().all(ContextController.getOpenProject());
+                assertEquals(newSimulations.size(), 2);
 	}
 }

@@ -8,6 +8,7 @@ package Controller;
 import Data.Data;
 import Legacy.Legacy;
 import Model.Project;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 public class AddRoadsController {
 
 	private Project project;
-	private List<Project> roads;
+	private List<Project> roads = new ArrayList<Project>();
 
 	/**
 	 *
@@ -43,7 +44,7 @@ public class AddRoadsController {
 	public Boolean loadRoads(String filePath) {
 		List<Project> roads = Legacy.importRoadNetwork(filePath);
 		if (roads != null) {
-			this.concatenateRoads(this.roads, roads);
+			this.concatenateRoads(roads);
 			return true;
 		}
 		return false;
@@ -51,47 +52,21 @@ public class AddRoadsController {
 
 	/**
 	 *
-	 * @param roads
 	 * @param newRoads
 	 */
-	public void concatenateRoads(List<Project> roads,
-								 List<Project> newRoads) {
+	public void concatenateRoads(List<Project> newRoads) {
+            if(newRoads.isEmpty()!=true){
 		for (Project newRoad : newRoads) {
-			Integer number = 1;
-			while (this.quantityName(roads, newRoad.getName()) != 0) {
-				if (number == 1) {
-					newRoad.setName(newRoad.getName() + " " + number);
-				} else {
-					newRoad.setName(newRoad.getName().
-						replaceAll(" [0-9]+$", " " + number));
-				}
-				number++;
-			}
-			roads.add(newRoad);
+                    this.roads.add(newRoad);
 		}
-	}
-
-	/**
-	 *
-	 * @param roads
-	 * @param name
-	 * @return
-	 */
-	public Integer quantityName(List<Project> roads, String name) {
-		Integer amount = 0;
-		for (Project road : roads) {
-			if (road.getName().equals(name)) {
-				amount++;
-			}
-		}
-		return amount;
+            }
 	}
 
 	/**
 	 *
 	 * @return
 	 */
-	public Boolean hasChanges() {
+	public Boolean hasChanges(){
 		return !this.roads.equals(this.project.getRoadNetwork());
 	}
 
@@ -101,7 +76,7 @@ public class AddRoadsController {
 	 */
 	public Boolean saveProjectRoads() {
 		for (Project road : this.roads) {
-
+                    this.project.getRoadNetwork().addRoadNetwork(road.getRoadNetwork());
 		}
 		return Data.getProjectData().save(this.project);
 	}
