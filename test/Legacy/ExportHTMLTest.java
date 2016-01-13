@@ -7,6 +7,7 @@ package Legacy;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -55,6 +56,48 @@ public class ExportHTMLTest {
 		String result = instance.export(text);
 		assertEquals(expResult, result);
 
+	}
+
+	/**
+	 * Test of getExtension method, of class ExportHTML.
+	 */
+	@Test
+	public void testGetExtension() {
+		System.out.println("getExtension");
+		ExportHTML instance = new ExportHTML();
+		String expResult = "";
+		String result = instance.getExtension();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getExtensionDescription method, of class ExportHTML.
+	 */
+	@Test
+	public void testGetExtensionDescription() {
+		System.out.println("getExtensionDescription");
+		ExportHTML instance = new ExportHTML();
+		String expResult = "";
+		String result = instance.getExtensionDescription();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getExtensionFilter method, of class ExportHTML.
+	 */
+	@Test
+	public void testGetExtensionFilter() {
+		System.out.println("getExtensionFilter");
+		ExportHTML instance = new ExportHTML();
+		FileNameExtensionFilter expResult = null;
+		FileNameExtensionFilter result = instance.getExtensionFilter();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }

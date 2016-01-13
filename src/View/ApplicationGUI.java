@@ -29,11 +29,17 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.creation(null);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.setLocationRelativeTo(null);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.rootPane.getContentPane().removeAll();
@@ -49,7 +55,7 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.repaint();
 		this.revalidate();
 	}
-	
+
 	private void accessMenu(Boolean stateProject, Boolean stateSimulation) {
 		this.addVehicle.setEnabled(stateProject);
 		this.copyProject.setEnabled(stateProject);

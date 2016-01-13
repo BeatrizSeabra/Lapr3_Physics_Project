@@ -19,10 +19,18 @@ public class Traffic {
 	private Vehicle vehicle;
 	private Measure arrivalRate;
 
+	/**
+	 *
+	 * @return
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 *
+	 * @param id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -34,18 +42,34 @@ public class Traffic {
 		return vehicle;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Node getNodeStart() {
 		return nodeStart;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Node getNodeEnd() {
 		return nodeEnd;
 	}
 
+	/**
+	 *
+	 * @param nodeStart
+	 */
 	public void setNodeStart(Node nodeStart) {
 		this.nodeStart = nodeStart;
 	}
 
+	/**
+	 *
+	 * @param nodeEnd
+	 */
 	public void setNodeEnd(Node nodeEnd) {
 		this.nodeEnd = nodeEnd;
 	}

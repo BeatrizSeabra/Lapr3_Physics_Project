@@ -18,12 +18,17 @@ public class LogGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form LogGUI
+	 *
+	 * @param origin
 	 */
 	public LogGUI(GraphicUserInterface origin) {
 		this.initComponents();
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		ActionListener task = new ActionListener() {
@@ -34,6 +39,9 @@ public class LogGUI extends GraphicUserInterface {
 		new Timer(1000, task).start();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.jTextAreaLog.setText(Error.log());

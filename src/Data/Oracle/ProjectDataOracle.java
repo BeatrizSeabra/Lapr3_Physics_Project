@@ -6,8 +6,13 @@
 package Data.Oracle;
 
 import Data.ProjectData;
+import Legacy.Import;
 import Legacy.RoadNetworkImportXML;
+import Legacy.SimulationImportXML;
+import Legacy.VehicleImportXML;
 import Model.Project;
+import Model.Simulation;
+import Model.Vehicle;
 import System.Error;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -29,17 +34,29 @@ public class ProjectDataOracle implements ProjectData {
 	private NodeDataOracle nodeDataOracle;
 	private SectionDataOracle sectionDataOracle;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public ProjectDataOracle(Connection connection) {
 		this.connection = connection;
 		this.nodeDataOracle = new NodeDataOracle(connection);
 		this.sectionDataOracle = new SectionDataOracle(connection);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public Integer size() {
 		return this.all().size();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public List<Project> all() {
 		try {
@@ -47,13 +64,13 @@ public class ProjectDataOracle implements ProjectData {
 				prepareCall("BEGIN ALLPROJECTS(?); END;");
 			callableStatement.registerOutParameter(1, OracleTypes.CURSOR);
 			callableStatement.execute();
-			ResultSet rSet = (ResultSet) callableStatement.getObject(1);
+			ResultSet resultSet = (ResultSet) callableStatement.getObject(1);
 			List<Project> projects = new ArrayList();
-			while (rSet.next()) {
+			while (resultSet.next()) {
 				Project project = new Project();
-				project.setId(rSet.getInt("IDPROJECT"));
-				project.setName(rSet.getString("NAME"));
-				project.setDescription(rSet.getString("DESCRIPTION"));
+				project.setId(resultSet.getInt("IDPROJECT"));
+				project.setName(resultSet.getString("NAME"));
+				project.setDescription(resultSet.getString("DESCRIPTION"));
 				projects.add(project);
 			}
 			return projects;
@@ -64,6 +81,11 @@ public class ProjectDataOracle implements ProjectData {
 		}
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project) {
 		List<Project> projects = new ArrayList();
@@ -71,6 +93,11 @@ public class ProjectDataOracle implements ProjectData {
 		return this.save(projects);
 	}
 
+	/**
+	 *
+	 * @param projects
+	 * @return
+	 */
 	@Override
 	public Boolean save(List<Project> projects) {
 		try {
@@ -126,29 +153,66 @@ public class ProjectDataOracle implements ProjectData {
 		}
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
-	public Project get(Project project
-	) {
-		for (Project projectList : this.all()) {
-			if (projectList.getId() == project.getId()) {
-				try {
-					CallableStatement callableStatement = connection.
-						prepareCall("BEGIN EXPORTXMLPROJECT(?,?); END;");
+	public Project get(Project project) {
+		if (project.getId() != 0) {
+			try {
+				CallableStatement callableStatement = connection.
+					prepareCall("BEGIN EXPORTXMLPROJECTS(?,?); END;");
+				callableStatement.
+					registerOutParameter(1, OracleTypes.VARCHAR);
+				callableStatement.setInt(2, project.getId());
+				callableStatement.execute();
+				String result = callableStatement.getString(1);
+				System.out.println("PROJECT:\"" + result + "\"");
+				Import importClass = new RoadNetworkImportXML();
+				List<Project> projects = importClass.importData(result);
+				if (projects != null && !projects.isEmpty()) {
+					Project newProject = projects.get(projects.size() - 1);
+					callableStatement = connection.
+						prepareCall("BEGIN EXPORTXMLVEHICLES(?,?); END;");
 					callableStatement.
 						registerOutParameter(1, OracleTypes.VARCHAR);
-					callableStatement.setInt(2, project.getId());
+					callableStatement.setInt(2, newProject.getId());
 					callableStatement.execute();
-					RoadNetworkImportXML importClass = new RoadNetworkImportXML();
-					List<Project> projects = importClass.
-						importData(callableStatement.getString(1));
-					if (projects != null && !projects.isEmpty()) {
-						return projects.get(projects.size() - 1);
+					result = callableStatement.getString(1);
+					System.out.println("VEHICLES:\"" + result + "\"");
+					if (result != null && !result.isEmpty()) {
+						importClass = new VehicleImportXML();
+						System.out.
+							println("\"" + callableStatement.getString(1) + "\"");
+						List<Vehicle> vehicles = importClass.
+							importData(callableStatement.getString(1));
+						for (Vehicle vehicle : vehicles) {
+							newProject.addVehicle(vehicle);
+						}
 					}
-				} catch (Exception ex) {
-					Error.setErrorMessage(ex.toString());
-					return null;
+					callableStatement = connection.
+						prepareCall("BEGIN EXPORTXMLSIMULATIONS(?,?); END;");
+					callableStatement.
+						registerOutParameter(1, OracleTypes.VARCHAR);
+					callableStatement.setInt(2, newProject.getId());
+					callableStatement.execute();
+					result = callableStatement.getString(1);
+					System.out.println("SIMULATINS:\"" + result + "\"");
+					if (result != null && !result.isEmpty()) {
+						importClass = new SimulationImportXML();
+						List<Simulation> simulations = importClass.
+							importData(result);
+						for (Simulation simulation : simulations) {
+							newProject.addSimulation(simulation);
+						}
+					}
+					return newProject;
 				}
-				break;
+			} catch (Exception ex) {
+				Error.setErrorMessage(ex.toString());
+				return null;
 			}
 		}
 		Error.
@@ -156,6 +220,11 @@ public class ProjectDataOracle implements ProjectData {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Boolean hasChanged(Project project
 	) {

@@ -24,10 +24,21 @@ import java.util.Map;
  */
 public class CheapestPathAnalysis implements PathAnalysis {
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getName() {
 		return "Cheapest Path Analysis";
 	}
 
+	/**
+	 *
+	 * @param roadNetwork
+	 * @param startNode
+	 * @param endNode
+	 * @return
+	 */
 	public List<String[]> analyze(RoadNetwork roadNetwork, Node startNode,
 								  Node endNode) {
 		Map<Double, List<String[]>> results = new HashMap();

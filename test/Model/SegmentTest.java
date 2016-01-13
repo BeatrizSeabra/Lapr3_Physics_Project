@@ -199,4 +199,221 @@ public class SegmentTest {
 		assertEquals(expResult, result);
 	}
 
+	/**
+	 * Test of getName method, of class Segment.
+	 */
+	@Test
+	public void testGetName() {
+		System.out.println("getName");
+		Segment instance = new Segment();
+		String expResult = "";
+		String result = instance.getName();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setName method, of class Segment.
+	 */
+	@Test
+	public void testSetName() {
+		System.out.println("setName");
+		String name = "";
+		Segment instance = new Segment();
+		instance.setName(name);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getHeight method, of class Segment.
+	 */
+	@Test
+	public void testGetHeight() {
+		System.out.println("getHeight");
+		Segment instance = new Segment();
+		Measure expResult = null;
+		Measure result = instance.getHeight();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setHeight method, of class Segment.
+	 */
+	@Test
+	public void testSetHeight() {
+		System.out.println("setHeight");
+		Measure height = null;
+		Segment instance = new Segment();
+		instance.setHeight(height);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getSlope method, of class Segment.
+	 */
+	@Test
+	public void testGetSlope() {
+		System.out.println("getSlope");
+		Segment instance = new Segment();
+		Measure expResult = null;
+		Measure result = instance.getSlope();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setSlope method, of class Segment.
+	 */
+	@Test
+	public void testSetSlope() {
+		System.out.println("setSlope");
+		Measure slope = null;
+		Segment instance = new Segment();
+		instance.setSlope(slope);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getLength method, of class Segment.
+	 */
+	@Test
+	public void testGetLength() {
+		System.out.println("getLength");
+		Segment instance = new Segment();
+		Measure expResult = null;
+		Measure result = instance.getLength();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setLength method, of class Segment.
+	 */
+	@Test
+	public void testSetLength() {
+		System.out.println("setLength");
+		Measure length = null;
+		Segment instance = new Segment();
+		instance.setLength(length);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getMaxVelocity method, of class Segment.
+	 */
+	@Test
+	public void testGetMaxVelocity() {
+		System.out.println("getMaxVelocity");
+		Segment instance = new Segment();
+		Measure expResult = null;
+		Measure result = instance.getMaxVelocity();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setMaxVelocity method, of class Segment.
+	 */
+	@Test
+	public void testSetMaxVelocity() {
+		System.out.println("setMaxVelocity");
+		Measure maxVelocity = null;
+		Segment instance = new Segment();
+		instance.setMaxVelocity(maxVelocity);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getMinVelocity method, of class Segment.
+	 */
+	@Test
+	public void testGetMinVelocity() {
+		System.out.println("getMinVelocity");
+		Segment instance = new Segment();
+		Measure expResult = null;
+		Measure result = instance.getMinVelocity();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setMinVelocity method, of class Segment.
+	 */
+	@Test
+	public void testSetMinVelocity() {
+		System.out.println("setMinVelocity");
+		Measure minVelocity = null;
+		Segment instance = new Segment();
+		instance.setMinVelocity(minVelocity);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getNumberVehicles method, of class Segment.
+	 */
+	@Test
+	public void testGetNumberVehicles() {
+		System.out.println("getNumberVehicles");
+		Segment instance = new Segment();
+		Integer expResult = null;
+		Integer result = instance.getNumberVehicles();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setNumberVehicles method, of class Segment.
+	 */
+	@Test
+	public void testSetNumberVehicles() {
+		System.out.println("setNumberVehicles");
+		Integer numberVehicles = null;
+		Segment instance = new Segment();
+		instance.setNumberVehicles(numberVehicles);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of toString method, of class Segment.
+	 */
+	@Test
+	public void testToString() {
+		System.out.println("toString");
+		Segment instance = new Segment();
+		String expResult = "";
+		String result = instance.toString();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of reverse method, of class Segment.
+	 */
+	@Test
+	public void testReverse() {
+		System.out.println("reverse");
+		Segment instance = new Segment();
+		Segment expResult = null;
+		Segment result = instance.reverse();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
 }

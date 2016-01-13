@@ -29,20 +29,34 @@ public class VehicleDataOracle implements VehicleData {
 	private Connection connection;
 	private VelocityLimitDataOracle velocityLimitDataOracle;
 	private GearDataOracle gearDataOracle;
-	private TrottleDataOracle trottleDataOracle;
+	private ThrottleDataOracle trottleDataOracle;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public VehicleDataOracle(Connection connection) {
 		this.connection = connection;
 		this.velocityLimitDataOracle = new VelocityLimitDataOracle(connection);
 		this.gearDataOracle = new GearDataOracle(connection);
-		this.trottleDataOracle = new TrottleDataOracle(connection);
+		this.trottleDataOracle = new ThrottleDataOracle(connection);
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Integer size(Project project) {
 		return this.all(project).size();
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public List<Vehicle> all(Project project) {
 		try {
@@ -68,6 +82,12 @@ public class VehicleDataOracle implements VehicleData {
 		}
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project, Vehicle vehicle) {
 		List<Vehicle> vehicles = new ArrayList();
@@ -75,6 +95,12 @@ public class VehicleDataOracle implements VehicleData {
 		return this.save(project, vehicles);
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicles
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project, List<Vehicle> vehicles) {
 		try {
@@ -229,6 +255,12 @@ public class VehicleDataOracle implements VehicleData {
 		}
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	@Override
 	public Vehicle get(Project project, Vehicle vehicle) {
 		for (Vehicle vehicleList : this.all(project)) {
@@ -258,6 +290,12 @@ public class VehicleDataOracle implements VehicleData {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	@Override
 	public Boolean hasChanged(Project project, Vehicle vehicle) {
 		Vehicle oldVehicle = this.get(project, vehicle);

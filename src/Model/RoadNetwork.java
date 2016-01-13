@@ -39,11 +39,23 @@ public class RoadNetwork {
 		this.id = id;
 	}
 
+	/**
+	 *
+	 * @param node
+	 * @return
+	 */
 	public Boolean addNode(Node node) {
 		this.origin.insertVertex(node);
 		return this.graph.insertVertex(node) != null;
 	}
 
+	/**
+	 *
+	 * @param startNode
+	 * @param endNode
+	 * @param section
+	 * @return
+	 */
 	public Boolean addSection(Node startNode, Node endNode, Section section) {
 		Double totalLength = section.getTotalLength().getValue();
 		this.origin.insertEdge(startNode, endNode, section, totalLength);
@@ -54,6 +66,11 @@ public class RoadNetwork {
 		return this.graph.insertEdge(startNode, endNode, section, totalLength) != null;
 	}
 
+	/**
+	 *
+	 * @param name
+	 * @return
+	 */
 	public Node getNode(String name) {
 		for (Node node : this.getNodes()) {
 			if (node.getName().equalsIgnoreCase(name)) {
@@ -63,18 +80,34 @@ public class RoadNetwork {
 		return null;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Node> getNodes() {
 		return this.graph.vertexElements();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Graph<Node, Section> getGraph() {
 		return this.graph;
 	}
 
+	/**
+	 *
+	 * @param graph
+	 */
 	public void setGraph(Graph<Node, Section> graph) {
 		this.graph = graph;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public RoadNetwork getOrigin() {
 		RoadNetwork roadNetwork = new RoadNetwork();
 		roadNetwork.setId(this.id);
@@ -82,6 +115,10 @@ public class RoadNetwork {
 		return roadNetwork;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Section> getSections() {
 		Comparator<Section> comparator = new Comparator<Section>() {
 			@Override
@@ -105,10 +142,21 @@ public class RoadNetwork {
 		return sections;
 	}
 
+	/**
+	 *
+	 * @param startNode
+	 * @param endNode
+	 * @return
+	 */
 	public Section getSection(Node startNode, Node endNode) {
 		return this.getGraph().getEdge(startNode, endNode).getElement();
 	}
 
+	/**
+	 *
+	 * @param nodes
+	 * @return
+	 */
 	public List<Section> getSections(List<Node> nodes) {
 		Deque<Node> nodesDeque = new ArrayDeque(nodes);
 		List<Section> sections = new ArrayList();
@@ -125,10 +173,22 @@ public class RoadNetwork {
 		return sections;
 	}
 
+	/**
+	 *
+	 * @param section
+	 * @return
+	 */
 	public Deque<Node> getExtremeNodes(Section section) {
 		return this.graph.getExtremeVertexElements(section);
 	}
 
+	/**
+	 *
+	 * @param starNode
+	 * @param endNode
+	 * @param sectionPaths
+	 * @return
+	 */
 	public List<Deque<Node>> getAllPaths(Node starNode, Node endNode,
 										 List<Deque<Section>> sectionPaths) {
 		return GraphAlgorithms.

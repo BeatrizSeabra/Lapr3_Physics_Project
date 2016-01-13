@@ -23,8 +23,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public abstract class GraphicUserInterface extends JFrame {
 
+	/**
+	 *
+	 */
 	public GraphicUserInterface origin;
 
+	/**
+	 *
+	 * @param origin
+	 */
 	public void creation(GraphicUserInterface origin) {
 		if (origin != null) {
 			this.origin = origin;
@@ -41,6 +48,9 @@ public abstract class GraphicUserInterface extends JFrame {
 		this.setVisible(true);
 	}
 
+	/**
+	 *
+	 */
 	public void close() {
 		if (this.origin != null) {
 			this.origin.update();
@@ -51,6 +61,11 @@ public abstract class GraphicUserInterface extends JFrame {
 		this.dispose();
 	}
 
+	/**
+	 *
+	 * @param filters
+	 * @return
+	 */
 	public String saveFile(List<FileFilter> filters) {
 		JFileChooser fileChooser = this.getJFileChooser(filters);
 		int response = fileChooser.showSaveDialog(this);
@@ -71,6 +86,11 @@ public abstract class GraphicUserInterface extends JFrame {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param filters
+	 * @return
+	 */
 	public String selectFile(List<FileFilter> filters) {
 		JFileChooser fileChooser = this.getJFileChooser(filters);
 		fileChooser.setMultiSelectionEnabled(false);
@@ -82,6 +102,11 @@ public abstract class GraphicUserInterface extends JFrame {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param filters
+	 * @return
+	 */
 	public String[] selectFiles(List<FileFilter> filters) {
 		JFileChooser fileChooser = this.getJFileChooser(filters);
 		fileChooser.setMultiSelectionEnabled(true);

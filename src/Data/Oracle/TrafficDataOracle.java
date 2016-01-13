@@ -24,10 +24,20 @@ public class TrafficDataOracle {
 
 	private Connection connection;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public TrafficDataOracle(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 *
+	 * @param simulation
+	 * @param traffics
+	 * @return
+	 */
 	public Boolean save(Simulation simulation, List<Traffic> traffics) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.
@@ -73,9 +83,11 @@ public class TrafficDataOracle {
 			ARRAY arrayIndex = ((OracleCallableStatement) callableStatement).
 				getARRAY(1);
 			int index[] = arrayIndex.getIntArray();
-			for (int i = 0; i < size; i++) {
-				System.out.println("TRAFFIC INDEX: " + index[i]);
-			}
+			/*
+			 for (int i = 0; i < size; i++) {
+			 System.out.println("TRAFFIC INDEX: " + index[i]);
+			 }
+			 */
 			return true;
 		} catch (Exception ex) {
 			Error.

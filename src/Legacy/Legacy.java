@@ -28,10 +28,21 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public abstract class Legacy {
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public static String getExtension(String filePath) {
 		return filePath.substring(filePath.lastIndexOf(".")).replace(".", "");
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @param text
+	 * @param additional
+	 */
 	public static void writeFile(String filePath, String text,
 								 boolean additional) {
 		try {
@@ -49,6 +60,11 @@ public abstract class Legacy {
 		}
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public static String readFile(String filePath) {
 		try {
 			File arquivo = new File(filePath);
@@ -64,6 +80,11 @@ public abstract class Legacy {
 		}
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public static Map<String, Double> importScalesMeasures(String filePath) {
 		Map<String, Double> map = new HashMap();
 		String file = Legacy.readFile(filePath);
@@ -82,6 +103,10 @@ public abstract class Legacy {
 		return map;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public static List<FileFilter> getFiltersExtensionsImportRoadNetwork() {
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions("RoadNetworkImportClass"));
@@ -95,6 +120,10 @@ public abstract class Legacy {
 		return filters;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public static String[] getExtensionsImportRoadNetwork() {
 		List<FileFilter> filters = Legacy.
 			getFiltersExtensionsImportRoadNetwork();
@@ -108,6 +137,11 @@ public abstract class Legacy {
 		return string.toString().substring(1).split(";");
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public static List<Project> importRoadNetwork(String filePath) {
 		filePath = filePath.trim();
 		String extension = Legacy.getExtension(filePath);
@@ -131,6 +165,10 @@ public abstract class Legacy {
 		return null;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public static List<FileFilter> getFiltersExtensionsImportVehicle() {
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions("VehicleImportClass"));
@@ -144,6 +182,10 @@ public abstract class Legacy {
 		return filters;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public static List<FileFilter> getFiltersExtensionsImportSimulations() {
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions("SimulationImportClass"));
@@ -157,6 +199,11 @@ public abstract class Legacy {
 		return filters;
 	}
 
+	/**
+	 *
+	 * @param importClassName
+	 * @return
+	 */
 	public static List<FileFilter> getFiltersExtensionsImportObjects(
 		String importClassName) {
 		List<Object> objects = Settings.loadAllClass(Settings.
@@ -171,6 +218,11 @@ public abstract class Legacy {
 		return filters;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public static List<Vehicle> importVehicles(String filePath) {
 		filePath = filePath.trim();
 		String extension = Legacy.getExtension(filePath);
@@ -193,6 +245,11 @@ public abstract class Legacy {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public static List<Simulation> importSimulation(String filePath) {
 		filePath = filePath.trim();
 		String extension = Legacy.getExtension(filePath);
@@ -215,6 +272,12 @@ public abstract class Legacy {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @param importClassName
+	 * @return
+	 */
 	public static List<Object> importObjects(String filePath,
 											 String importClassName) {
 		filePath = filePath.trim();
@@ -238,6 +301,12 @@ public abstract class Legacy {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @param data
+	 * @return
+	 */
 	public static Boolean export(String filePath, List<String[]> data) {
 		filePath = filePath.trim();
 		String extension = Legacy.getExtension(filePath);
@@ -261,6 +330,10 @@ public abstract class Legacy {
 		return null;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public static List<FileFilter> getFiltersExtensionsExport() {
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions("ExportClass"));

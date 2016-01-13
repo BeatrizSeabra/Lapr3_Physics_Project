@@ -26,10 +26,20 @@ public class VelocityLimitDataOracle {
 
 	private Connection connection;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public VelocityLimitDataOracle(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 *
+	 * @param vehicle
+	 * @param limits
+	 * @return
+	 */
 	public Boolean save(Vehicle vehicle, Map<String, Measure> limits) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.

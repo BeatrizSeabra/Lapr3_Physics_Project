@@ -19,14 +19,27 @@ public abstract class Settings {
 
 	private static String settingsFilePath = "settings.properties";
 
+	/**
+	 *
+	 * @return
+	 */
 	public static String getSettingsFilePath() {
 		return Settings.settingsFilePath;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 */
 	public static void setSettingsFilePath(String filePath) {
 		Settings.settingsFilePath = filePath;
 	}
 
+	/**
+	 *
+	 * @param key
+	 * @return
+	 */
 	public static String getOption(String key) {
 		try {
 			Properties properties = new Properties();
@@ -41,6 +54,11 @@ public abstract class Settings {
 		}
 	}
 
+	/**
+	 *
+	 * @param key
+	 * @return
+	 */
 	public static String[] getOptions(String key) {
 		String option = Settings.getOption(key);
 		if (option == null) {
@@ -49,6 +67,12 @@ public abstract class Settings {
 		return option.split(";");
 	}
 
+	/**
+	 *
+	 * @param <T>
+	 * @param name
+	 * @return
+	 */
 	public static <T> T loadClass(String name) {
 		try {
 			return (T) Class.forName(name).newInstance();
@@ -59,6 +83,12 @@ public abstract class Settings {
 		}
 	}
 
+	/**
+	 *
+	 * @param <T>
+	 * @param names
+	 * @return
+	 */
 	public static <T> List<T> loadAllClass(String[] names) {
 		List<T> objects = new ArrayList();
 		for (String name : names) {

@@ -19,12 +19,20 @@ public class CopyProjectController {
 	private Project project;
 	private Project projectCopy;
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean initiation() {
 		this.projectData = Data.getProjectData();
 		this.project = ContextController.getOpenProject();
 		return this.project != null;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean copyProject() {
 		this.projectCopy = this.project.clone();
 		this.projectCopy.setId(0);
@@ -34,6 +42,10 @@ public class CopyProjectController {
 		return this.projectCopy != null;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean saveProject() {
 		return this.projectData.save(this.projectCopy);
 	}

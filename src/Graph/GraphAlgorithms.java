@@ -18,6 +18,8 @@ public class GraphAlgorithms {
 	/**
 	 * Performs breadth-first search of a Graph starting in a Vertex
 	 *
+	 * @param <V>
+	 * @param <E>
 	 * @param g Graph instance
 	 * @param vInf information of the Vertex that will be the source of the
 	 * search
@@ -82,6 +84,8 @@ public class GraphAlgorithms {
 	}
 
 	/**
+	 * @param <V>
+	 * @param <E>
 	 * @param g Graph instance
 	 * @param vInf information of the Vertex that will be the source of the
 	 * search
@@ -145,9 +149,12 @@ public class GraphAlgorithms {
 	}
 
 	/**
+	 * @param <V>
+	 * @param <E>
 	 * @param g Graph instance
 	 * @param voInf information of the Vertex origin
 	 * @param vdInf information of the Vertex destination
+	 * @param edgePaths
 	 * @return paths ArrayList with all paths from voInf to vdInf
 	 */
 	public static <V, E> List<Deque<V>> allPaths(Graph<V, E> g, V voInf,
@@ -252,7 +259,18 @@ public class GraphAlgorithms {
 	}
 
 	//shortest-path between voInf and vdInf
-	public static <V, E> double shortestPath(Graph<V, E> g, V voInf, V vdInf,
+
+	/**
+	 *
+	 * @param <V>
+	 * @param <E>
+	 * @param g
+	 * @param voInf
+	 * @param vdInf
+	 * @param shortPath
+	 * @return
+	 */
+		public static <V, E> double shortestPath(Graph<V, E> g, V voInf, V vdInf,
 											 Deque<V> shortPath) {
 
 		Vertex<V, E> vOrig = g.getVertex(voInf);

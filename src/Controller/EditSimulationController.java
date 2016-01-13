@@ -21,6 +21,9 @@ public class EditSimulationController {
 	private Simulation simulation;
 	private Simulation editSimulation;
 
+	/**
+	 *
+	 */
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
 		this.simulation = ContextController.getOpenSimulation();
@@ -28,10 +31,20 @@ public class EditSimulationController {
 		this.editSimulation = this.simulation.clone();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Simulation getSimulation() {
 		return this.editSimulation;
 	}
 
+	/**
+	 *
+	 * @param name
+	 * @param description
+	 * @return
+	 */
 	public Boolean editSimulation(String name, String description) {
 		this.editSimulation.setName(name);
 		this.editSimulation.setDescription(description);
@@ -39,11 +52,19 @@ public class EditSimulationController {
 			getDescription().equalsIgnoreCase(description);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean hasChanges() {
 		return !this.editSimulation.getName().equals(this.simulation.getName()) || !this.editSimulation.
 			getDescription().equals(this.simulation.getDescription());
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean saveSimulation() {
 		return this.simulationData.save(this.project, this.editSimulation);
 	}

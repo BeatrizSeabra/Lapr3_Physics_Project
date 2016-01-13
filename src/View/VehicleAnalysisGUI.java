@@ -28,6 +28,9 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form VehicleComparisonGUI
+	 *
+	 * @param orign
+	 * @param vehicleAnalysis
 	 */
 	public VehicleAnalysisGUI(GraphicUserInterface orign,
 							  VehicleAnalysis vehicleAnalysis) {
@@ -36,6 +39,9 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
 		this.vehicleComparisonController.setVehicleAnalysis(vehicleAnalysis);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.vehicleComparisonController.initiation();
@@ -64,6 +70,11 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
 		this.active(true);
 	}
 
+	/**
+	 *
+	 * @param state
+	 * @return
+	 */
 	public Boolean active(Boolean state) {
 		this.jButtonAnalyze.setEnabled(this.jComboBoxStartNodes.
 			getSelectedIndex() != -1 && this.jListEndNodes.getSelectedIndex() != -1 && this.jListVehicles.

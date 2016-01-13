@@ -11,6 +11,7 @@ import Model.Regime;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
+import Model.Simulation;
 import Model.Throttle;
 import Model.Vehicle;
 import Physics.Measure;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.swing.filechooser.FileFilter;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -361,6 +363,171 @@ public class LegacyTest {
 		expResult.add(this.vehicle);
 		List<Vehicle> result = Legacy.importVehicles(this.filePathVehicles);
 		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of getExtension method, of class Legacy.
+	 */
+	@Test
+	public void testGetExtension() {
+		System.out.println("getExtension");
+		String filePath = "";
+		String expResult = "";
+		String result = Legacy.getExtension(filePath);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of writeFile method, of class Legacy.
+	 */
+	@Test
+	public void testWriteFile() {
+		System.out.println("writeFile");
+		String filePath = "";
+		String text = "";
+		boolean additional = false;
+		Legacy.writeFile(filePath, text, additional);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of readFile method, of class Legacy.
+	 */
+	@Test
+	public void testReadFile() {
+		System.out.println("readFile");
+		String filePath = "";
+		String expResult = "";
+		String result = Legacy.readFile(filePath);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFiltersExtensionsImportRoadNetwork method, of class Legacy.
+	 */
+	@Test
+	public void testGetFiltersExtensionsImportRoadNetwork() {
+		System.out.println("getFiltersExtensionsImportRoadNetwork");
+		List<FileFilter> expResult = null;
+		List<FileFilter> result = Legacy.getFiltersExtensionsImportRoadNetwork();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getExtensionsImportRoadNetwork method, of class Legacy.
+	 */
+	@Test
+	public void testGetExtensionsImportRoadNetwork() {
+		System.out.println("getExtensionsImportRoadNetwork");
+		String[] expResult = null;
+		String[] result = Legacy.getExtensionsImportRoadNetwork();
+		assertArrayEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFiltersExtensionsImportVehicle method, of class Legacy.
+	 */
+	@Test
+	public void testGetFiltersExtensionsImportVehicle() {
+		System.out.println("getFiltersExtensionsImportVehicle");
+		List<FileFilter> expResult = null;
+		List<FileFilter> result = Legacy.getFiltersExtensionsImportVehicle();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFiltersExtensionsImportSimulations method, of class Legacy.
+	 */
+	@Test
+	public void testGetFiltersExtensionsImportSimulations() {
+		System.out.println("getFiltersExtensionsImportSimulations");
+		List<FileFilter> expResult = null;
+		List<FileFilter> result = Legacy.getFiltersExtensionsImportSimulations();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFiltersExtensionsImportObjects method, of class Legacy.
+	 */
+	@Test
+	public void testGetFiltersExtensionsImportObjects() {
+		System.out.println("getFiltersExtensionsImportObjects");
+		String importClassName = "";
+		List<FileFilter> expResult = null;
+		List<FileFilter> result = Legacy.getFiltersExtensionsImportObjects(importClassName);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of importSimulation method, of class Legacy.
+	 */
+	@Test
+	public void testImportSimulation() {
+		System.out.println("importSimulation");
+		String filePath = "";
+		List<Simulation> expResult = null;
+		List<Simulation> result = Legacy.importSimulation(filePath);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of importObjects method, of class Legacy.
+	 */
+	@Test
+	public void testImportObjects() {
+		System.out.println("importObjects");
+		String filePath = "";
+		String importClassName = "";
+		List<Object> expResult = null;
+		List<Object> result = Legacy.importObjects(filePath, importClassName);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of export method, of class Legacy.
+	 */
+	@Test
+	public void testExport() {
+		System.out.println("export");
+		String filePath = "";
+		List data = null;
+		Boolean expResult = null;
+		Boolean result = Legacy.export(filePath, data);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFiltersExtensionsExport method, of class Legacy.
+	 */
+	@Test
+	public void testGetFiltersExtensionsExport() {
+		System.out.println("getFiltersExtensionsExport");
+		List<FileFilter> expResult = null;
+		List<FileFilter> result = Legacy.getFiltersExtensionsExport();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }

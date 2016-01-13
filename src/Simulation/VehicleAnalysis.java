@@ -16,6 +16,14 @@ import java.util.List;
  */
 public interface VehicleAnalysis extends Analysis {
 
+	/**
+	 *
+	 * @param vehicle
+	 * @param roadNetwork
+	 * @param startNode
+	 * @param endNode
+	 * @return
+	 */
 	List<String[]> analyze(Vehicle vehicle, RoadNetwork roadNetwork,
 						   Node startNode, Node endNode);
 }

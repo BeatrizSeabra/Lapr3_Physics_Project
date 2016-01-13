@@ -27,11 +27,21 @@ public class SectionDataOracle {
 	private Connection connection;
 	private SegmentDataOracle segmentDataOracle;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public SectionDataOracle(Connection connection) {
 		this.connection = connection;
 		this.segmentDataOracle = new SegmentDataOracle(connection);
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param sections
+	 * @return
+	 */
 	public Boolean save(Project project, List<Section> sections) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.

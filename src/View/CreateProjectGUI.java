@@ -23,12 +23,17 @@ public class CreateProjectGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form CreateProjectGUI
+	 *
+	 * @param origin
 	 */
 	public CreateProjectGUI(GraphicUserInterface origin) {
 		this.initComponents();
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.jListVehicles.setModel(jModelListVehicles);
@@ -36,6 +41,9 @@ public class CreateProjectGUI extends GraphicUserInterface {
 		this.createProjectController.initiation();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		if (this.active(this.createProjectController.hasProject())) {
@@ -60,6 +68,11 @@ public class CreateProjectGUI extends GraphicUserInterface {
 		}
 	}
 
+	/**
+	 *
+	 * @param state
+	 * @return
+	 */
 	public Boolean active(Boolean state) {
 		this.jTextFieldName.setEnabled(state);
 		this.jTextFieldDescription.setEnabled(state);

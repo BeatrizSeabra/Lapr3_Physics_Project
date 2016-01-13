@@ -14,6 +14,11 @@ public class Measure implements Comparable<Measure> {
 	private Double value = 0.0;
 	private String unit = "ratio";
 
+	/**
+	 *
+	 * @param value
+	 * @param unit
+	 */
 	public Measure(Double value, String unit) {
 		if (value == null) {
 			this.value = 0.0;

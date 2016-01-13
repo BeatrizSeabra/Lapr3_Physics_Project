@@ -7,6 +7,7 @@ package Model;
 
 import Physics.Measure;
 import Physics.Measurement;
+import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -285,6 +286,641 @@ public class VehicleTest {
 
 		System.out.println("fuelConsumptionTime: " + fuelConsumptionTime);
 		System.out.println("fuelConsumptionLenght: " + fuelConsumptionLenght);
+	}
+
+	/**
+	 * Test of setVelocityLimits method, of class Vehicle.
+	 */
+	@Test
+	public void testSetVelocityLimits() {
+		System.out.println("setVelocityLimits");
+		String segmentType = "";
+		Measure velocityLimit = null;
+		Vehicle instance = new Vehicle();
+		Boolean expResult = null;
+		Boolean result = instance.setVelocityLimits(segmentType, velocityLimit);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getVelocityLimits method, of class Vehicle.
+	 */
+	@Test
+	public void testGetVelocityLimits_String() {
+		System.out.println("getVelocityLimits");
+		String segmentType = "";
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getVelocityLimits(segmentType);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setGear method, of class Vehicle.
+	 */
+	@Test
+	public void testSetGear() {
+		System.out.println("setGear");
+		Integer number = null;
+		Measure ratio = null;
+		Vehicle instance = new Vehicle();
+		Boolean expResult = null;
+		Boolean result = instance.setGear(number, ratio);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getGear method, of class Vehicle.
+	 */
+	@Test
+	public void testGetGear() {
+		System.out.println("getGear");
+		Integer number = null;
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getGear(number);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of addThrottle method, of class Vehicle.
+	 */
+	@Test
+	public void testAddThrottle() {
+		System.out.println("addThrottle");
+		Throttle throttle = null;
+		Vehicle instance = new Vehicle();
+		Boolean expResult = null;
+		Boolean result = instance.addThrottle(throttle);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getThrottle method, of class Vehicle.
+	 */
+	@Test
+	public void testGetThrottle() {
+		System.out.println("getThrottle");
+		Integer index = null;
+		Vehicle instance = new Vehicle();
+		Throttle expResult = null;
+		Throttle result = instance.getThrottle(index);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getId method, of class Vehicle.
+	 */
+	@Test
+	public void testGetId() {
+		System.out.println("getId");
+		Vehicle instance = new Vehicle();
+		Integer expResult = null;
+		Integer result = instance.getId();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setId method, of class Vehicle.
+	 */
+	@Test
+	public void testSetId() {
+		System.out.println("setId");
+		Integer id = null;
+		Vehicle instance = new Vehicle();
+		instance.setId(id);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getName method, of class Vehicle.
+	 */
+	@Test
+	public void testGetName() {
+		System.out.println("getName");
+		Vehicle instance = new Vehicle();
+		String expResult = "";
+		String result = instance.getName();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setName method, of class Vehicle.
+	 */
+	@Test
+	public void testSetName() {
+		System.out.println("setName");
+		String name = "";
+		Vehicle instance = new Vehicle();
+		instance.setName(name);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getDescription method, of class Vehicle.
+	 */
+	@Test
+	public void testGetDescription() {
+		System.out.println("getDescription");
+		Vehicle instance = new Vehicle();
+		String expResult = "";
+		String result = instance.getDescription();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setDescription method, of class Vehicle.
+	 */
+	@Test
+	public void testSetDescription() {
+		System.out.println("setDescription");
+		String description = "";
+		Vehicle instance = new Vehicle();
+		instance.setDescription(description);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getType method, of class Vehicle.
+	 */
+	@Test
+	public void testGetType() {
+		System.out.println("getType");
+		Vehicle instance = new Vehicle();
+		String expResult = "";
+		String result = instance.getType();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setType method, of class Vehicle.
+	 */
+	@Test
+	public void testSetType() {
+		System.out.println("setType");
+		String type = "";
+		Vehicle instance = new Vehicle();
+		instance.setType(type);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getMotorization method, of class Vehicle.
+	 */
+	@Test
+	public void testGetMotorization() {
+		System.out.println("getMotorization");
+		Vehicle instance = new Vehicle();
+		String expResult = "";
+		String result = instance.getMotorization();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setMotorization method, of class Vehicle.
+	 */
+	@Test
+	public void testSetMotorization() {
+		System.out.println("setMotorization");
+		String motorization = "";
+		Vehicle instance = new Vehicle();
+		instance.setMotorization(motorization);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFuel method, of class Vehicle.
+	 */
+	@Test
+	public void testGetFuel() {
+		System.out.println("getFuel");
+		Vehicle instance = new Vehicle();
+		String expResult = "";
+		String result = instance.getFuel();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setFuel method, of class Vehicle.
+	 */
+	@Test
+	public void testSetFuel() {
+		System.out.println("setFuel");
+		String fuel = "";
+		Vehicle instance = new Vehicle();
+		instance.setFuel(fuel);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getMass method, of class Vehicle.
+	 */
+	@Test
+	public void testGetMass() {
+		System.out.println("getMass");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getMass();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setMass method, of class Vehicle.
+	 */
+	@Test
+	public void testSetMass() {
+		System.out.println("setMass");
+		Measure mass = null;
+		Vehicle instance = new Vehicle();
+		instance.setMass(mass);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getLoad method, of class Vehicle.
+	 */
+	@Test
+	public void testGetLoad() {
+		System.out.println("getLoad");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getLoad();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setLoad method, of class Vehicle.
+	 */
+	@Test
+	public void testSetLoad() {
+		System.out.println("setLoad");
+		Measure load = null;
+		Vehicle instance = new Vehicle();
+		instance.setLoad(load);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getDragCoefficient method, of class Vehicle.
+	 */
+	@Test
+	public void testGetDragCoefficient() {
+		System.out.println("getDragCoefficient");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getDragCoefficient();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setDragCoefficient method, of class Vehicle.
+	 */
+	@Test
+	public void testSetDragCoefficient() {
+		System.out.println("setDragCoefficient");
+		Measure dragCoefficient = null;
+		Vehicle instance = new Vehicle();
+		instance.setDragCoefficient(dragCoefficient);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFrontalArea method, of class Vehicle.
+	 */
+	@Test
+	public void testGetFrontalArea() {
+		System.out.println("getFrontalArea");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getFrontalArea();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setFrontalArea method, of class Vehicle.
+	 */
+	@Test
+	public void testSetFrontalArea() {
+		System.out.println("setFrontalArea");
+		Measure frontalArea = null;
+		Vehicle instance = new Vehicle();
+		instance.setFrontalArea(frontalArea);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getRollingRCoefficient method, of class Vehicle.
+	 */
+	@Test
+	public void testGetRollingRCoefficient() {
+		System.out.println("getRollingRCoefficient");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getRollingRCoefficient();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setRollingRCoefficient method, of class Vehicle.
+	 */
+	@Test
+	public void testSetRollingRCoefficient() {
+		System.out.println("setRollingRCoefficient");
+		Measure rollingRcoefficient = null;
+		Vehicle instance = new Vehicle();
+		instance.setRollingRCoefficient(rollingRcoefficient);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getWheelSize method, of class Vehicle.
+	 */
+	@Test
+	public void testGetWheelSize() {
+		System.out.println("getWheelSize");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getWheelSize();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setWheelSize method, of class Vehicle.
+	 */
+	@Test
+	public void testSetWheelSize() {
+		System.out.println("setWheelSize");
+		Measure wheelSize = null;
+		Vehicle instance = new Vehicle();
+		instance.setWheelSize(wheelSize);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getMinRPM method, of class Vehicle.
+	 */
+	@Test
+	public void testGetMinRPM() {
+		System.out.println("getMinRPM");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getMinRPM();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setMinRPM method, of class Vehicle.
+	 */
+	@Test
+	public void testSetMinRPM() {
+		System.out.println("setMinRPM");
+		Measure minRPM = null;
+		Vehicle instance = new Vehicle();
+		instance.setMinRPM(minRPM);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getMaxRPM method, of class Vehicle.
+	 */
+	@Test
+	public void testGetMaxRPM() {
+		System.out.println("getMaxRPM");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getMaxRPM();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setMaxRPM method, of class Vehicle.
+	 */
+	@Test
+	public void testSetMaxRPM() {
+		System.out.println("setMaxRPM");
+		Measure maxRPM = null;
+		Vehicle instance = new Vehicle();
+		instance.setMaxRPM(maxRPM);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFinalDriveRatio method, of class Vehicle.
+	 */
+	@Test
+	public void testGetFinalDriveRatio() {
+		System.out.println("getFinalDriveRatio");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getFinalDriveRatio();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setFinalDriveRatio method, of class Vehicle.
+	 */
+	@Test
+	public void testSetFinalDriveRatio() {
+		System.out.println("setFinalDriveRatio");
+		Measure finalDriveRatio = null;
+		Vehicle instance = new Vehicle();
+		instance.setFinalDriveRatio(finalDriveRatio);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getEnergyRegeneration method, of class Vehicle.
+	 */
+	@Test
+	public void testGetEnergyRegeneration() {
+		System.out.println("getEnergyRegeneration");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getEnergyRegeneration();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setEnergyRegeneration method, of class Vehicle.
+	 */
+	@Test
+	public void testSetEnergyRegeneration() {
+		System.out.println("setEnergyRegeneration");
+		Measure energyRegeneration = null;
+		Vehicle instance = new Vehicle();
+		instance.setEnergyRegeneration(energyRegeneration);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getVelocityLimits method, of class Vehicle.
+	 */
+	@Test
+	public void testGetVelocityLimits_0args() {
+		System.out.println("getVelocityLimits");
+		Vehicle instance = new Vehicle();
+		Map<String, Measure> expResult = null;
+		Map<String, Measure> result = instance.getVelocityLimits();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getGears method, of class Vehicle.
+	 */
+	@Test
+	public void testGetGears() {
+		System.out.println("getGears");
+		Vehicle instance = new Vehicle();
+		Map<Integer, Measure> expResult = null;
+		Map<Integer, Measure> result = instance.getGears();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getThrottles method, of class Vehicle.
+	 */
+	@Test
+	public void testGetThrottles() {
+		System.out.println("getThrottles");
+		Vehicle instance = new Vehicle();
+		List<Throttle> expResult = null;
+		List<Throttle> result = instance.getThrottles();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setThrottles method, of class Vehicle.
+	 */
+	@Test
+	public void testSetThrottles() {
+		System.out.println("setThrottles");
+		List<Throttle> throttles = null;
+		Vehicle instance = new Vehicle();
+		instance.setThrottles(throttles);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of clone method, of class Vehicle.
+	 */
+	@Test
+	public void testClone() {
+		System.out.println("clone");
+		Vehicle instance = new Vehicle();
+		Vehicle expResult = null;
+		Vehicle result = instance.clone();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of toString method, of class Vehicle.
+	 */
+	@Test
+	public void testToString() {
+		System.out.println("toString");
+		Vehicle instance = new Vehicle();
+		String expResult = "";
+		String result = instance.toString();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getCurrentGear method, of class Vehicle.
+	 */
+	@Test
+	public void testGetCurrentGear() {
+		System.out.println("getCurrentGear");
+		Vehicle instance = new Vehicle();
+		Integer expResult = null;
+		Integer result = instance.getCurrentGear();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getCurrentVelocity method, of class Vehicle.
+	 */
+	@Test
+	public void testGetCurrentVelocity() {
+		System.out.println("getCurrentVelocity");
+		Vehicle instance = new Vehicle();
+		Measure expResult = null;
+		Measure result = instance.getCurrentVelocity();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }

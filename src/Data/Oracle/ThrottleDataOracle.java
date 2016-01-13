@@ -20,16 +20,26 @@ import oracle.sql.ArrayDescriptor;
  *
  * @author LAPR3_20152016_G27
  */
-public class TrottleDataOracle {
+public class ThrottleDataOracle {
 
 	private Connection connection;
 	private RegimeDataOracle regimeDataOracle;
 
-	public TrottleDataOracle(Connection connection) {
+	/**
+	 *
+	 * @param connection
+	 */
+	public ThrottleDataOracle(Connection connection) {
 		this.connection = connection;
 		this.regimeDataOracle = new RegimeDataOracle(connection);
 	}
 
+	/**
+	 *
+	 * @param vehicle
+	 * @param throttles
+	 * @return
+	 */
 	public Boolean save(Vehicle vehicle, List<Throttle> throttles) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.
@@ -37,7 +47,7 @@ public class TrottleDataOracle {
 			ArrayDescriptor oracleNumberCollection = ArrayDescriptor.
 				createDescriptor("NUMBERTABLE", this.connection);
 			CallableStatement callableStatement = connection.
-				prepareCall("{ call saveTrottles(?,?,?,?) }");
+				prepareCall("{ call saveThrottles(?,?,?,?) }");
 			int size = throttles.size();
 			double[] param01 = new double[size];
 			double[] param02 = new double[size];

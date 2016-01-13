@@ -20,18 +20,26 @@ public class CreateSimulationGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form CreateProjectGUI
+	 *
+	 * @param origin
 	 */
 	public CreateSimulationGUI(GraphicUserInterface origin) {
 		this.initComponents();
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.createSimulationController = new CreateSimulationController();
 		this.createSimulationController.initiation();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		if (this.active(this.createSimulationController.hasSimulation())) {
@@ -53,6 +61,11 @@ public class CreateSimulationGUI extends GraphicUserInterface {
 		}
 	}
 
+	/**
+	 *
+	 * @param state
+	 * @return
+	 */
 	public Boolean active(Boolean state) {
 		this.jTextFieldName.setEnabled(state);
 		this.jTextFieldDescription.setEnabled(state);

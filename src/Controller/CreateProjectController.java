@@ -24,12 +24,21 @@ public class CreateProjectController {
 	private List<Vehicle> vehicles;
 	private AddVehiclesController addVehiclesController = new AddVehiclesController();
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean initiation() {
 		this.project = null;
 		this.vehicles = new ArrayList();
 		return true;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public Boolean loadVehicles(String filePath) {
 		List<Vehicle> newVehicles = Legacy.importVehicles(filePath);
 		if (newVehicles != null && !newVehicles.isEmpty()) {
@@ -40,6 +49,11 @@ public class CreateProjectController {
 		return false;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public Boolean loadRoadNetwork(String filePath) {
 		List<Project> projects = Legacy.importRoadNetwork(filePath);
 		if (projects != null && !projects.isEmpty()) {
@@ -49,6 +63,10 @@ public class CreateProjectController {
 		return false;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getName() {
 		if (this.hasProject()) {
 			return this.project.getName();
@@ -56,6 +74,10 @@ public class CreateProjectController {
 		return "";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getDescription() {
 		if (this.hasProject()) {
 			return this.project.getDescription();
@@ -63,6 +85,10 @@ public class CreateProjectController {
 		return "";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getToString() {
 		if (this.hasProject()) {
 			return this.project.getRoadNetwork().toString();
@@ -70,22 +96,39 @@ public class CreateProjectController {
 		return "";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean hasProject() {
 		return this.project != null;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Vehicle> getProjectVehicles() {
 		return this.vehicles;
 	}
 
+	/**
+	 *
+	 * @param name
+	 * @param description
+	 * @return
+	 */
 	public Boolean saveProject(String name, String description) {
 		if (this.hasProject()) {
 			this.project.setName(name);
 			this.project.setDescription(description);
 			Boolean idProject = this.projectData.save(this.project);
+			Data.getVehicleData().save(this.project, this.vehicles);
 			if (idProject == true) {
 				for (Vehicle vehicle : this.vehicles) {
-					//if (!this.project.addVehicle(vehicle)) return false;
+					if (!this.project.addVehicle(vehicle)) {
+						return false;
+					}
 				}
 				return true;
 			}

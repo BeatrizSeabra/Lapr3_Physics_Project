@@ -13,12 +13,29 @@ import javax.swing.filechooser.FileFilter;
  */
 public interface Export {
 
+	/**
+	 *
+	 * @return
+	 */
 	String getExtension();
 
+	/**
+	 *
+	 * @return
+	 */
 	String getExtensionDescription();
 
+	/**
+	 *
+	 * @return
+	 */
 	FileFilter getExtensionFilter();
 
+	/**
+	 *
+	 * @param data
+	 * @return
+	 */
 	String export(Object data);
 
 }

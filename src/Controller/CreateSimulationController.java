@@ -24,12 +24,20 @@ public class CreateSimulationController {
 	private Project project;
 	private Simulation simulation;
 
+	/**
+	 *
+	 * @return
+	 */
 	public boolean initiation() {
 		this.project = ContextController.getOpenProject();
 		this.simulation = null;
 		return true;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getName() {
 		if (this.hasSimulation()) {
 			return this.simulation.getName();
@@ -37,6 +45,10 @@ public class CreateSimulationController {
 		return "";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getDescription() {
 		if (this.hasSimulation()) {
 			return this.simulation.getDescription();
@@ -44,6 +56,10 @@ public class CreateSimulationController {
 		return "";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getToString() {
 		if (this.hasSimulation()) {
 			return this.simulation.toString();
@@ -51,6 +67,12 @@ public class CreateSimulationController {
 		return "";
 	}
 
+	/**
+	 *
+	 * @param name
+	 * @param description
+	 * @return
+	 */
 	public Boolean saveSimulation(String name, String description) {
 		if (this.hasSimulation()) {
 			this.simulation.setName(name);
@@ -60,10 +82,19 @@ public class CreateSimulationController {
 		return false;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean hasSimulation() {
 		return this.simulation != null;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public Boolean loadSimulation(String filePath) {
 		List<Simulation> simulations = Legacy.importSimulation(filePath);
 		if (simulations != null && !simulations.isEmpty()) {

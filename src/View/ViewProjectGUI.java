@@ -29,10 +29,16 @@ public class ViewProjectGUI extends JPanel {
 		this.update();
 	}
 
+	/**
+	 *
+	 */
 	public void initiation() {
 		this.jListVehicles.setModel(jModelListVehicles);
 	}
 
+	/**
+	 *
+	 */
 	public void update() {
 		Project project = ContextController.getOpenProject();
 		this.jLabelName.setText(project.getName());

@@ -30,12 +30,18 @@ public class OpenProjectGUI extends GraphicUserInterface {
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.jListProjects.setModel(jModelListProjects);
 		this.openProjectController.initiation();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.jModelListProjects.removeAllElements();
@@ -45,6 +51,11 @@ public class OpenProjectGUI extends GraphicUserInterface {
 		this.active(!this.jModelListProjects.isEmpty());
 	}
 
+	/**
+	 *
+	 * @param state
+	 * @return
+	 */
 	public Boolean active(Boolean state) {
 		this.jListProjects.setEnabled(state);
 		this.jButtonOpen.setEnabled(this.jListProjects.getSelectedIndex() != -1);

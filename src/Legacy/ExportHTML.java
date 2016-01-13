@@ -15,22 +15,39 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ExportHTML implements Export {
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtension() {
 		return "html";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtensionDescription() {
 		return "HTML Documents (*.html)";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public FileNameExtensionFilter getExtensionFilter() {
 		return new FileNameExtensionFilter(this.getExtensionDescription(), this.
 										   getExtension());
 	}
 
+	/**
+	 *
+	 * @param data
+	 * @return
+	 */
 	public String export(Object data) {
 		List<String[]> dataList = (List<String[]>) data;
 		if (dataList != null) {

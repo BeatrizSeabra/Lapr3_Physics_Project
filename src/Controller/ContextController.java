@@ -17,18 +17,34 @@ public abstract class ContextController {
 	static private Project currentProject;
 	static private Simulation currentSimulation;
 
+	/**
+	 *
+	 * @return
+	 */
 	static public Project getOpenProject() {
 		return ContextController.currentProject;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	static public Simulation getOpenSimulation() {
 		return ContextController.currentSimulation;
 	}
 
+	/**
+	 *
+	 * @param project
+	 */
 	static public void setOpenProject(Project project) {
 		ContextController.currentProject = project;
 	}
 
+	/**
+	 *
+	 * @param simulation
+	 */
 	static public void setOpenSimulation(Simulation simulation) {
 		ContextController.currentSimulation = simulation;
 	}

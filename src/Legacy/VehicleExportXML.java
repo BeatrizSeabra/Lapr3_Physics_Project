@@ -19,22 +19,39 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class VehicleExportXML implements Export {
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtension() {
 		return "xml";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtensionDescription() {
 		return "XML Documents (*.xml)";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public FileNameExtensionFilter getExtensionFilter() {
 		return new FileNameExtensionFilter(this.getExtensionDescription(), this.
 										   getExtension());
 	}
 
+	/**
+	 *
+	 * @param data
+	 * @return
+	 */
 	public String export(Object data) {
 		Vehicle vehicle = (Vehicle) data;
 		if (vehicle != null) {

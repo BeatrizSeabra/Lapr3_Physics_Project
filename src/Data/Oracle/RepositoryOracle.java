@@ -29,6 +29,9 @@ public class RepositoryOracle implements Repository {
 	private VehicleData vehicleData;
 	private SimulationData simulationData;
 
+	/**
+	 *
+	 */
 	public RepositoryOracle() {
 		try {
 			this.oracleDataSource = new OracleDataSource();
@@ -42,6 +45,10 @@ public class RepositoryOracle implements Repository {
 		}
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Integer getNextIndex() {
 		try {
 			CallableStatement callableStatement = connection.
@@ -56,16 +63,28 @@ public class RepositoryOracle implements Repository {
 		}
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public ProjectData getProjectData() {
 		return this.projactData;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public VehicleData getVehicleData() {
 		return this.vehicleData;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public SimulationData getSimulationData() {
 		return this.simulationData;

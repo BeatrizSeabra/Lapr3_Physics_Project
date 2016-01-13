@@ -100,4 +100,86 @@ public class NodeTest {
 		System.out.println("testEqualsFalseClass");
 		assertEquals(false, this.node.equals(new String()));
 	}
+
+	/**
+	 * Test of getId method, of class Node.
+	 */
+	@Test
+	public void testGetId() {
+		System.out.println("getId");
+		Node instance = null;
+		Integer expResult = null;
+		Integer result = instance.getId();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setId method, of class Node.
+	 */
+	@Test
+	public void testSetId() {
+		System.out.println("setId");
+		Integer id = null;
+		Node instance = null;
+		instance.setId(id);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getName method, of class Node.
+	 */
+	@Test
+	public void testGetName() {
+		System.out.println("getName");
+		Node instance = null;
+		String expResult = "";
+		String result = instance.getName();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setName method, of class Node.
+	 */
+	@Test
+	public void testSetName() {
+		System.out.println("setName");
+		String name = "";
+		Node instance = null;
+		instance.setName(name);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of clone method, of class Node.
+	 */
+	@Test
+	public void testClone() {
+		System.out.println("clone");
+		Node instance = null;
+		Node expResult = null;
+		Node result = instance.clone();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of toString method, of class Node.
+	 */
+	@Test
+	public void testToString() {
+		System.out.println("toString");
+		Node instance = null;
+		String expResult = "";
+		String result = instance.toString();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
 }

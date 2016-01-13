@@ -18,9 +18,19 @@ public class Regime implements Comparable<Regime> {
 	private Measure rpmHigh;
 	private Measure fuelConsumption = new Measure(0.0, "");
 
+	/**
+	 *
+	 */
 	public Regime() {
 	}
 
+	/**
+	 *
+	 * @param torque
+	 * @param rpmLow
+	 * @param rpmHigh
+	 * @param fuelConsumption
+	 */
 	public Regime(Measure torque, Measure rpmLow, Measure rpmHigh,
 				  Measure fuelConsumption) {
 		this.torque = torque;

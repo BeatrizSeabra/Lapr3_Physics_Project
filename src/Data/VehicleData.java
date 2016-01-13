@@ -15,16 +15,50 @@ import java.util.List;
  */
 public interface VehicleData {
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	Integer size(Project project);
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	List<Vehicle> all(Project project);
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	Boolean save(Project project, Vehicle vehicle);
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicles
+	 * @return
+	 */
 	Boolean save(Project project, List<Vehicle> vehicles);
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	Vehicle get(Project project, Vehicle vehicle);
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	Boolean hasChanged(Project project, Vehicle vehicle);
 
 }

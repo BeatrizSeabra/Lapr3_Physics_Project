@@ -19,15 +19,27 @@ public class AddRoadsController {
 	private Project project;
 	private List<Project> roads;
 
+	/**
+	 *
+	 */
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
 
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Project> getRoads() {
 		return this.roads;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public Boolean loadRoads(String filePath) {
 		List<Project> roads = Legacy.importRoadNetwork(filePath);
 		if (roads != null) {
@@ -37,6 +49,11 @@ public class AddRoadsController {
 		return false;
 	}
 
+	/**
+	 *
+	 * @param roads
+	 * @param newRoads
+	 */
 	public void concatenateRoads(List<Project> roads,
 								 List<Project> newRoads) {
 		for (Project newRoad : newRoads) {
@@ -54,6 +71,12 @@ public class AddRoadsController {
 		}
 	}
 
+	/**
+	 *
+	 * @param roads
+	 * @param name
+	 * @return
+	 */
 	public Integer quantityName(List<Project> roads, String name) {
 		Integer amount = 0;
 		for (Project road : roads) {
@@ -64,10 +87,18 @@ public class AddRoadsController {
 		return amount;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean hasChanges() {
 		return !this.roads.equals(this.project.getRoadNetwork());
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean saveProjectRoads() {
 		for (Project road : this.roads) {
 

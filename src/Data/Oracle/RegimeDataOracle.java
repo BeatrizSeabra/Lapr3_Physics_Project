@@ -24,10 +24,20 @@ public class RegimeDataOracle {
 
 	private Connection connection;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public RegimeDataOracle(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 *
+	 * @param throttle
+	 * @param regimes
+	 * @return
+	 */
 	public Boolean save(Throttle throttle, List<Regime> regimes) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.

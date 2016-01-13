@@ -26,6 +26,7 @@ public class ResultsGUI extends GraphicUserInterface {
 	 * Creates new form OpenProjectGUI
 	 *
 	 * @param origin
+	 * @param result
 	 */
 	public ResultsGUI(GraphicUserInterface origin, List<String[]> result) {
 		this.resultsController.setResults(result);
@@ -33,10 +34,16 @@ public class ResultsGUI extends GraphicUserInterface {
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		TableModel tableModel = new DefaultTableModel(this.resultsController.

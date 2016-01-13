@@ -22,14 +22,27 @@ public class PathAnalysisController {
 	private Node startNode;
 	private List<Node> endNodes;
 
+	/**
+	 *
+	 */
 	public void initiation() {
 		this.roadNetwork = ContextController.getOpenProject().getRoadNetwork();
 	}
 
+	/**
+	 *
+	 * @param pathAnalysis
+	 */
 	public void setPathAnalysis(PathAnalysis pathAnalysis) {
 		this.pathAnalysis = pathAnalysis;
 	}
 
+	/**
+	 *
+	 * @param startNode
+	 * @param endNodes
+	 * @return
+	 */
 	public Boolean setNodes(Node startNode, List<Node> endNodes) {
 		this.startNode = startNode;
 		this.endNodes = endNodes;
@@ -37,10 +50,18 @@ public class PathAnalysisController {
 			equals(endNodes);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Node> getNodes() {
 		return this.roadNetwork.getNodes();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<List<String[]>> analyze() {
 		List<List<String[]>> results = new ArrayList();
 		for (Node endNode : this.endNodes) {

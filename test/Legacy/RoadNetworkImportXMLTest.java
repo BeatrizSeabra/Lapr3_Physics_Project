@@ -14,6 +14,7 @@ import Physics.Measure;
 import System.Settings;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.filechooser.FileFilter;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -262,6 +263,34 @@ public class RoadNetworkImportXMLTest {
 		List<Project> result = this.roadNetworkImportXML.
 			importData(this.dataXML);
 		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of getExtensionDescription method, of class RoadNetworkImportXML.
+	 */
+	@Test
+	public void testGetExtensionDescription() {
+		System.out.println("getExtensionDescription");
+		RoadNetworkImportXML instance = new RoadNetworkImportXML();
+		String expResult = "";
+		String result = instance.getExtensionDescription();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getExtensionFilter method, of class RoadNetworkImportXML.
+	 */
+	@Test
+	public void testGetExtensionFilter() {
+		System.out.println("getExtensionFilter");
+		RoadNetworkImportXML instance = new RoadNetworkImportXML();
+		FileFilter expResult = null;
+		FileFilter result = instance.getExtensionFilter();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }

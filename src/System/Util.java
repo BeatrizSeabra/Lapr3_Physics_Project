@@ -17,10 +17,20 @@ public abstract class Util {
 	private static SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 	private static SimpleDateFormat formatDateComplete = new SimpleDateFormat("yyyy/M/dd HH:mm:ss.SSS");
 
+	/**
+	 *
+	 * @param date
+	 * @return
+	 */
 	public static String toString(Date date) {
 		return Util.formatDate.format(date);
 	}
 
+	/**
+	 *
+	 * @param date
+	 * @return
+	 */
 	public static Date toDate(String date) {
 		try {
 			return Util.formatDate.parse(date);
@@ -29,6 +39,11 @@ public abstract class Util {
 		}
 	}
 
+	/**
+	 *
+	 * @param string
+	 * @return
+	 */
 	public static Double toDouble(String string) {
 		try {
 			return Double.parseDouble(string.replaceAll(",", ".").trim());
@@ -39,6 +54,11 @@ public abstract class Util {
 		}
 	}
 
+	/**
+	 *
+	 * @param string
+	 * @return
+	 */
 	public static Integer toInteger(String string) {
 		try {
 			return Integer.parseInt(string.trim());
@@ -49,6 +69,11 @@ public abstract class Util {
 		}
 	}
 
+	/**
+	 *
+	 * @param string
+	 * @return
+	 */
 	public static Double toValue(String string) {
 		Double value = Util.toDouble(string.replaceAll("[^0-9\\.\\,\\- ]+", "").
 			split(" ")[0].
@@ -59,6 +84,11 @@ public abstract class Util {
 		return value;
 	}
 
+	/**
+	 *
+	 * @param string
+	 * @return
+	 */
 	public static String toUnit(String string) {
 		String unit = string.replaceAll("[0-9\\.\\,' '\\-\\+]+", "").trim();
 		if (unit == null || unit.isEmpty()) {

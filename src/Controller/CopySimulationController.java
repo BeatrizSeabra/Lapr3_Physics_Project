@@ -19,12 +19,22 @@ public class CopySimulationController {
 	private Simulation simulation;
 	private Simulation simulationCopy;
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean initiation() {
 		this.project = ContextController.getOpenProject();
 		this.simulation = ContextController.getOpenSimulation();
 		return this.simulation != null;
 	}
 
+	/**
+	 *
+	 * @param name
+	 * @param description
+	 * @return
+	 */
 	public Boolean copySimulation(String name, String description) {
 		if (name.equalsIgnoreCase(this.simulation.getName())) {
 			name += " (copy)";

@@ -28,22 +28,39 @@ import javax.xml.stream.XMLStreamReader;
  */
 public class RoadNetworkImportXML implements Import<Project> {
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtension() {
 		return "xml";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtensionDescription() {
 		return "XML Documents (*.xml)";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public FileFilter getExtensionFilter() {
 		return new FileNameExtensionFilter(this.getExtensionDescription(), this.
 										   getExtension());
 	}
 
+	/**
+	 *
+	 * @param data
+	 * @return
+	 */
 	@Override
 	public List<Project> importData(String data) {
 		List<Project> projects = new ArrayList();

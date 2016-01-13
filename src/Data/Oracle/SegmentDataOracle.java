@@ -24,10 +24,20 @@ public class SegmentDataOracle {
 
 	private Connection connection;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public SegmentDataOracle(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 *
+	 * @param section
+	 * @param segments
+	 * @return
+	 */
 	public Boolean save(Section section, List<Segment> segments) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.

@@ -25,22 +25,39 @@ import javax.xml.stream.XMLStreamReader;
  */
 public class VehicleImportXML implements Import<Vehicle> {
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtension() {
 		return "xml";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String getExtensionDescription() {
 		return "XML Documents (*.xml)";
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public FileNameExtensionFilter getExtensionFilter() {
 		return new FileNameExtensionFilter(this.getExtensionDescription(), this.
 										   getExtension());
 	}
 
+	/**
+	 *
+	 * @param data
+	 * @return
+	 */
 	@Override
 	public List<Vehicle> importData(String data) {
 		List<Vehicle> vehicles = new ArrayList();

@@ -26,10 +26,18 @@ public class Section {
 	private Measure windSpeed;
 	private List<Segment> segments = new ArrayList();
 
+	/**
+	 *
+	 * @return
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 *
+	 * @param id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -125,10 +133,19 @@ public class Section {
 		return this.segments;
 	}
 
+	/**
+	 *
+	 * @param segment
+	 * @return
+	 */
 	public Boolean addSegment(Segment segment) {
 		return this.segments.add(segment);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Measure getTotalLength() {
 		Measure measure = new Measure(0.0, "km");
 		for (Segment segment : this.segments) {
@@ -191,6 +208,10 @@ public class Section {
 		return section;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Section reverse() {
 		Section section = this.clone();
 		section.setWindSpeed(Measurement.neg(this.windSpeed));

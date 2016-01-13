@@ -28,6 +28,9 @@ public class EditSimulationGUI extends GraphicUserInterface {
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.editSimulationController = new EditSimulationController();
@@ -37,6 +40,9 @@ public class EditSimulationGUI extends GraphicUserInterface {
 		this.jTextFieldDescription.setText(simulation.getDescription());
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.editSimulationController.editSimulation(this.jTextFieldName.

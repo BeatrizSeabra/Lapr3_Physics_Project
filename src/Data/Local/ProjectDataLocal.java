@@ -26,16 +26,29 @@ public class ProjectDataLocal implements ProjectData {
 		return this.currentIndex;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public Integer size() {
 		return this.list.size();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public List<Project> all() {
 		return new ArrayList(this.list);
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project) {
 		if (project.getId() == 0) {
@@ -58,6 +71,11 @@ public class ProjectDataLocal implements ProjectData {
 		return oldProject.equals(project);
 	}
 
+	/**
+	 *
+	 * @param projects
+	 * @return
+	 */
 	@Override
 	public Boolean save(List<Project> projects) {
 		for (Project project : projects) {
@@ -66,6 +84,11 @@ public class ProjectDataLocal implements ProjectData {
 		return true;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Project get(Project project) {
 		for (Project projectList : this.list) {
@@ -76,6 +99,11 @@ public class ProjectDataLocal implements ProjectData {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Boolean hasChanged(Project project) {
 		Project oldProject = this.get(project);

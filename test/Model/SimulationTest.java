@@ -216,4 +216,115 @@ public class SimulationTest {
 		assertEquals(expResult, result);
 	}
 
+	/**
+	 * Test of addTraffic method, of class Simulation.
+	 */
+	@Test
+	public void testAddTraffic() {
+		System.out.println("addTraffic");
+		Traffic traffic = null;
+		Simulation instance = new Simulation();
+		Boolean expResult = null;
+		Boolean result = instance.addTraffic(traffic);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getTraffic method, of class Simulation.
+	 */
+	@Test
+	public void testGetTraffic() {
+		System.out.println("getTraffic");
+		int index = 0;
+		Simulation instance = new Simulation();
+		Traffic expResult = null;
+		Traffic result = instance.getTraffic(index);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getId method, of class Simulation.
+	 */
+	@Test
+	public void testGetId() {
+		System.out.println("getId");
+		Simulation instance = new Simulation();
+		Integer expResult = null;
+		Integer result = instance.getId();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setId method, of class Simulation.
+	 */
+	@Test
+	public void testSetId() {
+		System.out.println("setId");
+		Integer id = null;
+		Simulation instance = new Simulation();
+		instance.setId(id);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getName method, of class Simulation.
+	 */
+	@Test
+	public void testGetName() {
+		System.out.println("getName");
+		Simulation instance = new Simulation();
+		String expResult = "";
+		String result = instance.getName();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setName method, of class Simulation.
+	 */
+	@Test
+	public void testSetName() {
+		System.out.println("setName");
+		String name = "";
+		Simulation instance = new Simulation();
+		instance.setName(name);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getDescription method, of class Simulation.
+	 */
+	@Test
+	public void testGetDescription() {
+		System.out.println("getDescription");
+		Simulation instance = new Simulation();
+		String expResult = "";
+		String result = instance.getDescription();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setDescription method, of class Simulation.
+	 */
+	@Test
+	public void testSetDescription() {
+		System.out.println("setDescription");
+		String description = "";
+		Simulation instance = new Simulation();
+		instance.setDescription(description);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
 }

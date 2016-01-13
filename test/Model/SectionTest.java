@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -185,5 +186,279 @@ public class SectionTest {
 		Boolean result = this.section.equals(new String());
 		Boolean expResult = false;
 		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of getId method, of class Section.
+	 */
+	@Test
+	public void testGetId() {
+		System.out.println("getId");
+		Section instance = new Section();
+		Integer expResult = null;
+		Integer result = instance.getId();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setId method, of class Section.
+	 */
+	@Test
+	public void testSetId() {
+		System.out.println("setId");
+		Integer id = null;
+		Section instance = new Section();
+		instance.setId(id);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getRoad method, of class Section.
+	 */
+	@Test
+	public void testGetRoad() {
+		System.out.println("getRoad");
+		Section instance = new Section();
+		String expResult = "";
+		String result = instance.getRoad();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setRoad method, of class Section.
+	 */
+	@Test
+	public void testSetRoad() {
+		System.out.println("setRoad");
+		String road = "";
+		Section instance = new Section();
+		instance.setRoad(road);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getTypology method, of class Section.
+	 */
+	@Test
+	public void testGetTypology() {
+		System.out.println("getTypology");
+		Section instance = new Section();
+		String expResult = "";
+		String result = instance.getTypology();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setTypology method, of class Section.
+	 */
+	@Test
+	public void testSetTypology() {
+		System.out.println("setTypology");
+		String typology = "";
+		Section instance = new Section();
+		instance.setTypology(typology);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getDirection method, of class Section.
+	 */
+	@Test
+	public void testGetDirection() {
+		System.out.println("getDirection");
+		Section instance = new Section();
+		String expResult = "";
+		String result = instance.getDirection();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setDirection method, of class Section.
+	 */
+	@Test
+	public void testSetDirection() {
+		System.out.println("setDirection");
+		String direction = "";
+		Section instance = new Section();
+		instance.setDirection(direction);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getToll method, of class Section.
+	 */
+	@Test
+	public void testGetToll() {
+		System.out.println("getToll");
+		Section instance = new Section();
+		Measure expResult = null;
+		Measure result = instance.getToll();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setToll method, of class Section.
+	 */
+	@Test
+	public void testSetToll() {
+		System.out.println("setToll");
+		Measure toll = null;
+		Section instance = new Section();
+		instance.setToll(toll);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getWindDirection method, of class Section.
+	 */
+	@Test
+	public void testGetWindDirection() {
+		System.out.println("getWindDirection");
+		Section instance = new Section();
+		Measure expResult = null;
+		Measure result = instance.getWindDirection();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setWindDirection method, of class Section.
+	 */
+	@Test
+	public void testSetWindDirection() {
+		System.out.println("setWindDirection");
+		Measure windDirection = null;
+		Section instance = new Section();
+		instance.setWindDirection(windDirection);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getWindSpeed method, of class Section.
+	 */
+	@Test
+	public void testGetWindSpeed() {
+		System.out.println("getWindSpeed");
+		Section instance = new Section();
+		Measure expResult = null;
+		Measure result = instance.getWindSpeed();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setWindSpeed method, of class Section.
+	 */
+	@Test
+	public void testSetWindSpeed() {
+		System.out.println("setWindSpeed");
+		Measure windSpeed = null;
+		Section instance = new Section();
+		instance.setWindSpeed(windSpeed);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getSegments method, of class Section.
+	 */
+	@Test
+	public void testGetSegments() {
+		System.out.println("getSegments");
+		Section instance = new Section();
+		List<Segment> expResult = null;
+		List<Segment> result = instance.getSegments();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of addSegment method, of class Section.
+	 */
+	@Test
+	public void testAddSegment() {
+		System.out.println("addSegment");
+		Segment segment = null;
+		Section instance = new Section();
+		Boolean expResult = null;
+		Boolean result = instance.addSegment(segment);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getTotalLength method, of class Section.
+	 */
+	@Test
+	public void testGetTotalLength() {
+		System.out.println("getTotalLength");
+		Section instance = new Section();
+		Measure expResult = null;
+		Measure result = instance.getTotalLength();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of toString method, of class Section.
+	 */
+	@Test
+	public void testToString() {
+		System.out.println("toString");
+		Section instance = new Section();
+		String expResult = "";
+		String result = instance.toString();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of clone method, of class Section.
+	 */
+	@Test
+	public void testClone() {
+		System.out.println("clone");
+		Section instance = new Section();
+		Section expResult = null;
+		Section result = instance.clone();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of reverse method, of class Section.
+	 */
+	@Test
+	public void testReverse() {
+		System.out.println("reverse");
+		Section instance = new Section();
+		Section expResult = null;
+		Section result = instance.reverse();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 }

@@ -40,6 +40,10 @@ public class ResultsController {
 		return this.results.get(0);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public String[][] getResultsValues() {
 		if (!this.hasResults()) {
 			return new String[0][0];
@@ -54,6 +58,10 @@ public class ResultsController {
 		return values;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean hasResults() {
 		if (this.results == null || this.results.isEmpty()) {
 			return false;
@@ -61,6 +69,11 @@ public class ResultsController {
 		return true;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public Boolean export(String filePath) {
 		return Legacy.export(filePath, this.results);
 	}

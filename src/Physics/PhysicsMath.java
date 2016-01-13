@@ -13,18 +13,53 @@ import java.util.Random;
  */
 public class PhysicsMath {
 
+	/**
+	 *
+	 */
 	public static final Measure gravity = new Measure(9.80665, "m/s2");
+
+	/**
+	 *
+	 */
 	public static final Measure airDensity = new Measure(1.225, "kg/m3");
+
+	/**
+	 *
+	 */
 	public static final Measure specificEnergyGasoline = new Measure(44400.0, "J/g");
+
+	/**
+	 *
+	 */
 	public static final Measure specificEnergyDiesel = new Measure(48000.0, "J/g");
+
+	/**
+	 *
+	 */
 	public static final Measure densityGasoline = new Measure(755.0, "g/m3");
+
+	/**
+	 *
+	 */
 	public static final Measure densityDiesel = new Measure(832.0, "g/m3");
 	private static Random random = new Random();
 
+	/**
+	 *
+	 * @param averagePerPeriod
+	 * @return
+	 */
 	public static Double exponentialDistributionRandom(int averagePerPeriod) {
 		return -Math.log(PhysicsMath.random.nextDouble()) / (1.0 / averagePerPeriod);
 	}
 
+	/**
+	 *
+	 * @param power
+	 * @param time
+	 * @param fuel
+	 * @return
+	 */
 	public static Measure fuelConsumptionTime(Measure power, Measure time,
 											  String fuel) {
 		power = Measurement.convert(power, "J/s");
@@ -40,6 +75,13 @@ public class PhysicsMath {
 		return new Measure(value, "g/s");
 	}
 
+	/**
+	 *
+	 * @param force
+	 * @param lenght
+	 * @param fuel
+	 * @return
+	 */
 	public static Measure fuelConsumptionLenght(Measure force, Measure lenght,
 												String fuel) {
 		force = Measurement.convert(force, "N");
@@ -55,6 +97,13 @@ public class PhysicsMath {
 		return new Measure(value, "g/m");
 	}
 
+	/**
+	 *
+	 * @param torque
+	 * @param rotations
+	 * @param gearRatio
+	 * @return
+	 */
 	public static Measure engineCarPower(Measure torque, Measure rotations,
 										 Measure gearRatio) {
 		rotations = Measurement.convert(rotations, "rps");
@@ -65,6 +114,12 @@ public class PhysicsMath {
 		return new Measure(value, "J/s");
 	}
 
+	/**
+	 *
+	 * @param mass
+	 * @param slope
+	 * @return
+	 */
 	public static Measure gravityForce(Measure mass, Measure slope) {
 		mass = Measurement.convert(mass, "kg");
 		Measure gravity = Measurement.convert(PhysicsMath.gravity, "m/s2");
@@ -74,6 +129,15 @@ public class PhysicsMath {
 		return new Measure(value, "N");
 	}
 
+	/**
+	 *
+	 * @param torque
+	 * @param finalDrive
+	 * @param rotations
+	 * @param gearRatio
+	 * @param radiusTire
+	 * @return
+	 */
 	public static Measure engineCarForce(Measure torque, Measure finalDrive,
 										 Measure rotations, Measure gearRatio,
 										 Measure radiusTire) {
@@ -88,6 +152,13 @@ public class PhysicsMath {
 		return new Measure(value, "N");
 	}
 
+	/**
+	 *
+	 * @param torque
+	 * @param rotations
+	 * @param gearRatio
+	 * @return
+	 */
 	public static Measure torqueEngineSpeed(Measure torque, Measure rotations,
 											Measure gearRatio) {
 		torque = Measurement.convert(torque, "Nm");
@@ -99,6 +170,13 @@ public class PhysicsMath {
 		return new Measure(value, "Nm");
 	}
 
+	/**
+	 *
+	 * @param rollingResistance
+	 * @param mass
+	 * @param slope
+	 * @return
+	 */
 	public static Measure rollingResistanceForce(Measure rollingResistance,
 												 Measure mass, Measure slope) {
 		rollingResistance = Measurement.convert(rollingResistance, "ratio");
@@ -110,6 +188,13 @@ public class PhysicsMath {
 		return new Measure(value, "N");
 	}
 
+	/**
+	 *
+	 * @param dragCoefficient
+	 * @param frontalArea
+	 * @param relativeSpeed
+	 * @return
+	 */
 	public static Measure airResistanceForce(Measure dragCoefficient,
 											 Measure frontalArea,
 											 Measure relativeSpeed) {
@@ -123,6 +208,13 @@ public class PhysicsMath {
 		return new Measure(value, "N");
 	}
 
+	/**
+	 *
+	 * @param acceleration
+	 * @param mass
+	 * @param coefficientInertial
+	 * @return
+	 */
 	public static Measure inertiaResistanceForce(Measure acceleration,
 												 Measure mass,
 												 Measure coefficientInertial) {
@@ -134,6 +226,13 @@ public class PhysicsMath {
 		return new Measure(value, "N");
 	}
 
+	/**
+	 *
+	 * @param carSpeed
+	 * @param windSpeed
+	 * @param windDirection
+	 * @return
+	 */
 	public static Measure relativeSpeed(Measure carSpeed, Measure windSpeed,
 										Measure windDirection) {
 		carSpeed = Measurement.module(Measurement.convert(carSpeed, "m/s"));
@@ -144,6 +243,14 @@ public class PhysicsMath {
 		return Measurement.module(new Measure(value, "m/s"));
 	}
 
+	/**
+	 *
+	 * @param radiusTire
+	 * @param rotations
+	 * @param finalDrive
+	 * @param gearRatio
+	 * @return
+	 */
 	public static Measure carSpeed(Measure radiusTire, Measure rotations,
 								   Measure finalDrive, Measure gearRatio) {
 		radiusTire = Measurement.module(Measurement.convert(radiusTire, "m"));
@@ -155,6 +262,11 @@ public class PhysicsMath {
 		return Measurement.module(new Measure(value, "m/s"));
 	}
 
+	/**
+	 *
+	 * @param slope
+	 * @return
+	 */
 	public static Measure angle(Measure slope) {
 		slope = Measurement.convert(slope, "%");
 		Double value = Math.toDegrees(Math.atan(slope.getValue() / 100.0));

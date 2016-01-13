@@ -19,16 +19,32 @@ public class VehicleDataLocal implements VehicleData {
 
 	private List<Vehicle> list = new ArrayList();
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Integer size(Project project) {
 		return this.all(project).size();
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public List<Vehicle> all(Project project) {
 		return project.getVehicles();
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project, Vehicle vehicle) {
 		for (int i = 0; i < this.list.size(); i++) {
@@ -39,6 +55,12 @@ public class VehicleDataLocal implements VehicleData {
 		return this.list.add(vehicle);
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicles
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project, List<Vehicle> vehicles) {
 		for (Vehicle vehicle : vehicles) {
@@ -47,6 +69,12 @@ public class VehicleDataLocal implements VehicleData {
 		return true;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	@Override
 	public Vehicle get(Project project, Vehicle vehicle) {
 		for (Vehicle vehicleList : this.list) {
@@ -57,6 +85,12 @@ public class VehicleDataLocal implements VehicleData {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param vehicle
+	 * @return
+	 */
 	@Override
 	public Boolean hasChanged(Project project, Vehicle vehicle) {
 		Vehicle oldVehicle = this.get(project, vehicle);

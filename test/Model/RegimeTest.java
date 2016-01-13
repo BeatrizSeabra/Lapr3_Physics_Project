@@ -188,4 +188,112 @@ public class RegimeTest {
 		assertEquals(expResult, result);
 	}
 
+	/**
+	 * Test of getTorque method, of class Regime.
+	 */
+	@Test
+	public void testGetTorque() {
+		System.out.println("getTorque");
+		Regime instance = new Regime();
+		Measure expResult = null;
+		Measure result = instance.getTorque();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setTorque method, of class Regime.
+	 */
+	@Test
+	public void testSetTorque() {
+		System.out.println("setTorque");
+		Measure torque = null;
+		Regime instance = new Regime();
+		instance.setTorque(torque);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getRpmLow method, of class Regime.
+	 */
+	@Test
+	public void testGetRpmLow() {
+		System.out.println("getRpmLow");
+		Regime instance = new Regime();
+		Measure expResult = null;
+		Measure result = instance.getRpmLow();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setRpmLow method, of class Regime.
+	 */
+	@Test
+	public void testSetRpmLow() {
+		System.out.println("setRpmLow");
+		Measure rpmLow = null;
+		Regime instance = new Regime();
+		instance.setRpmLow(rpmLow);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getRpmHigh method, of class Regime.
+	 */
+	@Test
+	public void testGetRpmHigh() {
+		System.out.println("getRpmHigh");
+		Regime instance = new Regime();
+		Measure expResult = null;
+		Measure result = instance.getRpmHigh();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setRpmHigh method, of class Regime.
+	 */
+	@Test
+	public void testSetRpmHigh() {
+		System.out.println("setRpmHigh");
+		Measure rpmHigh = null;
+		Regime instance = new Regime();
+		instance.setRpmHigh(rpmHigh);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getFuelConsumption method, of class Regime.
+	 */
+	@Test
+	public void testGetFuelConsumption() {
+		System.out.println("getFuelConsumption");
+		Regime instance = new Regime();
+		Measure expResult = null;
+		Measure result = instance.getFuelConsumption();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setFuelConsumption method, of class Regime.
+	 */
+	@Test
+	public void testSetFuelConsumption() {
+		System.out.println("setFuelConsumption");
+		Measure espFuelConsumption = null;
+		Regime instance = new Regime();
+		instance.setFuelConsumption(espFuelConsumption);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
 }

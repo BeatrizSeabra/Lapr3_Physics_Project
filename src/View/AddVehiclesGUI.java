@@ -23,12 +23,17 @@ public class AddVehiclesGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form CreateProjectGUI
+	 *
+	 * @param origin
 	 */
 	public AddVehiclesGUI(GraphicUserInterface origin) {
 		this.initComponents();
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.addVehiclesController = new AddVehiclesController();
@@ -36,6 +41,9 @@ public class AddVehiclesGUI extends GraphicUserInterface {
 		this.jListVehicles.setModel(this.jModelListVehicles);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.jModelListVehicles.removeAllElements();

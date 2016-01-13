@@ -15,16 +15,50 @@ import java.util.List;
  */
 public interface SimulationData {
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	Integer size(Project project);
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	List<Simulation> all(Project project);
 
+	/**
+	 *
+	 * @param project
+	 * @param simulation
+	 * @return
+	 */
 	Boolean save(Project project, Simulation simulation);
 
+	/**
+	 *
+	 * @param project
+	 * @param simulations
+	 * @return
+	 */
 	Boolean save(Project project, List<Simulation> simulations);
 
+	/**
+	 *
+	 * @param project
+	 * @param simulation
+	 * @return
+	 */
 	Simulation get(Project project, Simulation simulation);
 
+	/**
+	 *
+	 * @param project
+	 * @param simulation
+	 * @return
+	 */
 	Boolean hasChanged(Project project, Simulation simulation);
 
 }

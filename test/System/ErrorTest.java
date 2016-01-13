@@ -84,4 +84,42 @@ public class ErrorTest {
 		assertEquals(Error.log(), " ");
 	}
 
+	/**
+	 * Test of setErrorMessage method, of class Error.
+	 */
+	@Test
+	public void testSetErrorMessage() {
+		System.out.println("setErrorMessage");
+		String errorMessage = "";
+		Error.setErrorMessage(errorMessage);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getErrorMessage method, of class Error.
+	 */
+	@Test
+	public void testGetErrorMessage() {
+		System.out.println("getErrorMessage");
+		String expResult = "";
+		String result = Error.getErrorMessage();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of log method, of class Error.
+	 */
+	@Test
+	public void testLog_0args() {
+		System.out.println("log");
+		String expResult = "";
+		String result = Error.log();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
 }

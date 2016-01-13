@@ -17,10 +17,20 @@ public abstract class Measurement {
 
 	private static String keyScalesMeasuresFilePath = "ScalesMeasuresFilePath";
 
+	/**
+	 *
+	 * @return
+	 */
 	static public String getScalesMeasuresFilePath() {
 		return Settings.getOption(Measurement.keyScalesMeasuresFilePath);
 	}
 
+	/**
+	 *
+	 * @param measure
+	 * @param unit
+	 * @return
+	 */
 	static public Measure convert(Measure measure, String unit) {
 		if (measure == null || unit == null) {
 			Error.
@@ -42,6 +52,12 @@ public abstract class Measurement {
 		return new Measure(ratio, unit);
 	}
 
+	/**
+	 *
+	 * @param measureA
+	 * @param measureB
+	 * @return
+	 */
 	static public Measure sum(Measure measureA, Measure measureB) {
 		measureB = Measurement.convert(measureB, measureA.getUnit());
 		if (measureB == null) {
@@ -51,6 +67,12 @@ public abstract class Measurement {
 						   getUnit());
 	}
 
+	/**
+	 *
+	 * @param measureA
+	 * @param measureB
+	 * @return
+	 */
 	public static Measure minus(Measure measureA, Measure measureB) {
 		measureB = Measurement.convert(measureB, measureA.getUnit());
 		if (measureB == null) {
@@ -60,6 +82,11 @@ public abstract class Measurement {
 						   getUnit());
 	}
 
+	/**
+	 *
+	 * @param measure
+	 * @return
+	 */
 	public static Measure neg(Measure measure) {
 		if (measure == null) {
 			return null;
@@ -67,6 +94,11 @@ public abstract class Measurement {
 		return new Measure(measure.getValue() * -1, measure.getUnit());
 	}
 
+	/**
+	 *
+	 * @param measure
+	 * @return
+	 */
 	public static Measure module(Measure measure) {
 		if (measure.getValue() < 0) {
 			measure = Measurement.neg(measure);

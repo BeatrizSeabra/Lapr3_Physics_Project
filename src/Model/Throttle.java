@@ -19,14 +19,27 @@ public class Throttle implements Comparable<Throttle> {
 	private Measure percentage;
 	private List<Regime> regimes = new ArrayList();
 
+	/**
+	 *
+	 * @param regime
+	 * @return
+	 */
 	public Boolean addRegime(Regime regime) {
 		return this.regimes.add(regime);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 *
+	 * @param id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}

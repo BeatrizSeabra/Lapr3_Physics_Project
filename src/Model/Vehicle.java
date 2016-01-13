@@ -40,30 +40,67 @@ public class Vehicle {
 	private Map<Integer, Measure> gears = new HashMap();
 	private List<Throttle> throttles = new ArrayList();
 
+	/**
+	 *
+	 * @param segmentType
+	 * @param velocityLimit
+	 * @return
+	 */
 	public Boolean setVelocityLimits(String segmentType, Measure velocityLimit) {
 		return this.getVelocityLimits().put(segmentType, velocityLimit) != null;
 	}
 
+	/**
+	 *
+	 * @param segmentType
+	 * @return
+	 */
 	public Measure getVelocityLimits(String segmentType) {
 		return this.getVelocityLimits().get(segmentType);
 	}
 
+	/**
+	 *
+	 * @param number
+	 * @param ratio
+	 * @return
+	 */
 	public Boolean setGear(Integer number, Measure ratio) {
 		return this.getGears().put(number, ratio) != null;
 	}
 
+	/**
+	 *
+	 * @param number
+	 * @return
+	 */
 	public Measure getGear(Integer number) {
 		return this.getGears().get(number);
 	}
 
+	/**
+	 *
+	 * @param throttle
+	 * @return
+	 */
 	public Boolean addThrottle(Throttle throttle) {
 		return this.throttles.add(throttle);
 	}
 
+	/**
+	 *
+	 * @param index
+	 * @return
+	 */
 	public Throttle getThrottle(Integer index) {
 		return this.getThrottles().get(index);
 	}
 
+	/**
+	 *
+	 * @param gear
+	 * @return
+	 */
 	public Measure getVelocity(Integer gear) {
 		Double wheelSize = Measurement.convert(this.wheelSize, "m").getValue();
 		Double RPM = Measurement.convert(this.maxRPM, "rps").getValue();
@@ -75,6 +112,10 @@ public class Vehicle {
 		return Measurement.convert(result, "km/h");
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Measure getMaxVelocity() {
 		return this.getVelocity(Collections.max(this.gears.keySet()));
 	}
@@ -289,10 +330,18 @@ public class Vehicle {
 		this.finalDriveRatio = finalDriveRatio;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Measure getEnergyRegeneration() {
 		return energyRegeneration;
 	}
 
+	/**
+	 *
+	 * @param energyRegeneration
+	 */
 	public void setEnergyRegeneration(Measure energyRegeneration) {
 		this.energyRegeneration = energyRegeneration;
 	}
@@ -433,10 +482,18 @@ public class Vehicle {
 		return stringBuilder.toString();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Integer getCurrentGear() {
 		return 1;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Measure getCurrentVelocity() {
 		return Measurement.convert(new Measure(60.0, "km/h"), "m/s");
 

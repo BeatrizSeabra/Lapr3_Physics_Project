@@ -77,14 +77,28 @@ public class Project {
 		this.roadNetwork = roadNetwork;
 	}
 
+	/**
+	 *
+	 * @param vehicle
+	 * @return
+	 */
 	public Boolean addVehicle(Vehicle vehicle) {
 		return this.vehicles.add(vehicle);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Vehicle> getVehicles() {
 		return this.vehicles;
 	}
 
+	/**
+	 *
+	 * @param name
+	 * @return
+	 */
 	public Vehicle getVehicle(String name) {
 		for (Vehicle vehicle : vehicles) {
 			if (vehicle.getName().equalsIgnoreCase(name)) {
@@ -94,10 +108,19 @@ public class Project {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param simulation
+	 * @return
+	 */
 	public Boolean addSimulation(Simulation simulation) {
 		return this.simulations.add(simulation);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Simulation> getSimulations() {
 		return this.simulations;
 	}

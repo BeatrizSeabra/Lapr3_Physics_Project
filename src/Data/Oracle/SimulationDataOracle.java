@@ -29,16 +29,30 @@ public class SimulationDataOracle implements SimulationData {
 	private Connection connection;
 	private TrafficDataOracle trafficDataOracle;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public SimulationDataOracle(Connection connection) {
 		this.connection = connection;
 		this.trafficDataOracle = new TrafficDataOracle(connection);
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public Integer size(Project project) {
 		return this.all(project).size();
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	@Override
 	public List<Simulation> all(Project project) {
 		try {
@@ -64,6 +78,12 @@ public class SimulationDataOracle implements SimulationData {
 		}
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param simulation
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project, Simulation simulation) {
 		List<Simulation> simulations = new ArrayList();
@@ -71,6 +91,12 @@ public class SimulationDataOracle implements SimulationData {
 		return this.save(project, simulations);
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param simulations
+	 * @return
+	 */
 	@Override
 	public Boolean save(Project project, List<Simulation> simulations) {
 		try {
@@ -107,7 +133,7 @@ public class SimulationDataOracle implements SimulationData {
 			int index[] = arrayIndex.getIntArray();
 			callableStatement.close();
 			for (int i = 0; i < size; i++) {
-				System.out.println("SIULATION INDEX: " + index[i]);
+				//System.out.println("SIULATION INDEX: " + index[i]);
 				simulations.get(i).setId(index[i]);
 				if (index[i] != 0 && !simulations.get(i).getTraffics().isEmpty()) {
 					this.trafficDataOracle.save(simulations.get(i), simulations.
@@ -122,6 +148,12 @@ public class SimulationDataOracle implements SimulationData {
 		}
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param simulation
+	 * @return
+	 */
 	@Override
 	public Simulation get(Project project, Simulation simulation) {
 		for (Simulation simulationList : this.all(project)) {
@@ -151,6 +183,12 @@ public class SimulationDataOracle implements SimulationData {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param simulation
+	 * @return
+	 */
 	@Override
 	public Boolean hasChanged(Project project, Simulation simulation) {
 		Simulation oldSimulation = this.get(project, simulation);

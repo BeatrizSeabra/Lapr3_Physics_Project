@@ -153,6 +153,10 @@ public class Segment {
 		return hash;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Segment reverse() {
 		Segment segment = new Segment();
 		segment.setName(this.name);

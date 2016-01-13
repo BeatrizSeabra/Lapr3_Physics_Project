@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Graph.Graph;
 import Physics.Measure;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -409,6 +410,135 @@ public class RoadNetworkTest {
 		expResult.add(this.section5);
 		List<Section> result = this.roadNetwork.getOrigin().getSections();
 		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of getId method, of class RoadNetwork.
+	 */
+	@Test
+	public void testGetId() {
+		System.out.println("getId");
+		RoadNetwork instance = new RoadNetwork();
+		Integer expResult = null;
+		Integer result = instance.getId();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setId method, of class RoadNetwork.
+	 */
+	@Test
+	public void testSetId() {
+		System.out.println("setId");
+		Integer id = null;
+		RoadNetwork instance = new RoadNetwork();
+		instance.setId(id);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getNode method, of class RoadNetwork.
+	 */
+	@Test
+	public void testGetNode() {
+		System.out.println("getNode");
+		String name = "";
+		RoadNetwork instance = new RoadNetwork();
+		Node expResult = null;
+		Node result = instance.getNode(name);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setGraph method, of class RoadNetwork.
+	 */
+	@Test
+	public void testSetGraph() {
+		System.out.println("setGraph");
+		Graph<Node, Section> graph = null;
+		RoadNetwork instance = new RoadNetwork();
+		instance.setGraph(graph);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getOrigin method, of class RoadNetwork.
+	 */
+	@Test
+	public void testGetOrigin() {
+		System.out.println("getOrigin");
+		RoadNetwork instance = new RoadNetwork();
+		RoadNetwork expResult = null;
+		RoadNetwork result = instance.getOrigin();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getSections method, of class RoadNetwork.
+	 */
+	@Test
+	public void testGetSections_List() {
+		System.out.println("getSections");
+		List<Node> nodes = null;
+		RoadNetwork instance = new RoadNetwork();
+		List<Section> expResult = null;
+		List<Section> result = instance.getSections(nodes);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getAllPaths method, of class RoadNetwork.
+	 */
+	@Test
+	public void testGetAllPaths() {
+		System.out.println("getAllPaths");
+		Node starNode = null;
+		Node endNode = null;
+		List<Deque<Section>> sectionPaths = null;
+		RoadNetwork instance = new RoadNetwork();
+		List<Deque<Node>> expResult = null;
+		List<Deque<Node>> result = instance.getAllPaths(starNode, endNode, sectionPaths);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of clone method, of class RoadNetwork.
+	 */
+	@Test
+	public void testClone() {
+		System.out.println("clone");
+		RoadNetwork instance = new RoadNetwork();
+		RoadNetwork expResult = null;
+		RoadNetwork result = instance.clone();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of toString method, of class RoadNetwork.
+	 */
+	@Test
+	public void testToString() {
+		System.out.println("toString");
+		RoadNetwork instance = new RoadNetwork();
+		String expResult = "";
+		String result = instance.toString();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }

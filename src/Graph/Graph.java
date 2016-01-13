@@ -20,32 +20,64 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 	private List<Edge<V, E>> listEdges = new ArrayList();
 
 	// Constructs an empty graph (either undirected or directed)
+	/**
+	 *
+	 * @param directed
+	 */
 	public Graph(boolean directed) {
 		this.isDirected = directed;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int numVertices() {
 		return this.listVertex.size();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Iterable<Vertex<V, E>> vertices() {
 		return this.listVertex;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public int numEdges() {
 		return this.listEdges.size();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Iterable<Edge<V, E>> getEdges() {
 		return new ArrayList(this.listEdges);
 	}
 
+	/**
+	 *
+	 * @param elementOrigin
+	 * @param elementDestination
+	 * @return
+	 */
 	public Edge<V, E> getEdge(V elementOrigin, V elementDestination) {
 		Vertex<V, E> vertexOrigin = getVertex(elementOrigin);
 		Vertex<V, E> vertexDestination = getVertex(elementDestination);
 		return this.getEdge(vertexOrigin, vertexDestination);
 	}
 
+	/**
+	 *
+	 * @param vorig
+	 * @param vdest
+	 * @return
+	 */
 	public Edge<V, E> getEdge(Vertex<V, E> vorig, Vertex<V, E> vdest) {
 		if (this.listVertex.contains(vorig) && this.listVertex.contains(vdest)) {
 			return vorig.getOutgoing().get(vdest);
@@ -53,6 +85,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param element
+	 * @return
+	 */
 	public Deque<V> getExtremeVertexElements(E element) {
 		Deque<V> nodes = new ArrayDeque();
 		for (Vertex<V, E> vertex : this.listVertex) {
@@ -67,6 +104,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return nodes;
 	}
 
+	/**
+	 *
+	 * @param e
+	 * @return
+	 */
 	public Vertex<V, E>[] endVertices(Edge<V, E> e) {
 		if (e != null) {
 			Vertex<V, E> vorig = e.getVOrig();
@@ -80,6 +122,12 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param vert
+	 * @param e
+	 * @return
+	 */
 	public Vertex<V, E> opposite(Vertex<V, E> vert, Edge<V, E> e) {
 		Vertex<V, E> vOrig = e.getVOrig();
 		Vertex<V, E> vDest = e.getVDest();
@@ -115,6 +163,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		}
 	}
 
+	/**
+	 *
+	 * @param v
+	 * @return
+	 */
 	public Iterable<Edge<V, E>> outgoingEdges(Vertex<V, E> v) {
 		if (!this.listVertex.contains(v)) {
 			return null;
@@ -129,6 +182,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return edges;
 	}
 
+	/**
+	 *
+	 * @param v
+	 * @return
+	 */
 	public Iterable<Edge<V, E>> incomingEdges(Vertex<V, E> v) {
 		if (this.listVertex.contains(v)) {
 			Iterable<Edge<V, E>> listEdges = getEdges();
@@ -144,6 +202,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		}
 	}
 
+	/**
+	 *
+	 * @param vInf
+	 * @return
+	 */
 	public Vertex<V, E> insertVertex(V vInf) {
 		Vertex<V, E> vert = getVertex(vInf);
 		if (vert == null) {
@@ -154,6 +217,14 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return vert;
 	}
 
+	/**
+	 *
+	 * @param vOrig
+	 * @param vDest
+	 * @param eInf
+	 * @param eWeight
+	 * @return
+	 */
 	public Edge<V, E> insertEdge(V vOrig, V vDest, E eInf, double eWeight) {
 		Vertex<V, E> vorig = getVertex(vOrig);
 		if (vorig == null) {
@@ -179,6 +250,10 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param vInf
+	 */
 	@Override
 	public void removeVertex(V vInf) {
 		Vertex<V, E> vert = getVertex(vInf);
@@ -197,6 +272,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		}
 	}
 
+	/**
+	 *
+	 * @param edge
+	 * @return
+	 */
 	@Override
 	public boolean removeEdge(Edge<V, E> edge) {
 		int numTemp = this.listEdges.size() - 1;
@@ -212,6 +292,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return numTemp == this.listEdges.size();
 	}
 
+	/**
+	 *
+	 * @param element
+	 * @return
+	 */
 	public Vertex<V, E> getVertex(V element) {
 		for (Vertex<V, E> vertex : this.listVertex) {
 			if (element.equals(vertex.getElement())) {
@@ -221,6 +306,11 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return null;
 	}
 
+	/**
+	 *
+	 * @param index
+	 * @return
+	 */
 	public Vertex<V, E> getVertex(int index) {
 		if (index < this.listVertex.size()) {
 			return this.listVertex.get(index);
@@ -228,6 +318,10 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return null;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<V> vertexElements() {
 		List<V> elements = new ArrayList();
 		for (Vertex<V, E> vertex : this.listVertex) {
@@ -236,6 +330,10 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 		return elements;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<E> edgesElements() {
 		List<E> elements = new ArrayList();
 		for (Edge<V, E> edge : this.listEdges) {

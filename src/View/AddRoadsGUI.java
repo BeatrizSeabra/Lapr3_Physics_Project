@@ -23,12 +23,17 @@ public class AddRoadsGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form CreateProjectGUI
+	 *
+	 * @param origin
 	 */
 	public AddRoadsGUI(GraphicUserInterface origin) {
 		this.initComponents();
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.addRoadsController = new AddRoadsController();
@@ -36,6 +41,9 @@ public class AddRoadsGUI extends GraphicUserInterface {
 		this.jListVehicles.setModel(this.jModelListRoads);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.jModelListRoads.removeAllElements();

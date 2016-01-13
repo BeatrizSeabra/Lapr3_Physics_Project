@@ -29,6 +29,9 @@ public class CopySimulationGUI extends GraphicUserInterface {
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.copySimulationController = new CopySimulationController();
@@ -38,6 +41,9 @@ public class CopySimulationGUI extends GraphicUserInterface {
 		this.jTextFieldDescription.setText(simulation.getDescription());
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 

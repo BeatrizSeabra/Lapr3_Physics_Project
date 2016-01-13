@@ -12,6 +12,7 @@ import Physics.Measure;
 import System.Settings;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -125,6 +126,34 @@ public class VehicleImportXMLTest {
 		List<Vehicle> expResult = this.vehicles;
 		List<Vehicle> result = this.vehicleImportXML.importData(this.dataXML);
 		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of getExtensionDescription method, of class VehicleImportXML.
+	 */
+	@Test
+	public void testGetExtensionDescription() {
+		System.out.println("getExtensionDescription");
+		VehicleImportXML instance = new VehicleImportXML();
+		String expResult = "";
+		String result = instance.getExtensionDescription();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getExtensionFilter method, of class VehicleImportXML.
+	 */
+	@Test
+	public void testGetExtensionFilter() {
+		System.out.println("getExtensionFilter");
+		VehicleImportXML instance = new VehicleImportXML();
+		FileNameExtensionFilter expResult = null;
+		FileNameExtensionFilter result = instance.getExtensionFilter();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }

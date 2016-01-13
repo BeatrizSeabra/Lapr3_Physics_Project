@@ -20,6 +20,7 @@ import Physics.Measure;
 import System.Settings;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.filechooser.FileFilter;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -337,6 +338,34 @@ public class SimulationImportXMLTest {
 		List<Simulation> result = this.simulationImportXML.
 			importData(this.dataXML);
 		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of getExtensionDescription method, of class SimulationImportXML.
+	 */
+	@Test
+	public void testGetExtensionDescription() {
+		System.out.println("getExtensionDescription");
+		SimulationImportXML instance = new SimulationImportXML();
+		String expResult = "";
+		String result = instance.getExtensionDescription();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getExtensionFilter method, of class SimulationImportXML.
+	 */
+	@Test
+	public void testGetExtensionFilter() {
+		System.out.println("getExtensionFilter");
+		SimulationImportXML instance = new SimulationImportXML();
+		FileFilter expResult = null;
+		FileFilter result = instance.getExtensionFilter();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }

@@ -11,10 +11,22 @@ package Data;
  */
 public interface Repository {
 
+	/**
+	 *
+	 * @return
+	 */
 	ProjectData getProjectData();
 
+	/**
+	 *
+	 * @return
+	 */
 	VehicleData getVehicleData();
 
+	/**
+	 *
+	 * @return
+	 */
 	SimulationData getSimulationData();
 
 }

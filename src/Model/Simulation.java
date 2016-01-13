@@ -19,10 +19,20 @@ public class Simulation {
 	private String description = "";
 	private List<Traffic> traffics = new ArrayList();
 
+	/**
+	 *
+	 * @param traffic
+	 * @return
+	 */
 	public Boolean addTraffic(Traffic traffic) {
 		return this.traffics.add(traffic);
 	}
 
+	/**
+	 *
+	 * @param index
+	 * @return
+	 */
 	public Traffic getTraffic(int index) {
 		return this.traffics.get(index);
 	}

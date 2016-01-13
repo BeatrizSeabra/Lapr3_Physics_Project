@@ -27,12 +27,18 @@ public class CopyProjectGUI extends GraphicUserInterface {
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.copyProjectController = new CopyProjectController();
 		this.copyProjectController.initiation();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 

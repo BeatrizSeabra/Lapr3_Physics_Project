@@ -25,6 +25,9 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 
 	/**
 	 * Creates new form CreateProjectGUI
+	 *
+	 * @param origin
+	 * @param pathAnalysis
 	 */
 	public PathAnalysisGUI(GraphicUserInterface origin,
 						   PathAnalysis pathAnalysis) {
@@ -33,6 +36,9 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 		this.pathAnalysisController.setPathAnalysis(pathAnalysis);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.pathAnalysisController.initiation();
@@ -44,6 +50,9 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 		this.jButtonCleanActionPerformed(null);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.jModelListEndNodes.removeAllElements();
@@ -59,6 +68,11 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 		this.active(true);
 	}
 
+	/**
+	 *
+	 * @param state
+	 * @return
+	 */
 	public Boolean active(Boolean state) {
 		this.jButtonAnalyze.setEnabled(this.jComboBoxStartNodes.
 			getSelectedIndex() != -1 && this.jListEndNodes.getSelectedIndex() != -1);

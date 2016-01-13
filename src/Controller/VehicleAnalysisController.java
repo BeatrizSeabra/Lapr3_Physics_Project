@@ -24,14 +24,28 @@ public class VehicleAnalysisController {
 	private List<Node> endNodes;
 	private List<Vehicle> vehicles;
 
+	/**
+	 *
+	 */
 	public void initiation() {
 		this.roadNetwork = ContextController.getOpenProject().getRoadNetwork();
 	}
 
+	/**
+	 *
+	 * @param vehicleAnalysis
+	 */
 	public void setVehicleAnalysis(VehicleAnalysis vehicleAnalysis) {
 		this.vehicleAnalysis = vehicleAnalysis;
 	}
 
+	/**
+	 *
+	 * @param startNode
+	 * @param endsNodes
+	 * @param vehicles
+	 * @return
+	 */
 	public Boolean setNodes(Node startNode, List<Node> endsNodes,
 							List<Vehicle> vehicles) {
 		this.startNode = startNode;
@@ -40,10 +54,18 @@ public class VehicleAnalysisController {
 		return this.startNode.equals(startNode);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Node> getNodes() {
 		return this.roadNetwork.getNodes();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<List<String[]>> analyze() {
 		List<List<String[]>> results = new ArrayList();
 		for (Node endNode : this.endNodes) {

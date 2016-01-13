@@ -15,6 +15,13 @@ import java.util.List;
  */
 public interface PathAnalysis extends Analysis {
 
+	/**
+	 *
+	 * @param roadNetwork
+	 * @param startNode
+	 * @param endNode
+	 * @return
+	 */
 	List<String[]> analyze(RoadNetwork roadNetwork, Node startNode, Node endNode);
 
 }

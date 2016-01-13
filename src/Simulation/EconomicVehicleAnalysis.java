@@ -26,10 +26,22 @@ import java.util.Map;
  */
 public class EconomicVehicleAnalysis implements VehicleAnalysis {
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getName() {
 		return "Economic Vehicle Analysis";
 	}
 
+	/**
+	 *
+	 * @param vehicle
+	 * @param roadNetwork
+	 * @param startNode
+	 * @param endNode
+	 * @return
+	 */
 	public List<String[]> analyze(Vehicle vehicle, RoadNetwork roadNetwork,
 								  Node startNode, Node endNode) {
 		Map<Double, List<String[]>> results = new HashMap();

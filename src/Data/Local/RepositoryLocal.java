@@ -20,16 +20,28 @@ public class RepositoryLocal implements Repository {
 	private VehicleData vehicleData = new VehicleDataLocal();
 	private SimulationData simulationData = new SimulationDataLocal();
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public ProjectData getProjectData() {
 		return this.projactData;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public VehicleData getVehicleData() {
 		return this.vehicleData;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public SimulationData getSimulationData() {
 		return this.simulationData;

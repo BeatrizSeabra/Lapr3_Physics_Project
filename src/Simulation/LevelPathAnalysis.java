@@ -25,10 +25,21 @@ import java.util.Map;
  */
 public class LevelPathAnalysis implements PathAnalysis {
 
+	/**
+	 *
+	 * @return
+	 */
 	public String getName() {
 		return "Level Path Analysis";
 	}
 
+	/**
+	 *
+	 * @param roadNetwork
+	 * @param startNode
+	 * @param endNode
+	 * @return
+	 */
 	public List<String[]> analyze(RoadNetwork roadNetwork, Node startNode,
 								  Node endNode) {
 		Map<Double, List<String[]>> results = new HashMap();

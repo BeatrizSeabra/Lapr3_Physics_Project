@@ -26,10 +26,20 @@ public class GearDataOracle {
 
 	private Connection connection;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public GearDataOracle(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 *
+	 * @param vehicle
+	 * @param gears
+	 * @return
+	 */
 	public Boolean save(Vehicle vehicle, Map<Integer, Measure> gears) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.

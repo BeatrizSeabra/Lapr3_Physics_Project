@@ -14,14 +14,26 @@ public class Node {
 	private Integer id = 0;
 	private String name = "none";
 
+	/**
+	 *
+	 * @param name
+	 */
 	public Node(String name) {
 		this.name = name;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Integer getId() {
 		return id;
 	}
 
+	/**
+	 *
+	 * @param id
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}

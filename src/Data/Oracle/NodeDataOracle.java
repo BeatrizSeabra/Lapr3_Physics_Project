@@ -24,10 +24,20 @@ public class NodeDataOracle {
 
 	private Connection connection;
 
+	/**
+	 *
+	 * @param connection
+	 */
 	public NodeDataOracle(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 *
+	 * @param project
+	 * @param nodes
+	 * @return
+	 */
 	public Boolean save(Project project, List<Node> nodes) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.

@@ -11,6 +11,10 @@ package Simulation;
  */
 public interface Analysis {
 
+	/**
+	 *
+	 * @return
+	 */
 	String getName();
 
 }

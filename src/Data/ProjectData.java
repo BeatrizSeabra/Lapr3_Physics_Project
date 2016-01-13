@@ -14,16 +14,44 @@ import java.util.List;
  */
 public interface ProjectData {
 
+	/**
+	 *
+	 * @return
+	 */
 	Integer size();
 
+	/**
+	 *
+	 * @return
+	 */
 	List<Project> all();
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	Boolean save(Project project);
 
+	/**
+	 *
+	 * @param projects
+	 * @return
+	 */
 	Boolean save(List<Project> projects);
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	Project get(Project project);
 
+	/**
+	 *
+	 * @param project
+	 * @return
+	 */
 	Boolean hasChanged(Project project);
 
 }

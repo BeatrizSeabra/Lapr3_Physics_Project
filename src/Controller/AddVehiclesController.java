@@ -23,16 +23,28 @@ public class AddVehiclesController {
 	private VehicleData vehicleData;
 	private List<Vehicle> vehicles;
 
+	/**
+	 *
+	 */
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
 		this.vehicleData = Data.getVehicleData();
 		this.vehicles = new ArrayList(this.vehicleData.all(this.project));
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Vehicle> getVehicles() {
 		return this.vehicles;
 	}
 
+	/**
+	 *
+	 * @param filePath
+	 * @return
+	 */
 	public Boolean loadVehicles(String filePath) {
 		List<Vehicle> vehicles = Legacy.importVehicles(filePath);
 		if (vehicles != null) {
@@ -42,6 +54,11 @@ public class AddVehiclesController {
 		return false;
 	}
 
+	/**
+	 *
+	 * @param vehicles
+	 * @param newVehicles
+	 */
 	public void concatenateVehicles(List<Vehicle> vehicles,
 									List<Vehicle> newVehicles) {
 		for (Vehicle newVehicle : newVehicles) {
@@ -59,6 +76,12 @@ public class AddVehiclesController {
 		}
 	}
 
+	/**
+	 *
+	 * @param vehicles
+	 * @param name
+	 * @return
+	 */
 	public Integer quantityName(List<Vehicle> vehicles, String name) {
 		Integer amount = 0;
 		for (Vehicle vehicle : vehicles) {
@@ -69,10 +92,18 @@ public class AddVehiclesController {
 		return amount;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean hasChanges() {
 		return this.vehicles.size() != this.vehicleData.size(this.project);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public Boolean saveProjectVehicles() {
 		for (Vehicle vehicle : this.vehicles) {
 			if (!this.project.getVehicles().contains(vehicle)) {

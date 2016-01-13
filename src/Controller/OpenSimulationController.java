@@ -21,16 +21,28 @@ public class OpenSimulationController {
 	private SimulationData simulationData;
 	private List<Simulation> simulations;
 
+	/**
+	 *
+	 */
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
 		this.simulationData = Data.getSimulationData();
 		this.simulations = this.simulationData.all(this.project);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public List<Simulation> getSimulations() {
 		return this.simulations;
 	}
 
+	/**
+	 *
+	 * @param simulation
+	 * @return
+	 */
 	public Boolean openSimulation(Simulation simulation) {
 		simulation = this.simulationData.get(this.project, simulation);
 		ContextController.setOpenSimulation(simulation);

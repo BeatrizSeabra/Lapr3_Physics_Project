@@ -28,6 +28,9 @@ public class EditProjectGUI extends GraphicUserInterface {
 		this.creation(origin);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initiation() {
 		this.editProjectController = new EditProjectController();
@@ -37,6 +40,9 @@ public class EditProjectGUI extends GraphicUserInterface {
 		this.jTextFieldDescription.setText(project.getDescription());
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void update() {
 		this.editProjectController.
