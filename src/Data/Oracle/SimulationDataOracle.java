@@ -133,7 +133,7 @@ public class SimulationDataOracle implements SimulationData {
 			int index[] = arrayIndex.getIntArray();
 			callableStatement.close();
 			for (int i = 0; i < size; i++) {
-				//System.out.println("SIULATION INDEX: " + index[i]);
+				System.out.println("SIULATION INDEX: " + index[i]);
 				simulations.get(i).setId(index[i]);
 				if (index[i] != 0 && !simulations.get(i).getTraffics().isEmpty()) {
 					this.trafficDataOracle.save(simulations.get(i), simulations.
@@ -156,26 +156,23 @@ public class SimulationDataOracle implements SimulationData {
 	 */
 	@Override
 	public Simulation get(Project project, Simulation simulation) {
-		for (Simulation simulationList : this.all(project)) {
-			if (simulationList.getId() == simulation.getId()) {
-				try {
-					CallableStatement callableStatement = connection.
-						prepareCall("BEGIN EXPORTXMLSIMULATION(?,?); END;");
-					callableStatement.
-						registerOutParameter(1, OracleTypes.VARCHAR);
-					callableStatement.setInt(2, simulation.getId());
-					callableStatement.execute();
-					SimulationImportXML importClass = new SimulationImportXML();
-					List<Simulation> simulations = importClass.
-						importData(callableStatement.getString(1));
-					if (simulations != null && !simulations.isEmpty()) {
-						return simulations.get(simulations.size() - 1);
-					}
-				} catch (Exception ex) {
-					Error.setErrorMessage(ex.toString());
-					return null;
+		if (simulation.getId() != 0) {
+			try {
+				CallableStatement callableStatement = connection.
+					prepareCall("{ call ? := exportXMLSimulations(?) }");
+				callableStatement.
+					registerOutParameter(1, OracleTypes.VARCHAR);
+				callableStatement.setInt(2, simulation.getId());
+				callableStatement.execute();
+				SimulationImportXML importClass = new SimulationImportXML();
+				List<Simulation> simulations = importClass.
+					importData(callableStatement.getString(1));
+				if (simulations != null && !simulations.isEmpty()) {
+					return simulations.get(simulations.size() - 1);
 				}
-				break;
+			} catch (Exception ex) {
+				Error.setErrorMessage(ex.toString());
+				return null;
 			}
 		}
 		Error.

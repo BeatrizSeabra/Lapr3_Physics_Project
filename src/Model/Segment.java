@@ -21,6 +21,7 @@ public class Segment {
 	private Measure maxVelocity;
 	private Measure minVelocity;
 	private Integer numberVehicles;
+	private Integer vehicles;
 
 	/**
 	 * @return the name
@@ -118,6 +119,20 @@ public class Segment {
 	 */
 	public void setNumberVehicles(Integer numberVehicles) {
 		this.numberVehicles = numberVehicles;
+	}
+
+	/**
+	 * @return the vehicles
+	 */
+	public Integer getVehicles() {
+		return vehicles;
+	}
+
+	/**
+	 * @param vehicles the vehicles to set
+	 */
+	public void setVehicles(Integer vehicles) {
+		this.vehicles = vehicles;
 	}
 
 	@Override

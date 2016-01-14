@@ -36,13 +36,7 @@ public class PhysicsMath {
 	/**
 	 *
 	 */
-	public static final Measure densityGasoline = new Measure(755.0, "g/m3");
-
-	/**
-	 *
-	 */
-	public static final Measure densityDiesel = new Measure(832.0, "g/m3");
-	private static Random random = new Random();
+	public static final Random random = new Random();
 
 	/**
 	 *
@@ -56,45 +50,34 @@ public class PhysicsMath {
 	/**
 	 *
 	 * @param power
-	 * @param time
-	 * @param fuel
+	 * @param fuelConsumption
 	 * @return
 	 */
-	public static Measure fuelConsumptionTime(Measure power, Measure time,
-											  String fuel) {
+	public static Measure realPowerGasoline(Measure power,
+											Measure fuelConsumption) {
 		power = Measurement.convert(power, "J/s");
-		time = Measurement.convert(time, "s");
-		Measure specificEnergy = new Measure(0.0, "J/g");
-		if (fuel.equalsIgnoreCase("gasoline")) {
-			specificEnergy = PhysicsMath.specificEnergyGasoline;
-		} else if (fuel.equalsIgnoreCase("diesel")) {
-			specificEnergy = PhysicsMath.specificEnergyDiesel;
-		}
-		Double value = power.getValue() * time.getValue() * specificEnergy.
+		fuelConsumption = Measurement.convert(fuelConsumption, "g/J");
+		Measure specificEnergy = Measurement.
+			convert(PhysicsMath.specificEnergyGasoline, "J/g");
+		Double value = power.getValue() * fuelConsumption.getValue() * specificEnergy.
 			getValue();
-		return new Measure(value, "g/s");
+		return new Measure(value, "J/s");
 	}
 
 	/**
 	 *
-	 * @param force
-	 * @param lenght
-	 * @param fuel
+	 * @param power
+	 * @param fuelConsumption
 	 * @return
 	 */
-	public static Measure fuelConsumptionLenght(Measure force, Measure lenght,
-												String fuel) {
-		force = Measurement.convert(force, "N");
-		lenght = Measurement.convert(lenght, "m");
-		Measure specificEnergy = new Measure(1.0, "J/g");
-		if (fuel.equalsIgnoreCase("gasoline")) {
-			specificEnergy = PhysicsMath.specificEnergyGasoline;
-		} else if (fuel.equalsIgnoreCase("diesel")) {
-			specificEnergy = PhysicsMath.specificEnergyDiesel;
-		}
-		Double value = force.getValue() * lenght.getValue() * specificEnergy.
+	public static Measure realPowerDiesel(Measure power, Measure fuelConsumption) {
+		power = Measurement.convert(power, "J/s");
+		fuelConsumption = Measurement.convert(fuelConsumption, "g/J");
+		Measure specificEnergy = Measurement.
+			convert(PhysicsMath.specificEnergyDiesel, "J/g");
+		Double value = power.getValue() * fuelConsumption.getValue() * specificEnergy.
 			getValue();
-		return new Measure(value, "g/m");
+		return new Measure(value, "J/s");
 	}
 
 	/**

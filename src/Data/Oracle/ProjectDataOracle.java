@@ -163,7 +163,7 @@ public class ProjectDataOracle implements ProjectData {
 		if (project.getId() != 0) {
 			try {
 				CallableStatement callableStatement = connection.
-					prepareCall("BEGIN EXPORTXMLPROJECTS(?,?); END;");
+					prepareCall("{ call ? := exportXMLProject(?) }");
 				callableStatement.
 					registerOutParameter(1, OracleTypes.VARCHAR);
 				callableStatement.setInt(2, project.getId());
@@ -174,8 +174,9 @@ public class ProjectDataOracle implements ProjectData {
 				List<Project> projects = importClass.importData(result);
 				if (projects != null && !projects.isEmpty()) {
 					Project newProject = projects.get(projects.size() - 1);
+					newProject.setId(project.getId());
 					callableStatement = connection.
-						prepareCall("BEGIN EXPORTXMLVEHICLES(?,?); END;");
+						prepareCall("{ call ? := exportXMLVehicles(?) }");
 					callableStatement.
 						registerOutParameter(1, OracleTypes.VARCHAR);
 					callableStatement.setInt(2, newProject.getId());
@@ -193,7 +194,7 @@ public class ProjectDataOracle implements ProjectData {
 						}
 					}
 					callableStatement = connection.
-						prepareCall("BEGIN EXPORTXMLSIMULATIONS(?,?); END;");
+						prepareCall("{ call ? := exportXMLSimulations(?) }");
 					callableStatement.
 						registerOutParameter(1, OracleTypes.VARCHAR);
 					callableStatement.setInt(2, newProject.getId());

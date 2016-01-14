@@ -83,11 +83,9 @@ public class TrafficDataOracle {
 			ARRAY arrayIndex = ((OracleCallableStatement) callableStatement).
 				getARRAY(1);
 			int index[] = arrayIndex.getIntArray();
-			/*
-			 for (int i = 0; i < size; i++) {
-			 System.out.println("TRAFFIC INDEX: " + index[i]);
-			 }
-			 */
+			for (int i = 0; i < size; i++) {
+				System.out.println("TRAFFIC INDEX: " + index[i]);
+			}
 			return true;
 		} catch (Exception ex) {
 			Error.
