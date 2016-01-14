@@ -33,7 +33,6 @@ public class OpenSimulationTest {
 		this.project = new Project();
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.simulation = new Simulation();
-		this.simulation.setId(1);
 		this.simulation.setName("Project Name");
 		this.simulation.setDescription("Project Description");
 		Data.getSimulationData().save(this.project, this.simulation);

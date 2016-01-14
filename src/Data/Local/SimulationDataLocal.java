@@ -8,6 +8,7 @@ package Data.Local;
 import Data.SimulationData;
 import Model.Project;
 import Model.Simulation;
+import Model.Traffic;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,13 @@ import java.util.List;
 public class SimulationDataLocal implements SimulationData {
 
 	private List<Simulation> list = new ArrayList();
-
+        private Integer currentIndex = 0;
+        
+        private Integer getNextIndex() {
+		currentIndex++;
+		return this.currentIndex;
+	}
+        
 	/**
 	 *
 	 * @param project
@@ -46,14 +53,21 @@ public class SimulationDataLocal implements SimulationData {
 	 * @return
 	 */
 	public Boolean save(Project project, Simulation simulation) {
-		for (Simulation oldSimulation : this.list) {
-			if (oldSimulation.getId() == simulation.getId()) {
-				this.list.remove(oldSimulation);
-				break;
-			}
-		}
-		return this.list.add(simulation) && project.addSimulation(simulation);
-	}
+            if (simulation.getId() == 0) {
+                    simulation.setId(this.getNextIndex());
+                    return this.list.add(simulation) && project.addSimulation(simulation);
+            }
+            Simulation oldSimulation = this.get(project,simulation);
+            oldSimulation.setId(simulation.getId());
+            oldSimulation.setName(simulation.getName());
+            oldSimulation.setDescription(simulation.getDescription());
+            oldSimulation.getTraffics().clear();
+            for (Traffic traffic : simulation.getTraffics()) {
+                    oldSimulation.addTraffic(traffic);
+            }
+     
+            return oldSimulation.equals(simulation);
+        }
 
 	/**
 	 *

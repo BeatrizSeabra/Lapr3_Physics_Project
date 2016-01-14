@@ -30,10 +30,10 @@ public class EditProjectTest {
 	public EditProjectTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
 		this.project = new Project();
-		this.project.setId(1);
 		this.project.setName("Project Name");
 		this.project.setDescription("Project Description");
 		ContextController.setOpenProject(this.project);
+                Data.getProjectData().save(this.project);
 		this.editController = new EditProjectController();
 	}
 
@@ -62,9 +62,8 @@ public class EditProjectTest {
 		this.editController.initiation();
 		this.editController.editProject("Name X", "Description X");
 		this.editController.saveProject();
-		List<Project> projects = Data.getProjectData().all();
-		assertEquals(projects.size(), 1);
-		assertEquals(projects.get(0).getName(), "Name X");
-		assertEquals(projects.get(0).getDescription(), "Description X");
+		Project OpenPoject = ContextController.getOpenProject();
+		assertEquals(OpenPoject.getName(), "Name X");
+		assertEquals(OpenPoject.getDescription(), "Description X");
 	}
 }

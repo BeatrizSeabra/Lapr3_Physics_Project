@@ -51,24 +51,24 @@ public class ProjectDataLocal implements ProjectData {
 	 */
 	@Override
 	public Boolean save(Project project) {
-		if (project.getId() == 0) {
-			project.setId(this.getNextIndex());
-			return this.list.add(project);
-		}
-		Project oldProject = this.get(project);
-		project.setId(project.getId());
-		project.setName(project.getName());
-		project.setDescription(project.getDescription());
-		project.setRoadNetwork(project.getRoadNetwork());
-		oldProject.getVehicles().clear();
-		oldProject.getSimulations().clear();
-		for (Vehicle vehicle : project.getVehicles()) {
-			oldProject.addVehicle(vehicle);
-		}
-		for (Simulation simulation : project.getSimulations()) {
-			oldProject.addSimulation(simulation);
-		}
-		return oldProject.equals(project);
+            if (project.getId() == 0) {
+                    project.setId(this.getNextIndex());
+                    return this.list.add(project);
+            }
+            Project oldProject = this.get(project);
+            oldProject.setId(project.getId());
+            oldProject.setName(project.getName());
+            oldProject.setDescription(project.getDescription());
+            oldProject.setRoadNetwork(project.getRoadNetwork());
+            oldProject.getVehicles().clear();
+            oldProject.getSimulations().clear();
+            for (Vehicle vehicle : project.getVehicles()) {
+                    oldProject.addVehicle(vehicle);
+            }
+            for (Simulation simulation : project.getSimulations()) {
+                    oldProject.addSimulation(simulation);
+            }
+            return oldProject.equals(project);
 	}
 
 	/**

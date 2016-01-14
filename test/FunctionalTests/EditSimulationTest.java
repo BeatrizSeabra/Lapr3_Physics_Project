@@ -31,11 +31,17 @@ public class EditSimulationTest {
 
 	public EditSimulationTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
-		this.simulation = new Simulation();
+		this.project = new Project();
+                this.project.setName("Project Name");
+                this.project.setDescription("Project Description");
+                ContextController.setOpenProject(this.project);
+                Data.getProjectData().save(this.project);
+                this.simulation = new Simulation();
 		this.simulation.setId(1);
 		this.simulation.setName("Simulation Name");
 		this.simulation.setDescription("Simulation Description");
 		ContextController.setOpenSimulation(this.simulation);
+                Data.getSimulationData().save(this.project, this.simulation);
 		this.editController = new EditSimulationController();
 	}
 
