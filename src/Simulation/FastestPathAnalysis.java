@@ -113,4 +113,8 @@ public class FastestPathAnalysis extends AnalysisMethod {
 		this.results.add(listResults.get(index));
 	}
 
+	@Override
+	public String getName() {
+		return "Fastest Path";
+	}
 }

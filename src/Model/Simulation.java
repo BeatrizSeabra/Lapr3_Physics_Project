@@ -18,6 +18,7 @@ public class Simulation {
 	private String name = "";
 	private String description = "";
 	private List<Traffic> traffics = new ArrayList();
+	private List<Run> runs = new ArrayList();
 
 	/**
 	 *
@@ -30,6 +31,15 @@ public class Simulation {
 
 	/**
 	 *
+	 * @param run
+	 * @return
+	 */
+	public Boolean addRun(Run run) {
+		return this.runs.add(run);
+	}
+
+	/**
+	 *
 	 * @param index
 	 * @return
 	 */
@@ -38,10 +48,19 @@ public class Simulation {
 	}
 
 	/**
+	 *
+	 * @param index
+	 * @return
+	 */
+	public Run getRun(int index) {
+		return this.runs.get(index);
+	}
+
+	/**
 	 * @return the id
 	 */
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	/**
@@ -55,7 +74,7 @@ public class Simulation {
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	/**
@@ -69,7 +88,7 @@ public class Simulation {
 	 * @return the description
 	 */
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 
 	/**
@@ -83,14 +102,14 @@ public class Simulation {
 	 * @return the traffics
 	 */
 	public List<Traffic> getTraffics() {
-		return traffics;
+		return this.traffics;
 	}
 
 	/**
-	 * @param traffics the traffics to set
+	 * @return the runs
 	 */
-	public void setTraffics(List<Traffic> traffics) {
-		this.traffics = traffics;
+	public List<Run> getRuns() {
+		return this.runs;
 	}
 
 	@Override

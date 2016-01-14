@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<results>
+	<step_list>
+		<step>
+			<vehicle>Dummy01</vehicle>
+			<start>N2</start>
+			<end>N4</end>
+			<road>A1</road>
+			<segment>01</segment>
+			<entry>3 s</entry>
+			<out>3 s</out>
+			<power>9 J/s</power>
+			<speed>9 km/h</speed>
+			<relative>9 km/h</relative>
+			<car>9 N</car>
+			<rolling>9 N</rolling>
+			<air>9 N</air>
+			<gravity>9 N</gravity>
+		</step>
+		<step>
+			<vehicle>Dummy01</vehicle>
+			<start>N2</start>
+			<end>N4</end>
+			<road>A1</road>
+			<segment>02</segment>
+			<entry>3 s</entry>
+			<out>3 s</out>
+			<power>9 J/s</power>
+			<speed>9 km/h</speed>
+			<relative>9 km/h</relative>
+			<car>9 N</car>
+			<rolling>9 N</rolling>
+			<air>9 N</air>
+			<gravity>9 N</gravity>
+		</step>
+		<step>
+			<vehicle>Dummy02</vehicle>
+			<start>N1</start>
+			<end>N2</end>
+			<road>A2</road>
+			<segment>01</segment>
+			<entry>3 s</entry>
+			<out>3 s</out>
+			<power>9 J/s</power>
+			<speed>9 km/h</speed>
+			<relative>9 km/h</relative>
+			<car>9 N</car>
+			<rolling>9 N</rolling>
+			<air>9 N</air>
+			<gravity>9 N</gravity>
+		</step>
+	</step_list>
+	<drop_list>
+		<drop>
+			<vehicle>Dummy01</vehicle>
+			<nodestart>N2</nodestart>
+			<nodeend>N4</nodeend>
+			<time>40 s</time>
+		</drop>
+		<drop>
+			<vehicle>Dummy02</vehicle>
+			<nodestart>N1</nodestart>
+			<nodeend>N2</nodeend>
+			<time>30 s</time>
+		</drop>
+	</drop_list>
+</results>

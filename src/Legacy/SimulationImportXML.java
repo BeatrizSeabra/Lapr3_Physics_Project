@@ -8,11 +8,14 @@ package Legacy;
 import Controller.ContextController;
 import Model.Node;
 import Model.Project;
+import Model.Run;
 import Model.Simulation;
 import Model.Traffic;
 import Model.Vehicle;
 import Physics.Measure;
+import Simulation.AnalysisMethod;
 import System.Error;
+import System.Settings;
 import System.Util;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -66,13 +69,18 @@ public class SimulationImportXML implements Import<Simulation> {
 	public List<Simulation> importData(String data) {
 		Project project = ContextController.getOpenProject();
 		List<Simulation> simulations = new ArrayList();
+		List<Object> methods = Settings.loadAllClass(Settings.
+			getOptions("AnalysisMethodClass"));
 		try {
 			Simulation simulation = null;
+			Run run = null;
 			Double value = null;
 			Node nodeStart = null, nodeEnd = null;
 			Vehicle vehicle = null;
 			String text = null, unit = null;
 			Measure arrivalRate = null;
+			Measure time = null;
+			Measure step = null;
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 			XMLStreamReader reader = factory.
 				createXMLStreamReader(new StringReader(data));
@@ -95,6 +103,11 @@ public class SimulationImportXML implements Import<Simulation> {
 								nodeEnd = project.getRoadNetwork().
 									getNode(reader.getAttributeValue(1));
 								break;
+							case "run":
+								run = new Run();
+								run.setName(reader.getAttributeValue(0).
+									trim());
+								break;
 							default:
 								break;
 						}
@@ -102,6 +115,9 @@ public class SimulationImportXML implements Import<Simulation> {
 					}
 					case XMLStreamConstants.CHARACTERS: {
 						text = reader.getText().replaceAll("\"", "").trim();
+						if (!text.isEmpty()) {
+							System.out.println(text);
+						}
 						break;
 					}
 					case XMLStreamConstants.END_ELEMENT: {
@@ -127,6 +143,39 @@ public class SimulationImportXML implements Import<Simulation> {
 									traffic.setArrivalRate(arrivalRate);
 									simulation.addTraffic(traffic);
 								}
+								break;
+							case "method":
+								AnalysisMethod method = null;
+								for (Object objectMethod : methods) {
+									AnalysisMethod methodClass = (AnalysisMethod) objectMethod;
+									if (methodClass != null && methodClass.
+										getName().equals(text)) {
+										method = methodClass;
+									}
+								}
+								break;
+							case "time":
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									time = new Measure(value, unit);
+								} else {
+									time = new Measure(value, "s");
+								}
+								break;
+							case "step":
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									step = new Measure(value, unit);
+								} else {
+									step = new Measure(value, "s");
+								}
+								break;
+							case "run":
+								run.setTime(time);
+								run.setTimeStep(time);
+								simulation.addRun(run);
 								break;
 							default:
 								break;
