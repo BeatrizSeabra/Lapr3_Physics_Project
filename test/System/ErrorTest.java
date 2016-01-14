@@ -102,7 +102,7 @@ public class ErrorTest {
 	@Test
 	public void testGetErrorMessage() {
 		System.out.println("getErrorMessage");
-		String expResult = "testSetGetErrorMessage";
+		String expResult = "Error";
 		String result = Error.getErrorMessage();
 		assertEquals(expResult, result);
 
