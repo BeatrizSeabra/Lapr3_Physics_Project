@@ -19,12 +19,13 @@ import java.util.List;
  */
 public abstract class AnalysisMethod {
 
-	List<Vehicle> vehicles = new ArrayList();
-	List<RoadNetwork> roadNetworks = new ArrayList();
-	List<Node> startNodes = new ArrayList();
-	List<Node> endNodes = new ArrayList();
-	List<Deque<Section>> bestPaths = new ArrayList();
-	List<List<String[]>> results = new ArrayList();
+	protected String name;
+	protected List<Vehicle> vehicles = new ArrayList();
+	protected List<RoadNetwork> roadNetworks = new ArrayList();
+	protected List<Node> startNodes = new ArrayList();
+	protected List<Node> endNodes = new ArrayList();
+	protected List<Deque<Section>> bestPaths = new ArrayList();
+	protected List<List<String[]>> results = new ArrayList();
 
 	public List<String[]> result(Vehicle vehicle, RoadNetwork roadNetwork,
 								 Node startNode, Node endNode) {
@@ -56,5 +57,19 @@ public abstract class AnalysisMethod {
 
 	abstract void analyze(Vehicle vehicle, RoadNetwork roadNetwork,
 						  Node startNode, Node endNode);
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

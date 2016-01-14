@@ -16,7 +16,9 @@ import Physics.Measure;
 import Physics.Measurement;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 import java.util.Map;
 import javax.swing.Timer;
 
@@ -34,7 +36,10 @@ public class Simulator {
 	public Simulator(Simulation simulation, String name, Measure time,
 					 Measure timeStep) {
 		this.simulation = simulation;
-		this.run = new Run(name, time, timeStep);
+		this.run = new Run();
+		this.run.setName(name);
+		this.run.setTime(time);
+		this.run.setTimeStep(timeStep);
 	}
 
 	public void run() {
@@ -61,9 +66,20 @@ public class Simulator {
 			}
 		}
 		for (Traffic traffic : this.simulation.getTraffics()) {
+			traffic.getNodeStart().getBots().clear();
+		}
+		for (Traffic traffic : this.simulation.getTraffics()) {
 			Deque<Section> sections = this.run.getMethod().path(traffic.
 				getVehicle(), roadNetwork, traffic.getNodeStart(), traffic.
 																getNodeEnd());
+			List<Segment> segments = new ArrayList();
+			for (Section Section : sections) {
+				for (Segment segment : segments) {
+					segments.add(segment);
+				}
+			}
+			VehicleBot vehicleBot = new VehicleBot();
+			traffic.getNodeStart().getBots().put(segments.get(0), vehicleBot);
 		}
 	}
 

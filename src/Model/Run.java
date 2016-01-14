@@ -23,12 +23,6 @@ public class Run {
 	private List<Step> steps;
 	private List<Drop> drops;
 
-	public Run(String name, Measure time, Measure timeStep) {
-		this.name = name;
-		this.time = time;
-		this.timeStep = timeStep;
-	}
-
 	/**
 	 * @return the id
 	 */
