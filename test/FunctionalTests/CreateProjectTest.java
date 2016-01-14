@@ -66,8 +66,8 @@ public class CreateProjectTest {
 			getProjectVehicles();
 		assertEquals(vehicles.size(), 0);
 		this.createProjectController.loadRoadNetwork(this.filePathRoadNetwork);
-		assertEquals(this.createProjectController.getName(), "TestSet01");
-		assertEquals(this.createProjectController.getDescription(), "Simple test set to begin development");
+		assertEquals(this.createProjectController.getName(), "TestSet02");
+		assertEquals(this.createProjectController.getDescription(), "5 node test set");
 		this.createProjectController.loadVehicles(this.filePathVehicles);
 		vehicles = this.createProjectController.getProjectVehicles();
 		assertEquals(vehicles.size(), 1);

@@ -67,7 +67,7 @@ public class OpenSimulationTest {
 		assertEquals(ContextController.getOpenSimulation(), null);
 		this.openController.initiation();
 		List<Simulation> simulations = this.openController.getSimulations();
-		assertEquals(simulations.size(), 1);
+		assertEquals(simulations.size(), 2);
 		this.openController.openSimulation(simulations.get(0));
 		assertEquals(ContextController.getOpenSimulation(), simulations.get(0));
 	}

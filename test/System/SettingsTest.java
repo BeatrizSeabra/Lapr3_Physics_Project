@@ -46,11 +46,10 @@ public class SettingsTest {
 	@Test
 	public void testGetSettingsFilePath() {
 		System.out.println("getSettingsFilePath");
-		String expResult = "";
+		String expResult = "settings.properties";
 		String result = Settings.getSettingsFilePath();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -59,10 +58,9 @@ public class SettingsTest {
 	@Test
 	public void testSetSettingsFilePath() {
 		System.out.println("setSettingsFilePath");
-		String filePath = "";
-		Settings.setSettingsFilePath(filePath);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String expResult = "settings.properties";
+		Settings.setSettingsFilePath(expResult);
+		assertEquals(expResult, Settings.getSettingsFilePath());
 	}
 
 	/**
