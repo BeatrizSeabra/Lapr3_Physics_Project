@@ -6,12 +6,12 @@
 package Model;
 
 import Physics.Measure;
+import Physics.Measurement;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -402,7 +402,7 @@ public class SectionTest {
 		segm.setNumberVehicles(Integer.MIN_VALUE);
 		List<Segment> segment = new ArrayList<>();
 		segment.add(segm);
-
+		this.section.addSegment(segm);
 		List<Segment> expResult = segment;
 		List<Segment> result = this.section.getSegments();
 		assertEquals(expResult, result);
@@ -465,11 +465,14 @@ public class SectionTest {
 	@Test
 	public void testReverse() {
 		System.out.println("reverse");
-		Section instance = new Section();
-		Section expResult = null;
-		Section result = instance.reverse();
+		Measure windSpeed = this.section.getWindSpeed();
+		Section result = this.section.reverse();
+		Measure windSpeed2 = Measurement.neg(windSpeed);
+		this.section.setWindSpeed(windSpeed2);
+
+		Section expResult = this.section;
+
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 }
