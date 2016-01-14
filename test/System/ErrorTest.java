@@ -8,7 +8,6 @@ package System;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -91,10 +90,10 @@ public class ErrorTest {
 	@Test
 	public void testSetErrorMessage() {
 		System.out.println("setErrorMessage");
-		String errorMessage = "";
-		Error.setErrorMessage(errorMessage);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String expResult = "Error";
+
+		Error.setErrorMessage(expResult);
+		assertEquals(expResult, Error.getErrorMessage());
 	}
 
 	/**
@@ -103,11 +102,10 @@ public class ErrorTest {
 	@Test
 	public void testGetErrorMessage() {
 		System.out.println("getErrorMessage");
-		String expResult = "";
+		String expResult = "testSetGetErrorMessage";
 		String result = Error.getErrorMessage();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -116,11 +114,12 @@ public class ErrorTest {
 	@Test
 	public void testLog_0args() {
 		System.out.println("log");
-		String expResult = "";
-		String result = Error.log();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String menssege = "test";
+
+		Error.clearLog();
+		Error.log(menssege);
+		assertEquals(Error.log().contains(menssege), true);
+
 	}
 
 }
