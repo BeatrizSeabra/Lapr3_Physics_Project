@@ -77,6 +77,7 @@ public class VehicleTest {
 		this.vehicle.addThrottle(throttle1);
 		this.vehicle.addThrottle(throttle2);
 		this.vehicle.addThrottle(throttle3);
+                this.vehicle.setVelocityLimits("road", new Measure(60.0, "km/h"));
 	}
 
 	@BeforeClass
@@ -192,14 +193,13 @@ public class VehicleTest {
 	@Test
 	public void testGetVelocity() {
 		System.out.println("testGetVelocity");
-		/*
-		 assertEquals(this.vehicle.getVelocity(1).getValue(), 77.14, 0.01);
-		 assertEquals(this.vehicle.getVelocity(2).getValue(), 125.09, 0.01);
-		 assertEquals(this.vehicle.getVelocity(3).getValue(), 175.21, 0.01);
-		 assertEquals(this.vehicle.getVelocity(4).getValue(), 225.02, 0.01);
-		 assertEquals(this.vehicle.getVelocity(5).getValue(), 295.22, 0.01);
-		 assertEquals(this.vehicle.getVelocity(6).getValue(), 372.29, 0.01);
-		 */
+                assertEquals(this.vehicle.getVelocity(1).getValue(), 2.52, 0.01);
+                assertEquals(this.vehicle.getVelocity(2).getValue(), 4.08, 0.01);
+                assertEquals(this.vehicle.getVelocity(3).getValue(), 5.72, 0.01);
+                assertEquals(this.vehicle.getVelocity(4).getValue(), 7.35, 0.01);
+                assertEquals(this.vehicle.getVelocity(5).getValue(), 9.64, 0.01);
+                assertEquals(this.vehicle.getVelocity(6).getValue(), 12.16, 0.01);
+		 
 	}
 
 	/**
@@ -208,88 +208,7 @@ public class VehicleTest {
 	@Test
 	public void testGetMaxVelocity() {
 		System.out.println("testGetMaxVelocity");
-		/*
-		 assertEquals(this.vehicle.getMaxVelocity().getValue(), 372.29, 0.01);
-		 */
-		for (Map.Entry<Integer, Measure> entry : this.vehicle.getGears().
-			entrySet()) {
-			System.out.println("Gear " + entry.getKey() + ": " + entry.
-				getValue());
-			for (Throttle throttle : this.vehicle.getThrottles()) {
-				System.out.println("\tThrottle: " + throttle.getPercentage());
-				for (Regime regime : throttle.getRegimes()) {
-					System.out.
-						println("\t\tRegime: torque: " + regime.getTorque() + " - high: " + regime.
-							getRpmHigh() + " - fuel: " + regime.
-							getFuelConsumption());
-					System.out.println("\t\t\tminSpeed: " + Measurement.
-						convert(Physics.PhysicsMath.
-							carSpeed(vehicle.getWheelSize(), regime.getRpmLow(), vehicle.
-									 getFinalDriveRatio(), entry.getValue()), "km/h"));
-					System.out.println("\t\t\tmaxSpeed: " + Measurement.
-						convert(Physics.PhysicsMath.
-							carSpeed(vehicle.getWheelSize(), regime.getRpmHigh(), vehicle.
-									 getFinalDriveRatio(), entry.getValue()), "km/h"));
-					System.out.println("\t\t\tminForce: " + Physics.PhysicsMath.
-						engineCarForce(regime.getTorque(), vehicle.
-									   getFinalDriveRatio(), regime.getRpmLow(), entry.
-									   getValue(), vehicle.getWheelSize()));
-					System.out.println("\t\t\tmaxForce: " + Physics.PhysicsMath.
-						engineCarForce(regime.getTorque(), vehicle.
-									   getFinalDriveRatio(), regime.getRpmHigh(), entry.
-									   getValue(), vehicle.getWheelSize()));
-					System.out.println("\t\t\tminPower: " + Physics.PhysicsMath.
-						engineCarPower(regime.getTorque(), regime.getRpmLow(), entry.
-									   getValue()));
-					System.out.println("\t\t\tmaxPower: " + Physics.PhysicsMath.
-						engineCarPower(regime.getTorque(), regime.getRpmHigh(), entry.
-									   getValue()));
-				}
-			}
-		}
-
-		Measure radiusTire = vehicle.getWheelSize();
-		Measure rotations = vehicle.getThrottles().get(0).getRegimes().get(0).
-			getRpmLow();
-		Measure finalDrive = vehicle.getFinalDriveRatio();
-		Measure gearRatio = vehicle.getGear(1);
-		Measure carSpeed = Physics.PhysicsMath.
-			carSpeed(radiusTire, rotations, finalDrive, gearRatio);
-		Measure windSpeed = new Measure(5.0, "m/s");
-		Measure windDirection = new Measure(20.0, "°");
-		Measure relativeSpeed = Physics.PhysicsMath.
-			relativeSpeed(carSpeed, windSpeed, windDirection);
-		Measure torque = vehicle.getThrottles().get(0).getRegimes().get(0).
-			getTorque();
-		Measure force = Physics.PhysicsMath.
-			engineCarForce(torque, finalDrive, rotations, gearRatio, radiusTire);
-		Measure power = Physics.PhysicsMath.
-			engineCarPower(torque, rotations, gearRatio);
-		Measure lenght = new Measure(1.0, "m");
-		Measure time = new Measure(1.0, "s");
-		Measure fuelConsumptionTime = Physics.PhysicsMath.
-			fuelConsumptionTime(power, time, vehicle.getFuel());
-		Measure fuelConsumptionLenght = Physics.PhysicsMath.
-			fuelConsumptionLenght(force, lenght, vehicle.getFuel());
-
-		System.out.println(radiusTire);
-		System.out.println(rotations);
-		System.out.println(finalDrive);
-		System.out.println(gearRatio);
-		System.out.println(carSpeed);
-		System.out.println(windSpeed);
-		System.out.println(windDirection);
-		System.out.println("aqui -> " + relativeSpeed);
-		System.out.println(torque);
-		System.out.println(force);
-		System.out.println(power);
-		System.out.println(lenght);
-		System.out.println(time);
-		System.out.println(fuelConsumptionTime);
-		System.out.println(fuelConsumptionLenght);
-
-		System.out.println("fuelConsumptionTime: " + fuelConsumptionTime);
-		System.out.println("fuelConsumptionLenght: " + fuelConsumptionLenght);
+		assertEquals(this.vehicle.getMaxVelocity().getValue(), 12.17, 0.01);
 	}
 
 	/**
@@ -299,11 +218,9 @@ public class VehicleTest {
 	public void testSetVelocityLimits() {
 		System.out.println("setVelocityLimits");
 		String segmentType = "testCase1";
-		Measure velocityLimit = new Measure(22.2, "km");
-		Boolean expResult = false;
-		Boolean result = this.vehicle.
-			setVelocityLimits(segmentType, velocityLimit);
-		assertEquals(expResult, result);
+		Measure velocityLimit = new Measure(22.2, "km/h");
+		this.vehicle.setVelocityLimits(segmentType, velocityLimit);
+                assertEquals(this.vehicle.getVelocityLimits(segmentType).getValue(), 22.2, 0.01);
 	}
 
 	/**
@@ -312,8 +229,8 @@ public class VehicleTest {
 	@Test
 	public void testGetVelocityLimits_String() {
 		System.out.println("getVelocityLimits");
-		String segmentType = "km";
-		Measure expResult = new Measure(22.2, "km");
+		String segmentType = "road";
+		Measure expResult = new Measure(22.2, "km/h");
 		this.vehicle.setVelocityLimits(segmentType, expResult);
 		Measure result = this.vehicle.getVelocityLimits(segmentType);
 		assertEquals(expResult, result);
@@ -755,10 +672,11 @@ public class VehicleTest {
 	@Test
 	public void testGetVelocityLimits_0args() {
 		System.out.println("getVelocityLimits");
-		Measure measure = new Measure(20.2, "km");
+		Measure measure = new Measure(20.2, "km/h");
 		this.vehicle.setVelocityLimits("Highway12", measure);
 		Map<String, Measure> expResult = new HashMap<>();
 		expResult.put("Highway12", measure);
+                expResult.put("road", new Measure(60.0, "km/h"));
 		Map<String, Measure> result = this.vehicle.getVelocityLimits();
 		assertEquals(expResult, result);
 	}
@@ -881,9 +799,9 @@ public class VehicleTest {
 	@Test
 	public void testToString() {
 		System.out.println("toString");
-		String expResult = "Vehicle | name: Nissan Skyline 2001 | description: 2001 Nissan Skyline GT-R R34 V-spec II N1 | type: car | motorization: combustion | fuel: gasoline | mass: 1550,00 kg | load: 0,00 kg | drag: 0,34 ratio | rrc: 0,01 ratio | wheelSize: 0,33 m | minRPM: 8500,00 rpm | maxRPM: 1000,00 rpm | finalDrive: 3,55 ratio | energyRegeneration: 22,00 rpm | gear1: 3,83 ratio | gear2: 2,36 ratio | gear3: 1,69 ratio | gear4: 1,31 ratio | gear5: 1,00 ratio | gear6: 0,79 ratio | throttleModel.Throttle@c6aed28a | throttleModel.Throttle@9212bc77 | throttleModel.Throttle@a3c51c77";
-		String result = this.vehicle.toString();
-		assertEquals(expResult, result);
+                String stringResult = "Vehicle | name: Nissan Skyline 2001 | description: 2001 Nissan Skyline GT-R R34 V-spec II N1 | type: car | motorization: combustion | fuel: gasoline | mass: 1550,00 kg | load: 0,00 kg | drag: 0,34 ratio | rrc: 0,01 ratio | wheelSize: 0,33 m | minRPM: 8500,00 rpm | maxRPM: 1000,00 rpm | finalDrive: 3,55 ratio | energyRegeneration: 22,00 rpm | gear1: 3,83 ratio | gear2: 2,36 ratio | gear3: 1,69 ratio | gear4: 1,31 ratio | gear5: 1,00 ratio | gear6: 0,79 ratio | limitroad: 60,00 km/h";
+                String result = this.vehicle.toString();
+		assertEquals(stringResult, result);
 	}
 
 	/**

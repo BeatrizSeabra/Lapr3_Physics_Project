@@ -47,7 +47,7 @@ public class Vehicle {
 	 * @return
 	 */
 	public Boolean setVelocityLimits(String segmentType, Measure velocityLimit) {
-		return this.getVelocityLimits().put(segmentType, velocityLimit) != null;
+		return this.velocityLimits.put(segmentType, velocityLimit)==this.velocityLimits.get(segmentType);
 	}
 
 	/**
@@ -102,14 +102,7 @@ public class Vehicle {
 	 * @return
 	 */
 	public Measure getVelocity(Integer gear) {
-		Double wheelSize = Measurement.convert(this.wheelSize, "m").getValue();
-		Double RPM = Measurement.convert(this.maxRPM, "rps").getValue();
-		Double finalDriveRatio = Measurement.
-			convert(this.finalDriveRatio, "ratio").getValue();
-		Double gearValue = Measurement.convert(this.getGear(gear), "ratio").
-			getValue();
-		Measure result = new Measure((2 * Math.PI * wheelSize * RPM) / (finalDriveRatio * gearValue), "m/s");
-		return Measurement.convert(result, "km/h");
+		return Physics.PhysicsMath.carSpeed(this.wheelSize, this.maxRPM, this.finalDriveRatio, this.getGear(gear));
 	}
 
 	/**
@@ -117,7 +110,8 @@ public class Vehicle {
 	 * @return
 	 */
 	public Measure getMaxVelocity() {
-		return this.getVelocity(Collections.max(this.gears.keySet()));
+		return Physics.PhysicsMath.carSpeed(this.wheelSize, this.maxRPM, this.finalDriveRatio, this.getGear(Collections.max(this.gears.keySet())));
+
 	}
 
 	/**
@@ -476,9 +470,6 @@ public class Vehicle {
 		for (Entry<String, Measure> entry : this.velocityLimits.entrySet()) {
 			stringBuilder.append(" | limit").append(entry.getKey()).append(": ").
 				append(entry.getValue());
-		}
-		for (Throttle throttle : this.getThrottles()) {
-			stringBuilder.append(" | throttle" + throttle);
 		}
 		return stringBuilder.toString();
 	}
