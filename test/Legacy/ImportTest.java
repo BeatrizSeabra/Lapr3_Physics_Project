@@ -50,8 +50,6 @@ public class ImportTest<T> {
 		String expResult = "";
 		String result = instance.getExtension();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -64,8 +62,6 @@ public class ImportTest<T> {
 		String expResult = "";
 		String result = instance.getExtensionDescription();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -78,8 +74,6 @@ public class ImportTest<T> {
 		FileFilter expResult = null;
 		FileFilter result = instance.getExtensionFilter();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -93,8 +87,6 @@ public class ImportTest<T> {
 		List expResult = null;
 		List result = instance.importData(data);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	public class ImportImpl implements Import {

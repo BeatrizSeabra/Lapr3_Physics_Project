@@ -50,8 +50,6 @@ public class ExportTest {
 		String expResult = "";
 		String result = instance.getExtension();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -64,8 +62,6 @@ public class ExportTest {
 		String expResult = "";
 		String result = instance.getExtensionDescription();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -78,8 +74,6 @@ public class ExportTest {
 		FileFilter expResult = null;
 		FileFilter result = instance.getExtensionFilter();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -93,8 +87,6 @@ public class ExportTest {
 		String expResult = "";
 		String result = instance.export(data);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	public class ExportImpl implements Export {
