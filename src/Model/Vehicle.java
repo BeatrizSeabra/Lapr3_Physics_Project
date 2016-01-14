@@ -481,14 +481,4 @@ public class Vehicle {
 	public Integer getCurrentGear() {
 		return 1;
 	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public Measure getCurrentVelocity() {
-		return Measurement.convert(new Measure(60.0, "km/h"), "m/s");
-
-	}
-
 }

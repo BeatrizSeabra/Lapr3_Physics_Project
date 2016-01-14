@@ -814,18 +814,4 @@ public class VehicleTest {
 		Integer result = this.vehicle.getCurrentGear();
 		assertEquals(expResult, result);
 	}
-
-	/**
-	 * Test of getCurrentVelocity method, of class Vehicle.
-	 */
-	@Test
-	public void testGetCurrentVelocity() {
-		System.out.println("getCurrentVelocity");
-		Measure expResult = new Measure(44.2, "km");
-		expResult = Measurement.convert(new Measure(60.0, "km/h"), "m/s");
-		this.vehicle.setVelocityLimits("testCase", expResult);
-		Measure result = this.vehicle.getCurrentVelocity();
-		assertEquals(expResult, result);
-	}
-
 }
