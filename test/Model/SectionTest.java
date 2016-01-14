@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -31,6 +32,7 @@ public class SectionTest {
 		this.section.setTypology("Section typology");
 		this.section.setWindDirection(new Measure(2.0, "°"));
 		this.section.setWindSpeed(new Measure(3.0, "km"));
+
 	}
 
 	@BeforeClass
@@ -196,11 +198,11 @@ public class SectionTest {
 	public void testGetId() {
 		System.out.println("getId");
 		Section instance = new Section();
-		Integer expResult = null;
-		Integer result = instance.getId();
+
+		Integer expResult = 0;
+		Integer result = this.section.getId();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -209,11 +211,13 @@ public class SectionTest {
 	@Test
 	public void testSetId() {
 		System.out.println("setId");
-		Integer id = null;
+
 		Section instance = new Section();
-		instance.setId(id);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Integer expResult = 0;
+		instance.setId(expResult);
+		Integer result = this.section.getId();
+		assertEquals(expResult, result);
+
 	}
 
 	/**
@@ -222,12 +226,11 @@ public class SectionTest {
 	@Test
 	public void testGetRoad() {
 		System.out.println("getRoad");
-		Section instance = new Section();
-		String expResult = "";
-		String result = instance.getRoad();
+
+		String expResult = "Section road";
+		String result = this.section.getRoad();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -236,11 +239,13 @@ public class SectionTest {
 	@Test
 	public void testSetRoad() {
 		System.out.println("setRoad");
-		String road = "";
-		Section instance = new Section();
-		instance.setRoad(road);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
+		String expResult = "Section road tt";
+
+		this.section.setRoad(expResult);
+		String result = this.section.getRoad();
+		assertEquals(expResult, result);
+
 	}
 
 	/**
@@ -249,12 +254,11 @@ public class SectionTest {
 	@Test
 	public void testGetTypology() {
 		System.out.println("getTypology");
-		Section instance = new Section();
-		String expResult = "";
-		String result = instance.getTypology();
+
+		String expResult = "Section typology";
+		String result = this.section.getTypology();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -263,11 +267,13 @@ public class SectionTest {
 	@Test
 	public void testSetTypology() {
 		System.out.println("setTypology");
-		String typology = "";
-		Section instance = new Section();
-		instance.setTypology(typology);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
+		String expResult = "Section road2";
+
+		this.section.setTypology(expResult);
+		String result = this.section.getTypology();
+		assertEquals(expResult, result);
+
 	}
 
 	/**
@@ -276,12 +282,11 @@ public class SectionTest {
 	@Test
 	public void testGetDirection() {
 		System.out.println("getDirection");
-		Section instance = new Section();
-		String expResult = "";
-		String result = instance.getDirection();
+
+		String expResult = "Section Diretion";
+		String result = this.section.getDirection();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -290,11 +295,11 @@ public class SectionTest {
 	@Test
 	public void testSetDirection() {
 		System.out.println("setDirection");
-		String direction = "";
-		Section instance = new Section();
-		instance.setDirection(direction);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String expResult = "Section Diretion2";
+		this.section.setDirection(expResult);
+		String result = this.section.getDirection();
+		assertEquals(expResult, result);
+
 	}
 
 	/**
@@ -303,12 +308,11 @@ public class SectionTest {
 	@Test
 	public void testGetToll() {
 		System.out.println("getToll");
-		Section instance = new Section();
-		Measure expResult = null;
-		Measure result = instance.getToll();
+
+		Measure expResult = new Measure(1.0, "€");
+		Measure result = this.section.getToll();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -317,11 +321,12 @@ public class SectionTest {
 	@Test
 	public void testSetToll() {
 		System.out.println("setToll");
-		Measure toll = null;
+		Measure expResult = new Measure(2.0, "€");
 		Section instance = new Section();
-		instance.setToll(toll);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		this.section.setToll(expResult);
+		Measure result = this.section.getToll();
+		instance.setToll(expResult);
+		assertEquals(expResult, result);
 	}
 
 	/**
@@ -330,12 +335,11 @@ public class SectionTest {
 	@Test
 	public void testGetWindDirection() {
 		System.out.println("getWindDirection");
-		Section instance = new Section();
-		Measure expResult = null;
-		Measure result = instance.getWindDirection();
+
+		Measure expResult = new Measure(2.00, "°");
+		Measure result = this.section.getWindDirection();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -344,11 +348,14 @@ public class SectionTest {
 	@Test
 	public void testSetWindDirection() {
 		System.out.println("setWindDirection");
-		Measure windDirection = null;
+
+		Measure expResult = new Measure(2.0, "€");
 		Section instance = new Section();
-		instance.setWindDirection(windDirection);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		this.section.setWindDirection(expResult);
+		Measure result = this.section.getWindDirection();
+		instance.setToll(expResult);
+		assertEquals(expResult, result);
+
 	}
 
 	/**
@@ -357,12 +364,10 @@ public class SectionTest {
 	@Test
 	public void testGetWindSpeed() {
 		System.out.println("getWindSpeed");
-		Section instance = new Section();
-		Measure expResult = null;
-		Measure result = instance.getWindSpeed();
+		Measure expResult = new Measure(3.00, "km");
+		Measure result = this.section.getWindSpeed();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -371,11 +376,13 @@ public class SectionTest {
 	@Test
 	public void testSetWindSpeed() {
 		System.out.println("setWindSpeed");
-		Measure windSpeed = null;
+		Measure expResult = new Measure(2.0, "km/h");
 		Section instance = new Section();
-		instance.setWindSpeed(windSpeed);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		this.section.setWindSpeed(expResult);
+		Measure result = this.section.getWindSpeed();
+		instance.setToll(expResult);
+		assertEquals(expResult, result);
+
 	}
 
 	/**
@@ -384,12 +391,22 @@ public class SectionTest {
 	@Test
 	public void testGetSegments() {
 		System.out.println("getSegments");
-		Section instance = new Section();
-		List<Segment> expResult = null;
-		List<Segment> result = instance.getSegments();
+
+		Segment segm = new Segment();
+		segm.setName("test");
+		segm.setHeight(new Measure(2.0, "test"));
+		segm.setLength(new Measure(2.0, "test"));
+		segm.setSlope(new Measure(2.0, "test"));
+		segm.setMaxVelocity(new Measure(2.0, "test"));
+		segm.setMinVelocity(new Measure(2.0, "test"));
+		segm.setNumberVehicles(Integer.MIN_VALUE);
+		List<Segment> segment = new ArrayList<>();
+		segment.add(segm);
+
+		List<Segment> expResult = segment;
+		List<Segment> result = this.section.getSegments();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -398,13 +415,12 @@ public class SectionTest {
 	@Test
 	public void testAddSegment() {
 		System.out.println("addSegment");
-		Segment segment = null;
-		Section instance = new Section();
-		Boolean expResult = null;
-		Boolean result = instance.addSegment(segment);
+		Segment segment = new Segment();
+
+		Boolean expResult = true;
+		Boolean result = this.section.addSegment(segment);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -413,12 +429,9 @@ public class SectionTest {
 	@Test
 	public void testGetTotalLength() {
 		System.out.println("getTotalLength");
-		Section instance = new Section();
-		Measure expResult = null;
-		Measure result = instance.getTotalLength();
+		Measure expResult = new Measure(0.00, "km");
+		Measure result = this.section.getTotalLength();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -428,11 +441,10 @@ public class SectionTest {
 	public void testToString() {
 		System.out.println("toString");
 		Section instance = new Section();
-		String expResult = "";
+		String expResult = "test";
 		String result = instance.toString();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(expResult.getClass(), result.getClass());
+
 	}
 
 	/**
@@ -441,12 +453,10 @@ public class SectionTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		Section instance = new Section();
-		Section expResult = null;
-		Section result = instance.clone();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
+		Section expResult = this.section.clone();
+
+		assertEquals(expResult, this.section);
 	}
 
 	/**
