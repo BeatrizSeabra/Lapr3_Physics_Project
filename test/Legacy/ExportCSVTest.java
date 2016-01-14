@@ -5,22 +5,23 @@
  */
 package Legacy;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  *
- * @author valhalla
+ * @author LAPR3_20152016_G27
  */
 public class ExportCSVTest {
 
 	public ExportCSVTest() {
+
 	}
 
 	@BeforeClass
@@ -44,13 +45,11 @@ public class ExportCSVTest {
 	 */
 	@Test
 	public void testGetExtension() {
-		System.out.println("getExtension");
+		System.out.println("testGetExtension");
 		ExportCSV instance = new ExportCSV();
-		String expResult = "";
+		String expResult = "csv";
 		String result = instance.getExtension();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -58,27 +57,11 @@ public class ExportCSVTest {
 	 */
 	@Test
 	public void testGetExtensionDescription() {
-		System.out.println("getExtensionDescription");
+		System.out.println("testGetExtensionDescription");
 		ExportCSV instance = new ExportCSV();
-		String expResult = "";
+		String expResult = "CSV Documents (*.csv)";
 		String result = instance.getExtensionDescription();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of getExtensionFilter method, of class ExportCSV.
-	 */
-	@Test
-	public void testGetExtensionFilter() {
-		System.out.println("getExtensionFilter");
-		ExportCSV instance = new ExportCSV();
-		FileNameExtensionFilter expResult = null;
-		FileNameExtensionFilter result = instance.getExtensionFilter();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -86,14 +69,18 @@ public class ExportCSVTest {
 	 */
 	@Test
 	public void testExport() {
-		System.out.println("export");
-		Object data = null;
+		System.out.println("testExport");
+		System.out.println("testExport");
+		List<String[]> text = new ArrayList();
+		text.add("1;2;3".split(";"));
+		text.add("4;5;6".split(";"));
+		text.add("7;8;9".split(";"));
+		String expResult = "1;2;3\n"
+			+ "4;5;6\n"
+			+ "7;8;9\n";
 		ExportCSV instance = new ExportCSV();
-		String expResult = "";
-		String result = instance.export(data);
+		String result = instance.export(text);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 }
