@@ -8,7 +8,6 @@ package Physics;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,11 +43,10 @@ public class MeasurementTest {
 	@Test
 	public void testGetScalesMeasuresFilePath() {
 		System.out.println("getScalesMeasuresFilePath");
-		String expResult = "";
+		String expResult = "files/scalesMeasures.csv";
 		String result = Measurement.getScalesMeasuresFilePath();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+
 	}
 
 	/**
@@ -57,13 +55,11 @@ public class MeasurementTest {
 	@Test
 	public void testConvert() {
 		System.out.println("convert");
-		Measure measure = null;
-		String unit = "";
-		Measure expResult = null;
+		Measure measure = new Measure(22.2, "ratio");
+		String unit = "ratio";
+		Measure expResult = new Measure(22.2, "ratio");
 		Measure result = Measurement.convert(measure, unit);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -72,13 +68,11 @@ public class MeasurementTest {
 	@Test
 	public void testSum() {
 		System.out.println("sum");
-		Measure measureA = null;
-		Measure measureB = null;
-		Measure expResult = null;
+		Measure measureA = new Measure(22.1, "ratio");
+		Measure measureB = new Measure(11.1, "ratio");
+		Measure expResult = new Measure(33.20, "ratio");
 		Measure result = Measurement.sum(measureA, measureB);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -87,13 +81,11 @@ public class MeasurementTest {
 	@Test
 	public void testMinus() {
 		System.out.println("minus");
-		Measure measureA = null;
-		Measure measureB = null;
-		Measure expResult = null;
+		Measure measureA = new Measure(11.1, "ratio");
+		Measure measureB = new Measure(8.09, "ratio");
+		Measure expResult = new Measure(3.01, "ratio");
 		Measure result = Measurement.minus(measureA, measureB);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -102,12 +94,10 @@ public class MeasurementTest {
 	@Test
 	public void testNeg() {
 		System.out.println("neg");
-		Measure measure = null;
-		Measure expResult = null;
+		Measure measure = new Measure(2.2, "ratio");
+		Measure expResult = new Measure(-2.20, "ratio");
 		Measure result = Measurement.neg(measure);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -116,12 +106,11 @@ public class MeasurementTest {
 	@Test
 	public void testModule() {
 		System.out.println("module");
-		Measure measure = null;
-		Measure expResult = null;
+		Measure measure = new Measure(12.2, "ratio");
+		Measure expResult = new Measure(12.20, "ratio");
 		Measure result = Measurement.module(measure);
+		System.out.println(result.toString());
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 }
