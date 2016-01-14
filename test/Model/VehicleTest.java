@@ -7,12 +7,13 @@ package Model;
 
 import Physics.Measure;
 import Physics.Measurement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -66,6 +67,7 @@ public class VehicleTest {
 		this.vehicle.setMinRPM(new Measure(8500.0, "rpm"));
 		this.vehicle.setMaxRPM(new Measure(1000.0, "rpm"));
 		this.vehicle.setFinalDriveRatio(new Measure(3.545, "ratio"));
+		this.vehicle.setEnergyRegeneration(new Measure(22.0, "rpm"));
 		this.vehicle.setGear(1, new Measure(3.827, "ratio"));
 		this.vehicle.setGear(2, new Measure(2.36, "ratio"));
 		this.vehicle.setGear(3, new Measure(1.685, "ratio"));
@@ -115,6 +117,7 @@ public class VehicleTest {
 		expResult += 11 * this.vehicle.getMinRPM().hashCode();
 		expResult += 11 * this.vehicle.getMaxRPM().hashCode();
 		expResult += 11 * this.vehicle.getFinalDriveRatio().hashCode();
+		expResult += 11 * this.vehicle.getEnergyRegeneration().hashCode();
 		for (Map.Entry<String, Measure> entity : this.vehicle.
 			getVelocityLimits().
 			entrySet()) {
@@ -295,14 +298,12 @@ public class VehicleTest {
 	@Test
 	public void testSetVelocityLimits() {
 		System.out.println("setVelocityLimits");
-		String segmentType = "";
-		Measure velocityLimit = null;
-		Vehicle instance = new Vehicle();
-		Boolean expResult = null;
-		Boolean result = instance.setVelocityLimits(segmentType, velocityLimit);
+		String segmentType = "testCase1";
+		Measure velocityLimit = new Measure(22.2, "km");
+		Boolean expResult = false;
+		Boolean result = this.vehicle.
+			setVelocityLimits(segmentType, velocityLimit);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -311,13 +312,11 @@ public class VehicleTest {
 	@Test
 	public void testGetVelocityLimits_String() {
 		System.out.println("getVelocityLimits");
-		String segmentType = "";
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getVelocityLimits(segmentType);
+		String segmentType = "km";
+		Measure expResult = new Measure(22.2, "km");
+		this.vehicle.setVelocityLimits(segmentType, expResult);
+		Measure result = this.vehicle.getVelocityLimits(segmentType);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -326,14 +325,11 @@ public class VehicleTest {
 	@Test
 	public void testSetGear() {
 		System.out.println("setGear");
-		Integer number = null;
-		Measure ratio = null;
-		Vehicle instance = new Vehicle();
-		Boolean expResult = null;
-		Boolean result = instance.setGear(number, ratio);
+		Integer number = 22;
+		Measure ratio = new Measure(22.2, "km");
+		Boolean expResult = false;
+		Boolean result = this.vehicle.setGear(number, ratio);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -342,13 +338,11 @@ public class VehicleTest {
 	@Test
 	public void testGetGear() {
 		System.out.println("getGear");
-		Integer number = null;
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getGear(number);
+		Integer number = 12;
+		Measure expResult = new Measure(19.0, "km");
+		this.vehicle.setGear(number, expResult);
+		Measure result = this.vehicle.getGear(number);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -357,13 +351,17 @@ public class VehicleTest {
 	@Test
 	public void testAddThrottle() {
 		System.out.println("addThrottle");
-		Throttle throttle = null;
-		Vehicle instance = new Vehicle();
-		Boolean expResult = null;
-		Boolean result = instance.addThrottle(throttle);
+		Throttle throttle1 = new Throttle();
+		throttle1.setPercentage(new Measure(25.0, "%"));
+		throttle1.
+			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "g/KWh")));
+		Boolean expResult = true;
+		Boolean result = this.vehicle.addThrottle(throttle1);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -372,13 +370,20 @@ public class VehicleTest {
 	@Test
 	public void testGetThrottle() {
 		System.out.println("getThrottle");
-		Integer index = null;
-		Vehicle instance = new Vehicle();
-		Throttle expResult = null;
-		Throttle result = instance.getThrottle(index);
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Integer index = 0;
+		Throttle throttle1 = new Throttle();
+		throttle1.setPercentage(new Measure(25.0, "%"));
+		throttle1.
+			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "g/KWh")));
+		ArrayList<Throttle> trot = new ArrayList<>();
+		trot.add(throttle1);
+		this.vehicle.setThrottles(trot);
+		Throttle result = this.vehicle.getThrottle(index);
+		assertEquals(trot.get(index), result);
 	}
 
 	/**
@@ -387,12 +392,9 @@ public class VehicleTest {
 	@Test
 	public void testGetId() {
 		System.out.println("getId");
-		Vehicle instance = new Vehicle();
-		Integer expResult = null;
-		Integer result = instance.getId();
+		Integer expResult = 1;
+		Integer result = this.vehicle.getId();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -401,11 +403,9 @@ public class VehicleTest {
 	@Test
 	public void testSetId() {
 		System.out.println("setId");
-		Integer id = null;
-		Vehicle instance = new Vehicle();
-		instance.setId(id);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Integer id = 2;
+		this.vehicle.setId(id);
+		assertEquals(id, this.vehicle.getId());
 	}
 
 	/**
@@ -414,12 +414,9 @@ public class VehicleTest {
 	@Test
 	public void testGetName() {
 		System.out.println("getName");
-		Vehicle instance = new Vehicle();
-		String expResult = "";
-		String result = instance.getName();
+		String expResult = "Nissan Skyline 2001";
+		String result = this.vehicle.getName();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -428,11 +425,9 @@ public class VehicleTest {
 	@Test
 	public void testSetName() {
 		System.out.println("setName");
-		String name = "";
-		Vehicle instance = new Vehicle();
-		instance.setName(name);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String name = "Nissan Almera";
+		this.vehicle.setName(name);
+		assertEquals(name, this.vehicle.getName());
 	}
 
 	/**
@@ -441,12 +436,9 @@ public class VehicleTest {
 	@Test
 	public void testGetDescription() {
 		System.out.println("getDescription");
-		Vehicle instance = new Vehicle();
-		String expResult = "";
-		String result = instance.getDescription();
+		String expResult = "2001 Nissan Skyline GT-R R34 V-spec II N1";
+		String result = this.vehicle.getDescription();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -455,11 +447,9 @@ public class VehicleTest {
 	@Test
 	public void testSetDescription() {
 		System.out.println("setDescription");
-		String description = "";
-		Vehicle instance = new Vehicle();
-		instance.setDescription(description);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String description = "TestCar";
+		this.vehicle.setDescription(description);
+		assertEquals(description, this.vehicle.getDescription());
 	}
 
 	/**
@@ -468,12 +458,9 @@ public class VehicleTest {
 	@Test
 	public void testGetType() {
 		System.out.println("getType");
-		Vehicle instance = new Vehicle();
-		String expResult = "";
-		String result = instance.getType();
+		String expResult = "car";
+		String result = this.vehicle.getType();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -482,11 +469,9 @@ public class VehicleTest {
 	@Test
 	public void testSetType() {
 		System.out.println("setType");
-		String type = "";
-		Vehicle instance = new Vehicle();
-		instance.setType(type);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String type = "sub";
+		this.vehicle.setType(type);
+		assertEquals(type, this.vehicle.getType());
 	}
 
 	/**
@@ -495,12 +480,9 @@ public class VehicleTest {
 	@Test
 	public void testGetMotorization() {
 		System.out.println("getMotorization");
-		Vehicle instance = new Vehicle();
-		String expResult = "";
-		String result = instance.getMotorization();
+		String expResult = "combustion";
+		String result = this.vehicle.getMotorization();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -509,11 +491,9 @@ public class VehicleTest {
 	@Test
 	public void testSetMotorization() {
 		System.out.println("setMotorization");
-		String motorization = "";
-		Vehicle instance = new Vehicle();
-		instance.setMotorization(motorization);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String motorization = "Gasoline";
+		this.vehicle.setMotorization(motorization);
+		assertEquals(motorization, this.vehicle.getMotorization());
 	}
 
 	/**
@@ -522,12 +502,10 @@ public class VehicleTest {
 	@Test
 	public void testGetFuel() {
 		System.out.println("getFuel");
-		Vehicle instance = new Vehicle();
-		String expResult = "";
-		String result = instance.getFuel();
+		String expResult = "Prototype";
+		this.vehicle.setFuel(expResult);
+		String result = this.vehicle.getFuel();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -536,11 +514,9 @@ public class VehicleTest {
 	@Test
 	public void testSetFuel() {
 		System.out.println("setFuel");
-		String fuel = "";
-		Vehicle instance = new Vehicle();
-		instance.setFuel(fuel);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		String fuel = "Prototype";
+		this.vehicle.setFuel(fuel);
+		assertEquals(fuel, this.vehicle.getFuel());
 	}
 
 	/**
@@ -549,12 +525,10 @@ public class VehicleTest {
 	@Test
 	public void testGetMass() {
 		System.out.println("getMass");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getMass();
+		Measure expResult = new Measure(22.2, "sub");
+		this.vehicle.setMass(expResult);
+		Measure result = this.vehicle.getMass();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -563,11 +537,9 @@ public class VehicleTest {
 	@Test
 	public void testSetMass() {
 		System.out.println("setMass");
-		Measure mass = null;
-		Vehicle instance = new Vehicle();
-		instance.setMass(mass);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure mass = new Measure(20.0, "sub");
+		this.vehicle.setMass(mass);
+		assertEquals(mass, this.vehicle.getMass());
 	}
 
 	/**
@@ -576,12 +548,10 @@ public class VehicleTest {
 	@Test
 	public void testGetLoad() {
 		System.out.println("getLoad");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getLoad();
+		Measure expResult = new Measure(33.0, "subway");
+		this.vehicle.setLoad(expResult);
+		Measure result = this.vehicle.getLoad();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -590,11 +560,9 @@ public class VehicleTest {
 	@Test
 	public void testSetLoad() {
 		System.out.println("setLoad");
-		Measure load = null;
-		Vehicle instance = new Vehicle();
-		instance.setLoad(load);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure load = new Measure(59.0, "unit");
+		this.vehicle.setLoad(load);
+		assertEquals(load, this.vehicle.getLoad());
 	}
 
 	/**
@@ -603,12 +571,10 @@ public class VehicleTest {
 	@Test
 	public void testGetDragCoefficient() {
 		System.out.println("getDragCoefficient");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getDragCoefficient();
+		Measure expResult = new Measure(49.0, "testCase");
+		this.vehicle.setDragCoefficient(expResult);
+		Measure result = this.vehicle.getDragCoefficient();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -617,11 +583,9 @@ public class VehicleTest {
 	@Test
 	public void testSetDragCoefficient() {
 		System.out.println("setDragCoefficient");
-		Measure dragCoefficient = null;
-		Vehicle instance = new Vehicle();
-		instance.setDragCoefficient(dragCoefficient);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure dragCoefficient = new Measure(48.0, "test");
+		this.vehicle.setDragCoefficient(dragCoefficient);
+		assertEquals(dragCoefficient, this.vehicle.getDragCoefficient());
 	}
 
 	/**
@@ -630,12 +594,10 @@ public class VehicleTest {
 	@Test
 	public void testGetFrontalArea() {
 		System.out.println("getFrontalArea");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getFrontalArea();
+		Measure expResult = new Measure(30.0, "high");
+		this.vehicle.setFrontalArea(expResult);
+		Measure result = this.vehicle.getFrontalArea();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -644,11 +606,9 @@ public class VehicleTest {
 	@Test
 	public void testSetFrontalArea() {
 		System.out.println("setFrontalArea");
-		Measure frontalArea = null;
-		Vehicle instance = new Vehicle();
-		instance.setFrontalArea(frontalArea);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure frontalArea = new Measure(22.0, "km");
+		this.vehicle.setFrontalArea(frontalArea);
+		assertEquals(frontalArea, this.vehicle.getFrontalArea());
 	}
 
 	/**
@@ -657,12 +617,10 @@ public class VehicleTest {
 	@Test
 	public void testGetRollingRCoefficient() {
 		System.out.println("getRollingRCoefficient");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getRollingRCoefficient();
+		Measure expResult = new Measure(25.0, "high");
+		this.vehicle.setRollingRCoefficient(expResult);
+		Measure result = this.vehicle.getRollingRCoefficient();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -671,11 +629,9 @@ public class VehicleTest {
 	@Test
 	public void testSetRollingRCoefficient() {
 		System.out.println("setRollingRCoefficient");
-		Measure rollingRcoefficient = null;
-		Vehicle instance = new Vehicle();
-		instance.setRollingRCoefficient(rollingRcoefficient);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure rollingRcoefficient = new Measure(0.01, "ratio");
+		this.vehicle.setRollingRCoefficient(rollingRcoefficient);
+		assertEquals(rollingRcoefficient, this.vehicle.getRollingRCoefficient());
 	}
 
 	/**
@@ -684,12 +640,10 @@ public class VehicleTest {
 	@Test
 	public void testGetWheelSize() {
 		System.out.println("getWheelSize");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getWheelSize();
+		Measure expResult = new Measure(0.05, "Michelin");
+		this.vehicle.setWheelSize(expResult);
+		Measure result = this.vehicle.getWheelSize();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -698,11 +652,9 @@ public class VehicleTest {
 	@Test
 	public void testSetWheelSize() {
 		System.out.println("setWheelSize");
-		Measure wheelSize = null;
-		Vehicle instance = new Vehicle();
-		instance.setWheelSize(wheelSize);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure wheelSize = new Measure(0.07, "Prindelli");
+		this.vehicle.setWheelSize(wheelSize);
+		assertEquals(wheelSize, this.vehicle.getWheelSize());
 	}
 
 	/**
@@ -711,12 +663,10 @@ public class VehicleTest {
 	@Test
 	public void testGetMinRPM() {
 		System.out.println("getMinRPM");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getMinRPM();
+		Measure expResult = new Measure(3.5, "km");
+		this.vehicle.setMinRPM(expResult);
+		Measure result = this.vehicle.getMinRPM();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -725,11 +675,9 @@ public class VehicleTest {
 	@Test
 	public void testSetMinRPM() {
 		System.out.println("setMinRPM");
-		Measure minRPM = null;
-		Vehicle instance = new Vehicle();
-		instance.setMinRPM(minRPM);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure minRPM = new Measure(30.5, "km");
+		this.vehicle.setMinRPM(minRPM);
+		assertEquals(minRPM, this.vehicle.getMinRPM());
 	}
 
 	/**
@@ -738,12 +686,10 @@ public class VehicleTest {
 	@Test
 	public void testGetMaxRPM() {
 		System.out.println("getMaxRPM");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getMaxRPM();
+		Measure expResult = new Measure(12.2, "km");
+		this.vehicle.setMaxRPM(expResult);
+		Measure result = this.vehicle.getMaxRPM();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -752,11 +698,9 @@ public class VehicleTest {
 	@Test
 	public void testSetMaxRPM() {
 		System.out.println("setMaxRPM");
-		Measure maxRPM = null;
-		Vehicle instance = new Vehicle();
-		instance.setMaxRPM(maxRPM);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure maxRPM = new Measure(10.0, "km");
+		this.vehicle.setMaxRPM(maxRPM);
+		assertEquals(maxRPM, this.vehicle.getMaxRPM());
 	}
 
 	/**
@@ -765,12 +709,10 @@ public class VehicleTest {
 	@Test
 	public void testGetFinalDriveRatio() {
 		System.out.println("getFinalDriveRatio");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getFinalDriveRatio();
+		Measure expResult = new Measure(15.2, "km");
+		this.vehicle.setFinalDriveRatio(expResult);
+		Measure result = this.vehicle.getFinalDriveRatio();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -779,11 +721,9 @@ public class VehicleTest {
 	@Test
 	public void testSetFinalDriveRatio() {
 		System.out.println("setFinalDriveRatio");
-		Measure finalDriveRatio = null;
-		Vehicle instance = new Vehicle();
-		instance.setFinalDriveRatio(finalDriveRatio);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure finalDriveRatio = new Measure(12.0, "km");
+		this.vehicle.setFinalDriveRatio(finalDriveRatio);
+		assertEquals(finalDriveRatio, this.vehicle.getFinalDriveRatio());
 	}
 
 	/**
@@ -792,12 +732,10 @@ public class VehicleTest {
 	@Test
 	public void testGetEnergyRegeneration() {
 		System.out.println("getEnergyRegeneration");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getEnergyRegeneration();
+		Measure expResult = new Measure(15.0, "km");
+		this.vehicle.setEnergyRegeneration(expResult);
+		Measure result = this.vehicle.getEnergyRegeneration();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -806,11 +744,9 @@ public class VehicleTest {
 	@Test
 	public void testSetEnergyRegeneration() {
 		System.out.println("setEnergyRegeneration");
-		Measure energyRegeneration = null;
-		Vehicle instance = new Vehicle();
-		instance.setEnergyRegeneration(energyRegeneration);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Measure energyRegeneration = new Measure(12.0, "km");
+		this.vehicle.setEnergyRegeneration(energyRegeneration);
+		assertEquals(energyRegeneration, this.vehicle.getEnergyRegeneration());
 	}
 
 	/**
@@ -819,12 +755,12 @@ public class VehicleTest {
 	@Test
 	public void testGetVelocityLimits_0args() {
 		System.out.println("getVelocityLimits");
-		Vehicle instance = new Vehicle();
-		Map<String, Measure> expResult = null;
-		Map<String, Measure> result = instance.getVelocityLimits();
+		Measure measure = new Measure(20.2, "km");
+		this.vehicle.setVelocityLimits("Highway12", measure);
+		Map<String, Measure> expResult = new HashMap<>();
+		expResult.put("Highway12", measure);
+		Map<String, Measure> result = this.vehicle.getVelocityLimits();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -833,12 +769,23 @@ public class VehicleTest {
 	@Test
 	public void testGetGears() {
 		System.out.println("getGears");
-		Vehicle instance = new Vehicle();
-		Map<Integer, Measure> expResult = null;
-		Map<Integer, Measure> result = instance.getGears();
+		Measure measure = new Measure(3.827, "ratio");
+		Measure measure1 = new Measure(2.36, "ratio");
+		Measure measure2 = new Measure(1.685, "ratio");
+		Measure measure3 = new Measure(1.312, "ratio");
+		Measure measure4 = new Measure(1.0, "ratio");
+		Measure measure5 = new Measure(0.793, "ratio");
+
+		Map<Integer, Measure> expResult = new HashMap<>();
+		expResult.put(1, measure);
+		expResult.put(2, measure1);
+		expResult.put(3, measure2);
+		expResult.put(4, measure3);
+		expResult.put(5, measure4);
+		expResult.put(6, measure5);
+
+		Map<Integer, Measure> result = this.vehicle.getGears();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -847,12 +794,36 @@ public class VehicleTest {
 	@Test
 	public void testGetThrottles() {
 		System.out.println("getThrottles");
-		Vehicle instance = new Vehicle();
-		List<Throttle> expResult = null;
-		List<Throttle> result = instance.getThrottles();
+		Throttle throttle1 = new Throttle();
+		throttle1.setPercentage(new Measure(25.0, "%"));
+		throttle1.
+			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "g/KWh")));
+		Throttle throttle2 = new Throttle();
+		throttle2.setPercentage(new Measure(50.0, "%"));
+		throttle2.
+			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "g/KWh")));
+		throttle2.
+			addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "g/KWh")));
+		throttle2.
+			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "g/KWh")));
+		Throttle throttle3 = new Throttle();
+		throttle3.setPercentage(new Measure(100.0, "%"));
+		throttle3.
+			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "g/KWh")));
+		throttle3.
+			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "g/KWh")));
+		throttle3.
+			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "g/KWh")));
+		List<Throttle> expResult = new ArrayList<>();
+		expResult.add(throttle1);
+		expResult.add(throttle2);
+		expResult.add(throttle3);
+		List<Throttle> result = this.vehicle.getThrottles();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -861,11 +832,36 @@ public class VehicleTest {
 	@Test
 	public void testSetThrottles() {
 		System.out.println("setThrottles");
-		List<Throttle> throttles = null;
-		Vehicle instance = new Vehicle();
-		instance.setThrottles(throttles);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		Throttle throttle1 = new Throttle();
+		throttle1.setPercentage(new Measure(25.0, "%"));
+		throttle1.
+			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "g/KWh")));
+		throttle1.
+			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "g/KWh")));
+		Throttle throttle2 = new Throttle();
+		throttle2.setPercentage(new Measure(50.0, "%"));
+		throttle2.
+			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "g/KWh")));
+		throttle2.
+			addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "g/KWh")));
+		throttle2.
+			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "g/KWh")));
+		Throttle throttle3 = new Throttle();
+		throttle3.setPercentage(new Measure(100.0, "%"));
+		throttle3.
+			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "g/KWh")));
+		throttle3.
+			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "g/KWh")));
+		throttle3.
+			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "g/KWh")));
+		List<Throttle> throttles = new ArrayList<>();
+		throttles.add(throttle1);
+		throttles.add(throttle2);
+		throttles.add(throttle3);
+		this.vehicle.setThrottles(throttles);
+		assertEquals(throttles, this.vehicle.getThrottles());
 	}
 
 	/**
@@ -874,12 +870,9 @@ public class VehicleTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		Vehicle instance = new Vehicle();
-		Vehicle expResult = null;
-		Vehicle result = instance.clone();
+		Vehicle expResult = this.vehicle;
+		Vehicle result = this.vehicle.clone();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -888,12 +881,9 @@ public class VehicleTest {
 	@Test
 	public void testToString() {
 		System.out.println("toString");
-		Vehicle instance = new Vehicle();
-		String expResult = "";
-		String result = instance.toString();
+		String expResult = "Vehicle | name: Nissan Skyline 2001 | description: 2001 Nissan Skyline GT-R R34 V-spec II N1 | type: car | motorization: combustion | fuel: gasoline | mass: 1550,00 kg | load: 0,00 kg | drag: 0,34 ratio | rrc: 0,01 ratio | wheelSize: 0,33 m | minRPM: 8500,00 rpm | maxRPM: 1000,00 rpm | finalDrive: 3,55 ratio | energyRegeneration: 22,00 rpm | gear1: 3,83 ratio | gear2: 2,36 ratio | gear3: 1,69 ratio | gear4: 1,31 ratio | gear5: 1,00 ratio | gear6: 0,79 ratio | throttleModel.Throttle@c6aed28a | throttleModel.Throttle@9212bc77 | throttleModel.Throttle@a3c51c77";
+		String result = this.vehicle.toString();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -902,12 +892,9 @@ public class VehicleTest {
 	@Test
 	public void testGetCurrentGear() {
 		System.out.println("getCurrentGear");
-		Vehicle instance = new Vehicle();
-		Integer expResult = null;
-		Integer result = instance.getCurrentGear();
+		Integer expResult = 1;
+		Integer result = this.vehicle.getCurrentGear();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -916,12 +903,11 @@ public class VehicleTest {
 	@Test
 	public void testGetCurrentVelocity() {
 		System.out.println("getCurrentVelocity");
-		Vehicle instance = new Vehicle();
-		Measure expResult = null;
-		Measure result = instance.getCurrentVelocity();
+		Measure expResult = new Measure(44.2, "km");
+		expResult = Measurement.convert(new Measure(60.0, "km/h"), "m/s");
+		this.vehicle.setVelocityLimits("testCase", expResult);
+		Measure result = this.vehicle.getCurrentVelocity();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 }

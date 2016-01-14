@@ -441,6 +441,7 @@ public class Vehicle {
 		vehicle.setMaxRPM(this.maxRPM.clone());
 		vehicle.setFinalDriveRatio(this.finalDriveRatio.clone());
 		vehicle.setFinalDriveRatio(this.finalDriveRatio.clone());
+		vehicle.setEnergyRegeneration(this.energyRegeneration.clone());
 		for (Entry<String, Measure> entity : this.getVelocityLimits().entrySet()) {
 			vehicle.
 				setVelocityLimits(entity.getKey(), entity.getValue().clone());
