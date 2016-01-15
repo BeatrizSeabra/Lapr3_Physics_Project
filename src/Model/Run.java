@@ -128,6 +128,38 @@ public class Run {
 
 	@Override
 	public String toString() {
-		return "Run | name: " + this.name + " | time: " + this.time + " | time step: " + this.timeStep;
+		return "Run | id: " + this.id + " | name: " + this.name + " | time: " + this.time + " | time step: " + this.timeStep;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.id.hashCode();
+		hash += 11 * this.name.hashCode();
+		hash += 11 * this.time.hashCode();
+		hash += 11 * this.timeStep.hashCode();
+		hash += 11 * this.method.hashCode();
+		for (Step step : this.steps) {
+			hash += 11 * step.hashCode();
+		}
+		for (Drop drop : this.drops) {
+			hash += 11 * drop.hashCode();
+		}
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Run other = (Run) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
 	}
 }

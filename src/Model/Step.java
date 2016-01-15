@@ -228,4 +228,39 @@ public class Step {
 	public String toString() {
 		return "Step | vehicle: " + this.vehicle + " | node start: " + this.nodeStart + " | node end: " + this.nodeEnd + " | road: " + this.road + " | segment: " + this.segment + " | time entry: " + this.timeEntry + " | time out: " + this.timeOut + " | car power: " + this.carPower + " | car speed: " + this.carSpeed + " | speed relative: " + this.speedRelative + " | car force: " + this.carForce + " | rolling force: " + this.rollingForce + " | air force: " + this.airForce + " | gravity force: " + this.gravityForce;
 	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.vehicle.hashCode();
+		hash += 11 * this.nodeStart.hashCode();
+		hash += 11 * this.nodeEnd.hashCode();
+		hash += 11 * this.road.hashCode();
+		hash += 11 * this.segment.hashCode();
+		hash += 11 * this.timeEntry.hashCode();
+		hash += 11 * this.timeOut.hashCode();
+		hash += 11 * this.carPower.hashCode();
+		hash += 11 * this.carSpeed.hashCode();
+		hash += 11 * this.speedRelative.hashCode();
+		hash += 11 * this.carForce.hashCode();
+		hash += 11 * this.rollingForce.hashCode();
+		hash += 11 * this.airForce.hashCode();
+		hash += 11 * this.gravityForce.hashCode();
+		return hash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Step other = (Step) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
 }
