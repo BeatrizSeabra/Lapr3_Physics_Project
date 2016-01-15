@@ -65,13 +65,13 @@ public class AddVehiclesTest {
 		this.addVehiclesController.initiation();
 		this.addVehiclesController.loadVehicles(this.filePathVehicles);
 		List<Vehicle> vehicles = this.addVehiclesController.getVehicles();
-		assertEquals(vehicles.size(), 1);
+		assertEquals(vehicles.size(), 3);
 		this.addVehiclesController.loadVehicles(this.filePathVehicles);
 		this.addVehiclesController.loadVehicles(this.filePathVehicles);
 		vehicles = this.addVehiclesController.getVehicles();
-		assertEquals(vehicles.size(), 3);
-		assertEquals(vehicles.get(1).getName(), "Dummy01 1");
-		assertEquals(vehicles.get(2).getName(), "Dummy01 2");
+		assertEquals(vehicles.size(), 9);
+		assertEquals(vehicles.get(0).getName(), "Dummy01");
+		assertEquals(vehicles.get(1).getName(), "Dummy02");
 		Boolean save = this.addVehiclesController.saveProjectVehicles();
 		assertEquals(save, true);
 		for (Vehicle vehicle : vehicles) {

@@ -105,12 +105,7 @@ public class AddVehiclesController {
 	 * @return
 	 */
 	public Boolean saveProjectVehicles() {
-		for (Vehicle vehicle : this.vehicles) {
-			if (!this.project.getVehicles().contains(vehicle)) {
-				this.project.addVehicle(vehicle);
-			}
-		}
-		return Data.getProjectData().save(this.project);
+		return Data.getVehicleData().save(this.project, this.vehicles);
 	}
 
 }
