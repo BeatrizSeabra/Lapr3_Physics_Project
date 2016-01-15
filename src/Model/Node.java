@@ -17,7 +17,7 @@ public class Node {
 
 	private Integer id = 0;
 	private String name = "none";
-	private Map<Segment, VehicleBot> bots = new HashMap();
+	private Map<Section, VehicleBot> bots = new HashMap();
 
 	/**
 	 *
@@ -60,7 +60,7 @@ public class Node {
 	/**
 	 * @return the bots
 	 */
-	public Map<Segment, VehicleBot> getBots() {
+	public Map<Section, VehicleBot> getBots() {
 		return bots;
 	}
 
@@ -68,7 +68,7 @@ public class Node {
 	 * @param bots the bots to set
 	 */
 	public void setBots(
-		Map<Segment, VehicleBot> bots) {
+		Map<Section, VehicleBot> bots) {
 		this.bots = bots;
 	}
 

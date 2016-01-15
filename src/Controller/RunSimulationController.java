@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author LAPR3_20152016_G27
  */
-public class CreateSimulationController {
+public class RunSimulationController {
 
 	private ProjectData projectData = Data.getProjectData();
 	private SimulationData simulationData = Data.getSimulationData();

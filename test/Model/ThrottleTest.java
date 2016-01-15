@@ -17,7 +17,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Eduardo
+ * @author LAPR3_20152016_G27
  */
 public class ThrottleTest {
 

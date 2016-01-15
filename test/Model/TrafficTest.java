@@ -15,7 +15,7 @@ import org.junit.Test;
 
 /**
  *
- * @author Eduardo
+ * @author LAPR3_20152016_G27
  */
 public class TrafficTest {
 
@@ -333,12 +333,34 @@ public class TrafficTest {
 	 */
 	@Test
 	public void testToString() {
-		System.out.println("toString");
 		Traffic instance = new Traffic();
+		Vehicle vec = new Vehicle();
+		instance.setId(1);
+		vec.setId(1);
+		vec.setName("Tommy");
+		vec.setDescription("Audi");
+		vec.setType("Sub");
+		vec.setMotorization("VEC");
+		vec.setFuel("Gasoline");
+		Measure rmpLow = new Measure(1.2, "MeasureTorque");
+		vec.setMass(rmpLow);
+		vec.setLoad(rmpLow);
+		vec.setDragCoefficient(rmpLow);
+		vec.setFrontalArea(rmpLow);
+		vec.setRollingRCoefficient(rmpLow);
+		vec.setWheelSize(rmpLow);
+		vec.setMinRPM(rmpLow);
+		vec.setMaxRPM(rmpLow);
+		vec.setFinalDriveRatio(rmpLow);
+		instance.setVehicle(vec);
+		Node nodeEnd = new Node("Anta");
+		Node nodeStart = new Node("Espinho");
+		instance.setNodeEnd(nodeEnd);
+		instance.setNodeStart(nodeStart);
+		instance.setArrivalRate(rmpLow);
 		String expResult = "test";
 		String result = instance.toString();
 		assertEquals(expResult.getClass(), result.getClass());
-
 	}
 
 }

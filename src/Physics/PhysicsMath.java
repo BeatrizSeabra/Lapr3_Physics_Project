@@ -43,7 +43,7 @@ public class PhysicsMath {
 	 * @param averagePerPeriod
 	 * @return
 	 */
-	public static Double exponentialDistributionRandom(int averagePerPeriod) {
+	public static Double exponentialDistributionRandom(Double averagePerPeriod) {
 		return -Math.log(PhysicsMath.random.nextDouble()) / (1.0 / averagePerPeriod);
 	}
 

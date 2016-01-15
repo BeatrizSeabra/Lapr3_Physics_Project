@@ -23,7 +23,7 @@ import org.junit.Test;
 
 /**
  *
- * @author ruben
+ * @author LAPR3_20152016_G27
  */
 public class EconomicVehicleAnalysisTest {
 

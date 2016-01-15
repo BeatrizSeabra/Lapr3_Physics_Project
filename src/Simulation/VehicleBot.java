@@ -5,8 +5,10 @@
  */
 package Simulation;
 
-import Model.Segment;
+import Model.Section;
+import Model.Step;
 import java.util.Deque;
+import java.util.List;
 
 /**
  *
@@ -14,6 +16,19 @@ import java.util.Deque;
  */
 public class VehicleBot {
 
-	private Deque<Segment> segments;
+	private Deque<Section> sections;
+	private List<Step> steps;
+	private Integer timeStep;
+
+	public VehicleBot(Deque<Section> sections, List<Step> steps,
+					  Integer timeStep) {
+		this.sections = sections;
+		this.steps = steps;
+		this.timeStep = timeStep;
+	}
+
+	public void step() {
+
+	}
 
 }

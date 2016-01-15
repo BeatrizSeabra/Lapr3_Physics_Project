@@ -120,6 +120,10 @@ public class ApplicationGUI extends GraphicUserInterface {
         JMenuItemCopySimulation = new javax.swing.JMenuItem();
         jMenuItemEditSimulation = new javax.swing.JMenuItem();
         jMenuItemCloseSimulation = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemRunSimulation = new javax.swing.JMenuItem();
+        jMenuItemViewRun = new javax.swing.JMenuItem();
+        jMenuItemDeleteRun = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
         jMenuItemLog = new javax.swing.JMenuItem();
 
@@ -128,9 +132,10 @@ public class ApplicationGUI extends GraphicUserInterface {
         jMenuItem2.setText("jMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(500, 630));
-        setMinimumSize(new java.awt.Dimension(500, 630));
-        setSize(new java.awt.Dimension(500, 630));
+        setMaximumSize(new java.awt.Dimension(827, 630));
+        setMinimumSize(new java.awt.Dimension(827, 630));
+        setPreferredSize(new java.awt.Dimension(827, 630));
+        setSize(new java.awt.Dimension(827, 630));
 
         jLabelWithWarning.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
         jLabelWithWarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -268,6 +273,34 @@ public class ApplicationGUI extends GraphicUserInterface {
 
         jMenuBar1.add(simulation);
 
+        jMenu1.setText("Run");
+
+        jMenuItemRunSimulation.setText("Run Simulation");
+        jMenuItemRunSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRunSimulationActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemRunSimulation);
+
+        jMenuItemViewRun.setText("View Run");
+        jMenuItemViewRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewRunActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemViewRun);
+
+        jMenuItemDeleteRun.setText("Delete Run");
+        jMenuItemDeleteRun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemDeleteRunActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemDeleteRun);
+
+        jMenuBar1.add(jMenu1);
+
         jMenuHelp.setText("Help");
 
         jMenuItemLog.setText("Log");
@@ -287,27 +320,26 @@ public class ApplicationGUI extends GraphicUserInterface {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(307, 307, 307)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelWithWarning)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabelWithWarning))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
+                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelOpenProject)
                             .addComponent(jLabelCreateProject))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(320, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addGap(86, 86, 86)
                 .addComponent(jLabelWithWarning)
                 .addGap(57, 57, 57)
                 .addComponent(jLabelCreateProject)
                 .addGap(46, 46, 46)
                 .addComponent(jLabelOpenProject)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addContainerGap(366, Short.MAX_VALUE))
         );
 
         pack();
@@ -379,6 +411,18 @@ public class ApplicationGUI extends GraphicUserInterface {
 		new AddRoadsGUI(this);
     }//GEN-LAST:event_jMenuItemAddRoadsActionPerformed
 
+    private void jMenuItemDeleteRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteRunActionPerformed
+		//new DeleteRunGUI(this);
+    }//GEN-LAST:event_jMenuItemDeleteRunActionPerformed
+
+    private void jMenuItemViewRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewRunActionPerformed
+		//new ViewRunGUI(this);
+    }//GEN-LAST:event_jMenuItemViewRunActionPerformed
+
+    private void jMenuItemRunSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRunSimulationActionPerformed
+		new RunSimulationGUI(this);
+    }//GEN-LAST:event_jMenuItemRunSimulationActionPerformed
+
 	private void jMenuAnalysisActionPerformed(ActionEvent evt, Analysis analysis) {
 		if (analysis instanceof PathAnalysis) {
 			new PathAnalysisGUI(this, (PathAnalysis) analysis);
@@ -398,6 +442,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JLabel jLabelCreateProject;
     private javax.swing.JLabel jLabelOpenProject;
     private javax.swing.JLabel jLabelWithWarning;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItem1;
@@ -406,9 +451,12 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JMenuItem jMenuItemCloseProject;
     private javax.swing.JMenuItem jMenuItemCloseSimulation;
     private javax.swing.JMenuItem jMenuItemCreateSimulation;
+    private javax.swing.JMenuItem jMenuItemDeleteRun;
     private javax.swing.JMenuItem jMenuItemEditSimulation;
     private javax.swing.JMenuItem jMenuItemLog;
     private javax.swing.JMenuItem jMenuItemOpenSimulation;
+    private javax.swing.JMenuItem jMenuItemRunSimulation;
+    private javax.swing.JMenuItem jMenuItemViewRun;
     private javax.swing.JMenuItem openProject;
     private javax.swing.JMenu simulation;
     // End of variables declaration//GEN-END:variables

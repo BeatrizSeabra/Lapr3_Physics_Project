@@ -7,7 +7,6 @@ package Model;
 
 import Physics.Measure;
 import java.util.ArrayList;
-import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -17,7 +16,7 @@ import org.junit.Test;
 
 /**
  *
- * @author ruben
+ * @author LAPR3_20152016_G27
  */
 public class SimulationTest {
 
@@ -88,47 +87,6 @@ public class SimulationTest {
 		String result = this.simulation.getDescription();
 		assertEquals(expResult, result);
 
-	}
-
-	/**
-	 * Test of getTraffics method, of class Simulation.
-	 */
-	@Test
-	public void testGetTraffics() {
-		System.out.println("getTraffics");
-		Traffic traffic = new Traffic();
-		traffic.setId(1);
-		traffic.setNodeStart(new Node("test"));
-		traffic.setNodeEnd(new Node("test2"));
-		traffic.setVehicle(new Vehicle());
-		traffic.setArrivalRate(new Measure(2.0, "test3"));
-		List<Traffic> traf = new ArrayList<Traffic>();
-		traf.add(traffic);
-		this.simulation.setTraffics(traf);
-		List<Traffic> expResult = traf;
-		List<Traffic> result = this.simulation.getTraffics();
-		assertEquals(expResult, result);
-
-	}
-
-	/**
-	 * Test of setTraffics method, of class Simulation.
-	 */
-	@Test
-	public void testSetTraffics() {
-		System.out.println("setTraffics");
-		Traffic traffic = new Traffic();
-		traffic.setId(1);
-		traffic.setNodeStart(new Node("test1"));
-		traffic.setNodeEnd(new Node("test22"));
-		traffic.setVehicle(new Vehicle());
-		traffic.setArrivalRate(new Measure(6.0, "test33"));
-		List<Traffic> traf = new ArrayList<Traffic>();
-		traf.add(traffic);
-		this.simulation.setTraffics(traf);
-		List<Traffic> expResult = traf;
-		List<Traffic> result = this.simulation.getTraffics();
-		assertEquals(expResult, result);
 	}
 
 	/**
@@ -265,7 +223,6 @@ public class SimulationTest {
 		instance.addTraffic(obj);
 		traf.add(obj);
 		Traffic expResult = traf.get(0);
-		instance.setTraffics(traf);
 		Traffic result = instance.getTraffic(index);
 		assertEquals(expResult, result);
 	}

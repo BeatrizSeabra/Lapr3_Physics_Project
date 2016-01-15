@@ -121,4 +121,8 @@ public class Run {
 		this.drops = drops;
 	}
 
+	public Boolean addDrop(Drop drop) {
+		return this.drops.add(drop);
+	}
+
 }
