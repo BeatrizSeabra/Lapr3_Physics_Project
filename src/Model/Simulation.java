@@ -127,6 +127,10 @@ public class Simulation {
 		return this.hashCode() == other.hashCode();
 	}
 
+	public Boolean deleteRun(Run run) {
+		return this.runs.remove(run);
+	}
+
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
