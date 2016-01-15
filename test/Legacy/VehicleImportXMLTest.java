@@ -258,6 +258,8 @@ public class VehicleImportXMLTest {
 		List<Vehicle> result = this.vehicleImportXML.importData(this.dataXML);
 		System.out.println("Obtido: ");
 		System.out.println(result);
+		System.out.println(expResult.hashCode());
+		System.out.println(result.hashCode());
 		assertEquals(expResult, result);
 	}
 

@@ -165,6 +165,7 @@ public class Segment {
 		hash += 11 * this.maxVelocity.hashCode();
 		hash += 11 * this.minVelocity.hashCode();
 		hash += 11 * this.numberVehicles.hashCode();
+		hash += 11 * this.vehicles.hashCode();
 		return hash;
 	}
 

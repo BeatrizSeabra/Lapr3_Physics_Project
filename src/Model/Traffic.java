@@ -19,7 +19,6 @@ public class Traffic {
 	private Node nodeEnd;
 	private Vehicle vehicle;
 	private Measure arrivalRate;
-
 	private Segment segment;
 	private VehicleBot vehicleBot;
 

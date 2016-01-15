@@ -104,7 +104,7 @@ public class RoadNetworkExportXMLTest {
 		this.segment3.setLength(new Measure(5.0, "km"));
 		this.segment3.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment3.setMinVelocity(new Measure(0.0, "km/h"));
-		this.segment3.setNumberVehicles(20);
+		this.segment3.setNumberVehicles(200);
 		this.section1 = new Section();
 		this.section1.setRoad("E01");
 		this.section1.setTypology("regular road");
@@ -148,7 +148,7 @@ public class RoadNetworkExportXMLTest {
 		this.segment6.setLength(new Measure(25.0, "km"));
 		this.segment6.setMaxVelocity(new Measure(120.0, "km/h"));
 		this.segment6.setMinVelocity(new Measure(50.0, "km/h"));
-		this.segment6.setNumberVehicles(200);
+		this.segment6.setNumberVehicles(2000);
 		this.section3 = new Section();
 		this.section3.setRoad("A01");
 		this.section3.setTypology("highway");
@@ -221,9 +221,9 @@ public class RoadNetworkExportXMLTest {
 		this.roadNetwork.addSection(this.node2, this.node4, this.section5);
 
 		this.project = new Project();
-		this.project.setName("TestSet02");
+		this.project.setName("TestSet03");
 		this.project.setDescription("5 node test set");
-		this.project.setRoadNetwork(this.roadNetwork);
+		this.project.setRoadNetwork(roadNetwork);
 
 		this.projects = new ArrayList();
 		this.projects.add(this.project);
@@ -285,6 +285,8 @@ public class RoadNetworkExportXMLTest {
 		String result = this.roadNetworkExportXML.export(this.project).
 			replaceAll("\\s+", "");
 		String expResult = dataXML.trim().replaceAll("\\s+", "");
+		System.out.println(result);
+		System.out.println(expResult);
 		assertEquals(result, expResult);
 	}
 }

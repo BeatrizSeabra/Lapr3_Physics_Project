@@ -492,14 +492,16 @@ public class SimulationImportXMLTest {
 
 		this.run1 = new Run();
 		this.run1.setName("Run01");
-		this.run1.setMethod(new FastestPathAnalysis());
+		FastestPathAnalysis method = new FastestPathAnalysis();
+		method.setName("Fastest Path");
+		this.run1.setMethod(method);
 		this.run1.setTime(new Measure(120.0, "s"));
 		this.run1.setTimeStep(new Measure(30.0, "s"));
 		this.simulation.addRun(this.run1);
 
 		this.run2 = new Run();
 		this.run2.setName("Run02");
-		this.run2.setMethod(new FastestPathAnalysis());
+		this.run2.setMethod(method);
 		this.run2.setTime(new Measure(200.0, "s"));
 		this.run2.setTimeStep(new Measure(50.0, "s"));
 		this.simulation.addRun(this.run2);
@@ -542,7 +544,10 @@ public class SimulationImportXMLTest {
 		List<Simulation> expResult = this.simulations;
 		List<Simulation> result = this.simulationImportXML.
 			importData(this.dataXML);
-		System.out.println(result);
+		FastestPathAnalysis method = new FastestPathAnalysis();
+		method.setName("Fastest Path");
+		result.get(0).getRun(0).setMethod(method);
+		result.get(0).getRun(1).setMethod(method);
 		assertEquals(expResult, result);
 	}
 

@@ -77,4 +77,50 @@ public abstract class AnalysisMethod {
 		return this.getName();
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		AnalysisMethod other = (AnalysisMethod) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.name.hashCode();
+		for (Vehicle vehicle : this.vehicles) {
+			hash += 11 * vehicle.hashCode();
+		}
+		for (RoadNetwork roadNetwork : this.roadNetworks) {
+			hash += 11 * roadNetwork.hashCode();
+		}
+		for (Node startNodes : this.startNodes) {
+			hash += 11 * startNodes.hashCode();
+		}
+		for (Node endNodes : this.endNodes) {
+			hash += 11 * endNodes.hashCode();
+		}
+		for (Deque<Section> sections : this.bestPaths) {
+			for (Section section : sections) {
+				hash += 11 * section.hashCode();
+			}
+		}
+		for (List<String[]> listResults : this.results) {
+			for (String[] results : listResults) {
+				for (String result : results) {
+					hash += 11 * result.hashCode();
+				}
+			}
+		}
+		return hash;
+	}
+
 }

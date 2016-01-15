@@ -108,7 +108,9 @@ public class ResultsImportXMLTest {
 		this.run.setName("Run01");
 		this.run.setTime(new Measure(10.0, "s"));
 		this.run.setTimeStep(new Measure(1.0, "s"));
-		this.run.setMethod(new FastestPathAnalysis());
+		FastestPathAnalysis method = new FastestPathAnalysis();
+		method.setName("method");
+		this.run.setMethod(method);
 		this.run.setId(1);
 
 		this.run.getSteps().add(this.step1);
@@ -166,38 +168,14 @@ public class ResultsImportXMLTest {
 	public void testImportData() {
 		System.out.println("testImportData");
 		List<Run> expResult = this.runs;
-		System.out.println("esperado: ");
-		for (Run run : expResult) {
-			System.out.println(run);
-			List<Step> steps = run.getSteps();
-			for (Step step : steps) {
-				System.out.println(step);
-			}
-			List<Drop> drops = run.getDrops();
-			for (Drop drop : drops) {
-				System.out.println(drop);
-			}
-		}
 		List<Run> result = this.resultsImportXML.importData(this.dataXML);
 		result.get(0).setId(1);
 		result.get(0).setName("Run01");
 		result.get(0).setTime(new Measure(10.0, "s"));
 		result.get(0).setTimeStep(new Measure(1.0, "s"));
-		result.get(0).setMethod(new FastestPathAnalysis());
-		System.out.println("Obtido: ");
-		for (Run run : result) {
-			System.out.println(run);
-			List<Step> steps = run.getSteps();
-			for (Step step : steps) {
-				System.out.println(step);
-			}
-			List<Drop> drops = run.getDrops();
-			for (Drop drop : drops) {
-				System.out.println(drop);
-			}
-		}
-		System.out.println(expResult.hashCode());
-		System.out.println(result.hashCode());
+		FastestPathAnalysis method = new FastestPathAnalysis();
+		method.setName("method");
+		result.get(0).setMethod(method);
 		assertEquals(expResult, result);
 	}
 

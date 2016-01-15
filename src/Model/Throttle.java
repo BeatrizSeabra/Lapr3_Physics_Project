@@ -93,7 +93,7 @@ public class Throttle implements Comparable<Throttle> {
 		hash += 11 * this.id.hashCode();
 		hash += 11 * this.percentage.hashCode();
 		for (Regime regime : this.getRegimes()) {
-			hash += 7 * regime.hashCode();
+			hash += 11 * regime.hashCode();
 		}
 		return hash;
 	}

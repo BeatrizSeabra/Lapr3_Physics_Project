@@ -148,10 +148,10 @@ public class Project {
 		hash += 11 * this.getDescription().hashCode();
 		hash += 11 * this.roadNetwork.hashCode();
 		for (Vehicle vehicle : this.vehicles) {
-			hash += 7 * vehicle.hashCode();
+			hash += 11 * vehicle.hashCode();
 		}
 		for (Simulation simulation : this.simulations) {
-			hash += 7 * simulation.hashCode();
+			hash += 11 * simulation.hashCode();
 		}
 		return hash;
 	}

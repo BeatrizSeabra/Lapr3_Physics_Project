@@ -6,7 +6,6 @@
 package Model;
 
 import Physics.Measure;
-import Physics.Measurement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -47,7 +46,8 @@ public class Vehicle {
 	 * @return
 	 */
 	public Boolean setVelocityLimits(String segmentType, Measure velocityLimit) {
-		return this.velocityLimits.put(segmentType, velocityLimit)==this.velocityLimits.get(segmentType);
+		return this.velocityLimits.put(segmentType, velocityLimit) == this.velocityLimits.
+			get(segmentType);
 	}
 
 	/**
@@ -102,7 +102,9 @@ public class Vehicle {
 	 * @return
 	 */
 	public Measure getVelocity(Integer gear) {
-		return Physics.PhysicsMath.carSpeed(this.wheelSize, this.maxRPM, this.finalDriveRatio, this.getGear(gear));
+		return Physics.PhysicsMath.
+			carSpeed(this.wheelSize, this.maxRPM, this.finalDriveRatio, this.
+					 getGear(gear));
 	}
 
 	/**
@@ -110,7 +112,9 @@ public class Vehicle {
 	 * @return
 	 */
 	public Measure getMaxVelocity() {
-		return Physics.PhysicsMath.carSpeed(this.wheelSize, this.maxRPM, this.finalDriveRatio, this.getGear(Collections.max(this.gears.keySet())));
+		return Physics.PhysicsMath.
+			carSpeed(this.wheelSize, this.maxRPM, this.finalDriveRatio, this.
+					 getGear(Collections.max(this.gears.keySet())));
 
 	}
 
@@ -403,15 +407,15 @@ public class Vehicle {
 		hash += 11 * this.finalDriveRatio.hashCode();
 		hash += 11 * this.energyRegeneration.hashCode();
 		for (Entry<String, Measure> entity : this.velocityLimits.entrySet()) {
-			hash += 7 * entity.getKey().hashCode();
-			hash += 7 * entity.getValue().hashCode();
+			hash += 11 * entity.getKey().hashCode();
+			hash += 11 * entity.getValue().hashCode();
 		}
 		for (Entry<Integer, Measure> entity : this.gears.entrySet()) {
-			hash += 7 * entity.getKey().hashCode();
-			hash += 7 * entity.getValue().hashCode();
+			hash += 11 * entity.getKey().hashCode();
+			hash += 11 * entity.getValue().hashCode();
 		}
 		for (Throttle throttle : this.throttles) {
-			hash += 7 * throttle.hashCode();
+			hash += 11 * throttle.hashCode();
 		}
 		return hash;
 	}

@@ -134,7 +134,10 @@ public class Simulation {
 		hash += 11 * this.name.hashCode();
 		hash += 11 * this.description.hashCode();
 		for (Traffic traffic : this.traffics) {
-			hash += 7 * traffic.hashCode();
+			hash += 11 * traffic.hashCode();
+		}
+		for (Run run : this.runs) {
+			hash += 11 * run.hashCode();
 		}
 		return hash;
 	}
