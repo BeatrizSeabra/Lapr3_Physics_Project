@@ -106,6 +106,40 @@ public class Graph<V, E> implements GraphInterface<V, E> {
 
 	/**
 	 *
+	 * @param element
+	 * @return
+	 */
+	public V getFirstVertexElement(E element) {
+		for (Vertex<V, E> vertex : this.listVertex) {
+			for (Map.Entry<Vertex<V, E>, Edge<V, E>> entrySet : vertex.
+				getOutgoing().entrySet()) {
+				if (entrySet.getValue().getElement().equals(element)) {
+					return entrySet.getValue().getVOrig().getElement();
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 *
+	 * @param element
+	 * @return
+	 */
+	public V getLastVertexElement(E element) {
+		for (Vertex<V, E> vertex : this.listVertex) {
+			for (Map.Entry<Vertex<V, E>, Edge<V, E>> entrySet : vertex.
+				getOutgoing().entrySet()) {
+				if (entrySet.getValue().getElement().equals(element)) {
+					return entrySet.getValue().getVDest().getElement();
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 *
 	 * @param e
 	 * @return
 	 */

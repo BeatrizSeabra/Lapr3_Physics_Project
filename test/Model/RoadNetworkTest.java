@@ -51,113 +51,113 @@ public class RoadNetworkTest {
 		this.segment0 = new Segment();
 		this.segment0.setName("01");
 		this.segment0.setHeight(new Measure(100.0, "km"));
-		this.segment0.setSlope(new Measure(0.0, "%"));
-		this.segment0.setLength(new Measure(25.0, "km"));
-		this.segment0.setMaxVelocity(new Measure(120.0, "km/h"));
-		this.segment0.setMinVelocity(new Measure(50.0, "km/h"));
-		this.segment0.setNumberVehicles(200);
-		this.section0 = new Section();
-		this.section0.setRoad("A01");
-		this.section0.setTypology("highway");
-		this.section0.setDirection("bidirectional");
-		this.section0.setToll(new Measure(12.0, "€"));
-		this.section0.setWindDirection(new Measure(-5.0, "°"));
-		this.section0.setWindSpeed(new Measure(3.0, "m/s"));
-		this.section0.addSegment(this.segment0);
-
+		this.segment0.setSlope(new Measure(3.0, "%"));
+		this.segment0.setLength(new Measure(3.2, "km"));
+		this.segment0.setMaxVelocity(new Measure(90.0, "km/h"));
+		this.segment0.setMinVelocity(new Measure(0.0, "km/h"));
+		this.segment0.setNumberVehicles(250);
 		this.segment1 = new Segment();
-		this.segment1.setName("01");
-		this.segment1.setHeight(new Measure(100.0, "km"));
-		this.segment1.setSlope(new Measure(0.5, "%"));
-		this.segment1.setLength(new Measure(20.0, "km"));
-		this.segment1.setMaxVelocity(new Measure(120.0, "km/h"));
-		this.segment1.setMinVelocity(new Measure(50.0, "km/h"));
-		this.segment1.setNumberVehicles(1500);
-		this.section1 = new Section();
-		this.section1.setRoad("A01");
-		this.section1.setTypology("highway");
-		this.section1.setDirection("bidirectional");
-		this.section1.setToll(new Measure(4.0, "€"));
-		this.section1.setWindDirection(new Measure(-5.0, "°"));
-		this.section1.setWindSpeed(new Measure(3.0, "m/s"));
-		this.section1.addSegment(this.segment1);
+		this.segment1.setName("02");
+		this.segment1.setHeight(new Measure(196.0, "km"));
+		this.segment1.setSlope(new Measure(-1.5, "%"));
+		this.segment1.setLength(new Measure(6.4, "km"));
+		this.segment1.setMaxVelocity(new Measure(90.0, "km/h"));
+		this.segment1.setMinVelocity(new Measure(0.0, "km/h"));
+		this.segment1.setNumberVehicles(200);
+		this.section0 = new Section();
+		this.section0.setRoad("E01");
+		this.section0.setTypology("regular road");
+		this.section0.setDirection("bidirectional");
+		this.section0.setToll(new Measure(0.0, "€"));
+		this.section0.setWindDirection(new Measure(20.0, "°"));
+		this.section0.setWindSpeed(new Measure(5.0, "m/s"));
+		this.section0.addSegment(this.segment0);
+		this.section0.addSegment(this.segment1);
 
 		this.segment2 = new Segment();
 		this.segment2.setName("01");
 		this.segment2.setHeight(new Measure(100.0, "km"));
-		this.segment2.setSlope(new Measure(3.0, "%"));
-		this.segment2.setLength(new Measure(3.2, "km"));
+		this.segment2.setSlope(new Measure(1.5, "%"));
+		this.segment2.setLength(new Measure(10.0, "km"));
 		this.segment2.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment2.setMinVelocity(new Measure(0.0, "km/h"));
-		this.segment2.setNumberVehicles(250);
+		this.segment2.setNumberVehicles(350);
 		this.segment3 = new Segment();
 		this.segment3.setName("02");
-		this.segment3.setHeight(new Measure(196.0, "km"));
-		this.segment3.setSlope(new Measure(-1.5, "%"));
-		this.segment3.setLength(new Measure(6.4, "km"));
+		this.segment3.setHeight(new Measure(150.0, "km"));
+		this.segment3.setSlope(new Measure(1.0, "%"));
+		this.segment3.setLength(new Measure(5.0, "km"));
 		this.segment3.setMaxVelocity(new Measure(90.0, "km/h"));
 		this.segment3.setMinVelocity(new Measure(0.0, "km/h"));
 		this.segment3.setNumberVehicles(200);
+		this.section1 = new Section();
+		this.section1.setRoad("E01");
+		this.section1.setTypology("regular road");
+		this.section1.setDirection("bidirectional");
+		this.section1.setToll(new Measure(0.0, "€"));
+		this.section1.setWindDirection(new Measure(-5.0, "°"));
+		this.section1.setWindSpeed(new Measure(3.0, "m/s"));
+		this.section1.addSegment(this.segment2);
+		this.section1.addSegment(this.segment3);
+
+		this.segment4 = new Segment();
+		this.segment4.setName("01");
+		this.segment4.setHeight(new Measure(200.0, "km"));
+		this.segment4.setSlope(new Measure(2.0, "%"));
+		this.segment4.setLength(new Measure(10.0, "km"));
+		this.segment4.setMaxVelocity(new Measure(90.0, "km/h"));
+		this.segment4.setMinVelocity(new Measure(0.0, "km/h"));
+		this.segment4.setNumberVehicles(300);
+		this.segment5 = new Segment();
+		this.segment5.setName("02");
+		this.segment5.setHeight(new Measure(400.0, "km"));
+		this.segment5.setSlope(new Measure(-2.5, "%"));
+		this.segment5.setLength(new Measure(10.0, "km"));
+		this.segment5.setMaxVelocity(new Measure(90.0, "km/h"));
+		this.segment5.setMinVelocity(new Measure(0.0, "km/h"));
+		this.segment5.setNumberVehicles(250);
 		this.section2 = new Section();
 		this.section2.setRoad("E01");
 		this.section2.setTypology("regular road");
 		this.section2.setDirection("bidirectional");
 		this.section2.setToll(new Measure(0.0, "€"));
-		this.section2.setWindDirection(new Measure(20.0, "°"));
+		this.section2.setWindDirection(new Measure(-5.0, "°"));
 		this.section2.setWindSpeed(new Measure(5.0, "m/s"));
-		this.section2.addSegment(this.segment2);
-		this.section2.addSegment(this.segment3);
-
-		this.segment4 = new Segment();
-		this.segment4.setName("01");
-		this.segment4.setHeight(new Measure(100.0, "km"));
-		this.segment4.setSlope(new Measure(1.5, "%"));
-		this.segment4.setLength(new Measure(10.0, "km"));
-		this.segment4.setMaxVelocity(new Measure(90.0, "km/h"));
-		this.segment4.setMinVelocity(new Measure(0.0, "km/h"));
-		this.segment4.setNumberVehicles(350);
-		this.segment5 = new Segment();
-		this.segment5.setName("02");
-		this.segment5.setHeight(new Measure(150.0, "km"));
-		this.segment5.setSlope(new Measure(1.0, "%"));
-		this.segment5.setLength(new Measure(5.0, "km"));
-		this.segment5.setMaxVelocity(new Measure(90.0, "km/h"));
-		this.segment5.setMinVelocity(new Measure(0.0, "km/h"));
-		this.segment5.setNumberVehicles(20);
-		this.section3 = new Section();
-		this.section3.setRoad("E01");
-		this.section3.setTypology("regular road");
-		this.section3.setDirection("bidirectional");
-		this.section3.setToll(new Measure(0.0, "€"));
-		this.section3.setWindDirection(new Measure(-5.0, "°"));
-		this.section3.setWindSpeed(new Measure(3.0, "m/s"));
-		this.section3.addSegment(this.segment4);
-		this.section3.addSegment(this.segment5);
+		this.section2.addSegment(this.segment4);
+		this.section2.addSegment(this.segment5);
 
 		this.segment6 = new Segment();
 		this.segment6.setName("01");
-		this.segment6.setHeight(new Measure(200.0, "km"));
-		this.segment6.setSlope(new Measure(2.0, "%"));
-		this.segment6.setLength(new Measure(10.0, "km"));
-		this.segment6.setMaxVelocity(new Measure(90.0, "km/h"));
-		this.segment6.setMinVelocity(new Measure(0.0, "km/h"));
-		this.segment6.setNumberVehicles(300);
+		this.segment6.setHeight(new Measure(100.0, "km"));
+		this.segment6.setSlope(new Measure(0.0, "%"));
+		this.segment6.setLength(new Measure(25.0, "km"));
+		this.segment6.setMaxVelocity(new Measure(120.0, "km/h"));
+		this.segment6.setMinVelocity(new Measure(50.0, "km/h"));
+		this.segment6.setNumberVehicles(2000);
+		this.section3 = new Section();
+		this.section3.setRoad("A01");
+		this.section3.setTypology("highway");
+		this.section3.setDirection("bidirectional");
+		this.section3.setToll(new Measure(12.0, "€"));
+		this.section3.setWindDirection(new Measure(-5.0, "°"));
+		this.section3.setWindSpeed(new Measure(3.0, "m/s"));
+		this.section3.addSegment(this.segment6);
+
 		this.segment7 = new Segment();
-		this.segment7.setName("02");
-		this.segment7.setHeight(new Measure(400.0, "km"));
-		this.segment7.setSlope(new Measure(-2.5, "%"));
-		this.segment7.setLength(new Measure(10.0, "km"));
-		this.segment7.setMaxVelocity(new Measure(90.0, "km/h"));
-		this.segment7.setMinVelocity(new Measure(0.0, "km/h"));
-		this.segment7.setNumberVehicles(250);
+		this.segment7.setName("01");
+		this.segment7.setHeight(new Measure(100.0, "km"));
+		this.segment7.setSlope(new Measure(0.5, "%"));
+		this.segment7.setLength(new Measure(20.0, "km"));
+		this.segment7.setMaxVelocity(new Measure(120.0, "km/h"));
+		this.segment7.setMinVelocity(new Measure(50.0, "km/h"));
+		this.segment7.setNumberVehicles(1500);
 		this.section4 = new Section();
-		this.section4.setRoad("E01");
-		this.section4.setTypology("regular road");
+		this.section4.setRoad("A01");
+		this.section4.setTypology("highway");
 		this.section4.setDirection("bidirectional");
-		this.section4.setToll(new Measure(0.0, "€"));
+		this.section4.setToll(new Measure(4.0, "€"));
 		this.section4.setWindDirection(new Measure(-5.0, "°"));
-		this.section4.setWindSpeed(new Measure(5.0, "m/s"));
-		this.section4.addSegment(this.segment6);
+		this.section4.setWindSpeed(new Measure(3.0, "m/s"));
 		this.section4.addSegment(this.segment7);
 
 		this.segment8 = new Segment();
@@ -198,11 +198,11 @@ public class RoadNetworkTest {
 		this.roadNetwork.addNode(this.node2);
 		this.roadNetwork.addNode(this.node3);
 		this.roadNetwork.addNode(this.node4);
-		this.roadNetwork.addSection(this.node0, this.node1, this.section0);
-		this.roadNetwork.addSection(this.node1, this.node3, this.section1);
-		this.roadNetwork.addSection(this.node0, this.node2, this.section2);
-		this.roadNetwork.addSection(this.node2, this.node3, this.section3);
-		this.roadNetwork.addSection(this.node3, this.node4, this.section4);
+		this.roadNetwork.addSection(this.node0, this.node2, this.section0);
+		this.roadNetwork.addSection(this.node2, this.node3, this.section1);
+		this.roadNetwork.addSection(this.node3, this.node4, this.section2);
+		this.roadNetwork.addSection(this.node0, this.node1, this.section3);
+		this.roadNetwork.addSection(this.node1, this.node3, this.section4);
 		this.roadNetwork.addSection(this.node2, this.node4, this.section5);
 	}
 
@@ -524,6 +524,67 @@ public class RoadNetworkTest {
 
 		String expResult = this.roadNetwork.toString();
 		String result = this.roadNetwork.toString();
+		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of addRoadNetwork method, of class RoadNetwork.
+	 */
+	@Test
+	public void testAddRoadNetwork() {
+		System.out.println("testAddRoadNetwork");
+
+	}
+
+	/**
+	 * Test of getNodeStart method, of class RoadNetwork.
+	 */
+	@Test
+	public void testGetNodeStart() {
+		System.out.println("testGetNodeStart");
+		Node expResult = this.node0;
+		Node result = this.roadNetwork.getNodeStart(section0);
+		assertEquals(expResult, result);
+		expResult = this.node2;
+		result = this.roadNetwork.getNodeStart(section1);
+		assertEquals(expResult, result);
+		expResult = this.node3;
+		result = this.roadNetwork.getNodeStart(section2);
+		assertEquals(expResult, result);
+		expResult = this.node0;
+		result = this.roadNetwork.getNodeStart(section3);
+		assertEquals(expResult, result);
+		expResult = this.node1;
+		result = this.roadNetwork.getNodeStart(section4);
+		assertEquals(expResult, result);
+		expResult = this.node2;
+		result = this.roadNetwork.getNodeStart(section5);
+		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of getNodeEnd method, of class RoadNetwork.
+	 */
+	@Test
+	public void testGetNodeEnd() {
+		System.out.println("testGetNodeEnd");
+		Node expResult = this.node2;
+		Node result = this.roadNetwork.getNodeEnd(section0);
+		assertEquals(expResult, result);
+		expResult = this.node3;
+		result = this.roadNetwork.getNodeEnd(section1);
+		assertEquals(expResult, result);
+		expResult = this.node4;
+		result = this.roadNetwork.getNodeEnd(section2);
+		assertEquals(expResult, result);
+		expResult = this.node1;
+		result = this.roadNetwork.getNodeEnd(section3);
+		assertEquals(expResult, result);
+		expResult = this.node3;
+		result = this.roadNetwork.getNodeEnd(section4);
+		assertEquals(expResult, result);
+		expResult = this.node4;
+		result = this.roadNetwork.getNodeEnd(section5);
 		assertEquals(expResult, result);
 	}
 
