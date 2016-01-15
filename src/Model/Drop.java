@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Physics.Measure;
+
 /**
  *
  * @author LAPR3_20152016_G27
@@ -14,20 +16,13 @@ public class Drop {
 	private String vehicle;
 	private String nodeStart;
 	private String nodeEnd;
-	private String time;
-
-	public Drop(String vehicle, String nodeStart, String nodeEnd, String time) {
-		this.vehicle = vehicle;
-		this.nodeStart = nodeStart;
-		this.nodeEnd = nodeEnd;
-		this.time = time;
-	}
+	private Measure time;
 
 	/**
 	 * @return the vehicle
 	 */
 	public String getVehicle() {
-		return vehicle;
+		return this.vehicle;
 	}
 
 	/**
@@ -41,7 +36,7 @@ public class Drop {
 	 * @return the nodeStart
 	 */
 	public String getNodeStart() {
-		return nodeStart;
+		return this.nodeStart;
 	}
 
 	/**
@@ -55,7 +50,7 @@ public class Drop {
 	 * @return the nodeEnd
 	 */
 	public String getNodeEnd() {
-		return nodeEnd;
+		return this.nodeEnd;
 	}
 
 	/**
@@ -68,15 +63,44 @@ public class Drop {
 	/**
 	 * @return the time
 	 */
-	public String getTime() {
-		return time;
+	public Measure getTime() {
+		return this.time;
 	}
 
 	/**
 	 * @param time the time to set
 	 */
-	public void setTime(String time) {
+	public void setTime(Measure time) {
 		this.time = time;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Drop other = (Drop) obj;
+		if (other == null) {
+			return false;
+		}
+		return this.hashCode() == other.hashCode();
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 29 * this.getClass().hashCode();
+		hash += 11 * this.getVehicle().hashCode();
+		hash += 11 * this.getNodeStart().hashCode();
+		hash += 11 * this.getNodeEnd().hashCode();
+		hash += 11 * this.getTime().hashCode();
+		return hash;
+	}
+
+	@Override
+	public String toString() {
+		return "Drop | vehicle: " + this.vehicle + " | node start: " + this.nodeStart + " | node end: " + this.nodeEnd + " | time: " + this.time;
+	}
 }

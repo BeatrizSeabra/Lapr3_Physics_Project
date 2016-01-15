@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Physics.Measure;
+
 /**
  *
  * @author LAPR3_20152016_G27
@@ -16,42 +18,21 @@ public class Step {
 	private String nodeEnd;
 	private String road;
 	private String segment;
-	private String timeEntry;
-	private String timeOut;
-	private String carPower;
-	private String carSpeed;
-	private String speedRelative;
-	private String carForce;
-	private String rollingForce;
-	private String airForce;
-	private String gravityForce;
-
-	public Step(String vehicle, String nodeStart, String nodeEnd, String road,
-				String segment, String timeEntry, String timeOut,
-				String carPower, String carSpeed, String speedRelative,
-				String carForce, String rollingForce, String airForce,
-				String gravityForce) {
-		this.vehicle = vehicle;
-		this.nodeStart = nodeStart;
-		this.nodeEnd = nodeEnd;
-		this.road = road;
-		this.segment = segment;
-		this.timeEntry = timeEntry;
-		this.timeOut = timeOut;
-		this.carPower = carPower;
-		this.carSpeed = carSpeed;
-		this.speedRelative = speedRelative;
-		this.carForce = carForce;
-		this.rollingForce = rollingForce;
-		this.airForce = airForce;
-		this.gravityForce = gravityForce;
-	}
+	private Measure timeEntry;
+	private Measure timeOut;
+	private Measure carPower;
+	private Measure carSpeed;
+	private Measure speedRelative;
+	private Measure carForce;
+	private Measure rollingForce;
+	private Measure airForce;
+	private Measure gravityForce;
 
 	/**
 	 * @return the vehicle
 	 */
 	public String getVehicle() {
-		return vehicle;
+		return this.vehicle;
 	}
 
 	/**
@@ -65,7 +46,7 @@ public class Step {
 	 * @return the nodeStart
 	 */
 	public String getNodeStart() {
-		return nodeStart;
+		return this.nodeStart;
 	}
 
 	/**
@@ -79,7 +60,7 @@ public class Step {
 	 * @return the nodeEnd
 	 */
 	public String getNodeEnd() {
-		return nodeEnd;
+		return this.nodeEnd;
 	}
 
 	/**
@@ -93,7 +74,7 @@ public class Step {
 	 * @return the road
 	 */
 	public String getRoad() {
-		return road;
+		return this.road;
 	}
 
 	/**
@@ -107,7 +88,7 @@ public class Step {
 	 * @return the segment
 	 */
 	public String getSegment() {
-		return segment;
+		return this.segment;
 	}
 
 	/**
@@ -120,127 +101,131 @@ public class Step {
 	/**
 	 * @return the timeEntry
 	 */
-	public String getTimeEntry() {
-		return timeEntry;
+	public Measure getTimeEntry() {
+		return this.timeEntry;
 	}
 
 	/**
 	 * @param timeEntry the timeEntry to set
 	 */
-	public void setTimeEntry(String timeEntry) {
+	public void setTimeEntry(Measure timeEntry) {
 		this.timeEntry = timeEntry;
 	}
 
 	/**
 	 * @return the timeOut
 	 */
-	public String getTimeOut() {
-		return timeOut;
+	public Measure getTimeOut() {
+		return this.timeOut;
 	}
 
 	/**
 	 * @param timeOut the timeOut to set
 	 */
-	public void setTimeOut(String timeOut) {
+	public void setTimeOut(Measure timeOut) {
 		this.timeOut = timeOut;
 	}
 
 	/**
 	 * @return the carPower
 	 */
-	public String getCarPower() {
-		return carPower;
+	public Measure getCarPower() {
+		return this.carPower;
 	}
 
 	/**
 	 * @param carPower the carPower to set
 	 */
-	public void setCarPower(String carPower) {
+	public void setCarPower(Measure carPower) {
 		this.carPower = carPower;
 	}
 
 	/**
 	 * @return the carSpeed
 	 */
-	public String getCarSpeed() {
-		return carSpeed;
+	public Measure getCarSpeed() {
+		return this.carSpeed;
 	}
 
 	/**
 	 * @param carSpeed the carSpeed to set
 	 */
-	public void setCarSpeed(String carSpeed) {
+	public void setCarSpeed(Measure carSpeed) {
 		this.carSpeed = carSpeed;
 	}
 
 	/**
 	 * @return the speedRelative
 	 */
-	public String getSpeedRelative() {
-		return speedRelative;
+	public Measure getSpeedRelative() {
+		return this.speedRelative;
 	}
 
 	/**
 	 * @param speedRelative the speedRelative to set
 	 */
-	public void setSpeedRelative(String speedRelative) {
+	public void setSpeedRelative(Measure speedRelative) {
 		this.speedRelative = speedRelative;
 	}
 
 	/**
 	 * @return the carForce
 	 */
-	public String getCarForce() {
-		return carForce;
+	public Measure getCarForce() {
+		return this.carForce;
 	}
 
 	/**
 	 * @param carForce the carForce to set
 	 */
-	public void setCarForce(String carForce) {
+	public void setCarForce(Measure carForce) {
 		this.carForce = carForce;
 	}
 
 	/**
 	 * @return the rollingForce
 	 */
-	public String getRollingForce() {
-		return rollingForce;
+	public Measure getRollingForce() {
+		return this.rollingForce;
 	}
 
 	/**
 	 * @param rollingForce the rollingForce to set
 	 */
-	public void setRollingForce(String rollingForce) {
+	public void setRollingForce(Measure rollingForce) {
 		this.rollingForce = rollingForce;
 	}
 
 	/**
 	 * @return the airForce
 	 */
-	public String getAirForce() {
-		return airForce;
+	public Measure getAirForce() {
+		return this.airForce;
 	}
 
 	/**
 	 * @param airForce the airForce to set
 	 */
-	public void setAirForce(String airForce) {
+	public void setAirForce(Measure airForce) {
 		this.airForce = airForce;
 	}
 
 	/**
 	 * @return the gravityForce
 	 */
-	public String getGravityForce() {
-		return gravityForce;
+	public Measure getGravityForce() {
+		return this.gravityForce;
 	}
 
 	/**
 	 * @param gravityForce the gravityForce to set
 	 */
-	public void setGravityForce(String gravityForce) {
+	public void setGravityForce(Measure gravityForce) {
 		this.gravityForce = gravityForce;
 	}
 
+	@Override
+	public String toString() {
+		return "Step | vehicle: " + this.vehicle + " | node start: " + this.nodeStart + " | node end: " + this.nodeEnd + " | road: " + this.road + " | segment: " + this.segment + " | time entry: " + this.timeEntry + " | time out: " + this.timeOut + " | car power: " + this.carPower + " | car speed: " + this.carSpeed + " | speed relative: " + this.speedRelative + " | car force: " + this.carForce + " | rolling force: " + this.rollingForce + " | air force: " + this.airForce + " | gravity force: " + this.gravityForce;
+	}
 }

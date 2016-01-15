@@ -7,6 +7,7 @@ package Model;
 
 import Physics.Measure;
 import Simulation.AnalysisMethod;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +21,8 @@ public class Run {
 	private Measure time;
 	private Measure timeStep;
 	private AnalysisMethod method;
-	private List<Step> steps;
-	private List<Drop> drops;
+	private List<Step> steps = new ArrayList();
+	private List<Drop> drops = new ArrayList();
 
 	/**
 	 * @return the id
@@ -125,4 +126,8 @@ public class Run {
 		return this.drops.add(drop);
 	}
 
+	@Override
+	public String toString() {
+		return "Run | name: " + this.name + " | time: " + this.time + " | time step: " + this.timeStep;
+	}
 }

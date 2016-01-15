@@ -52,13 +52,13 @@
 	</step_list>
 	<drop_list>
 		<drop>
-			<vehicle>Dummy01</vehicle>
+			<dropVehicle>Dummy01</dropVehicle>
 			<nodestart>N2</nodestart>
 			<nodeend>N4</nodeend>
 			<time>40 s</time>
 		</drop>
 		<drop>
-			<vehicle>Dummy02</vehicle>
+			<dropVehicle>Dummy02</dropVehicle>
 			<nodestart>N1</nodestart>
 			<nodeend>N2</nodeend>
 			<time>30 s</time>

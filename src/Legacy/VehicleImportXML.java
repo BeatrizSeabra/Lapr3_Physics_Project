@@ -228,6 +228,17 @@ public class VehicleImportXML implements Import<Vehicle> {
 										setFinalDriveRatio(new Measure(value, "ratio"));
 								}
 								break;
+							case "energy_regeneration_ratio":
+								value = Util.toValue(text);
+								unit = Util.toUnit(text);
+								if (!unit.isEmpty()) {
+									vehicle.
+										setEnergyRegeneration(new Measure(value, unit));
+								} else {
+									vehicle.
+										setEnergyRegeneration(new Measure(value, "ratio"));
+								}
+								break;
 							case "ratio":
 								value = Util.toValue(text);
 								unit = Util.toUnit(text);
