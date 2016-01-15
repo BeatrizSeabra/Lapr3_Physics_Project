@@ -150,7 +150,7 @@ public class SimulationImportXML implements Import<Simulation> {
 									AnalysisMethod methodClass = (AnalysisMethod) objectMethod;
 									if (methodClass != null && methodClass.
 										getName().equals(text)) {
-										method = methodClass;
+										run.setMethod(methodClass);
 									}
 								}
 								break;

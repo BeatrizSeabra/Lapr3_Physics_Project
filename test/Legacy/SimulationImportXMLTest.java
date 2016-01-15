@@ -76,6 +76,7 @@ public class SimulationImportXMLTest {
 	private Traffic traffic8;
 	private Run run1;
 	private Run run2;
+	private FastestPathAnalysis method;
 
 	public SimulationImportXMLTest() {
 		Settings.setSettingsFilePath("test/Files/settingsTest.properties");
@@ -490,18 +491,18 @@ public class SimulationImportXMLTest {
 		this.traffic8.setArrivalRate(new Measure(20.0, "/m"));
 		this.simulation.addTraffic(traffic8);
 
+		this.method = new FastestPathAnalysis();
+
 		this.run1 = new Run();
 		this.run1.setName("Run01");
-		FastestPathAnalysis method = new FastestPathAnalysis();
-		method.setName("Fastest Path");
-		this.run1.setMethod(method);
+		this.run1.setMethod(this.method);
 		this.run1.setTime(new Measure(120.0, "s"));
 		this.run1.setTimeStep(new Measure(30.0, "s"));
 		this.simulation.addRun(this.run1);
 
 		this.run2 = new Run();
 		this.run2.setName("Run02");
-		this.run2.setMethod(method);
+		this.run2.setMethod(this.method);
 		this.run2.setTime(new Measure(200.0, "s"));
 		this.run2.setTimeStep(new Measure(50.0, "s"));
 		this.simulation.addRun(this.run2);
@@ -544,10 +545,8 @@ public class SimulationImportXMLTest {
 		List<Simulation> expResult = this.simulations;
 		List<Simulation> result = this.simulationImportXML.
 			importData(this.dataXML);
-		FastestPathAnalysis method = new FastestPathAnalysis();
-		method.setName("Fastest Path");
-		result.get(0).getRun(0).setMethod(method);
-		result.get(0).getRun(1).setMethod(method);
+		result.get(0).getRun(0).setMethod(this.method);
+		result.get(0).getRun(1).setMethod(this.method);
 		assertEquals(expResult, result);
 	}
 

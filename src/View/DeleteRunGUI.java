@@ -144,7 +144,7 @@ public class DeleteRunGUI extends GraphicUserInterface {
 
     private void jButtonDeleteRunsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteRunsActionPerformed
 		if (this.deleteRunController.setRuns((Run) jComboBoxListRuns.
-			getSelectedItem())      {
+			getSelectedItem())       {
 			List<List<String[]>> results = this.deleteRunController.analyze();
 			if (results != null && !results.isEmpty()) {
 				for (List<String[]> result : results) {

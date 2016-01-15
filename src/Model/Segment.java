@@ -20,8 +20,8 @@ public class Segment {
 	private Measure length;
 	private Measure maxVelocity;
 	private Measure minVelocity;
-	private Integer numberVehicles = 0;
-	private Integer vehicles = 0;
+	private Integer numberVehicles;
+	private Integer numberVehiclesCurrent = 0;
 
 	/**
 	 * @return the name
@@ -122,17 +122,17 @@ public class Segment {
 	}
 
 	/**
-	 * @return the vehicles
+	 * @return the numberVehiclesCurrent
 	 */
-	public Integer getVehicles() {
-		return vehicles;
+	public Integer getNumberVehiclesCurrent() {
+		return numberVehiclesCurrent;
 	}
 
 	/**
-	 * @param vehicles the vehicles to set
+	 * @param numberVehiclesCurrent the numberVehiclesCurrent to set
 	 */
-	public void setVehicles(Integer vehicles) {
-		this.vehicles = vehicles;
+	public void setNumberVehiclesCurrent(Integer numberVehiclesCurrent) {
+		this.numberVehiclesCurrent = numberVehiclesCurrent;
 	}
 
 	@Override
@@ -165,7 +165,6 @@ public class Segment {
 		hash += 11 * this.maxVelocity.hashCode();
 		hash += 11 * this.minVelocity.hashCode();
 		hash += 11 * this.numberVehicles.hashCode();
-		hash += 11 * this.vehicles.hashCode();
 		return hash;
 	}
 

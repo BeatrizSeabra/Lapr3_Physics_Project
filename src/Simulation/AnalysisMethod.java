@@ -8,6 +8,8 @@ package Simulation;
 import Model.Node;
 import Model.RoadNetwork;
 import Model.Section;
+import Model.Segment;
+import Model.Step;
 import Model.Vehicle;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -19,7 +21,6 @@ import java.util.List;
  */
 public abstract class AnalysisMethod {
 
-	protected String name;
 	protected List<Vehicle> vehicles = new ArrayList();
 	protected List<RoadNetwork> roadNetworks = new ArrayList();
 	protected List<Node> startNodes = new ArrayList();
@@ -55,22 +56,15 @@ public abstract class AnalysisMethod {
 		return this.bestPaths.get(size);
 	}
 
-	abstract void analyze(Vehicle vehicle, RoadNetwork roadNetwork,
-						  Node startNode, Node endNode);
+	public abstract void analyze(Vehicle vehicle, RoadNetwork roadNetwork,
+								 Node startNode, Node endNode);
+
+	public abstract Step analyze(Vehicle vehicle, Segment segment);
 
 	/**
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+	public abstract String getName();
 
 	@Override
 	public String toString() {
@@ -95,31 +89,7 @@ public abstract class AnalysisMethod {
 	@Override
 	public int hashCode() {
 		int hash = 29 * this.getClass().hashCode();
-		hash += 11 * this.name.hashCode();
-		for (Vehicle vehicle : this.vehicles) {
-			hash += 11 * vehicle.hashCode();
-		}
-		for (RoadNetwork roadNetwork : this.roadNetworks) {
-			hash += 11 * roadNetwork.hashCode();
-		}
-		for (Node startNodes : this.startNodes) {
-			hash += 11 * startNodes.hashCode();
-		}
-		for (Node endNodes : this.endNodes) {
-			hash += 11 * endNodes.hashCode();
-		}
-		for (Deque<Section> sections : this.bestPaths) {
-			for (Section section : sections) {
-				hash += 11 * section.hashCode();
-			}
-		}
-		for (List<String[]> listResults : this.results) {
-			for (String[] results : listResults) {
-				for (String result : results) {
-					hash += 11 * result.hashCode();
-				}
-			}
-		}
+		hash += 11 * this.getName().hashCode();
 		return hash;
 	}
 

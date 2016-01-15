@@ -5,10 +5,6 @@
  */
 package Model;
 
-import Simulation.VehicleBot;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  *
  * @author LAPR3_20152016_G27
@@ -17,7 +13,6 @@ public class Node {
 
 	private Integer id = 0;
 	private String name = "none";
-	private Map<Section, VehicleBot> bots = new HashMap();
 
 	/**
 	 *
@@ -55,21 +50,6 @@ public class Node {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	/**
-	 * @return the bots
-	 */
-	public Map<Section, VehicleBot> getBots() {
-		return bots;
-	}
-
-	/**
-	 * @param bots the bots to set
-	 */
-	public void setBots(
-		Map<Section, VehicleBot> bots) {
-		this.bots = bots;
 	}
 
 	@Override

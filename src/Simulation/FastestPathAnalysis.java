@@ -9,6 +9,7 @@ import Model.Node;
 import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
+import Model.Step;
 import Model.Vehicle;
 import Physics.Measure;
 import Physics.Measurement;
@@ -113,6 +114,12 @@ public class FastestPathAnalysis extends AnalysisMethod {
 		this.endNodes.add(endNode);
 		this.bestPaths.add(listPaths.get(index));
 		this.results.add(listResults.get(index));
+	}
+
+	@Override
+	public Step analyze(Vehicle vehicle, Segment segment) {
+		Step step = new Step();
+		return step;
 	}
 
 	@Override

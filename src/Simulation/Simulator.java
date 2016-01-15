@@ -80,17 +80,16 @@ public class Simulator {
 			getRoadNetwork();
 		for (Section section : roadNetwork.getSections()) {
 			for (Segment segment : section.getSegments()) {
-				segment.setVehicles(0);
+				segment.setNumberVehiclesCurrent(0);
 			}
-		}
-		for (Traffic traffic : this.simulation.getTraffics()) {
-			traffic.getNodeStart().getBots().clear();
 		}
 		for (Traffic traffic : this.simulation.getTraffics()) {
 			Deque<Section> sections = this.run.getMethod().path(traffic.
 				getVehicle(), roadNetwork, traffic.getNodeStart(), traffic.
 																getNodeEnd());
-			VehicleBot vehicleBot = new VehicleBot(sections, this.run.getSteps(), this.timeStep);
+			VehicleBot vehicleBot = new VehicleBot(traffic.getVehicle(), sections, this.run.
+												   getSteps(), this.timeStep, this.run.
+												   getMethod());
 			traffic.setSegment(sections.peekFirst().getSegments().get(0));
 			traffic.setVehicleBot(vehicleBot);
 		}
@@ -104,15 +103,17 @@ public class Simulator {
 
 	private void stepNewVehicles() {
 		for (Traffic traffic : this.simulation.getTraffics()) {
-			Integer amount = Physics.PhysicsMath.
+			int amount = Physics.PhysicsMath.
 				exponentialDistributionRandom(traffic.getArrivalRate().
 					getValue()).intValue();
 			amount = 1;
 			Segment segment = traffic.getSegment();
 			VehicleBot vehicleBot = traffic.getVehicleBot();
 			for (int i = 0; i < amount; i++) {
-				if (segment.getVehicles() < segment.getNumberVehicles()) {
+				int numberVehicles = segment.getNumberVehiclesCurrent();
+				if (numberVehicles < segment.getNumberVehicles()) {
 					this.vehicleBots.add(vehicleBot);
+					segment.setNumberVehiclesCurrent(numberVehicles + 1);
 				} else {
 					Drop drop = new Drop();
 					drop.setVehicle(traffic.getVehicle().getName());

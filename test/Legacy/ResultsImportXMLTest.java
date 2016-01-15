@@ -109,7 +109,6 @@ public class ResultsImportXMLTest {
 		this.run.setTime(new Measure(10.0, "s"));
 		this.run.setTimeStep(new Measure(1.0, "s"));
 		FastestPathAnalysis method = new FastestPathAnalysis();
-		method.setName("method");
 		this.run.setMethod(method);
 		this.run.setId(1);
 
@@ -174,7 +173,6 @@ public class ResultsImportXMLTest {
 		result.get(0).setTime(new Measure(10.0, "s"));
 		result.get(0).setTimeStep(new Measure(1.0, "s"));
 		FastestPathAnalysis method = new FastestPathAnalysis();
-		method.setName("method");
 		result.get(0).setMethod(method);
 		assertEquals(expResult, result);
 	}
