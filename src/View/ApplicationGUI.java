@@ -67,6 +67,7 @@ public class ApplicationGUI extends GraphicUserInterface {
 		this.JMenuItemCopySimulation.setEnabled(stateSimulation);
 		this.jMenuItemEditSimulation.setEnabled(stateSimulation);
 		this.jMenuItemCloseSimulation.setEnabled(stateSimulation);
+		this.jMenuRun.setEnabled(stateSimulation);
 	}
 
 	private void loadMenuAnalysis() {
@@ -120,11 +121,12 @@ public class ApplicationGUI extends GraphicUserInterface {
         JMenuItemCopySimulation = new javax.swing.JMenuItem();
         jMenuItemEditSimulation = new javax.swing.JMenuItem();
         jMenuItemCloseSimulation = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        jMenuRun = new javax.swing.JMenu();
         jMenuItemRunSimulation = new javax.swing.JMenuItem();
         jMenuItemViewRun = new javax.swing.JMenuItem();
         jMenuItemDeleteRun = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
+        jMenuItemAbout = new javax.swing.JMenuItem();
         jMenuItemLog = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -134,7 +136,6 @@ public class ApplicationGUI extends GraphicUserInterface {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(827, 630));
         setMinimumSize(new java.awt.Dimension(827, 630));
-        setPreferredSize(new java.awt.Dimension(827, 630));
         setSize(new java.awt.Dimension(827, 630));
 
         jLabelWithWarning.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
@@ -273,7 +274,7 @@ public class ApplicationGUI extends GraphicUserInterface {
 
         jMenuBar1.add(simulation);
 
-        jMenu1.setText("Run");
+        jMenuRun.setText("Run");
 
         jMenuItemRunSimulation.setText("Run Simulation");
         jMenuItemRunSimulation.addActionListener(new java.awt.event.ActionListener() {
@@ -281,7 +282,7 @@ public class ApplicationGUI extends GraphicUserInterface {
                 jMenuItemRunSimulationActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemRunSimulation);
+        jMenuRun.add(jMenuItemRunSimulation);
 
         jMenuItemViewRun.setText("View Run");
         jMenuItemViewRun.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +290,7 @@ public class ApplicationGUI extends GraphicUserInterface {
                 jMenuItemViewRunActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemViewRun);
+        jMenuRun.add(jMenuItemViewRun);
 
         jMenuItemDeleteRun.setText("Delete Run");
         jMenuItemDeleteRun.addActionListener(new java.awt.event.ActionListener() {
@@ -297,11 +298,19 @@ public class ApplicationGUI extends GraphicUserInterface {
                 jMenuItemDeleteRunActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemDeleteRun);
+        jMenuRun.add(jMenuItemDeleteRun);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuRun);
 
         jMenuHelp.setText("Help");
+
+        jMenuItemAbout.setText("About");
+        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jMenuItemAbout);
 
         jMenuItemLog.setText("Log");
         jMenuItemLog.addActionListener(new java.awt.event.ActionListener() {
@@ -423,6 +432,10 @@ public class ApplicationGUI extends GraphicUserInterface {
 		new RunSimulationGUI(this);
     }//GEN-LAST:event_jMenuItemRunSimulationActionPerformed
 
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+		new AboutGUI(this);
+    }//GEN-LAST:event_jMenuItemAboutActionPerformed
+
 	private void jMenuAnalysisActionPerformed(ActionEvent evt, Analysis analysis) {
 		if (analysis instanceof PathAnalysis) {
 			new PathAnalysisGUI(this, (PathAnalysis) analysis);
@@ -442,11 +455,11 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JLabel jLabelCreateProject;
     private javax.swing.JLabel jLabelOpenProject;
     private javax.swing.JLabel jLabelWithWarning;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuHelp;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAddRoads;
     private javax.swing.JMenuItem jMenuItemCloseProject;
     private javax.swing.JMenuItem jMenuItemCloseSimulation;
@@ -457,6 +470,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     private javax.swing.JMenuItem jMenuItemOpenSimulation;
     private javax.swing.JMenuItem jMenuItemRunSimulation;
     private javax.swing.JMenuItem jMenuItemViewRun;
+    private javax.swing.JMenu jMenuRun;
     private javax.swing.JMenuItem openProject;
     private javax.swing.JMenu simulation;
     // End of variables declaration//GEN-END:variables

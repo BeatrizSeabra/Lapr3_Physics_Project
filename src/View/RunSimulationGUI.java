@@ -5,9 +5,10 @@
  */
 package View;
 
-import Controller.CreateSimulationController;
-import Legacy.Legacy;
-import System.Error;
+import Controller.RunSimulationController;
+import Simulation.AnalysisMethod;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +17,9 @@ import javax.swing.JOptionPane;
  */
 public class RunSimulationGUI extends GraphicUserInterface {
 
-	private CreateSimulationController createSimulationController = new CreateSimulationController();
+	private RunSimulationController runSimulationController = new RunSimulationController();
+	private DefaultComboBoxModel jModelComboBoxAnalysisMethod = new DefaultComboBoxModel();
+	private List<AnalysisMethod> analysisMethods;
 
 	/**
 	 * Creates new form CreateProjectGUI
@@ -33,8 +36,20 @@ public class RunSimulationGUI extends GraphicUserInterface {
 	 */
 	@Override
 	public void initiation() {
-		this.createSimulationController = new CreateSimulationController();
-		this.createSimulationController.initiation();
+		this.runSimulationController.initiation();
+		this.analysisMethods = this.runSimulationController.getAnalysisMethods();
+		this.jComboBoxAnalysisMethod.setModel(this.jModelComboBoxAnalysisMethod);
+		this.jModelComboBoxAnalysisMethod.removeAllElements();
+		for (AnalysisMethod analysisMethod : this.runSimulationController.
+			getAnalysisMethods()) {
+			this.jModelComboBoxAnalysisMethod.addElement(analysisMethod);
+		}
+		this.jComboBoxDurationType.setSelectedIndex(-1);
+		this.jComboBoxTimeStepType.setSelectedIndex(-1);
+		this.jComboBoxAnalysisMethod.setSelectedIndex(-1);
+		this.jTextFieldName.setText("");
+		this.jTextFieldDuration.setText("");
+		this.jTextFieldTimeStep.setText("");
 	}
 
 	/**
@@ -42,23 +57,29 @@ public class RunSimulationGUI extends GraphicUserInterface {
 	 */
 	@Override
 	public void update() {
-		if (this.active(this.createSimulationController.hasSimulation())) {
-			if (this.jTextFieldName.getText().isEmpty()) {
-				this.jTextFieldName.setText(this.createSimulationController.
-					getName());
+		if (this.runSimulationController.getActive()) {
+			this.jButtonRun.setText("Stop");
+			this.jButtonPause.setEnabled(true);
+			this.active(false);
+			if (this.runSimulationController.getPause()) {
+				this.jButtonPause.setText("Continue");
+			} else {
+				this.jButtonPause.setText("Pause");
 			}
-			if (this.jTextFieldDescription.getText().isEmpty()) {
-				this.jTextFieldDescription.
-					setText(this.createSimulationController.
-						getDescription());
-			}
-			this.jTextAreaSimulations.setText(this.createSimulationController.
-				getToString());
 		} else {
-			this.jTextFieldName.setText("");
-			this.jTextFieldDescription.setText("");
-			this.jTextAreaSimulations.setText("");
+			this.active(true);
+			this.jButtonRun.setText("Run");
+			this.jButtonPause.setEnabled(false);
+			this.jButtonPause.setText("Pause");
 		}
+
+		// TEMPORARIO
+		this.jTextFieldName.setText("Meu Run");
+		this.jTextFieldDuration.setText("3");
+		this.jTextFieldTimeStep.setText("10");
+		this.jComboBoxDurationType.setSelectedIndex(0);
+		this.jComboBoxTimeStepType.setSelectedIndex(0);
+		this.jComboBoxAnalysisMethod.setSelectedIndex(0);
 	}
 
 	/**
@@ -67,9 +88,13 @@ public class RunSimulationGUI extends GraphicUserInterface {
 	 * @return
 	 */
 	public Boolean active(Boolean state) {
+		this.jButtonClean.setEnabled(state);
 		this.jTextFieldName.setEnabled(state);
-		this.jTextFieldDescription.setEnabled(state);
-		this.jButtonSave.setEnabled(state);
+		this.jTextFieldDuration.setEnabled(state);
+		this.jTextFieldTimeStep.setEnabled(state);
+		this.jComboBoxDurationType.setEnabled(state);
+		this.jComboBoxTimeStepType.setEnabled(state);
+		this.jComboBoxAnalysisMethod.setEnabled(state);
 		return state;
 	}
 
@@ -82,31 +107,37 @@ public class RunSimulationGUI extends GraphicUserInterface {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonSave = new javax.swing.JButton();
+        jButtonRun = new javax.swing.JButton();
         jTextFieldName = new javax.swing.JTextField();
-        jTextFieldDescription = new javax.swing.JTextField();
+        jTextFieldDuration = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelDuration = new javax.swing.JLabel();
         jButtonClean = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
-        jButtonRoad = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaSimulations = new javax.swing.JTextArea();
-        jLabel4 = new javax.swing.JLabel();
+        jComboBoxDurationType = new javax.swing.JComboBox();
+        jLabelTimeStep = new javax.swing.JLabel();
+        jTextFieldTimeStep = new javax.swing.JTextField();
+        jComboBoxTimeStepType = new javax.swing.JComboBox();
+        jLabelAnalysisMethod = new javax.swing.JLabel();
+        jComboBoxAnalysisMethod = new javax.swing.JComboBox();
+        jButtonPause = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(400, 500));
+        setBounds(new java.awt.Rectangle(0, 23, 400, 200));
+        setMaximumSize(new java.awt.Dimension(400, 200));
+        setMinimumSize(new java.awt.Dimension(400, 200));
+        setPreferredSize(new java.awt.Dimension(400, 200));
 
-        jButtonSave.setText("Save");
-        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRun.setText("Start");
+        jButtonRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSaveActionPerformed(evt);
+                jButtonRunActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Name:");
 
-        jLabel2.setText("Description:");
+        jLabelDuration.setText("Duration:");
 
         jButtonClean.setText("Clean");
         jButtonClean.addActionListener(new java.awt.event.ActionListener() {
@@ -122,20 +153,20 @@ public class RunSimulationGUI extends GraphicUserInterface {
             }
         });
 
-        jButtonRoad.setText("Load Simulation");
-        jButtonRoad.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxDurationType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "second (s)", "minutes (min)", "hours (h)" }));
+
+        jLabelTimeStep.setText("Time Step:");
+
+        jComboBoxTimeStepType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "second (s)", "minutes (min)", "hours (h)" }));
+
+        jLabelAnalysisMethod.setText("Analysis Method:");
+
+        jButtonPause.setText("Pause");
+        jButtonPause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRoadActionPerformed(evt);
+                jButtonPauseActionPerformed(evt);
             }
         });
-
-        jTextAreaSimulations.setEditable(false);
-        jTextAreaSimulations.setColumns(20);
-        jTextAreaSimulations.setLineWrap(true);
-        jTextAreaSimulations.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaSimulations);
-
-        jLabel4.setText("Simulations:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,24 +176,33 @@ public class RunSimulationGUI extends GraphicUserInterface {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonClean)
-                        .addGap(72, 72, 72)
-                        .addComponent(jButtonCancel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jButtonRun)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldDescription))
+                        .addComponent(jButtonPause)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(jButtonClean)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonCancel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldName))
-                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelDuration)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldDuration)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxDurationType, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
-                        .addComponent(jButtonRoad)))
+                        .addComponent(jLabelTimeStep)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTimeStep)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxTimeStepType, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelAnalysisMethod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxAnalysisMethod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -174,73 +214,110 @@ public class RunSimulationGUI extends GraphicUserInterface {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonRoad)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                    .addComponent(jTextFieldDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDuration)
+                    .addComponent(jComboBoxDurationType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldTimeStep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTimeStep)
+                    .addComponent(jComboBoxTimeStepType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxAnalysisMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAnalysisMethod))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClean)
                     .addComponent(jButtonCancel)
-                    .addComponent(jButtonSave))
+                    .addComponent(jButtonRun)
+                    .addComponent(jButtonPause))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
-		if (this.jTextFieldName.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(this, "Simulation needs a name!");
-		} else if (this.jTextFieldDescription.getText().isEmpty()) {
-			JOptionPane.
-				showMessageDialog(this, "Simulation needs a description!");
-		} else if (this.createSimulationController.
-			saveSimulation(this.jTextFieldName.
-				getText(), this.jTextFieldDescription.getText())) {
-			JOptionPane.
-				showMessageDialog(this, "Creation simulation successfully!");
-			this.close();
+    private void jButtonRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunActionPerformed
+		if (this.runSimulationController.getActive()) {
+			this.runSimulationController.setActive(false);
+			//JOptionPane.showMessageDialog(this, "Simulation needs a name!");
 		} else {
-			JOptionPane.
-				showMessageDialog(this, "Error create simulation: " + Error.
-								  getErrorMessage());
-		}
-    }//GEN-LAST:event_jButtonSaveActionPerformed
-
-    private void jButtonRoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRoadActionPerformed
-		String file = this.selectFile(Legacy.
-			getFiltersExtensionsImportSimulations());
-		if (file != null) {
-			this.createSimulationController.loadSimulation(file);
+			if (!this.jTextFieldName.getText().isEmpty() || !this.jTextFieldDuration.
+				getText().isEmpty() || !this.jTextFieldTimeStep.getText().
+				isEmpty() || this.jComboBoxDurationType.getSelectedIndex() != -1 || this.jComboBoxTimeStepType.
+				getSelectedIndex() != -1 || this.jComboBoxAnalysisMethod.
+				getSelectedIndex() != -1) {
+				String time = this.jTextFieldDuration.getText();
+				if (this.jComboBoxDurationType.getSelectedIndex() == 0) {
+					time += " s";
+				} else if (this.jComboBoxDurationType.getSelectedIndex() == 1) {
+					time += " min";
+				} else if (this.jComboBoxDurationType.getSelectedIndex() == 2) {
+					time += " h";
+				}
+				String timeStep = this.jTextFieldDuration.getText();
+				if (this.jComboBoxTimeStepType.getSelectedIndex() == 0) {
+					timeStep += " s";
+				} else if (this.jComboBoxTimeStepType.getSelectedIndex() == 1) {
+					timeStep += " min";
+				} else if (this.jComboBoxTimeStepType.getSelectedIndex() == 2) {
+					timeStep += " h";
+				}
+				System.out.println(time);
+				System.out.println(timeStep);
+				if (this.runSimulationController.run(this.jTextFieldName.
+					getText(), time, timeStep, this.jComboBoxAnalysisMethod.
+													 getSelectedIndex())) {
+					this.runSimulationController.setActive(true);
+				} else {
+					JOptionPane.
+						showMessageDialog(this, "It is only accept numbers in the times!");
+				}
+			} else {
+				JOptionPane.
+					showMessageDialog(this, "It must fill all data to run the simulation!");
+			}
 		}
 		this.update();
-    }//GEN-LAST:event_jButtonRoadActionPerformed
+    }//GEN-LAST:event_jButtonRunActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
-		this.close();
+		if (this.runSimulationController.getActive()) {
+			this.runSimulationController.setActive(false);
+		} else {
+			this.close();
+		}
+		this.update();
     }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCleanActionPerformed
-		this.createSimulationController.initiation();
-		this.update();
+		this.initiation();
     }//GEN-LAST:event_jButtonCleanActionPerformed
+
+    private void jButtonPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPauseActionPerformed
+		if (this.runSimulationController.getPause()) {
+			this.runSimulationController.setPause(false);
+		} else {
+			this.runSimulationController.setPause(true);
+		}
+		this.update();
+    }//GEN-LAST:event_jButtonPauseActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonClean;
-    private javax.swing.JButton jButtonRoad;
-    private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonPause;
+    private javax.swing.JButton jButtonRun;
+    private javax.swing.JComboBox jComboBoxAnalysisMethod;
+    private javax.swing.JComboBox jComboBoxDurationType;
+    private javax.swing.JComboBox jComboBoxTimeStepType;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextAreaSimulations;
-    private javax.swing.JTextField jTextFieldDescription;
+    private javax.swing.JLabel jLabelAnalysisMethod;
+    private javax.swing.JLabel jLabelDuration;
+    private javax.swing.JLabel jLabelTimeStep;
+    private javax.swing.JTextField jTextFieldDuration;
     private javax.swing.JTextField jTextFieldName;
+    private javax.swing.JTextField jTextFieldTimeStep;
     // End of variables declaration//GEN-END:variables
 }

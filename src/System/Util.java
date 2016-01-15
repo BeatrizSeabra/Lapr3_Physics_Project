@@ -75,13 +75,20 @@ public abstract class Util {
 	 * @return
 	 */
 	public static Double toValue(String string) {
-		Double value = Util.toDouble(string.replaceAll("[^0-9\\.\\,\\- ]+", "").
-			split(" ")[0].
-			replaceAll(",", ".").trim());
-		if (value == null) {
-			return 0.0;
+		try {
+			Double value = Util.toDouble(string.
+				replaceAll("[^0-9\\.\\,\\- ]+", "").
+				split(" ")[0].
+				replaceAll(",", ".").trim());
+			if (value == null) {
+				return 0.0;
+			}
+			return value;
+		} catch (Exception ex) {
+			Error.
+				setErrorMessage("Could not get the value of the measure: " + string);
+			return null;
 		}
-		return value;
 	}
 
 	/**
@@ -90,14 +97,20 @@ public abstract class Util {
 	 * @return
 	 */
 	public static String toUnit(String string) {
-		String unit = string.replaceAll("[0-9\\.\\,' '\\-\\+]+", "").trim();
-		if (unit == null || unit.isEmpty()) {
-			return "";
+		try {
+			String unit = string.replaceAll("[0-9\\.\\,' '\\-\\+]+", "").trim();
+			if (unit == null || unit.isEmpty()) {
+				return "";
+			}
+			if (unit.contains("Km")) {
+				unit = unit.replaceAll("Km", "km");
+			}
+			return unit;
+		} catch (Exception ex) {
+			Error.
+				setErrorMessage("Could not get the unit of the measure: " + string);
+			return null;
 		}
-		if (unit.contains("Km")) {
-			unit = unit.replaceAll("Km", "km");
-		}
-		return unit;
 	}
 
 }

@@ -49,6 +49,7 @@ public class FastestPathAnalysis extends AnalysisMethod {
 		}
 
 		for (Deque<Object> path : paths) {
+			Deque<Section> sections = new ArrayDeque();
 			Measure total = new Measure(0.0, "s");
 			List<String[]> result = new ArrayList();
 			result.
@@ -64,6 +65,7 @@ public class FastestPathAnalysis extends AnalysisMethod {
 					result.add(stringBuilder.toString().split(";"));
 				} else if (object instanceof Section) {
 					Section section = (Section) object;
+					sections.add(section);
 					for (Segment segment : section.getSegments()) {
 						StringBuilder stringBuilder = new StringBuilder();
 						List<Measure> velocities = new ArrayList();
@@ -100,7 +102,7 @@ public class FastestPathAnalysis extends AnalysisMethod {
 					}
 				}
 			}
-			listPaths.add((Deque<Section>) (Object) path);
+			listPaths.add(sections);
 			listResults.add(result);
 			listValues.add(total.getValue());
 		}
@@ -117,4 +119,5 @@ public class FastestPathAnalysis extends AnalysisMethod {
 	public String getName() {
 		return "Fastest Path";
 	}
+
 }

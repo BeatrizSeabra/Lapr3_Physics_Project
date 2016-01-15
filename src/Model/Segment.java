@@ -20,8 +20,8 @@ public class Segment {
 	private Measure length;
 	private Measure maxVelocity;
 	private Measure minVelocity;
-	private Integer numberVehicles;
-	private Integer vehicles;
+	private Integer numberVehicles = 0;
+	private Integer vehicles = 0;
 
 	/**
 	 * @return the name

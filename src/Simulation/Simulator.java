@@ -15,14 +15,11 @@ import Model.Simulation;
 import Model.Traffic;
 import Physics.Measure;
 import Physics.Measurement;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -32,37 +29,49 @@ public class Simulator {
 
 	private Simulation simulation;
 	private Run run;
-	private Boolean active = true;
-	private Map<Traffic, Segment> segments = new HashMap();
+	private Boolean active = false;
+	private Boolean pause = false;
+	//private Map<Traffic, Segment> segments = new HashMap();
 	private List<VehicleBot> vehicleBots = new ArrayList();
 	private Integer time = 0;
 	private Integer timeStep;
+	private Timer timer;
 
-	public Simulator(Simulation simulation, String name, Measure time,
-					 Measure timeStep) {
+	public void setData(Simulation simulation, String name, Measure time,
+						Measure timeStep, AnalysisMethod analysisMethod) {
 		this.simulation = simulation;
 		this.run = new Run();
 		this.run.setName(name);
 		this.run.setTime(time);
 		this.run.setTimeStep(timeStep);
+		this.run.setMethod(analysisMethod);
 		this.timeStep = Measurement.convert(timeStep, "s").getValue().intValue();
 	}
 
 	public void run() {
-		ActionListener action = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				active = false;
-			}
-		};
 		this.createBots();
-		Measure time = Measurement.convert(this.run.getTime(), "s");
-		new Timer(new Integer((time.getValue() * 1000) + ""), action).start();
-		while (this.active) {
-			System.out.println("ALGO");
+		this.active = true;
+		timer = new Timer();
+		timer.schedule(new TimerSchedule(), this.run.getTime().getValue().
+					   intValue() * 1000);
+		while (this.getActive()) {
+			while (this.getPause()) {
+			}
+			System.out.println(this.vehicleBots.size());
 			this.stepVehicles();
 			this.stepNewVehicles();
 			this.time += this.timeStep;
+		}
+
+		System.out.println("DROP!!!! " + this.run.getDrops().size());
+	}
+
+	private class TimerSchedule extends TimerTask {
+
+		@Override
+		public void run() {
+			active = false;
+			timer.cancel();
 		}
 	}
 
@@ -81,16 +90,9 @@ public class Simulator {
 			Deque<Section> sections = this.run.getMethod().path(traffic.
 				getVehicle(), roadNetwork, traffic.getNodeStart(), traffic.
 																getNodeEnd());
-			/*
-			 Deque<Segment> segments = new ArrayDeque();
-			 for (Section section : sections) {
-			 for (Segment segment : section.getSegments()) {
-			 segments.add(segment);
-			 }
-			 }*/
 			VehicleBot vehicleBot = new VehicleBot(sections, this.run.getSteps(), this.timeStep);
-			traffic.getNodeStart().getBots().
-				put(sections.peekFirst(), vehicleBot);
+			traffic.setSegment(sections.peekFirst().getSegments().get(0));
+			traffic.setVehicleBot(vehicleBot);
 		}
 	}
 
@@ -105,21 +107,52 @@ public class Simulator {
 			Integer amount = Physics.PhysicsMath.
 				exponentialDistributionRandom(traffic.getArrivalRate().
 					getValue()).intValue();
-			Segment segment = this.segments.get(traffic);
+			amount = 1;
+			Segment segment = traffic.getSegment();
+			VehicleBot vehicleBot = traffic.getVehicleBot();
 			for (int i = 0; i < amount; i++) {
-				VehicleBot vehicleBot = traffic.getNodeStart().getBots().
-					get(segment);
 				if (segment.getVehicles() < segment.getNumberVehicles()) {
 					this.vehicleBots.add(vehicleBot);
 				} else {
-					this.run.
-						addDrop(new Drop(traffic.getVehicle().getName(), traffic.
-										 getNodeStart().getName(), traffic.
-										 getNodeEnd().getName(), this.time.
-										 toString()));
+					Drop drop = new Drop();
+					drop.setVehicle(traffic.getVehicle().getName());
+					drop.setNodeStart(traffic.getNodeStart().getName());
+					drop.setNodeEnd(traffic.getNodeEnd().getName());
+					drop.setTime(new Measure(Double.parseDouble(this.time.
+						toString()), "s"));
+					this.run.addDrop(drop);
+
 				}
 			}
 		}
+	}
+
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @return the pause
+	 */
+	public Boolean getPause() {
+		return pause;
+	}
+
+	/**
+	 * @param pause the pause to set
+	 */
+	public void setPause(Boolean pause) {
+		this.pause = pause;
 	}
 
 }

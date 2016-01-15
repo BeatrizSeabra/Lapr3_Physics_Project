@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import Simulation.VehicleBot;
 
 /**
  *
@@ -18,6 +19,9 @@ public class Traffic {
 	private Node nodeEnd;
 	private Vehicle vehicle;
 	private Measure arrivalRate;
+
+	private Segment segment;
+	private VehicleBot vehicleBot;
 
 	/**
 	 *
@@ -138,6 +142,34 @@ public class Traffic {
 			append(" - ").append(this.nodeEnd).append(" - ").
 			append(this.arrivalRate).append(" - ").
 			append(this.vehicle.getName()).toString();
+	}
+
+	/**
+	 * @return the segment
+	 */
+	public Segment getSegment() {
+		return segment;
+	}
+
+	/**
+	 * @param segment the segment to set
+	 */
+	public void setSegment(Segment segment) {
+		this.segment = segment;
+	}
+
+	/**
+	 * @return the vehicleBot
+	 */
+	public VehicleBot getVehicleBot() {
+		return vehicleBot;
+	}
+
+	/**
+	 * @param vehicleBot the vehicleBot to set
+	 */
+	public void setVehicleBot(VehicleBot vehicleBot) {
+		this.vehicleBot = vehicleBot;
 	}
 
 }

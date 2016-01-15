@@ -28,7 +28,7 @@ public class VehicleBot {
 	}
 
 	public void step() {
-
+		//System.out.println("CAR:  " + Physics.PhysicsMath.random.ints());
 	}
 
 }

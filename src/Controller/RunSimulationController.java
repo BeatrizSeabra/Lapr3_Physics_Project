@@ -5,12 +5,14 @@
  */
 package Controller;
 
-import Data.Data;
-import Data.ProjectData;
-import Data.SimulationData;
-import Legacy.Legacy;
-import Model.Project;
 import Model.Simulation;
+import Physics.Measure;
+import Physics.Measurement;
+import Simulation.AnalysisMethod;
+import Simulation.Simulator;
+import System.Settings;
+import System.Util;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,89 +21,80 @@ import java.util.List;
  */
 public class RunSimulationController {
 
-	private ProjectData projectData = Data.getProjectData();
-	private SimulationData simulationData = Data.getSimulationData();
-	private Project project;
 	private Simulation simulation;
+	private Simulator simulator;
+	private List<AnalysisMethod> analysisMethods;
 
 	/**
 	 *
 	 * @return
 	 */
 	public boolean initiation() {
-		this.project = ContextController.getOpenProject();
-		this.simulation = null;
+		this.simulation = ContextController.getOpenSimulation();
+		this.simulator = new Simulator();
 		return true;
 	}
 
-	/**
-	 *
-	 * @return
-	 */
-	public String getName() {
-		if (this.hasSimulation()) {
-			return this.simulation.getName();
+	public List<AnalysisMethod> getAnalysisMethods() {
+		if (this.analysisMethods == null) {
+			this.analysisMethods = new ArrayList();
+			List<Object> methods = Settings.loadAllClass(Settings.
+				getOptions("AnalysisMethodClass"));
+			for (Object objectMethod : methods) {
+				AnalysisMethod methodClass = (AnalysisMethod) objectMethod;
+				if (methodClass != null) {
+					this.analysisMethods.add(methodClass);
+				}
+			}
 		}
-		return "";
+		return this.analysisMethods;
 	}
 
-	/**
-	 *
-	 * @return
-	 */
-	public String getDescription() {
-		if (this.hasSimulation()) {
-			return this.simulation.getDescription();
-		}
-		return "";
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public String getToString() {
-		if (this.hasSimulation()) {
-			return this.simulation.toString();
-		}
-		return "";
-	}
-
-	/**
-	 *
-	 * @param name
-	 * @param description
-	 * @return
-	 */
-	public Boolean saveSimulation(String name, String description) {
-		if (this.hasSimulation()) {
-			this.simulation.setName(name);
-			this.simulation.setDescription(description);
-			return this.simulationData.save(this.project, this.simulation);
-		}
-		return false;
-	}
-
-	/**
-	 *
-	 * @return
-	 */
-	public Boolean hasSimulation() {
-		return this.simulation != null;
-	}
-
-	/**
-	 *
-	 * @param filePath
-	 * @return
-	 */
-	public Boolean loadSimulation(String filePath) {
-		List<Simulation> simulations = Legacy.importSimulation(filePath);
-		if (simulations != null && !simulations.isEmpty()) {
-			this.simulation = simulations.get(simulations.size() - 1);
+	public Boolean run(String name, String time, String timeStep, int method) {
+		Double timeValue = Util.toValue(time);
+		String timeUnit = Util.toUnit(time);
+		Double timeStepValue = Util.toValue(timeStep);
+		String timeStepUnit = Util.toUnit(timeStep);
+		Measure timeMeasure = Measurement.
+			convert(new Measure(timeValue, timeUnit), "s");
+		Measure timeStepMeasure = Measurement.
+			convert(new Measure(timeStepValue, timeStepUnit), "s");
+		if (timeMeasure != null && timeStepMeasure != null) {
+			this.simulator.
+				setData(this.simulation, name, timeMeasure, timeStepMeasure, this.analysisMethods.
+						get(method));
+			this.simulator.run();
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return this.simulator.getActive();
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.simulator.setActive(active);
+	}
+
+	/**
+	 * @return the pause
+	 */
+	public Boolean getPause() {
+		return this.simulator.getPause();
+	}
+
+	/**
+	 * @param pause the pause to set
+	 */
+	public void setPause(Boolean pause) {
+		this.simulator.setPause(pause);
 	}
 
 }

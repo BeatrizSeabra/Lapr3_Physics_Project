@@ -47,11 +47,7 @@ public class VehicleDataLocal implements VehicleData {
 	 */
 	@Override
 	public Boolean save(Project project, Vehicle vehicle) {
-		for (int i = 0; i < this.list.size(); i++) {
-			if (this.list.get(i).getId() == vehicle.getId()) {
-				return this.list.set(i, vehicle.clone()) != null;
-			}
-		}
+		project.addVehicle(vehicle);
 		return this.list.add(vehicle);
 	}
 
