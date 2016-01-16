@@ -43,17 +43,18 @@ public class ViewProjectGUI extends JPanel {
 	 *
 	 */
 	public void update() {
+		this.jModelListRuns.removeAllElements();
+		this.jModelListVehicles.removeAllElements();
+		this.jTextAreaRoadNetwork.setText("");
+		this.jTextAreaSimulation.setText("");
 		Project project = ContextController.getOpenProject();
 		this.jLabelName.setText(project.getName());
 		this.jLabelDescription.setText(project.getDescription());
 		this.jTextAreaRoadNetwork.setText(project.getRoadNetwork().toString());
-		this.jModelListVehicles.removeAllElements();
 		for (Vehicle vehicle : project.getVehicles()) {
 			this.jModelListVehicles.addElement(vehicle);
 		}
 		Simulation simulation = ContextController.getOpenSimulation();
-		this.jTextAreaSimulation.setText("");
-		this.jModelListRuns.removeAllElements();
 		if (simulation != null) {
 			this.jTextAreaSimulation.setText(simulation.toString());
 			for (Run run : simulation.getRuns()) {

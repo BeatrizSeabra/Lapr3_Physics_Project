@@ -62,7 +62,8 @@ public abstract class AnalysisMethod {
 	public abstract List<Step> analyze(Vehicle vehicle, Node startNode,
 									   Node endNode, List<Section> sections);
 
-	public abstract Step analyze(Vehicle vehicle, Segment segment);
+	public abstract Step analyze(Vehicle vehicle, Section section,
+								 Segment segment);
 
 	/**
 	 * @return the name
