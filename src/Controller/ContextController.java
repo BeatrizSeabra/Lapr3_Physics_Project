@@ -39,6 +39,7 @@ public abstract class ContextController {
 	 */
 	static public void setOpenProject(Project project) {
 		ContextController.currentProject = project;
+		ContextController.currentSimulation = null;
 	}
 
 	/**

@@ -5,8 +5,8 @@
  */
 package Data.Oracle;
 
-import Data.RunData;
 import Legacy.ResultsImportXML;
+import Model.Drop;
 import Model.Run;
 import Model.Simulation;
 import System.Error;
@@ -24,20 +24,18 @@ import oracle.sql.ArrayDescriptor;
  *
  * @author LAPR3_20152016_G27
  */
-public class RunDataOracle implements RunData {
+public class DropDataOracle {
 
 	private Connection connection;
-	private DropDataOracle dropDataOracle;
-	private StepDataOracle stepDataOracle;
+	private TrafficDataOracle trafficDataOracle;
 
 	/**
 	 *
 	 * @param connection
 	 */
-	public RunDataOracle(Connection connection) {
+	public DropDataOracle(Connection connection) {
 		this.connection = connection;
-		this.dropDataOracle = new DropDataOracle(connection);
-		this.stepDataOracle = new StepDataOracle(connection);
+		this.trafficDataOracle = new TrafficDataOracle(connection);
 	}
 
 	/**
@@ -54,7 +52,6 @@ public class RunDataOracle implements RunData {
 	 * @param project
 	 * @return
 	 */
-	@Override
 	public List<Run> all(Simulation simulation) {
 		try {
 			CallableStatement callableStatement = connection.
@@ -84,53 +81,45 @@ public class RunDataOracle implements RunData {
 	 * @param simulation
 	 * @return
 	 */
-	@Override
-	public Boolean save(Simulation simulation, Run run) {
-		List<Run> runs = new ArrayList();
-		runs.add(run);
-		return this.save(simulation, runs);
+	public Boolean save(Run run, Drop drop) {
+		List<Drop> drops = new ArrayList();
+		drops.add(drop);
+		return this.save(run, drops);
 	}
 
 	/**
 	 *
 	 * @return
 	 */
-	@Override
-	public Boolean save(Simulation simulation, List<Run> runs) {
+	public Boolean save(Run run, List<Drop> drops) {
 		try {
 			ArrayDescriptor oracleVarchar2Collection = ArrayDescriptor.
 				createDescriptor("STRINGTABLE", this.connection);
 			ArrayDescriptor oracleNumberCollection = ArrayDescriptor.
 				createDescriptor("NUMBERTABLE", this.connection);
 			CallableStatement callableStatement = connection.
-				prepareCall("{ call saveRuns(?,?,?,?,?,?,?,?) }");
-			int size = runs.size();
+				prepareCall("{ call saveDrops(?,?,?,?,?,?) }");
+			int size = drops.size();
 			double[] param01 = new double[size];
 			double[] param02 = new double[size];
 			String[] param03 = new String[size];
 			String[] param04 = new String[size];
-			double[] param05 = new double[size];
+			String[] param05 = new String[size];
 			String[] param06 = new String[size];
-			double[] param07 = new double[size];
-			String[] param08 = new String[size];
 			for (int i = 0; i < size; i++) {
-				param01[i] = runs.get(i).getId();
-				param02[i] = simulation.getId();
-				param03[i] = runs.get(i).getName();
-				param04[i] = runs.get(i).getMethod().getName();
-				param05[i] = runs.get(i).getTime().getValue();
-				param06[i] = runs.get(i).getTime().getUnit();
-				param07[i] = runs.get(i).getTimeStep().getValue();
-				param08[i] = runs.get(i).getTimeStep().getUnit();
+				param01[i] = 0;
+				param02[i] = run.getId();
+				param03[i] = drops.get(i).getVehicle();
+				param04[i] = drops.get(i).getTime().toString();
+				param05[i] = drops.get(i).getNodeStart();
+				param06[i] = drops.get(i).getNodeEnd();
 			}
 			ARRAY param01O = new ARRAY(oracleNumberCollection, this.connection, param01);
 			ARRAY param02O = new ARRAY(oracleNumberCollection, this.connection, param02);
 			ARRAY param03O = new ARRAY(oracleVarchar2Collection, this.connection, param03);
 			ARRAY param04O = new ARRAY(oracleVarchar2Collection, this.connection, param04);
-			ARRAY param05O = new ARRAY(oracleNumberCollection, this.connection, param05);
+			ARRAY param05O = new ARRAY(oracleVarchar2Collection, this.connection, param05);
 			ARRAY param06O = new ARRAY(oracleVarchar2Collection, this.connection, param06);
-			ARRAY param07O = new ARRAY(oracleNumberCollection, this.connection, param07);
-			ARRAY param08O = new ARRAY(oracleVarchar2Collection, this.connection, param08);
 			callableStatement.
 				registerOutParameter(1, OracleTypes.ARRAY, "NUMBERTABLE");
 			callableStatement.setObject(1, param01O, OracleTypes.ARRAY);
@@ -139,26 +128,13 @@ public class RunDataOracle implements RunData {
 			callableStatement.setObject(4, param04O, OracleTypes.ARRAY);
 			callableStatement.setObject(5, param05O, OracleTypes.ARRAY);
 			callableStatement.setObject(6, param06O, OracleTypes.ARRAY);
-			callableStatement.setObject(7, param07O, OracleTypes.ARRAY);
-			callableStatement.setObject(8, param08O, OracleTypes.ARRAY);
 			callableStatement.execute();
 			ARRAY arrayIndex = ((OracleCallableStatement) callableStatement).
 				getARRAY(1);
 			int index[] = arrayIndex.getIntArray();
 			callableStatement.close();
 			for (int i = 0; i < size; i++) {
-				System.out.println("RUN INDEX: " + index[i]);
-				runs.get(i).setId(index[i]);
-				if (index[i] != 0) {
-					if (!runs.get(i).getDrops().isEmpty()) {
-						this.dropDataOracle.
-							save(runs.get(i), runs.get(i).getDrops());
-					}
-					if (!runs.get(i).getSteps().isEmpty()) {
-						this.stepDataOracle.
-							save(runs.get(i), runs.get(i).getSteps());
-					}
-				}
+				System.out.println("DROP INDEX: " + index[i]);
 			}
 			return true;
 		} catch (Exception ex) {
@@ -173,7 +149,6 @@ public class RunDataOracle implements RunData {
 	 * @param simulation
 	 * @return
 	 */
-	@Override
 	public Run get(Simulation simulation, Run run) {
 		if (run.getId() != 0) {
 			try {
@@ -204,15 +179,9 @@ public class RunDataOracle implements RunData {
 	 * @param simulation
 	 * @return
 	 */
-	@Override
 	public Boolean hasChanged(Simulation simulation, Run run) {
 		Run oldRun = this.get(simulation, run);
 		return !oldRun.equals(run);
-	}
-
-	@Override
-	public Boolean remove(Simulation simulation, Run run) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 }

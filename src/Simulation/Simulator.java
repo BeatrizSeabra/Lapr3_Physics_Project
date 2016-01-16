@@ -85,8 +85,7 @@ public class Simulator {
 		}
 		for (Traffic traffic : this.simulation.getTraffics()) {
 			Deque<Section> sections = this.run.getMethod().path(traffic.
-				getVehicle(), roadNetwork, traffic.getNodeStart(), traffic.
-																getNodeEnd());
+				getVehicle(), traffic.getNodeStart(), traffic.getNodeEnd(), roadNetwork);
 			VehicleBot vehicleBot = new VehicleBot(traffic.getVehicle(), sections, this.run.
 												   getSteps(), this.timeStep, this.run.
 												   getMethod());

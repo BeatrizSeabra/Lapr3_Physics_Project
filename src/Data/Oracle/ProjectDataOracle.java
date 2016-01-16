@@ -8,10 +8,8 @@ package Data.Oracle;
 import Data.ProjectData;
 import Legacy.Import;
 import Legacy.RoadNetworkImportXML;
-import Legacy.SimulationImportXML;
 import Legacy.VehicleImportXML;
 import Model.Project;
-import Model.Simulation;
 import Model.Vehicle;
 import System.Error;
 import java.sql.CallableStatement;
@@ -174,7 +172,7 @@ public class ProjectDataOracle implements ProjectData {
 				List<Project> projects = importClass.importData(result);
 				if (projects != null && !projects.isEmpty()) {
 					Project newProject = projects.get(projects.size() - 1);
-					newProject.setId(project.getId());
+					//newProject.setId(project.getId());
 					callableStatement = connection.
 						prepareCall("{ call ? := exportXMLVehicles(?) }");
 					callableStatement.
@@ -182,7 +180,7 @@ public class ProjectDataOracle implements ProjectData {
 					callableStatement.setInt(2, newProject.getId());
 					callableStatement.execute();
 					result = callableStatement.getString(1);
-					System.out.println("VEHICLES:\"" + result + "\"");
+					System.out.println("VEHICLE:\"" + result + "\"");
 					if (result != null && !result.isEmpty()) {
 						importClass = new VehicleImportXML();
 						System.out.
@@ -191,22 +189,6 @@ public class ProjectDataOracle implements ProjectData {
 							importData(callableStatement.getString(1));
 						for (Vehicle vehicle : vehicles) {
 							newProject.addVehicle(vehicle);
-						}
-					}
-					callableStatement = connection.
-						prepareCall("{ call ? := exportXMLSimulations(?) }");
-					callableStatement.
-						registerOutParameter(1, OracleTypes.VARCHAR);
-					callableStatement.setInt(2, newProject.getId());
-					callableStatement.execute();
-					result = callableStatement.getString(1);
-					System.out.println("SIMULATINS:\"" + result + "\"");
-					if (result != null && !result.isEmpty()) {
-						importClass = new SimulationImportXML();
-						List<Simulation> simulations = importClass.
-							importData(result);
-						for (Simulation simulation : simulations) {
-							newProject.addSimulation(simulation);
 						}
 					}
 					return newProject;

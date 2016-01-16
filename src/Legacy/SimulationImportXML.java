@@ -119,6 +119,18 @@ public class SimulationImportXML implements Import<Simulation> {
 					}
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
+							case "idSimulation":
+								Integer idSimulation = Util.toInteger(text);
+								if (idSimulation != null) {
+									simulation.setId(idSimulation);
+								}
+								break;
+							case "idRun":
+								Integer idRun = Util.toInteger(text);
+								if (idRun != null) {
+									run.setId(idRun);
+								}
+								break;
 							case "vehicle":
 								vehicle = project.getVehicle(text);
 								break;

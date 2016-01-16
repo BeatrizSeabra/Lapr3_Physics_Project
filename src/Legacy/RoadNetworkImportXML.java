@@ -72,7 +72,7 @@ public class RoadNetworkImportXML implements Import<Project> {
 			Integer numberVehicles = null;
 			String text = null, unit = null, road = null, typology = null, direction = null;
 			Measure toll = null, windDirection = null, windSpeed = null, height = null, slope = null, length = null, maxVelocity = null, minVelocity = null;
-			Node nodeBegin = null, nodeEnd = null;
+			Node nodeStart = null, nodeEnd = null, node = null;
 			Section section = null;
 			Segment segment = null;
 			List<Segment> segments = null;
@@ -95,15 +95,16 @@ public class RoadNetworkImportXML implements Import<Project> {
 								projects.add(project);
 								break;
 							case "node":
-								roadNetwork.addNode(new Node(reader.
-									getAttributeValue(0).trim()));
+								node = new Node(reader.getAttributeValue(0).
+									trim());
+								roadNetwork.addNode(node);
 								break;
 							case "road_section":
 								section = new Section();
-								nodeBegin = new Node(reader.getAttributeValue(0).
-									trim());
-								nodeEnd = new Node(reader.getAttributeValue(1).
-									trim());
+								nodeStart = project.getRoadNetwork().
+									getNode(reader.getAttributeValue(0).trim());
+								nodeEnd = project.getRoadNetwork().
+									getNode(reader.getAttributeValue(1).trim());
 								break;
 							case "segment_list":
 								segments = new ArrayList();
@@ -124,6 +125,24 @@ public class RoadNetworkImportXML implements Import<Project> {
 					}
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
+							case "idProject":
+								Integer idProject = Util.toInteger(text);
+								if (idProject != null) {
+									project.setId(idProject);
+								}
+								break;
+							case "idNode":
+								Integer idNode = Util.toInteger(text);
+								if (idNode != null) {
+									node.setId(idNode);
+								}
+								break;
+							case "idSection":
+								Integer idSection = Util.toInteger(text);
+								if (idSection != null) {
+									section.setId(idSection);
+								}
+								break;
 							case "road":
 								road = text;
 								break;
@@ -168,7 +187,7 @@ public class RoadNetworkImportXML implements Import<Project> {
 								section.setWindDirection(windDirection);
 								section.setWindSpeed(windSpeed);
 								roadNetwork.
-									addSection(nodeBegin, nodeEnd, section);
+									addSection(nodeStart, nodeEnd, section);
 								break;
 							case "height":
 								value = Util.toValue(text);

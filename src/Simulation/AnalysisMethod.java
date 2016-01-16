@@ -28,8 +28,8 @@ public abstract class AnalysisMethod {
 	protected List<Deque<Section>> bestPaths = new ArrayList();
 	protected List<List<String[]>> results = new ArrayList();
 
-	public List<String[]> result(Vehicle vehicle, RoadNetwork roadNetwork,
-								 Node startNode, Node endNode) {
+	public List<String[]> result(Vehicle vehicle, Node startNode, Node endNode,
+								 RoadNetwork roadNetwork) {
 		int size = this.results.size();
 		for (int i = 0; i < size; i++) {
 			if (this.vehicles.get(i).equals(vehicle) && this.roadNetworks.get(i).
@@ -38,12 +38,12 @@ public abstract class AnalysisMethod {
 				return this.results.get(i);
 			}
 		}
-		this.analyze(vehicle, roadNetwork, startNode, endNode);
+		this.analyze(vehicle, startNode, endNode, roadNetwork);
 		return this.results.get(size);
 	}
 
-	public Deque<Section> path(Vehicle vehicle, RoadNetwork roadNetwork,
-							   Node startNode, Node endNode) {
+	public Deque<Section> path(Vehicle vehicle, Node startNode, Node endNode,
+							   RoadNetwork roadNetwork) {
 		int size = this.bestPaths.size();
 		for (int i = 0; i < size; i++) {
 			if (this.vehicles.get(i).equals(vehicle) && this.roadNetworks.get(i).
@@ -52,12 +52,15 @@ public abstract class AnalysisMethod {
 				return this.bestPaths.get(i);
 			}
 		}
-		this.analyze(vehicle, roadNetwork, startNode, endNode);
+		this.analyze(vehicle, startNode, endNode, roadNetwork);
 		return this.bestPaths.get(size);
 	}
 
-	public abstract void analyze(Vehicle vehicle, RoadNetwork roadNetwork,
-								 Node startNode, Node endNode);
+	public abstract List<Section> analyze(Vehicle vehicle, Node startNode,
+										  Node endNode, RoadNetwork roadNetwork);
+
+	public abstract List<Step> analyze(Vehicle vehicle, Node startNode,
+									   Node endNode, List<Section> sections);
 
 	public abstract Step analyze(Vehicle vehicle, Segment segment);
 

@@ -164,6 +164,9 @@ public class SimulationDataOracle implements SimulationData {
 					registerOutParameter(1, OracleTypes.VARCHAR);
 				callableStatement.setInt(2, simulation.getId());
 				callableStatement.execute();
+				System.out.
+					println("AQUI!! ID:" + simulation.getId() + " \"" + callableStatement.
+						getString(1) + "\"");
 				SimulationImportXML importClass = new SimulationImportXML();
 				List<Simulation> simulations = importClass.
 					importData(callableStatement.getString(1));

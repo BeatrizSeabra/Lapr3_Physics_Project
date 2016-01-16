@@ -114,6 +114,18 @@ public class VehicleImportXML implements Import<Vehicle> {
 					}
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
+							case "idVehicle":
+								Integer idVehicle = Util.toInteger(text);
+								if (idVehicle != null) {
+									vehicle.setId(idVehicle);
+								}
+								break;
+							case "idThrottle":
+								Integer idThrottle = Util.toInteger(text);
+								if (idThrottle != null) {
+									throttle.setId(idThrottle);
+								}
+								break;
 							case "type":
 								vehicle.setType(text);
 								break;

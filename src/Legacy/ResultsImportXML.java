@@ -97,6 +97,12 @@ public class ResultsImportXML implements Import<Run> {
 					}
 					case XMLStreamConstants.END_ELEMENT: {
 						switch (reader.getLocalName()) {
+							case "idRun":
+								Integer idRun = Util.toInteger(text);
+								if (idRun != null) {
+									run.setId(idRun);
+								}
+								break;
 							case "step":
 								step.setVehicle(vehicle);
 								step.setNodeStart(start);

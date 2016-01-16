@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author LAPR3_20152016_G27
  */
-public class FastestPathAnalysis extends AnalysisMethod {
+public class MostEfficientTheoricalAnalysis extends AnalysisMethod {
 
 	double totalForce = 0;
 
