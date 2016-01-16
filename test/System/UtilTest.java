@@ -45,12 +45,10 @@ public class UtilTest {
 	@Test
 	public void testToString() {
 		System.out.println("toString");
-		Date date = null;
-		String expResult = "";
+		Date date = new Date(1999-1900,0,01);
+		String expResult = "01/01/1999";
 		String result = Util.toString(date);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -59,12 +57,10 @@ public class UtilTest {
 	@Test
 	public void testToDate() {
 		System.out.println("toDate");
-		String date = "";
-		Date expResult = null;
+		String date = "01/01/1999";
+		Date expResult = new Date(1999-1900,0,1);
 		Date result = Util.toDate(date);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -73,12 +69,10 @@ public class UtilTest {
 	@Test
 	public void testToDouble() {
 		System.out.println("toDouble");
-		String string = "";
-		Double expResult = null;
+		String string = "5.6";
+		Double expResult = 5.6;
 		Double result = Util.toDouble(string);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -87,12 +81,10 @@ public class UtilTest {
 	@Test
 	public void testToInteger() {
 		System.out.println("toInteger");
-		String string = "";
-		Integer expResult = null;
+		String string = "5";
+		Integer expResult = 5;
 		Integer result = Util.toInteger(string);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -101,12 +93,10 @@ public class UtilTest {
 	@Test
 	public void testToValue() {
 		System.out.println("toValue");
-		String string = "";
-		Double expResult = null;
+		String string = "5.6";
+		Double expResult = 5.6;
 		Double result = Util.toValue(string);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -115,12 +105,9 @@ public class UtilTest {
 	@Test
 	public void testToUnit() {
 		System.out.println("toUnit");
-		String string = "";
-		String expResult = "";
+		String string = "km/h";
 		String result = Util.toUnit(string);
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(string, result);
 	}
 
 }

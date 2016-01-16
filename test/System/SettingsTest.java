@@ -69,8 +69,8 @@ public class SettingsTest {
 	@Test
 	public void testGetOption() {
 		System.out.println("getOption");
-		String key = "";
-		String expResult = "";
+		String key = "RoadNetworkImportClass";
+		String expResult = "Legacy.RoadNetworkImportXML";
 		String result = Settings.getOption(key);
 		assertEquals(expResult, result);
 
@@ -82,12 +82,10 @@ public class SettingsTest {
 	@Test
 	public void testGetOptions() {
 		System.out.println("getOptions");
-		String key = "";
-		String[] expResult = null;
+		String key = "ExportClass";
+		String[] expResult = {"Legacy.ExportHTML","Legacy.ExportCSV"};
 		String[] result = Settings.getOptions(key);
 		assertArrayEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -96,12 +94,9 @@ public class SettingsTest {
 	@Test
 	public void testLoadClass() {
 		System.out.println("loadClass");
-		String name = "";
-		Object expResult = null;
+		String name = "Legacy.ExportHTML";
 		Object result = Settings.loadClass(name);
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(result!=null, true);
 	}
 
 	/**
@@ -110,12 +105,9 @@ public class SettingsTest {
 	@Test
 	public void testLoadAllClass() {
 		System.out.println("loadAllClass");
-		String[] names = null;
-		List expResult = null;
+		String[] names = {"Legacy.ExportHTML", "Legacy.ExportCSV"};
 		List result = Settings.loadAllClass(names);
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(result.size(), 2);
 	}
 
 }

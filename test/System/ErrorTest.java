@@ -103,8 +103,8 @@ public class ErrorTest {
 	public void testGetErrorMessage() {
 		System.out.println("getErrorMessage");
 		String expResult = "Error";
-		String result = Error.getErrorMessage();
-		assertEquals(expResult, result);
+                Error.setErrorMessage(expResult);
+		assertEquals(expResult, Error.getErrorMessage());
 
 	}
 
