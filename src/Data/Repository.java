@@ -29,4 +29,10 @@ public interface Repository {
 	 */
 	SimulationData getSimulationData();
 
+	/**
+	 *
+	 * @return
+	 */
+	RunData getRunData();
+
 }

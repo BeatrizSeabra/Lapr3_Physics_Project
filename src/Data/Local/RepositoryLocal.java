@@ -7,6 +7,7 @@ package Data.Local;
 
 import Data.ProjectData;
 import Data.Repository;
+import Data.RunData;
 import Data.SimulationData;
 import Data.VehicleData;
 
@@ -19,6 +20,7 @@ public class RepositoryLocal implements Repository {
 	private ProjectData projactData = new ProjectDataLocal();
 	private VehicleData vehicleData = new VehicleDataLocal();
 	private SimulationData simulationData = new SimulationDataLocal();
+	private RunData runData = new RunDataLocal();
 
 	/**
 	 *
@@ -45,6 +47,15 @@ public class RepositoryLocal implements Repository {
 	@Override
 	public SimulationData getSimulationData() {
 		return this.simulationData;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	@Override
+	public RunData getRunData() {
+		return this.runData;
 	}
 
 }

@@ -40,4 +40,11 @@ public abstract class Data {
 		return Data.repository.getSimulationData();
 	}
 
+	/**
+	 *
+	 * @return
+	 */
+	public static RunData getRunData() {
+		return Data.repository.getRunData();
+	}
 }

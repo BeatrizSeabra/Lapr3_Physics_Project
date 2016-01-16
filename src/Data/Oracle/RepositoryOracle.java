@@ -7,6 +7,7 @@ package Data.Oracle;
 
 import Data.ProjectData;
 import Data.Repository;
+import Data.RunData;
 import Data.SimulationData;
 import Data.VehicleData;
 import System.Error;
@@ -28,6 +29,7 @@ public class RepositoryOracle implements Repository {
 	private ProjectData projactData;
 	private VehicleData vehicleData;
 	private SimulationData simulationData;
+	private RunData runData;
 
 	/**
 	 *
@@ -40,6 +42,7 @@ public class RepositoryOracle implements Repository {
 			this.projactData = new ProjectDataOracle(this.connection);
 			this.vehicleData = new VehicleDataOracle(this.connection);
 			this.simulationData = new SimulationDataOracle(this.connection);
+			this.runData = new RunDataOracle(this.connection);
 		} catch (Exception ex) {
 			Error.setErrorMessage("Oracle Database does not start:" + ex);
 		}
@@ -88,6 +91,11 @@ public class RepositoryOracle implements Repository {
 	@Override
 	public SimulationData getSimulationData() {
 		return this.simulationData;
+	}
+
+	@Override
+	public RunData getRunData() {
+		return this.runData;
 	}
 
 }

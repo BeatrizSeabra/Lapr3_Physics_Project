@@ -7,9 +7,7 @@ package View;
  */
 import Controller.DeleteRunController;
 import Model.Run;
-import Simulation.PathAnalysis;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +17,7 @@ import javax.swing.JOptionPane;
 public class DeleteRunGUI extends GraphicUserInterface {
 
 	private DeleteRunController deleteRunController = new DeleteRunController();
-	private DefaultComboBoxModel jModelComboBoxListRuns = new DefaultComboBoxModel();
+	private DefaultListModel jModelListRuns = new DefaultListModel();
 
 	/**
 	 * Creates new form CreateProjectGUI
@@ -27,12 +25,9 @@ public class DeleteRunGUI extends GraphicUserInterface {
 	 * @param origin
 	 * @param pathAnalysis
 	 */
-	public DeleteRunGUI(GraphicUserInterface origin,
-						PathAnalysis pathAnalysis) {
+	public DeleteRunGUI(GraphicUserInterface origin) {
 		this.initComponents();
 		this.creation(origin);
-		this.deleteRunController.DeleteRunSimulation(null, null);
-
 	}
 
 	/**
@@ -41,12 +36,10 @@ public class DeleteRunGUI extends GraphicUserInterface {
 	@Override
 	public void initiation() {
 		this.deleteRunController.initiation();
-		this.jComboBoxListRuns.setModel(this.jModelComboBoxListRuns);
-
+		this.jListRuns.setModel(this.jModelListRuns);
 		for (Run run : this.deleteRunController.getRuns()) {
-			this.jModelComboBoxListRuns.addElement(run);
+			this.jModelListRuns.addElement(run);
 		}
-
 	}
 
 	/**
@@ -54,37 +47,20 @@ public class DeleteRunGUI extends GraphicUserInterface {
 	 */
 	@Override
 	public void update() {
-
+		this.jModelListRuns.removeAllElements();
 		for (Run run : this.deleteRunController.getRuns()) {
-			if (!run.equals((Run) this.jComboBoxListRuns.
-				getSelectedItem())) {
-				this.jComboBoxListRuns.remove(run);
-			}
+			this.jModelListRuns.addElement(run);
 		}
-		if (jComboBoxListRuns.getSelectedIndex() != -1) {
-			jListEndNodes.setEnabled(true);
-		}
-		this.active(true);
-	}
-
-	/**
-	 *
-	 * @param state
-	 * @return
-	 */
-	public Boolean active(Boolean state) {
-		this.jButtonDeleteRuns.setEnabled(this.jComboBoxListRuns.
-			getSelectedIndex() != -1);
-		return state;
 	}
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jButtonCancel = new javax.swing.JButton();
-        jButtonDeleteRuns = new javax.swing.JButton();
-        jComboBoxListRuns = new javax.swing.JComboBox();
+        jButtonDelete = new javax.swing.JButton();
         jLabelWithRuns = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListRuns = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(280, 270));
@@ -96,20 +72,16 @@ public class DeleteRunGUI extends GraphicUserInterface {
             }
         });
 
-        jButtonDeleteRuns.setText("Delete Run");
-        jButtonDeleteRuns.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteRunsActionPerformed(evt);
-            }
-        });
-
-        jComboBoxListRuns.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxListRunsActionPerformed(evt);
+                jButtonDeleteActionPerformed(evt);
             }
         });
 
         jLabelWithRuns.setText("List of runs:");
+
+        jScrollPane1.setViewportView(jListRuns);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,12 +90,14 @@ public class DeleteRunGUI extends GraphicUserInterface {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addComponent(jLabelWithRuns, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonDeleteRuns)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
-                        .addComponent(jButtonCancel))
-                    .addComponent(jComboBoxListRuns, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonCancel))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,35 +105,23 @@ public class DeleteRunGUI extends GraphicUserInterface {
                 .addContainerGap()
                 .addComponent(jLabelWithRuns)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxListRuns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
-                    .addComponent(jButtonDeleteRuns))
+                    .addComponent(jButtonDelete))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonDeleteRunsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteRunsActionPerformed
-		if (this.deleteRunController.setRuns((Run) jComboBoxListRuns.
-			getSelectedItem())       {
-			List<List<String[]>> results = this.deleteRunController.analyze();
-			if (results != null && !results.isEmpty()) {
-				for (List<String[]> result : results) {
-					new ResultsGUI(null, result);
-				}
-			} else {
-				JOptionPane.
-					showMessageDialog(this, "There is no link between selected data!");
-			}
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+		if (this.deleteRunController.delete(this.jListRuns.getSelectedIndex())) {
+			JOptionPane.showMessageDialog(this, "Run remove successfully!");
+			this.close();
 		}
-    }//GEN-LAST:event_jButtonDeleteRunsActionPerformed
-
-    private void jComboBoxListRunsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxListRunsActionPerformed
-		this.update();
-    }//GEN-LAST:event_jComboBoxListRunsActionPerformed
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
 		this.close();
@@ -167,8 +129,9 @@ public class DeleteRunGUI extends GraphicUserInterface {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonDeleteRuns;
-    private javax.swing.JComboBox jComboBoxListRuns;
+    private javax.swing.JButton jButtonDelete;
     private javax.swing.JLabel jLabelWithRuns;
+    private javax.swing.JList jListRuns;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

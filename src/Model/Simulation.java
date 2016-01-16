@@ -127,7 +127,7 @@ public class Simulation {
 		return this.hashCode() == other.hashCode();
 	}
 
-	public Boolean deleteRun(Run run) {
+	public Boolean removeRun(Run run) {
 		return this.runs.remove(run);
 	}
 

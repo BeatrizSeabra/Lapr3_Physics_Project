@@ -5,7 +5,7 @@ package Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import Model.Project;
+import Data.Data;
 import Model.Run;
 import Model.Simulation;
 import java.util.List;
@@ -16,32 +16,31 @@ import java.util.List;
  */
 public class DeleteRunController {
 
-	private Project project;
 	private Simulation simulation;
 	private Run run;
+	private List<Run> runs;
 
 	/**
 	 *
 	 * @return
 	 */
 	public Boolean initiation() {
-		this.project = ContextController.getOpenProject();
 		this.simulation = ContextController.getOpenSimulation();
-		return this.simulation != null;
+		this.runs = Data.getRunData().all(simulation);
+		return true;
+
 	}
 
 	/**
 	 *
-	 * @param name
-	 * @param description
 	 * @return
 	 */
 	public List<Run> getRuns() {
-		return this.simulation.getRuns();
+		return this.runs;
 	}
 
-	public Boolean DeleteRunSimulation(String name, String description) {
-
+	public Boolean delete(int run) {
+		return Data.getRunData().remove(this.simulation, this.runs.get(run));
 	}
 
 }

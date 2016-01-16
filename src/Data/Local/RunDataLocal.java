@@ -106,7 +106,7 @@ public class RunDataLocal implements RunData {
 
 	@Override
 	public Boolean remove(Simulation simulation, Run run) {
-		return simulation.deleteRun(run) && this.list.remove(run);
+		return simulation.removeRun(run) && this.list.remove(run);
 	}
 
 }
