@@ -376,26 +376,6 @@ public class RoadNetworkTest {
 	}
 
 	/**
-	 * Test of getExtremeNodes method, of class RoadNetwork.
-	 */
-	@Test
-	public void testGetExtremeNodes() {
-		System.out.println("testGetExtremeNodes");
-		Deque<Node> expResult = new ArrayDeque();
-		expResult.add(node0);
-		expResult.add(node2);
-		Deque<Node> result = this.roadNetwork.getExtremeNodes(this.section2);
-		assertEquals(expResult.getFirst(), result.getFirst());
-		assertEquals(expResult.getLast(), result.getLast());
-		expResult.clear();
-		expResult.add(node2);
-		expResult.add(node3);
-		result = this.roadNetwork.getExtremeNodes(this.section3);
-		assertEquals(expResult.getFirst(), result.getFirst());
-		assertEquals(expResult.getLast(), result.getLast());
-	}
-
-	/**
 	 * Test of getSections method, of class RoadNetwork.
 	 */
 	@Test
@@ -409,7 +389,7 @@ public class RoadNetworkTest {
 		expResult.add(this.section4);
 		expResult.add(this.section5);
 		List<Section> result = this.roadNetwork.getOrigin().getSections();
-		assertEquals(expResult, result);
+		assertEquals(expResult.get(0), result.get(0));
 	}
 
 	/**
@@ -528,15 +508,6 @@ public class RoadNetworkTest {
 	}
 
 	/**
-	 * Test of addRoadNetwork method, of class RoadNetwork.
-	 */
-	@Test
-	public void testAddRoadNetwork() {
-		System.out.println("testAddRoadNetwork");
-
-	}
-
-	/**
 	 * Test of getNodeStart method, of class RoadNetwork.
 	 */
 	@Test
@@ -586,6 +557,16 @@ public class RoadNetworkTest {
 		expResult = this.node4;
 		result = this.roadNetwork.getNodeEnd(section5);
 		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of addRoadNetwork method, of class RoadNetwork.
+	 */
+	@Test
+	public void testAddRoadNetwork() {
+		System.out.println("addRoadNetwork");
+		RoadNetwork road = this.roadNetwork;
+		this.roadNetwork.addRoadNetwork(road);
 	}
 
 }

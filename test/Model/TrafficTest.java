@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import Simulation.VehicleBot;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -361,6 +362,59 @@ public class TrafficTest {
 		String expResult = "test";
 		String result = instance.toString();
 		assertEquals(expResult.getClass(), result.getClass());
+	}
+
+	/**
+	 * Test of getSegment method, of class Traffic.
+	 */
+	@Test
+	public void testGetSegment() {
+		System.out.println("getSegment");
+		Traffic instance = new Traffic();
+		Segment expResult = new Segment();
+		instance.setSegment(expResult);
+		Segment result = instance.getSegment();
+		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of setSegment method, of class Traffic.
+	 */
+	@Test
+	public void testSetSegment() {
+		System.out.println("setSegment");
+		Segment segment = null;
+		Traffic instance = new Traffic();
+		instance.setSegment(segment);
+		// TODO review the generated test code and remove the default call to fail.
+		//	fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getVehicleBot method, of class Traffic.
+	 */
+	@Test
+	public void testGetVehicleBot() {
+		System.out.println("getVehicleBot");
+		Traffic instance = new Traffic();
+		VehicleBot expResult = null;
+		VehicleBot result = instance.getVehicleBot();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		//	fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setVehicleBot method, of class Traffic.
+	 */
+	@Test
+	public void testSetVehicleBot() {
+		System.out.println("setVehicleBot");
+		VehicleBot vehicleBot = null;
+		Traffic instance = new Traffic();
+		instance.setVehicleBot(vehicleBot);
+		// TODO review the generated test code and remove the default call to fail.
+		//	fail("The test case is a prototype.");
 	}
 
 }

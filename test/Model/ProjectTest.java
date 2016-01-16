@@ -513,4 +513,79 @@ public class ProjectTest {
 		assertEquals(expResult, result);
 	}
 
+	/**
+	 * Test of getId method, of class Project.
+	 */
+	@Test
+	public void testGetId() {
+		System.out.println("getId");
+		Integer expResult = 1;
+		Integer result = this.project.getId();
+		assertEquals(expResult, result);
+	}
+
+	/**
+	 * Test of setId method, of class Project.
+	 */
+	@Test
+	public void testSetId() {
+		System.out.println("setId");
+		Integer id = 1;
+		this.project.setId(id);
+		assertEquals(id, this.project.getId());
+	}
+
+	/**
+	 * Test of getName method, of class Project.
+	 */
+	@Test
+	public void testGetName() {
+		System.out.println("getName");
+		String expResult = "Espinho";
+		String result = this.project.getName();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		//	fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setName method, of class Project.
+	 */
+	@Test
+	public void testSetName() {
+		System.out.println("setName");
+		String name = "";
+		Project instance = new Project();
+		instance.setName(name);
+		// TODO review the generated test code and remove the default call to fail.
+		//	fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getDescription method, of class Project.
+	 */
+	@Test
+	public void testGetDescription() {
+		System.out.println("getDescription");
+		Project instance = new Project();
+		String expResult = "";
+		String result = instance.getDescription();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		//	fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of setDescription method, of class Project.
+	 */
+	@Test
+	public void testSetDescription() {
+		System.out.println("setDescription");
+		String description = "";
+		Project instance = new Project();
+		instance.setDescription(description);
+		// TODO review the generated test code and remove the default call to fail.
+		//	fail("The test case is a prototype.");
+	}
+
 }

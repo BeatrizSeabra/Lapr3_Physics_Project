@@ -7,6 +7,7 @@ package Model;
 
 import Physics.Measure;
 import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -295,6 +296,79 @@ public class SimulationTest {
 		String description = "Descript";
 		this.simulation.setDescription(description);
 		assertEquals(description, this.simulation.getDescription());
+	}
+
+	/**
+	 * Test of addRun method, of class Simulation.
+	 */
+	@Test
+	public void testAddRun() {
+		System.out.println("addRun");
+		Run run = null;
+		Simulation instance = new Simulation();
+		Boolean expResult = null;
+		Boolean result = instance.addRun(run);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getRun method, of class Simulation.
+	 */
+	@Test
+	public void testGetRun() {
+		System.out.println("getRun");
+		int index = 0;
+		Simulation instance = new Simulation();
+		Run expResult = null;
+		Run result = instance.getRun(index);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getTraffics method, of class Simulation.
+	 */
+	@Test
+	public void testGetTraffics() {
+		System.out.println("getTraffics");
+		Simulation instance = new Simulation();
+		List<Traffic> expResult = null;
+		List<Traffic> result = instance.getTraffics();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of getRuns method, of class Simulation.
+	 */
+	@Test
+	public void testGetRuns() {
+		System.out.println("getRuns");
+		Simulation instance = new Simulation();
+		List<Run> expResult = null;
+		List<Run> result = instance.getRuns();
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
+	}
+
+	/**
+	 * Test of removeRun method, of class Simulation.
+	 */
+	@Test
+	public void testRemoveRun() {
+		System.out.println("removeRun");
+		Run run = null;
+		Simulation instance = new Simulation();
+		Boolean expResult = null;
+		Boolean result = instance.removeRun(run);
+		assertEquals(expResult, result);
+		// TODO review the generated test code and remove the default call to fail.
+		fail("The test case is a prototype.");
 	}
 
 }
