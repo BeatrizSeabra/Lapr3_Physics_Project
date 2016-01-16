@@ -749,31 +749,4 @@ public class GraphTest {
 
 	}
 
-	/**
-	 * Test of getExtremeVertexElements method, of class Graph.
-	 */
-	@Test
-	public void testGetExtremeVertexElements() {
-		System.out.println("testGetExtremeVertexElements");
-		Edge<String, String> edge1 = instance.insertEdge("A", "B", "Edge1", 6);
-		Edge<String, String> edge2 = instance.insertEdge("A", "C", "Edge2", 1);
-		Edge<String, String> edge3 = instance.insertEdge("B", "D", "Edge3", 3);
-		Edge<String, String> edge4 = instance.insertEdge("C", "D", "Edge4", 4);
-		Edge<String, String> edge5 = instance.insertEdge("C", "E", "Edge5", 1);
-		Edge<String, String> edge6 = instance.insertEdge("D", "A", "Edge6", 2);
-		Edge<String, String> edge7 = instance.insertEdge("E", "D", "Edge7", 1);
-		Edge<String, String> edge8 = instance.insertEdge("E", "E", "Edge8", 1);
-		Deque expResult = new ArrayDeque();
-		expResult.add("A");
-		expResult.add("B");
-		Deque result = instance.getExtremeVertexElements("Edge1");
-		assertEquals(expResult.getFirst(), result.getFirst());
-		assertEquals(expResult.getLast(), result.getLast());
-		expResult.clear();
-		expResult.add("D");
-		expResult.add("A");
-		result = instance.getExtremeVertexElements("Edge6");
-		assertEquals(expResult.getFirst(), result.getFirst());
-		assertEquals(expResult.getLast(), result.getLast());
-	}
 }
