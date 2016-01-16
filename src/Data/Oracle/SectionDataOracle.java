@@ -5,13 +5,11 @@
  */
 package Data.Oracle;
 
-import Model.Node;
 import Model.Project;
 import Model.Section;
 import System.Error;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.util.Deque;
 import java.util.List;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
@@ -65,12 +63,12 @@ public class SectionDataOracle {
 			double[] param12 = new double[size];
 			String[] param13 = new String[size];
 			for (int i = 0; i < size; i++) {
-				Deque<Node> nodes = project.getRoadNetwork().
-					getExtremeNodes(sections.get(i));
 				param01[i] = sections.get(i).getId();
 				param02[i] = project.getId();
-				param03[i] = nodes.getFirst().getId();
-				param04[i] = nodes.getLast().getId();
+				param03[i] = project.getRoadNetwork().getNodeStart(sections.
+					get(i)).getId();
+				param04[i] = project.getRoadNetwork().
+					getNodeEnd(sections.get(i)).getId();
 				param05[i] = sections.get(i).getRoad();
 				param06[i] = sections.get(i).getTypology();
 				param07[i] = sections.get(i).getDirection();

@@ -47,6 +47,7 @@ public class NodeDataOracle {
 			CallableStatement callableStatement = connection.
 				prepareCall("{ call saveNodes(?,?,?) }");
 			int size = nodes.size();
+			System.out.println("AQUIIIII SIZE = " + size);
 			double[] param01 = new double[size];
 			double[] param02 = new double[size];
 			String[] param03 = new String[size];
@@ -71,6 +72,15 @@ public class NodeDataOracle {
 			for (int i = 0; i < size; i++) {
 				System.out.println("NODE INDEX: " + index[i]);
 				nodes.get(i).setId(index[i]);
+				for (Node node : project.getRoadNetwork().getNodes()) {
+					if (node.getName().equalsIgnoreCase(nodes.get(i).getName())) {
+						node.setId(index[i]);
+						System.out.
+							println("INDEX NODE " + node.getName() + " = " + node.
+								getId());
+					}
+				}
+
 			}
 			return true;
 		} catch (Exception ex) {

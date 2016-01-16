@@ -126,14 +126,12 @@ public class RoadNetwork {
 				if (!sec1.getRoad().equalsIgnoreCase(sec2.getRoad())) {
 					return sec1.getRoad().compareTo(sec2.getRoad());
 				}
-				Deque<Node> nodes1 = getExtremeNodes(sec1);
-				Deque<Node> nodes2 = getExtremeNodes(sec2);
-				if (!nodes1.getFirst().getName().equalsIgnoreCase(nodes2.
-					getFirst().getName())) {
-					return nodes1.getFirst().getName().compareTo(nodes2.
-						getFirst().getName());
+				if (!getNodeStart(sec1).getName().
+					equalsIgnoreCase(getNodeStart(sec2).getName())) {
+					return getNodeStart(sec1).getName().
+						compareTo(getNodeStart(sec2).getName());
 				}
-				return nodes1.getLast().getName().compareTo(nodes2.getLast().
+				return getNodeEnd(sec1).getName().compareTo(getNodeEnd(sec2).
 					getName());
 			}
 		};
@@ -171,15 +169,6 @@ public class RoadNetwork {
 			sections.add(section);
 		}
 		return sections;
-	}
-
-	/**
-	 *
-	 * @param section
-	 * @return
-	 */
-	public Deque<Node> getExtremeNodes(Section section) {
-		return this.graph.getExtremeVertexElements(section);
 	}
 
 	/**
@@ -276,8 +265,9 @@ public class RoadNetwork {
 
 	public void addRoadNetwork(RoadNetwork road) {
 		for (Section section : road.getSections()) {
-			Deque<Node> nodes = road.getExtremeNodes(section);
-			this.addSection(nodes.getFirst(), nodes.getLast(), section);
+			this.
+				addSection(road.getNodeStart(section), road.getNodeEnd(section), section);
 		}
 	}
+
 }

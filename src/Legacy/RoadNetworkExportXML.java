@@ -11,7 +11,6 @@ import Model.RoadNetwork;
 import Model.Section;
 import Model.Segment;
 import System.Error;
-import java.util.Deque;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -73,11 +72,11 @@ public class RoadNetworkExportXML implements Export {
 			stringBuilder.append("\t</node_list>\n");
 			stringBuilder.append("\t<section_list>\n");
 			for (Section section : roadNetwork.getSections()) {
-				Deque<Node> nodes = roadNetwork.getExtremeNodes(section);
 				stringBuilder.append("\t\t<road_section begin=\"");
-				stringBuilder.append(nodes.getFirst().getName());
+				stringBuilder.
+					append(roadNetwork.getNodeStart(section).getName());
 				stringBuilder.append("\" end=\"");
-				stringBuilder.append(nodes.getLast().getName());
+				stringBuilder.append(roadNetwork.getNodeEnd(section).getName());
 				stringBuilder.append("\">\n");
 				stringBuilder.append("\t\t\t<road>\"");
 				stringBuilder.append(section.getRoad());
