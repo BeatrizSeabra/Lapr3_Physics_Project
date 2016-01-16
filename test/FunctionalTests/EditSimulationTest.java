@@ -37,7 +37,6 @@ public class EditSimulationTest {
                 ContextController.setOpenProject(this.project);
                 Data.getProjectData().save(this.project);
                 this.simulation = new Simulation();
-		this.simulation.setId(1);
 		this.simulation.setName("Simulation Name");
 		this.simulation.setDescription("Simulation Description");
 		ContextController.setOpenSimulation(this.simulation);

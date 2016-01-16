@@ -66,15 +66,16 @@ public class CreateProjectTest {
 			getProjectVehicles();
 		assertEquals(vehicles.size(), 0);
 		this.createProjectController.loadRoadNetwork(this.filePathRoadNetwork);
-		assertEquals(this.createProjectController.getName(), "TestSet02");
+		assertEquals(this.createProjectController.getName(), "TestSet03");
 		assertEquals(this.createProjectController.getDescription(), "5 node test set");
 		this.createProjectController.loadVehicles(this.filePathVehicles);
 		vehicles = this.createProjectController.getProjectVehicles();
-		assertEquals(vehicles.size(), 1);
-		this.createProjectController.saveProject("Name X", "Description X");
+		assertEquals(vehicles.size(), 3);
+                String name = "Name X", description = "Description X";
+		this.createProjectController.saveProject(name, description);
 		projects = Data.getProjectData().all();
 		assertEquals(projects.size(), 1);
-		assertEquals(projects.get(0).getName(), "Name X");
-		assertEquals(projects.get(0).getDescription(), "Description X");
+		assertEquals(projects.get(0).getName(), name);
+		assertEquals(projects.get(0).getDescription(), description);
 	}
 }

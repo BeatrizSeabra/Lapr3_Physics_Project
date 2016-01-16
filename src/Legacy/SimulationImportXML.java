@@ -115,9 +115,6 @@ public class SimulationImportXML implements Import<Simulation> {
 					}
 					case XMLStreamConstants.CHARACTERS: {
 						text = reader.getText().replaceAll("\"", "").trim();
-						if (!text.isEmpty()) {
-							System.out.println(text);
-						}
 						break;
 					}
 					case XMLStreamConstants.END_ELEMENT: {

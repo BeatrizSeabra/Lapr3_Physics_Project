@@ -252,18 +252,19 @@ public class CreateSimulationTest {
 	 */
 	@Test
 	public void testCreateSimulationFunctional() {
-		System.out.println("testCreateSimulationFunctional");
-		ContextController.setOpenProject(this.project);
-		this.createSimulationController.initiation();
-		this.createSimulationController.loadSimulation(this.filePathSimulation);
-		assertEquals(this.createSimulationController.getName(), "TestSet02");
-		assertEquals(this.createSimulationController.getDescription(), "simulation test set to begin development");
-		this.createSimulationController.
-			saveSimulation("Name X", "Description X");
-		List<Simulation> simulation = ContextController.getOpenProject().
-			getSimulations();
-		assertEquals(simulation.size(), 1);
-		assertEquals(simulation.get(0).getName(), "Name X");
-		assertEquals(simulation.get(0).getDescription(), "Description X");
+            System.out.println("testCreateSimulationFunctional");
+            ContextController.setOpenProject(this.project);
+            this.createSimulationController.initiation();
+            this.createSimulationController.loadSimulation(this.filePathSimulation);
+            assertEquals(this.createSimulationController.getName(), "TestSet03");
+            assertEquals(this.createSimulationController.getDescription(), "simulation test set with electric vehicle");
+            String name = "Name X", description = "Description X";
+            this.createSimulationController.
+                    saveSimulation(name, description);
+            List<Simulation> simulation = ContextController.getOpenProject().
+                    getSimulations();
+            assertEquals(simulation.size(), 1);
+            assertEquals(simulation.get(0).getName(), name);
+            assertEquals(simulation.get(0).getDescription(), description);
 	}
 }
