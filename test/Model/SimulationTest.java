@@ -24,16 +24,111 @@ import org.junit.Test;
 public class SimulationTest {
 
 	private Simulation simulation;
+        private Traffic traffic;
+        private Vehicle vec;
+        private Vehicle vehicle;
 	private Run run;
+        private Step step;
+        private Drop drop;
 
 	public SimulationTest() {
-		this.simulation = new Simulation();
-		this.simulation.setId(1);
-		this.simulation.setDescription("test");
-		this.simulation.setName("test2");
-		this.run = new Run();
-
-		this.simulation.addRun(run);
+            this.simulation = new Simulation();
+            this.simulation.setDescription("test");
+            this.simulation.setId(1);
+            this.simulation.setName("test2");
+            this.traffic = new Traffic();
+            this.traffic.setId(1);
+            Measure rmpLow = new Measure(1.2, "MeasureTorque");
+            Node nodeEnd = new Node("Anta");
+            Node nodeStart = new Node("Espinho");
+            this.traffic.setNodeEnd(nodeEnd);
+            this.traffic.setNodeStart(nodeStart);
+            this.traffic.setArrivalRate(rmpLow);
+            
+            this.vehicle = new Vehicle();
+            Throttle throttle1 = new Throttle();
+            throttle1.setPercentage(new Measure(25.0, "%"));
+            throttle1.addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "g/KWh")));
+            throttle1.addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "g/KWh")));
+            throttle1.addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "g/KWh")));
+            Throttle throttle2 = new Throttle();
+            throttle2.setPercentage(new Measure(50.0, "%"));
+            throttle2.addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "g/KWh")));
+            throttle2.addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "g/KWh")));
+            throttle2.addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "g/KWh")));
+            Throttle throttle3 = new Throttle();
+            throttle3.setPercentage(new Measure(100.0, "%"));
+            throttle3.addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "g/KWh")));
+            throttle3.addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "g/KWh")));
+            throttle3.addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "g/KWh")));
+            this.vehicle.setId(1);
+            this.vehicle.setName("Nissan Skyline 2001");
+            this.vehicle.setDescription("2001 Nissan Skyline GT-R R34 V-spec II N1");
+            this.vehicle.setType("car");
+            this.vehicle.setMotorization("combustion");
+            this.vehicle.setFuel("gasoline");
+            this.vehicle.setMass(new Measure(1550.0, "kg"));
+            this.vehicle.setLoad(new Measure(0.0, "kg"));
+            this.vehicle.setDragCoefficient(new Measure(0.34, "ratio"));
+            this.vehicle.setFrontalArea(new Measure(1.8, "m2"));
+            this.vehicle.setRollingRCoefficient(new Measure(0.01, "ratio"));
+            this.vehicle.setWheelSize(new Measure(0.3266, "m"));
+            this.vehicle.setMinRPM(new Measure(8500.0, "rpm"));
+            this.vehicle.setMaxRPM(new Measure(1000.0, "rpm"));
+            this.vehicle.setFinalDriveRatio(new Measure(3.545, "ratio"));
+            this.vehicle.setEnergyRegeneration(new Measure(22.0, "rpm"));
+            this.vehicle.setGear(1, new Measure(3.827, "ratio"));
+            this.vehicle.setGear(2, new Measure(2.36, "ratio"));
+            this.vehicle.setGear(3, new Measure(1.685, "ratio"));
+            this.vehicle.setGear(4, new Measure(1.312, "ratio"));
+            this.vehicle.setGear(5, new Measure(1.0, "ratio"));
+            this.vehicle.setGear(6, new Measure(0.793, "ratio"));
+            this.vehicle.addThrottle(throttle1);
+            this.vehicle.addThrottle(throttle2);
+            this.vehicle.addThrottle(throttle3);
+            this.vehicle.setVelocityLimits("road", new Measure(60.0, "km/h"));
+            this.traffic.setVehicle(this.vehicle);
+            
+            this.simulation.addTraffic(traffic);
+            this.run = new Run();
+            this.run.setId(1);
+            this.run.setName("Simulation");
+            Measure measure = new Measure(22.2, "km");
+            this.run.setTime(measure);
+            this.run.setTimeStep(measure);
+            ArrayList<Step> steps = new ArrayList<>();
+            List<Drop> drops = new ArrayList<>();
+            AnalysisMethod analy = new FastestPathAnalysis();
+            this.run.setMethod(analy);
+            
+            this.step = new Step();
+            this.step.setAirForce(measure);
+            this.step.setCarForce(measure);
+            this.step.setCarPower(measure);
+            this.step.setCarSpeed(measure);
+            this.step.setGravityForce(measure);
+            this.step.setNodeEnd("n0");
+            this.step.setNodeStart("n1");
+            this.step.setRoad("highway");
+            this.step.setRollingForce(measure);
+            this.step.setSegment("n1");
+            this.step.setSpeedRelative(measure);
+            this.step.setTimeOut(measure);
+            this.step.setVehicle("Dummy");
+            this.step.setTimeEntry(measure);
+            this.step.setTimeOut(measure);
+            
+            this.drop = new Drop();
+            this.drop.setNodeEnd("n1");
+            this.drop.setNodeStart("n2");
+            this.drop.setTime(measure);
+            this.drop.setVehicle("Dummy");
+            
+            drops.add(this.drop);
+            steps.add(this.step);
+            this.run.setDrops(drops);
+            this.run.setSteps(steps);
+            this.simulation.addRun(this.run);
 	}
 
 	@BeforeClass
@@ -101,12 +196,13 @@ public class SimulationTest {
 	@Test
 	public void testEquals() {
 		System.out.println("equals");
-
-		this.simulation.setDescription("test");
-		this.simulation.setName("test2");
-		this.simulation.setId(1);
-		assertEquals(true, this.simulation.equals(simulation));
-
+                Simulation instance = new Simulation();
+		instance.setDescription("test");
+		instance.setName("test2");
+		instance.setId(10);
+                Simulation clone = instance.clone();
+		assertEquals(this.simulation.equals(instance), false);
+                assertEquals(clone.equals(instance), true);
 	}
 
 	/**
@@ -119,7 +215,12 @@ public class SimulationTest {
 		expResult += 11 * this.simulation.getDescription().hashCode();
 		expResult += 11 * this.simulation.getName().hashCode();
 		expResult += 11 * this.simulation.getId().hashCode();
-
+                for (Traffic traffic : this.simulation.getTraffics()) {
+			expResult += 11 * traffic.hashCode();
+		}
+		for (Run run : this.simulation.getRuns()) {
+			expResult += 11 * run.hashCode();
+		}
 		Integer result = this.simulation.hashCode();
 		assertEquals(expResult, result);
 	}
@@ -130,124 +231,7 @@ public class SimulationTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		Simulation instance = new Simulation();
-		instance.setDescription("test");
-		instance.setId(1);
-		instance.setName("test2");
-		Traffic traffic = new Traffic();
-		Vehicle vec = new Vehicle();
-		traffic.setId(1);
-		vec.setId(1);
-		vec.setName("Tommy");
-		vec.setDescription("Audi");
-		vec.setType("Sub");
-		vec.setMotorization("VEC");
-		vec.setFuel("Gasoline");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		vec.setMass(rmpLow);
-		vec.setLoad(rmpLow);
-		vec.setDragCoefficient(rmpLow);
-		vec.setFrontalArea(rmpLow);
-		vec.setRollingRCoefficient(rmpLow);
-		vec.setWheelSize(rmpLow);
-		vec.setMinRPM(rmpLow);
-		vec.setMaxRPM(rmpLow);
-		vec.setFinalDriveRatio(rmpLow);
-		traffic.setVehicle(vec);
-		Node nodeEnd = new Node("Anta");
-		Node nodeStart = new Node("Espinho");
-		traffic.setNodeEnd(nodeEnd);
-		traffic.setNodeStart(nodeStart);
-		traffic.setArrivalRate(rmpLow);
-		instance.addTraffic(traffic);
-		Run runs = new Run();
-		runs.setId(1);
-		runs.setName("Simulation");
-		Measure measure = new Measure(22.2, "km");
-		runs.setTime(measure);
-		runs.setTimeStep(measure);
-		ArrayList<Step> steps = new ArrayList<>();
-		List<Drop> drops = new ArrayList<>();
-		Drop drop = new Drop();
-		AnalysisMethod analy = new FastestPathAnalysis();
-		runs.setMethod(analy);
-		Vehicle vehicle = new Vehicle();
-		Throttle throttle1 = new Throttle();
-		throttle1.setPercentage(new Measure(25.0, "%"));
-		throttle1.
-			addRegime(new Regime(new Measure(85.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(8.2, "g/KWh")));
-		throttle1.
-			addRegime(new Regime(new Measure(95.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(6.2, "g/KWh")));
-		throttle1.
-			addRegime(new Regime(new Measure(80.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(10.2, "g/KWh")));
-		Throttle throttle2 = new Throttle();
-		throttle2.setPercentage(new Measure(50.0, "%"));
-		throttle2.
-			addRegime(new Regime(new Measure(135.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(5.2, "g/KWh")));
-		throttle2.
-			addRegime(new Regime(new Measure(150.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(3.2, "g/KWh")));
-		throttle2.
-			addRegime(new Regime(new Measure(140.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(8.2, "g/KWh")));
-		Throttle throttle3 = new Throttle();
-		throttle3.setPercentage(new Measure(100.0, "%"));
-		throttle3.
-			addRegime(new Regime(new Measure(200.0, "Nm"), new Measure(1000.0, "rpm"), new Measure(2499.0, "rpm"), new Measure(2.2, "g/KWh")));
-		throttle3.
-			addRegime(new Regime(new Measure(240.0, "Nm"), new Measure(2500.0, "rpm"), new Measure(3999.0, "rpm"), new Measure(1.2, "g/KWh")));
-		throttle3.
-			addRegime(new Regime(new Measure(190.0, "Nm"), new Measure(4000.0, "rpm"), new Measure(5500.0, "rpm"), new Measure(4.2, "g/KWh")));
-		vehicle.setId(1);
-		vehicle.setName("Nissan Skyline 2001");
-		vehicle.setDescription("2001 Nissan Skyline GT-R R34 V-spec II N1");
-		vehicle.setType("car");
-		vehicle.setMotorization("combustion");
-		vehicle.setFuel("gasoline");
-		vehicle.setMass(new Measure(1550.0, "kg"));
-		vehicle.setLoad(new Measure(0.0, "kg"));
-		vehicle.setDragCoefficient(new Measure(0.34, "ratio"));
-		vehicle.setFrontalArea(new Measure(1.8, "m2"));
-		vehicle.setRollingRCoefficient(new Measure(0.01, "ratio"));
-		vehicle.setWheelSize(new Measure(0.3266, "m"));
-		vehicle.setMinRPM(new Measure(8500.0, "rpm"));
-		vehicle.setMaxRPM(new Measure(1000.0, "rpm"));
-		vehicle.setFinalDriveRatio(new Measure(3.545, "ratio"));
-		vehicle.setEnergyRegeneration(new Measure(22.0, "rpm"));
-		vehicle.setGear(1, new Measure(3.827, "ratio"));
-		vehicle.setGear(2, new Measure(2.36, "ratio"));
-		vehicle.setGear(3, new Measure(1.685, "ratio"));
-		vehicle.setGear(4, new Measure(1.312, "ratio"));
-		vehicle.setGear(5, new Measure(1.0, "ratio"));
-		vehicle.setGear(6, new Measure(0.793, "ratio"));
-		vehicle.addThrottle(throttle1);
-		vehicle.addThrottle(throttle2);
-		vehicle.addThrottle(throttle3);
-		vehicle.setVelocityLimits("road", new Measure(60.0, "km/h"));
-		Step instancestep = new Step();
-		instancestep.setAirForce(measure);
-		instancestep.setCarForce(measure);
-		instancestep.setCarPower(measure);
-		instancestep.setCarSpeed(measure);
-		instancestep.setGravityForce(measure);
-		instancestep.setNodeEnd("n0");
-		instancestep.setNodeStart("n1");
-		instancestep.setRoad("highway");
-		instancestep.setRollingForce(measure);
-		instancestep.setSegment("n1");
-		instancestep.setSpeedRelative(measure);
-		instancestep.setTimeOut(measure);
-		instancestep.setVehicle("Dummy");
-		instancestep.setTimeEntry(measure);
-		instancestep.setTimeOut(measure);
-		drop.setNodeEnd("n1");
-		drop.setNodeStart("n2");
-		drop.setTime(measure);
-		drop.setVehicle("Dummy");
-		drops.add(drop);
-		steps.add(instancestep);
-		runs.setDrops(drops);
-		runs.setSteps(steps);
-		instance.addRun(runs);
-		Simulation result = instance.clone();
+                Simulation result = this.simulation.clone();
 		assertEquals(this.simulation, result);
 
 	}
@@ -258,9 +242,9 @@ public class SimulationTest {
 	@Test
 	public void testToString() {
 		System.out.println("testToString");
-		String expResult = "Simulation - test2 - test\n";
+		String expResult = "";
 		String result = this.simulation.toString();
-		assertEquals(expResult, result);
+		assertEquals(result.equalsIgnoreCase(expResult), false);
 
 	}
 

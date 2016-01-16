@@ -18,9 +18,35 @@ import org.junit.Test;
  * @author Eduardo
  */
 public class StepTest {
-
+        
+        private Step step;
+        private Measure measure;
+        private String toString;
+        
 	public StepTest() {
-            
+            this.step = new Step();
+            this.step.setVehicle("Dummy");
+            this.step.setNodeStart("n01");
+            this.step.setNodeEnd("n03");
+            this.step.setRoad("road");
+            this.step.setSegment("segment");
+            this.measure = new Measure(1.0, "s");
+            this.step.setTimeEntry(this.measure);
+            this.step.setTimeOut(this.measure);
+            this.step.setCarPower(this.measure);
+            this.step.setCarSpeed(this.measure);
+            this.step.setSpeedRelative(this.measure);
+            this.step.setCarForce(this.measure);
+            this.step.setRollingForce(this.measure);
+            this.step.setAirForce(this.measure);
+            this.step.setGravityForce(this.measure);
+            toString = "Step | vehicle: " + this.step.getVehicle() + " | node start: " + this.step.getNodeStart() + 
+                    " | node end: " + this.step.getNodeEnd() + " | road: " + this.step.getRoad() + " | segment: " + 
+                    this.step.getSegment() + " | time entry: " + this.step.getTimeEntry() + " | time out: " + 
+                    this.step.getTimeOut() + " | car power: " + this.step.getCarPower() + " | car speed: " + 
+                    this.step.getCarSpeed() + " | speed relative: " + this.step.getSpeedRelative() + " | car force: " + 
+                    this.step.getCarForce() + " | rolling force: " + this.step.getRollingForce() + " | air force: " + 
+                    this.step.getAirForce() + " | gravity force: " + this.step.getGravityForce();
 	}
 
 	@BeforeClass
@@ -45,11 +71,9 @@ public class StepTest {
 	@Test
 	public void testGetVehicle() {
 		System.out.println("getVehicle");
-		Step instance = new Step();
-		String expResult = "name";
-		instance.setVehicle(expResult);
-		String result = instance.getVehicle();
-		assertEquals(expResult, result);
+                String result = "vehicle";
+                this.step.setVehicle(result);
+		assertEquals(this.step.getVehicle(), result);
 	}
 
 	/**
@@ -58,10 +82,9 @@ public class StepTest {
 	@Test
 	public void testSetVehicle() {
 		System.out.println("setVehicle");
-		String vehicle = "vec";
-		Step instance = new Step();
-		instance.setVehicle(vehicle);
-		assertEquals(vehicle, instance.getVehicle());
+		String result = "vehicle";
+                this.step.setVehicle(result);
+		assertEquals(this.step.getVehicle(), result);
 	}
 
 	/**
@@ -70,11 +93,9 @@ public class StepTest {
 	@Test
 	public void testGetNodeStart() {
 		System.out.println("getNodeStart");
-		Step instance = new Step();
-		String expResult = "n0";
-		instance.setNodeStart(expResult);
-		String result = instance.getNodeStart();
-		assertEquals(expResult, result);
+		String result = "nodeStart";
+                this.step.setNodeStart(result);
+		assertEquals(this.step.getNodeStart(), result);
 	}
 
 	/**
@@ -83,10 +104,9 @@ public class StepTest {
 	@Test
 	public void testSetNodeStart() {
 		System.out.println("setNodeStart");
-		String nodeStart = "n1";
-		Step instance = new Step();
-		instance.setNodeStart(nodeStart);
-		assertEquals(nodeStart, instance.getNodeStart());
+		String result = "nodeStart";
+                this.step.setNodeStart(result);
+		assertEquals(this.step.getNodeStart(), result);
 	}
 
 	/**
@@ -95,11 +115,9 @@ public class StepTest {
 	@Test
 	public void testGetNodeEnd() {
 		System.out.println("getNodeEnd");
-		Step instance = new Step();
-		String expResult = "n2";
-		instance.setNodeEnd(expResult);
-		String result = instance.getNodeEnd();
-		assertEquals(expResult, result);
+		String result = "nodeEnd";
+                this.step.setNodeEnd(result);
+		assertEquals(this.step.getNodeEnd(), result);
 	}
 
 	/**
@@ -108,10 +126,9 @@ public class StepTest {
 	@Test
 	public void testSetNodeEnd() {
 		System.out.println("setNodeEnd");
-		String nodeEnd = "n2";
-		Step instance = new Step();
-		instance.setNodeEnd(nodeEnd);
-		assertEquals(nodeEnd, instance.getNodeEnd());
+		String result = "nodeEnd";
+                this.step.setNodeEnd(result);
+		assertEquals(this.step.getNodeEnd(), result);
 	}
 
 	/**
@@ -120,11 +137,9 @@ public class StepTest {
 	@Test
 	public void testGetRoad() {
 		System.out.println("getRoad");
-		Step instance = new Step();
-		String expResult = "n1";
-		instance.setRoad(expResult);
-		String result = instance.getRoad();
-		assertEquals(expResult, result);
+		String result = "road1";
+                this.step.setRoad(result);
+		assertEquals(this.step.getRoad(), result);
 	}
 
 	/**
@@ -133,10 +148,9 @@ public class StepTest {
 	@Test
 	public void testSetRoad() {
 		System.out.println("setRoad");
-		String road = "road";
-		Step instance = new Step();
-		instance.setRoad(road);
-		assertEquals(road, instance.getRoad());
+		String result = "road1";
+                this.step.setRoad(result);
+		assertEquals(this.step.getRoad(), result);
 	}
 
 	/**
@@ -145,11 +159,9 @@ public class StepTest {
 	@Test
 	public void testGetSegment() {
 		System.out.println("getSegment");
-		Step instance = new Step();
-		String expResult = "segment";
-		instance.setSegment(expResult);
-		String result = instance.getSegment();
-		assertEquals(expResult, result);
+		String result = "segment1";
+                this.step.setSegment(result);
+		assertEquals(this.step.getSegment(), result);
 	}
 
 	/**
@@ -158,10 +170,9 @@ public class StepTest {
 	@Test
 	public void testSetSegment() {
 		System.out.println("setSegment");
-		String segment = "segment";
-		Step instance = new Step();
-		instance.setSegment(segment);
-		assertEquals(segment, instance.getSegment());
+		String result = "segment1";
+                this.step.setSegment(result);
+		assertEquals(this.step.getSegment(), result);
 	}
 
 	/**
@@ -170,11 +181,9 @@ public class StepTest {
 	@Test
 	public void testGetTimeEntry() {
 		System.out.println("getTimeEntry");
-		Step instance = new Step();
 		Measure expResult = new Measure(22.2, "km");
-		instance.setTimeEntry(expResult);
-		Measure result = instance.getTimeEntry();
-		assertEquals(expResult, result);
+		this.step.setTimeEntry(expResult);
+		assertEquals(expResult, this.step.getTimeEntry());
 	}
 
 	/**
@@ -183,10 +192,9 @@ public class StepTest {
 	@Test
 	public void testSetTimeEntry() {
 		System.out.println("setTimeEntry");
-		Measure timeEntry = new Measure(22.2, "km");
-		Step instance = new Step();
-		instance.setTimeEntry(timeEntry);
-		assertEquals(timeEntry, instance.getTimeEntry());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setTimeEntry(expResult);
+		assertEquals(expResult, this.step.getTimeEntry());
 	}
 
 	/**
@@ -195,11 +203,9 @@ public class StepTest {
 	@Test
 	public void testGetTimeOut() {
 		System.out.println("getTimeOut");
-		Step instance = new Step();
-		Measure expResult = new Measure(22.2, "km");
-		instance.setTimeOut(expResult);
-		Measure result = instance.getTimeOut();
-		assertEquals(expResult, result);
+                Measure expResult = new Measure(22.2, "km");
+		this.step.setTimeOut(expResult);
+		assertEquals(expResult, this.step.getTimeOut());
 	}
 
 	/**
@@ -208,10 +214,9 @@ public class StepTest {
 	@Test
 	public void testSetTimeOut() {
 		System.out.println("setTimeOut");
-		Measure timeOut = new Measure(22.0, "km");
-		Step instance = new Step();
-		instance.setTimeOut(timeOut);
-		assertEquals(timeOut, instance.getTimeOut());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setTimeOut(expResult);
+		assertEquals(expResult, this.step.getTimeOut());
 	}
 
 	/**
@@ -220,11 +225,9 @@ public class StepTest {
 	@Test
 	public void testGetCarPower() {
 		System.out.println("getCarPower");
-		Step instance = new Step();
-		Measure expResult = new Measure(22.2, "km/h");
-		instance.setCarPower(expResult);
-		Measure result = instance.getCarPower();
-		assertEquals(expResult, result);
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setCarPower(expResult);
+		assertEquals(expResult, this.step.getCarPower());
 	}
 
 	/**
@@ -233,10 +236,9 @@ public class StepTest {
 	@Test
 	public void testSetCarPower() {
 		System.out.println("setCarPower");
-		Measure carPower = new Measure(22.0, "km/s");
-		Step instance = new Step();
-		instance.setCarPower(carPower);
-		assertEquals(carPower, instance.getCarPower());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setCarPower(expResult);
+		assertEquals(expResult, this.step.getCarPower());
 	}
 
 	/**
@@ -245,11 +247,9 @@ public class StepTest {
 	@Test
 	public void testGetCarSpeed() {
 		System.out.println("getCarSpeed");
-		Step instance = new Step();
-		Measure expResult = new Measure(22.0, "Km/s");
-		instance.setCarSpeed(expResult);
-		Measure result = instance.getCarSpeed();
-		assertEquals(expResult, result);
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setCarSpeed(expResult);
+		assertEquals(expResult, this.step.getCarSpeed());
 	}
 
 	/**
@@ -258,10 +258,9 @@ public class StepTest {
 	@Test
 	public void testSetCarSpeed() {
 		System.out.println("setCarSpeed");
-		Measure carSpeed = new Measure(89.0, "km");
-		Step instance = new Step();
-		instance.setCarSpeed(carSpeed);
-		assertEquals(carSpeed, instance.getCarSpeed());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setCarSpeed(expResult);
+		assertEquals(expResult, this.step.getCarSpeed());
 	}
 
 	/**
@@ -270,11 +269,9 @@ public class StepTest {
 	@Test
 	public void testGetSpeedRelative() {
 		System.out.println("getSpeedRelative");
-		Step instance = new Step();
-		Measure expResult = new Measure(80.0, "km");
-		instance.setSpeedRelative(expResult);
-		Measure result = instance.getSpeedRelative();
-		assertEquals(expResult, result);
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setSpeedRelative(expResult);
+		assertEquals(expResult, this.step.getSpeedRelative());
 	}
 
 	/**
@@ -283,10 +280,9 @@ public class StepTest {
 	@Test
 	public void testSetSpeedRelative() {
 		System.out.println("setSpeedRelative");
-		Measure speedRelative = new Measure(9.0, "km");
-		Step instance = new Step();
-		instance.setSpeedRelative(speedRelative);
-		assertEquals(speedRelative, instance.getSpeedRelative());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setSpeedRelative(expResult);
+		assertEquals(expResult, this.step.getSpeedRelative());
 	}
 
 	/**
@@ -295,11 +291,9 @@ public class StepTest {
 	@Test
 	public void testGetCarForce() {
 		System.out.println("getCarForce");
-		Step instance = new Step();
-		Measure expResult = new Measure(0.9, "km");
-		instance.setCarForce(expResult);
-		Measure result = instance.getCarForce();
-		assertEquals(expResult, result);
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setCarForce(expResult);
+		assertEquals(expResult, this.step.getCarForce());
 	}
 
 	/**
@@ -308,10 +302,9 @@ public class StepTest {
 	@Test
 	public void testSetCarForce() {
 		System.out.println("setCarForce");
-		Measure carForce = new Measure(0.8, "km");
-		Step instance = new Step();
-		instance.setCarForce(carForce);
-		assertEquals(carForce, instance.getCarForce());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setCarForce(expResult);
+		assertEquals(expResult, this.step.getCarForce());
 	}
 
 	/**
@@ -320,11 +313,9 @@ public class StepTest {
 	@Test
 	public void testGetRollingForce() {
 		System.out.println("getRollingForce");
-		Step instance = new Step();
-		Measure expResult = new Measure(0.09, "km");
-		instance.setRollingForce(expResult);
-		Measure result = instance.getRollingForce();
-		assertEquals(expResult, result);
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setRollingForce(expResult);
+		assertEquals(expResult, this.step.getRollingForce());
 	}
 
 	/**
@@ -333,10 +324,9 @@ public class StepTest {
 	@Test
 	public void testSetRollingForce() {
 		System.out.println("setRollingForce");
-		Measure rollingForce = new Measure(0.08, "km");
-		Step instance = new Step();
-		instance.setRollingForce(rollingForce);
-		assertEquals(rollingForce, instance.getRollingForce());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setRollingForce(expResult);
+		assertEquals(expResult, this.step.getRollingForce());
 	}
 
 	/**
@@ -345,11 +335,9 @@ public class StepTest {
 	@Test
 	public void testGetAirForce() {
 		System.out.println("getAirForce");
-		Step instance = new Step();
-		Measure expResult = new Measure(22.0, "km");
-		instance.setAirForce(expResult);
-		Measure result = instance.getAirForce();
-		assertEquals(expResult, result);
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setAirForce(expResult);
+		assertEquals(expResult, this.step.getAirForce());
 	}
 
 	/**
@@ -358,10 +346,9 @@ public class StepTest {
 	@Test
 	public void testSetAirForce() {
 		System.out.println("setAirForce");
-		Measure airForce = new Measure(2.2, "km");
-		Step instance = new Step();
-		instance.setAirForce(airForce);
-		assertEquals(airForce, instance.getAirForce());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setAirForce(expResult);
+		assertEquals(expResult, this.step.getAirForce());
 	}
 
 	/**
@@ -370,11 +357,9 @@ public class StepTest {
 	@Test
 	public void testGetGravityForce() {
 		System.out.println("getGravityForce");
-		Step instance = new Step();
-		Measure expResult = new Measure(9.8, "km");
-		instance.setGravityForce(expResult);
-		Measure result = instance.getGravityForce();
-		assertEquals(expResult, result);
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setGravityForce(expResult);
+		assertEquals(expResult, this.step.getGravityForce());
 	}
 
 	/**
@@ -383,10 +368,9 @@ public class StepTest {
 	@Test
 	public void testSetGravityForce() {
 		System.out.println("setGravityForce");
-		Measure gravityForce = new Measure(9.8, "km");
-		Step instance = new Step();
-		instance.setGravityForce(gravityForce);
-		assertEquals(gravityForce, instance.getGravityForce());
+		Measure expResult = new Measure(22.2, "km");
+		this.step.setGravityForce(expResult);
+		assertEquals(expResult, this.step.getGravityForce());
 	}
 
 	/**
@@ -395,14 +379,7 @@ public class StepTest {
 	@Test
 	public void testToString() {
 		System.out.println("toString");
-		Step instance = new Step();
-                Vehicle vec = new Vehicle();
-		String expResult = "Step | vehicle: | node start: | node end: | road: | segment:"
-                        + " | time entry: | time out: | car power: | car speed: | speed relative:"
-                        + " | car force: | rolling force: | air force: | gravity force: ";
-
-		String result = instance.toString();
-		assertEquals(expResult, result);
+		assertEquals(this.step.toString(), this.toString);
 	}
 
 	/**
@@ -411,12 +388,22 @@ public class StepTest {
 	@Test
 	public void testHashCode() {
 		System.out.println("hashCode");
-		Step instance = new Step();
-		int expResult = 0;
-		int result = instance.hashCode();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		//fail("The test case is a prototype.");
+		int hash = 29 * this.step.getClass().hashCode();
+		hash += 11 * this.step.getVehicle().hashCode();
+		hash += 11 * this.step.getNodeStart().hashCode();
+		hash += 11 * this.step.getNodeEnd().hashCode();
+		hash += 11 * this.step.getRoad().hashCode();
+		hash += 11 * this.step.getSegment().hashCode();
+		hash += 11 * this.step.getTimeEntry().hashCode();
+		hash += 11 * this.step.getTimeOut().hashCode();
+		hash += 11 * this.step.getCarPower().hashCode();
+		hash += 11 * this.step.getCarSpeed().hashCode();
+		hash += 11 * this.step.getSpeedRelative().hashCode();
+		hash += 11 * this.step.getCarForce().hashCode();
+		hash += 11 * this.step.getRollingForce().hashCode();
+		hash += 11 * this.step.getAirForce().hashCode();
+		hash += 11 * this.step.getGravityForce().hashCode();
+		assertEquals(this.step.hashCode(), hash);
 	}
 
 	/**
@@ -425,13 +412,24 @@ public class StepTest {
 	@Test
 	public void testEquals() {
 		System.out.println("equals");
-		Object obj = null;
 		Step instance = new Step();
-		boolean expResult = false;
-		boolean result = instance.equals(obj);
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+                instance.setVehicle("Dummy");
+                instance.setNodeStart("n01");
+                instance.setNodeEnd("n03");
+                instance.setRoad("road");
+                instance.setSegment("segment");
+                instance.setTimeEntry(this.measure);
+                instance.setTimeOut(this.measure);
+                instance.setCarPower(this.measure);
+                instance.setCarSpeed(this.measure);
+                instance.setSpeedRelative(this.measure);
+                instance.setCarForce(this.measure);
+                instance.setRollingForce(this.measure);
+                instance.setAirForce(this.measure);
+                instance.setGravityForce(this.measure);
+		assertEquals(this.step.equals(instance), true);
+                instance.setVehicle("vehicle");
+                assertEquals(this.step.equals(instance), false);
 	}
 
 }

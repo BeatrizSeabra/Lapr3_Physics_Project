@@ -155,6 +155,9 @@ public class Simulation {
 		for (Traffic traffic : this.traffics) {
 			simulation.addTraffic(traffic.clone());
 		}
+                for (Run run : this.runs) {
+			simulation.addRun(run);
+		}
 		return simulation;
 	}
 
