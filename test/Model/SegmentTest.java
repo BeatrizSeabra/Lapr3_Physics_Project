@@ -385,44 +385,16 @@ public class SegmentTest {
 	}
 
 	/**
-	 * Test of getVehicles method, of class Segment.
-	 */
-	@Test
-	public void testGetVehicles() {
-		System.out.println("getVehicles");
-		Segment instance = new Segment();
-		Integer expResult = null;
-		Integer result = instance.getVehicles();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of setVehicles method, of class Segment.
-	 */
-	@Test
-	public void testSetVehicles() {
-		System.out.println("setVehicles");
-		Integer vehicles = null;
-		Segment instance = new Segment();
-		instance.setVehicles(vehicles);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
 	 * Test of getNumberVehiclesCurrent method, of class Segment.
 	 */
 	@Test
 	public void testGetNumberVehiclesCurrent() {
 		System.out.println("getNumberVehiclesCurrent");
 		Segment instance = new Segment();
-		Integer expResult = null;
+		Integer expResult = 1;
+		instance.setNumberVehiclesCurrent(expResult);
 		Integer result = instance.getNumberVehiclesCurrent();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -431,11 +403,10 @@ public class SegmentTest {
 	@Test
 	public void testSetNumberVehiclesCurrent() {
 		System.out.println("setNumberVehiclesCurrent");
-		Integer numberVehiclesCurrent = null;
+		Integer numberVehiclesCurrent = 1;
 		Segment instance = new Segment();
 		instance.setNumberVehiclesCurrent(numberVehiclesCurrent);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(numberVehiclesCurrent, instance.getNumberVehiclesCurrent());
 	}
 
 }

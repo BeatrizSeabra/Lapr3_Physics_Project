@@ -8,6 +8,7 @@ package Model;
 import Physics.Measure;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,11 +45,10 @@ public class StepTest {
 	public void testGetVehicle() {
 		System.out.println("getVehicle");
 		Step instance = new Step();
-		String expResult = "";
+		String expResult = "name";
+		instance.setVehicle(expResult);
 		String result = instance.getVehicle();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -57,11 +57,10 @@ public class StepTest {
 	@Test
 	public void testSetVehicle() {
 		System.out.println("setVehicle");
-		String vehicle = "";
+		String vehicle = "vec";
 		Step instance = new Step();
 		instance.setVehicle(vehicle);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(vehicle, instance.getVehicle());
 	}
 
 	/**
@@ -71,11 +70,10 @@ public class StepTest {
 	public void testGetNodeStart() {
 		System.out.println("getNodeStart");
 		Step instance = new Step();
-		String expResult = "";
+		String expResult = "n0";
+		instance.setNodeStart(expResult);
 		String result = instance.getNodeStart();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -84,11 +82,10 @@ public class StepTest {
 	@Test
 	public void testSetNodeStart() {
 		System.out.println("setNodeStart");
-		String nodeStart = "";
+		String nodeStart = "n1";
 		Step instance = new Step();
 		instance.setNodeStart(nodeStart);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(nodeStart, instance.getNodeStart());
 	}
 
 	/**
@@ -98,11 +95,10 @@ public class StepTest {
 	public void testGetNodeEnd() {
 		System.out.println("getNodeEnd");
 		Step instance = new Step();
-		String expResult = "";
+		String expResult = "n2";
+		instance.setNodeEnd(expResult);
 		String result = instance.getNodeEnd();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -111,11 +107,10 @@ public class StepTest {
 	@Test
 	public void testSetNodeEnd() {
 		System.out.println("setNodeEnd");
-		String nodeEnd = "";
+		String nodeEnd = "n2";
 		Step instance = new Step();
 		instance.setNodeEnd(nodeEnd);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(nodeEnd, instance.getNodeEnd());
 	}
 
 	/**
@@ -125,11 +120,10 @@ public class StepTest {
 	public void testGetRoad() {
 		System.out.println("getRoad");
 		Step instance = new Step();
-		String expResult = "";
+		String expResult = "n1";
+		instance.setRoad(expResult);
 		String result = instance.getRoad();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -138,11 +132,10 @@ public class StepTest {
 	@Test
 	public void testSetRoad() {
 		System.out.println("setRoad");
-		String road = "";
+		String road = "road";
 		Step instance = new Step();
 		instance.setRoad(road);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(road, instance.getRoad());
 	}
 
 	/**
@@ -152,11 +145,10 @@ public class StepTest {
 	public void testGetSegment() {
 		System.out.println("getSegment");
 		Step instance = new Step();
-		String expResult = "";
+		String expResult = "segment";
+		instance.setSegment(expResult);
 		String result = instance.getSegment();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -165,11 +157,10 @@ public class StepTest {
 	@Test
 	public void testSetSegment() {
 		System.out.println("setSegment");
-		String segment = "";
+		String segment = "segment";
 		Step instance = new Step();
 		instance.setSegment(segment);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(segment, instance.getSegment());
 	}
 
 	/**
@@ -179,11 +170,10 @@ public class StepTest {
 	public void testGetTimeEntry() {
 		System.out.println("getTimeEntry");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(22.2, "km");
+		instance.setTimeEntry(expResult);
 		Measure result = instance.getTimeEntry();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -192,11 +182,10 @@ public class StepTest {
 	@Test
 	public void testSetTimeEntry() {
 		System.out.println("setTimeEntry");
-		Measure timeEntry = null;
+		Measure timeEntry = new Measure(22.2, "km");
 		Step instance = new Step();
 		instance.setTimeEntry(timeEntry);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(timeEntry, instance.getTimeEntry());
 	}
 
 	/**
@@ -206,11 +195,10 @@ public class StepTest {
 	public void testGetTimeOut() {
 		System.out.println("getTimeOut");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(22.2, "km");
+		instance.setTimeOut(expResult);
 		Measure result = instance.getTimeOut();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -219,11 +207,10 @@ public class StepTest {
 	@Test
 	public void testSetTimeOut() {
 		System.out.println("setTimeOut");
-		Measure timeOut = null;
+		Measure timeOut = new Measure(22.0, "km");
 		Step instance = new Step();
 		instance.setTimeOut(timeOut);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(timeOut, instance.getTimeOut());
 	}
 
 	/**
@@ -233,11 +220,10 @@ public class StepTest {
 	public void testGetCarPower() {
 		System.out.println("getCarPower");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(22.2, "km/h");
+		instance.setCarPower(expResult);
 		Measure result = instance.getCarPower();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -246,11 +232,10 @@ public class StepTest {
 	@Test
 	public void testSetCarPower() {
 		System.out.println("setCarPower");
-		Measure carPower = null;
+		Measure carPower = new Measure(22.0, "km/s");
 		Step instance = new Step();
 		instance.setCarPower(carPower);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(carPower, instance.getCarPower());
 	}
 
 	/**
@@ -260,11 +245,10 @@ public class StepTest {
 	public void testGetCarSpeed() {
 		System.out.println("getCarSpeed");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(22.0, "Km/s");
+		instance.setCarSpeed(expResult);
 		Measure result = instance.getCarSpeed();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -273,11 +257,10 @@ public class StepTest {
 	@Test
 	public void testSetCarSpeed() {
 		System.out.println("setCarSpeed");
-		Measure carSpeed = null;
+		Measure carSpeed = new Measure(89.0, "km");
 		Step instance = new Step();
 		instance.setCarSpeed(carSpeed);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(carSpeed, instance.getCarSpeed());
 	}
 
 	/**
@@ -287,11 +270,10 @@ public class StepTest {
 	public void testGetSpeedRelative() {
 		System.out.println("getSpeedRelative");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(80.0, "km");
+		instance.setSpeedRelative(expResult);
 		Measure result = instance.getSpeedRelative();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -300,11 +282,10 @@ public class StepTest {
 	@Test
 	public void testSetSpeedRelative() {
 		System.out.println("setSpeedRelative");
-		Measure speedRelative = null;
+		Measure speedRelative = new Measure(9.0, "km");
 		Step instance = new Step();
 		instance.setSpeedRelative(speedRelative);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(speedRelative, instance.getSpeedRelative());
 	}
 
 	/**
@@ -314,11 +295,10 @@ public class StepTest {
 	public void testGetCarForce() {
 		System.out.println("getCarForce");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(0.9, "km");
+		instance.setCarForce(expResult);
 		Measure result = instance.getCarForce();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -327,11 +307,10 @@ public class StepTest {
 	@Test
 	public void testSetCarForce() {
 		System.out.println("setCarForce");
-		Measure carForce = null;
+		Measure carForce = new Measure(0.8, "km");
 		Step instance = new Step();
 		instance.setCarForce(carForce);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(carForce, instance.getCarForce());
 	}
 
 	/**
@@ -341,11 +320,10 @@ public class StepTest {
 	public void testGetRollingForce() {
 		System.out.println("getRollingForce");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(0.09, "km");
+		instance.setRollingForce(expResult);
 		Measure result = instance.getRollingForce();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -354,11 +332,10 @@ public class StepTest {
 	@Test
 	public void testSetRollingForce() {
 		System.out.println("setRollingForce");
-		Measure rollingForce = null;
+		Measure rollingForce = new Measure(0.08, "km");
 		Step instance = new Step();
 		instance.setRollingForce(rollingForce);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(rollingForce, instance.getRollingForce());
 	}
 
 	/**
@@ -368,11 +345,10 @@ public class StepTest {
 	public void testGetAirForce() {
 		System.out.println("getAirForce");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(22.0, "km");
+		instance.setAirForce(expResult);
 		Measure result = instance.getAirForce();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -381,11 +357,10 @@ public class StepTest {
 	@Test
 	public void testSetAirForce() {
 		System.out.println("setAirForce");
-		Measure airForce = null;
+		Measure airForce = new Measure(2.2, "km");
 		Step instance = new Step();
 		instance.setAirForce(airForce);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(airForce, instance.getAirForce());
 	}
 
 	/**
@@ -395,11 +370,10 @@ public class StepTest {
 	public void testGetGravityForce() {
 		System.out.println("getGravityForce");
 		Step instance = new Step();
-		Measure expResult = null;
+		Measure expResult = new Measure(9.8, "km");
+		instance.setGravityForce(expResult);
 		Measure result = instance.getGravityForce();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 
 	/**
@@ -408,11 +382,10 @@ public class StepTest {
 	@Test
 	public void testSetGravityForce() {
 		System.out.println("setGravityForce");
-		Measure gravityForce = null;
+		Measure gravityForce = new Measure(9.8, "km");
 		Step instance = new Step();
 		instance.setGravityForce(gravityForce);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		assertEquals(gravityForce, instance.getGravityForce());
 	}
 
 	/**
@@ -426,7 +399,7 @@ public class StepTest {
 		String result = instance.toString();
 		assertEquals(expResult, result);
 		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		//fail("The test case is a prototype.");
 	}
 
 	/**
@@ -440,7 +413,7 @@ public class StepTest {
 		int result = instance.hashCode();
 		assertEquals(expResult, result);
 		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		//fail("The test case is a prototype.");
 	}
 
 	/**
@@ -455,7 +428,7 @@ public class StepTest {
 		boolean result = instance.equals(obj);
 		assertEquals(expResult, result);
 		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
+		//	fail("The test case is a prototype.");
 	}
 
 }
