@@ -276,7 +276,7 @@ public class NodeTest {
 		section.add(section3);
 		section.add(section4);
 		section.add(section5);
-		VehicleBot vehicleBot = new VehicleBot(this.vehicle, section, null, Integer.SIZE, section);
+		VehicleBot vehicleBot = new VehicleBot(this.vehicle, section, null, Integer.SIZE, null);
 
 	}
 
@@ -314,7 +314,9 @@ public class NodeTest {
 	public void testHashCode() {
 		System.out.println("testHashCode");
 		Integer expResult = 29 * this.node.getClass().hashCode();
+                expResult += 11 * this.node.getId().hashCode();
 		expResult += 11 * this.node.getName().hashCode();
+                
 		Integer result = this.node.hashCode();
 		assertEquals(expResult, result);
 	}
@@ -325,7 +327,7 @@ public class NodeTest {
 	@Test
 	public void testEquals() {
 		System.out.println("testEquals");
-		Node node = new Node("Node name");
+		Node node = this.node.clone();
 		assertEquals(true, this.node.equals(node));
 	}
 
@@ -435,32 +437,5 @@ public class NodeTest {
 		String result = instance.toString();
 		assertEquals(expResult.getClass(), result.getClass());
 
-	}
-
-	/**
-	 * Test of getBots method, of class Node.
-	 */
-	@Test
-	public void testGetBots() {
-		System.out.println("getBots");
-		Node instance = null;
-		Map<Section, VehicleBot> expResult = null;
-		Map<Section, VehicleBot> result = instance.getBots();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
-	}
-
-	/**
-	 * Test of setBots method, of class Node.
-	 */
-	@Test
-	public void testSetBots() {
-		System.out.println("setBots");
-		Map<Section, VehicleBot> bots = null;
-		Node instance = null;
-		instance.setBots(bots);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 }
