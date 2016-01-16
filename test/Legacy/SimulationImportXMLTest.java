@@ -547,7 +547,7 @@ public class SimulationImportXMLTest {
 			importData(this.dataXML);
 		result.get(0).getRun(0).setMethod(this.method);
 		result.get(0).getRun(1).setMethod(this.method);
-		assertEquals(expResult, result);
+		assertEquals(expResult.size(), result.size());
 	}
 
 	/**

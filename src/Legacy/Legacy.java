@@ -34,7 +34,10 @@ public abstract class Legacy {
 	 * @return
 	 */
 	public static String getExtension(String filePath) {
-		return filePath.substring(filePath.lastIndexOf(".")).replace(".", "");
+            if(!filePath.isEmpty()){
+                return filePath.substring(filePath.lastIndexOf(".")).replace(".", "");
+            }
+            return "";
 	}
 
 	/**
@@ -206,16 +209,19 @@ public abstract class Legacy {
 	 */
 	public static List<FileFilter> getFiltersExtensionsImportObjects(
 		String importClassName) {
+            List<FileFilter> filters = new ArrayList();
+            if(!importClassName.isEmpty()){
 		List<Object> objects = Settings.loadAllClass(Settings.
 			getOptions(importClassName));
-		List<FileFilter> filters = new ArrayList();
+		
 		for (Object object : objects) {
 			Import imports = (Import) object;
 			if (imports != null) {
 				filters.add(imports.getExtensionFilter());
 			}
 		}
-		return filters;
+            }
+            return filters;
 	}
 
 	/**
