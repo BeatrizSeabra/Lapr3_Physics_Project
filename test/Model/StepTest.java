@@ -20,6 +20,7 @@ import org.junit.Test;
 public class StepTest {
 
 	public StepTest() {
+            
 	}
 
 	@BeforeClass
@@ -395,11 +396,13 @@ public class StepTest {
 	public void testToString() {
 		System.out.println("toString");
 		Step instance = new Step();
-		String expResult = "";
+                Vehicle vec = new Vehicle();
+		String expResult = "Step | vehicle: | node start: | node end: | road: | segment:"
+                        + " | time entry: | time out: | car power: | car speed: | speed relative:"
+                        + " | car force: | rolling force: | air force: | gravity force: ";
+
 		String result = instance.toString();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		//fail("The test case is a prototype.");
 	}
 
 	/**

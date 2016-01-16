@@ -362,7 +362,7 @@ public class RunTest {
 		int expResult = 29 * instance.getClass().hashCode();
 		expResult += 11 * instance.getId().hashCode();
 		expResult += 11 * instance.getName().hashCode();
-		expResult += 11 * instance.getId().hashCode();
+		expResult += 11 * instance.getTime().hashCode();
 		expResult += 11 * instance.getTimeStep().hashCode();
 		expResult += 11 * instance.getMethod().hashCode();
 		for (Step stepz : instance.getSteps()) {
@@ -373,8 +373,6 @@ public class RunTest {
 		}
 		int result = instance.hashCode();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-//		fail("The test case is a prototype.");
 	}
 
 	/**

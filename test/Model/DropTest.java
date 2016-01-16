@@ -107,11 +107,10 @@ public class DropTest {
 	@Test
 	public void testSetVehicle() {
 		System.out.println("setVehicle");
-		String vehicle = "";
-		Drop instance = new Drop();
-		instance.setVehicle(vehicle);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+		String vehicle = "Dummy 06";
+		this.drop.setVehicle(vehicle);
+                String result = this.drop.getVehicle();
+		assertEquals(vehicle, result);
 	}
 
 	/**
@@ -132,11 +131,10 @@ public class DropTest {
 	@Test
 	public void testSetNodeStart() {
 		System.out.println("setNodeStart");
-		String nodeStart = "";
-		Drop instance = new Drop();
-		instance.setNodeStart(nodeStart);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+		String expResult = "n02";
+		this.drop.setNodeStart(expResult);
+		String result = this.drop.getNodeStart();
+		assertEquals(expResult, result);
 	}
 
 	/**
@@ -157,11 +155,10 @@ public class DropTest {
 	@Test
 	public void testSetNodeEnd() {
 		System.out.println("setNodeEnd");
-		String nodeEnd = "";
-		Drop instance = new Drop();
-		instance.setNodeEnd(nodeEnd);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+		String expResult = "n06";
+		this.drop.setNodeEnd(expResult);
+		String result = this.drop.getNodeEnd();
+		assertEquals(expResult, result);
 	}
 
 	/**
@@ -170,12 +167,10 @@ public class DropTest {
 	@Test
 	public void testGetTime() {
 		System.out.println("getTime");
-		Drop instance = new Drop();
-		Measure expResult = null;
-		Measure result = instance.getTime();
+		Measure expResult = new Measure(5.0, "s");
+                this.drop.setTime(expResult);
+		Measure result = this.drop.getTime();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
 	}
 
 	/**
@@ -184,11 +179,10 @@ public class DropTest {
 	@Test
 	public void testSetTime() {
 		System.out.println("setTime");
-		Measure time = null;
-		Drop instance = new Drop();
-		instance.setTime(time);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+		Measure expResult = new Measure(5.0, "s");
+                this.drop.setTime(expResult);
+		Measure result = this.drop.getTime();
+		assertEquals(expResult, result);
 	}
 
 	/**
@@ -202,8 +196,6 @@ public class DropTest {
 		boolean expResult = false;
 		boolean result = instance.equals(obj);
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
 	}
 
 	/**
@@ -219,8 +211,6 @@ public class DropTest {
 		expResult += 11 * this.drop.getTime().hashCode();
 		int result = this.drop.hashCode();
 		assertEquals(expResult, result, 0.01);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
 	}
 
 	/**
@@ -230,7 +220,6 @@ public class DropTest {
 	public void testToString() {
 		System.out.println("toString");
 		String expResult = "Drop | vehicle: Dummy01 | node start: N1 | node end: N2 | time: 10,00 s";
-		System.out.println(this.drop.toString());
 		String result = this.drop.toString();
 		assertEquals(expResult, result);
 	}
