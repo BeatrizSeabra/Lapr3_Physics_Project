@@ -19,9 +19,51 @@ import org.junit.Test;
  * @author LAPR3_20152016_G27
  */
 public class TrafficTest {
-
+    
+        private Traffic traffic;
+        private Vehicle vehicle;
+        private Node nStart;
+        private Node nEnd;
+        private Segment segment;
+        private VehicleBot vehicleBot;
+        
 	public TrafficTest() {
-
+            this.traffic = new Traffic();
+            this.vehicle = new Vehicle();
+            this.vehicle.setId(1);
+            this.vehicle.setName("Tommy");
+            this.vehicle.setDescription("Audi");
+            this.vehicle.setType("Sub");
+            this.vehicle.setMotorization("VEC");
+            this.vehicle.setFuel("Gasoline");
+            Measure rmpLow = new Measure(1.2, "MeasureTorque");
+            this.vehicle.setMass(rmpLow);
+            this.vehicle.setLoad(rmpLow);
+            this.vehicle.setDragCoefficient(rmpLow);
+            this.vehicle.setFrontalArea(rmpLow);
+            this.vehicle.setRollingRCoefficient(rmpLow);
+            this.vehicle.setWheelSize(rmpLow);
+            this.vehicle.setMinRPM(rmpLow);
+            this.vehicle.setMaxRPM(rmpLow);
+            this.vehicle.setFinalDriveRatio(rmpLow);
+            this.traffic.setVehicle(this.vehicle);
+            this.nStart = new Node("Espinho");
+            this.traffic.setNodeStart(this.nStart);
+            this.nEnd = new Node("Anta");
+            this.traffic.setNodeEnd(this.nEnd);
+            this.segment = new Segment();
+            this.segment.setName("Segment name");
+            this.segment.setHeight(new Measure(1.0, "km"));
+            this.segment.setLength(new Measure(3.0, "km"));
+            this.segment.setMaxVelocity(new Measure(4.0, "km"));
+            this.segment.setMinVelocity(new Measure(5.0, "km"));
+            this.segment.setSlope(new Measure(6.0, "°"));
+            this.segment.setNumberVehicles(8);
+            this.traffic.setSegment(this.segment);
+            this.vehicleBot = new VehicleBot();
+            this.traffic.setVehicleBot(this.vehicleBot);
+            Measure arrivalRate = new Measure(1.2, "MeasureTorque");
+            this.traffic.setArrivalRate(arrivalRate);
 	}
 
 	@BeforeClass
@@ -46,11 +88,9 @@ public class TrafficTest {
 	@Test
 	public void testGetId() {
 		System.out.println("getId");
-		Traffic instance = new Traffic();
-		instance.setId(10);
-		Integer expResult = 10;
-		Integer result = instance.getId();
-		assertEquals(expResult, result);
+                Integer expResult = 10;
+		this.traffic.setId(expResult);
+		assertEquals(this.traffic.getId(), expResult);
 	}
 
 	/**
@@ -59,11 +99,9 @@ public class TrafficTest {
 	@Test
 	public void testSetId() {
 		System.out.println("setId");
-		Integer result = 12;
-		Traffic instance = new Traffic();
-		instance.setId(result);
-		Integer expResult = instance.getId();
-		assertEquals(expResult, result);
+                Integer expResult = 12;
+		this.traffic.setId(expResult);
+		assertEquals(this.traffic.getId(), expResult);
 	}
 
 	/**
@@ -72,29 +110,7 @@ public class TrafficTest {
 	@Test
 	public void testGetVehicle() {
 		System.out.println("getVehicle");
-		Traffic instance = new Traffic();
-		Vehicle vec = new Vehicle();
-		vec.setId(1);
-		vec.setName("Tommy");
-		vec.setDescription("Audi");
-		vec.setType("Sub");
-		vec.setMotorization("VEC");
-		vec.setFuel("Gasoline");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		vec.setMass(rmpLow);
-		vec.setLoad(rmpLow);
-		vec.setDragCoefficient(rmpLow);
-		vec.setFrontalArea(rmpLow);
-		vec.setRollingRCoefficient(rmpLow);
-		vec.setWheelSize(rmpLow);
-		vec.setMinRPM(rmpLow);
-		vec.setMaxRPM(rmpLow);
-		vec.setFinalDriveRatio(rmpLow);
-		instance.setVehicle(vec);
-		Vehicle expResult = vec;
-		Vehicle result = instance.getVehicle();
-		assertEquals(expResult, result);
-
+		assertEquals(this.traffic.getVehicle(), this.vehicle);
 	}
 
 	/**
@@ -103,13 +119,7 @@ public class TrafficTest {
 	@Test
 	public void testGetNodeStart() {
 		System.out.println("getNodeStart");
-		Traffic instance = new Traffic();
-		Node nStart = new Node("Espinho");
-		instance.setNodeStart(nStart);
-		Node expResult = nStart;
-		Node result = instance.getNodeStart();
-		assertEquals(expResult, result);
-
+		assertEquals(this.traffic.getNodeStart(), this.nStart);
 	}
 
 	/**
@@ -118,11 +128,7 @@ public class TrafficTest {
 	@Test
 	public void testGetNodeEnd() {
 		System.out.println("getNodeEnd");
-		Traffic instance = new Traffic();
-		Node expResult = new Node("Anta");
-		instance.setNodeEnd(expResult);
-		Node result = instance.getNodeEnd();
-		assertEquals(expResult, result);
+		assertEquals(this.traffic.getNodeEnd(), this.nEnd);
 	}
 
 	/**
@@ -131,11 +137,9 @@ public class TrafficTest {
 	@Test
 	public void testSetNodeStart() {
 		System.out.println("setNodeStart");
-		Node nodeStart = new Node("Espinho");
-		Traffic instance = new Traffic();
-		instance.setNodeStart(nodeStart);
-		Node expResult = instance.getNodeStart();
-		assertEquals(expResult, nodeStart);
+		Node nodeStart = new Node("Aveiro");
+		this.traffic.setNodeStart(nodeStart);
+		assertEquals(this.traffic.getNodeStart(), nodeStart);
 	}
 
 	/**
@@ -144,11 +148,9 @@ public class TrafficTest {
 	@Test
 	public void testSetNodeEnd() {
 		System.out.println("setNodeEnd");
-		Node nodeEnd = new Node("Anta");
-		Traffic instance = new Traffic();
-		instance.setNodeEnd(nodeEnd);
-		Node expResult = instance.getNodeEnd();
-		assertEquals(expResult, nodeEnd);
+		Node nodeEnd = new Node("Curia");
+		this.traffic.setNodeEnd(nodeEnd);
+		assertEquals(this.traffic.getNodeEnd(), nodeEnd);
 	}
 
 	/**
@@ -157,11 +159,10 @@ public class TrafficTest {
 	@Test
 	public void testSetVehicle() {
 		System.out.println("setVehicle");
-		Traffic instance = new Traffic();
 		Vehicle vec = new Vehicle();
-		vec.setId(1);
-		vec.setName("Tommy");
-		vec.setDescription("Audi");
+		vec.setId(2);
+		vec.setName("Tom");
+		vec.setDescription("Nissan");
 		vec.setType("Sub");
 		vec.setMotorization("VEC");
 		vec.setFuel("Gasoline");
@@ -175,10 +176,8 @@ public class TrafficTest {
 		vec.setMinRPM(rmpLow);
 		vec.setMaxRPM(rmpLow);
 		vec.setFinalDriveRatio(rmpLow);
-		instance.setVehicle(vec);
-		Vehicle vac = instance.getVehicle();
-		assertEquals(vec, vac);
-
+		this.traffic.setVehicle(vec);
+		assertEquals(this.traffic.getVehicle(), vec);
 	}
 
 	/**
@@ -187,13 +186,9 @@ public class TrafficTest {
 	@Test
 	public void testGetArrivalRate() {
 		System.out.println("getArrivalRate");
-		Traffic instance = new Traffic();
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		Measure expResult = rmpLow;
-		instance.setArrivalRate(expResult);
-		Measure result = instance.getArrivalRate();
-		assertEquals(expResult, result);
-
+                Measure arrivalRate = new Measure(1.2, "MeasureTorque");
+                this.traffic.setArrivalRate(arrivalRate);
+		assertEquals(this.traffic.getArrivalRate(), arrivalRate);
 	}
 
 	/**
@@ -202,12 +197,9 @@ public class TrafficTest {
 	@Test
 	public void testSetArrivalRate() {
 		System.out.println("setArrivalRate");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		Measure expResult = rmpLow;
-		Traffic instance = new Traffic();
-		instance.setArrivalRate(rmpLow);
-		assertEquals(instance.getArrivalRate(), expResult);
-
+		Measure arrivalRate = new Measure(1.5, "MeasureTorque");
+		this.traffic.setArrivalRate(arrivalRate);
+		assertEquals(this.traffic.getArrivalRate(), arrivalRate);
 	}
 
 	/**
@@ -216,18 +208,17 @@ public class TrafficTest {
 	@Test
 	public void testEquals() {
 		System.out.println("equals");
-		Traffic instance = new Traffic();
+                Traffic instance = this.traffic.clone();
 		Traffic obj = new Traffic();
 		Vehicle vec = new Vehicle();
-		instance.setId(1);
-		instance.setId(2);
-		vec.setId(1);
+		obj.setId(2);
+		vec.setId(3);
 		vec.setName("Tommy");
 		vec.setDescription("Audi");
 		vec.setType("Sub");
 		vec.setMotorization("VEC");
 		vec.setFuel("Gasoline");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
+		Measure rmpLow = new Measure(1.4, "MeasureTorque");
 		vec.setMass(rmpLow);
 		vec.setLoad(rmpLow);
 		vec.setDragCoefficient(rmpLow);
@@ -237,18 +228,16 @@ public class TrafficTest {
 		vec.setMinRPM(rmpLow);
 		vec.setMaxRPM(rmpLow);
 		vec.setFinalDriveRatio(rmpLow);
-		instance.setVehicle(vec);
 		obj.setVehicle(vec);
-		Node nodeEnd = new Node("Anta");
-		Node nodeStart = new Node("Espinho");
-		instance.setNodeEnd(nodeEnd);
+		Node nodeEnd = new Node("Lisboa");
+		Node nodeStart = new Node("Setubal");
 		obj.setNodeEnd(nodeEnd);
 		obj.setNodeStart(nodeStart);
-		instance.setNodeStart(nodeStart);
-		instance.setArrivalRate(rmpLow);
 		obj.setArrivalRate(rmpLow);
 		boolean expResult = false;
-		assertEquals(expResult, instance.equals(obj));
+		assertEquals(this.traffic.equals(obj), expResult);
+                expResult = true;
+                assertEquals(this.traffic.equals(instance), expResult);
 	}
 
 	/**
@@ -257,38 +246,13 @@ public class TrafficTest {
 	@Test
 	public void testHashCode() {
 		System.out.println("hashCode");
-		Traffic instance = new Traffic();
-		Vehicle vec = new Vehicle();
-		instance.setId(1);
-		vec.setId(1);
-		vec.setName("Tommy");
-		vec.setDescription("Audi");
-		vec.setType("Sub");
-		vec.setMotorization("VEC");
-		vec.setFuel("Gasoline");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		vec.setMass(rmpLow);
-		vec.setLoad(rmpLow);
-		vec.setDragCoefficient(rmpLow);
-		vec.setFrontalArea(rmpLow);
-		vec.setRollingRCoefficient(rmpLow);
-		vec.setWheelSize(rmpLow);
-		vec.setMinRPM(rmpLow);
-		vec.setMaxRPM(rmpLow);
-		vec.setFinalDriveRatio(rmpLow);
-		instance.setVehicle(vec);
-		Node nodeEnd = new Node("Anta");
-		Node nodeStart = new Node("Espinho");
-		instance.setNodeEnd(nodeEnd);
-		instance.setNodeStart(nodeStart);
-		instance.setArrivalRate(rmpLow);
-		int expResult = 29 * instance.getClass().hashCode();
-		expResult += 11 * instance.getId().hashCode();
-		expResult += 11 * instance.getArrivalRate().hashCode();
-		expResult += 11 * instance.getNodeEnd().hashCode();
-		expResult += 11 * instance.getNodeStart().hashCode();
-		expResult += 11 * instance.getVehicle().hashCode();
-		int result = instance.hashCode();
+		int expResult = 29 * this.traffic.getClass().hashCode();
+		expResult += 11 * this.traffic.getId().hashCode();
+		expResult += 11 * this.traffic.getArrivalRate().hashCode();
+		expResult += 11 * this.traffic.getNodeEnd().hashCode();
+		expResult += 11 * this.traffic.getNodeStart().hashCode();
+		expResult += 11 * this.traffic.getVehicle().hashCode();
+		int result = this.traffic.hashCode();
 		assertEquals(expResult, result);
 
 	}
@@ -299,34 +263,8 @@ public class TrafficTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		Traffic instance = new Traffic();
-		Vehicle vec = new Vehicle();
-		instance.setId(1);
-		vec.setId(1);
-		vec.setName("Tommy");
-		vec.setDescription("Audi");
-		vec.setType("Sub");
-		vec.setMotorization("VEC");
-		vec.setFuel("Gasoline");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		vec.setMass(rmpLow);
-		vec.setLoad(rmpLow);
-		vec.setDragCoefficient(rmpLow);
-		vec.setFrontalArea(rmpLow);
-		vec.setRollingRCoefficient(rmpLow);
-		vec.setWheelSize(rmpLow);
-		vec.setMinRPM(rmpLow);
-		vec.setMaxRPM(rmpLow);
-		vec.setFinalDriveRatio(rmpLow);
-		instance.setVehicle(vec);
-		Node nodeEnd = new Node("Anta");
-		Node nodeStart = new Node("Espinho");
-		instance.setNodeEnd(nodeEnd);
-		instance.setNodeStart(nodeStart);
-		instance.setArrivalRate(rmpLow);
-		Traffic expResult = instance;
-		Traffic result = instance.clone();
-		assertEquals(expResult, result);
+		Traffic result = this.traffic.clone();
+		assertEquals(this.traffic, result);
 	}
 
 	/**
@@ -334,34 +272,8 @@ public class TrafficTest {
 	 */
 	@Test
 	public void testToString() {
-		Traffic instance = new Traffic();
-		Vehicle vec = new Vehicle();
-		instance.setId(1);
-		vec.setId(1);
-		vec.setName("Tommy");
-		vec.setDescription("Audi");
-		vec.setType("Sub");
-		vec.setMotorization("VEC");
-		vec.setFuel("Gasoline");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		vec.setMass(rmpLow);
-		vec.setLoad(rmpLow);
-		vec.setDragCoefficient(rmpLow);
-		vec.setFrontalArea(rmpLow);
-		vec.setRollingRCoefficient(rmpLow);
-		vec.setWheelSize(rmpLow);
-		vec.setMinRPM(rmpLow);
-		vec.setMaxRPM(rmpLow);
-		vec.setFinalDriveRatio(rmpLow);
-		instance.setVehicle(vec);
-		Node nodeEnd = new Node("Anta");
-		Node nodeStart = new Node("Espinho");
-		instance.setNodeEnd(nodeEnd);
-		instance.setNodeStart(nodeStart);
-		instance.setArrivalRate(rmpLow);
-		String expResult = "test";
-		String result = instance.toString();
-		assertEquals(expResult.getClass(), result.getClass());
+		String result = this.traffic.toString();
+		assertEquals(result.length()>0, true);
 	}
 
 	/**
@@ -370,11 +282,7 @@ public class TrafficTest {
 	@Test
 	public void testGetSegment() {
 		System.out.println("getSegment");
-		Traffic instance = new Traffic();
-		Segment expResult = new Segment();
-		instance.setSegment(expResult);
-		Segment result = instance.getSegment();
-		assertEquals(expResult, result);
+		assertEquals(this.traffic.getSegment(), this.segment);
 	}
 
 	/**
@@ -383,11 +291,16 @@ public class TrafficTest {
 	@Test
 	public void testSetSegment() {
 		System.out.println("setSegment");
-		Segment segment = null;
-		Traffic instance = new Traffic();
-		instance.setSegment(segment);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+		Segment nSegment = new Segment();
+                nSegment.setName("Segment 2");
+		nSegment.setHeight(new Measure(2.0, "km"));
+		nSegment.setLength(new Measure(5.0, "km"));
+		nSegment.setMaxVelocity(new Measure(6.0, "km"));
+		nSegment.setMinVelocity(new Measure(4.0, "km"));
+		nSegment.setSlope(new Measure(7.0, "°"));
+		nSegment.setNumberVehicles(5);
+		this.traffic.setSegment(nSegment);
+		assertEquals(this.traffic.getSegment(), nSegment);
 	}
 
 	/**
@@ -395,13 +308,9 @@ public class TrafficTest {
 	 */
 	@Test
 	public void testGetVehicleBot() {
-		System.out.println("getVehicleBot");
-		Traffic instance = new Traffic();
-		VehicleBot expResult = null;
-		VehicleBot result = instance.getVehicleBot();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+            System.out.println("getVehicleBot");
+            assertEquals(this.traffic.getVehicleBot(), this.vehicleBot);
+		
 	}
 
 	/**
@@ -410,11 +319,9 @@ public class TrafficTest {
 	@Test
 	public void testSetVehicleBot() {
 		System.out.println("setVehicleBot");
-		VehicleBot vehicleBot = null;
-		Traffic instance = new Traffic();
-		instance.setVehicleBot(vehicleBot);
-		// TODO review the generated test code and remove the default call to fail.
-		//	fail("The test case is a prototype.");
+		VehicleBot vehicleB = new VehicleBot();
+		this.traffic.setVehicleBot(vehicleB);
+                assertEquals(this.traffic.getVehicleBot(), vehicleB);
 	}
 
 }

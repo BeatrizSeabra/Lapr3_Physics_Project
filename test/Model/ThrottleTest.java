@@ -20,8 +20,20 @@ import org.junit.Test;
  * @author LAPR3_20152016_G27
  */
 public class ThrottleTest {
-
+        private Throttle throttle;
+        private Regime regime;
+        
 	public ThrottleTest() {
+            this.throttle = new Throttle();
+            this.throttle.setId(12);
+            Measure mesureTorque = new Measure(12.2, "MeasureTorque");
+            Measure rmpLow = new Measure(1.2, "MeasureTorque");
+            Measure rmpHigh = new Measure(12.2, "MeasureTorque");
+            Measure fuel = new Measure(12.2, "MeasureTorque");
+            this.regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
+            this.throttle.addRegime(this.regime);
+            Measure result = new Measure(12.2, "X");
+            this.throttle.setPercentage(result);
 	}
 
 	@BeforeClass
@@ -46,15 +58,8 @@ public class ThrottleTest {
 	@Test
 	public void testAddRegime() {
 		System.out.println("addRegime");
-		Measure mesureTorque = new Measure(12.2, "MeasureTorque");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		Measure rmpHigh = new Measure(12.2, "MeasureTorque");
-		Measure fuel = new Measure(12.2, "MeasureTorque");
-		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
-		Throttle instance = new Throttle();
 		Boolean expResult = true;
-		Boolean result = instance.addRegime(regime);
-		assertEquals(expResult, result);
+		assertEquals(this.throttle.addRegime(this.regime), expResult);
 	}
 
 	/**
@@ -63,13 +68,9 @@ public class ThrottleTest {
 	@Test
 	public void testGetId() {
 		System.out.println("getId");
-		Throttle instance = new Throttle();
-		instance.setId(12);
 		Integer expResult = 12;
-		Integer result = instance.getId();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+                this.throttle.setId(expResult);
+		assertEquals(this.throttle.getId(),expResult);
 	}
 
 	/**
@@ -79,12 +80,8 @@ public class ThrottleTest {
 	public void testSetId() {
 		System.out.println("setId");
 		Integer result = 12;
-		Throttle instance = new Throttle();
-		instance.setId(result);
-		Integer expResult = instance.getId();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+		this.throttle.setId(result);
+		assertEquals(this.throttle.getId(), result);
 	}
 
 	/**
@@ -93,13 +90,9 @@ public class ThrottleTest {
 	@Test
 	public void testGetPercentage() {
 		System.out.println("getPercentage");
-		Throttle instance = new Throttle();
 		Measure expResult = new Measure(12.2, "X");
-		instance.setPercentage(expResult);
-		Measure result = instance.getPercentage();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+		this.throttle.setPercentage(expResult);
+		assertEquals(this.throttle.getPercentage(),expResult);
 	}
 
 	/**
@@ -109,12 +102,8 @@ public class ThrottleTest {
 	public void testSetPercentage() {
 		System.out.println("setPercentage");
 		Measure result = new Measure(12.2, "X");
-		Throttle instance = new Throttle();
-		instance.setPercentage(result);
-		Measure expResult = instance.getPercentage();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+		this.throttle.setPercentage(result);
+		assertEquals(this.throttle.getPercentage(), result);
 	}
 
 	/**
@@ -122,20 +111,15 @@ public class ThrottleTest {
 	 */
 	@Test
 	public void testGetRegimes() {
+                System.out.println("getRegimes");
+                assertEquals(this.throttle.getRegimes().size(),1);
 		Measure mesureTorque = new Measure(12.2, "MeasureTorque");
 		Measure rmpLow = new Measure(1.2, "MeasureTorque");
 		Measure rmpHigh = new Measure(12.2, "MeasureTorque");
 		Measure fuel = new Measure(12.2, "MeasureTorque");
-		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
-		System.out.println("getRegimes");
-		Throttle instance = new Throttle();
-		instance.addRegime(regime);
-		List<Regime> reg = new ArrayList<Regime>();
-		reg.add(regime);
-		List<Regime> expResult = reg;
-		List<Regime> result = instance.getRegimes();
-		assertEquals(expResult, result);
-
+		Regime regimeB = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
+		this.throttle.addRegime(regime);
+                assertEquals(this.throttle.getRegimes().size(),2);
 	}
 
 	/**
@@ -143,20 +127,16 @@ public class ThrottleTest {
 	 */
 	@Test
 	public void testSetRegimes() {
+                System.out.println("setRegimes");
 		Measure mesureTorque = new Measure(12.2, "MeasureTorque");
 		Measure rmpLow = new Measure(1.2, "MeasureTorque");
 		Measure rmpHigh = new Measure(12.2, "MeasureTorque");
 		Measure fuel = new Measure(12.2, "MeasureTorque");
-		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
-		System.out.println("setRegimes");
+		Regime regime1 = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
 		List<Regime> regimes = new ArrayList<Regime>();
-		regimes.add(regime);
-		Throttle instance = new Throttle();
-		instance.setRegimes(regimes);
-		List<Regime> reg = instance.getRegimes();
-		assertEquals(regimes, reg);
-		// TODO review the generated test code and remove the default call to fail.
-
+		regimes.add(regime1);
+		this.throttle.setRegimes(regimes);
+		assertEquals(regimes, this.throttle.getRegimes());
 	}
 
 	/**
@@ -165,25 +145,23 @@ public class ThrottleTest {
 	@Test
 	public void testEquals() {
 		System.out.println("equals");
-		Throttle instance2 = new Throttle();
-		Throttle instance = new Throttle();
-		instance.setId(12);
-		Measure mesureTorque = new Measure(12.2, "MeasureTorque");
+		Throttle instance1 = new Throttle();
+		Throttle instance2 = this.throttle.clone();
+		instance1.setId(20);
+		Measure mesureTorque = new Measure(1.2, "MeasureTorque");
 		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		Measure rmpHigh = new Measure(12.2, "MeasureTorque");
-		Measure fuel = new Measure(12.2, "MeasureTorque");
-		instance.setPercentage(mesureTorque);
-		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
-		List<Regime> regimes = new ArrayList<Regime>();
-		regimes.add(regime);
-		instance2.setId(11);
-		instance2.setPercentage(rmpHigh);
-		instance2.setRegimes(regimes);
-		instance.setRegimes(regimes);
-		boolean expResult = false;
-		assertEquals(expResult, instance.equals(instance2));
-		// TODO review the generated test code and remove the default call to fail.
-
+		Measure rmpHigh = new Measure(1.2, "MeasureTorque");
+		Measure fuel = new Measure(1.2, "MeasureTorque");
+		instance1.setPercentage(mesureTorque);
+		Regime regime1 = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
+		instance1.addRegime(regime1);
+		boolean expResult = true;
+                assertEquals(this.throttle.equals(instance2),expResult);
+                expResult = false;
+                assertEquals(this.throttle.equals(instance1),expResult);
+                this.throttle.addRegime(regime1);
+                assertEquals(this.throttle.equals(instance2),expResult);
+                
 	}
 
 	/**
@@ -192,27 +170,13 @@ public class ThrottleTest {
 	@Test
 	public void testHashCode() {
 		System.out.println("hashCode");
-		Throttle instance = new Throttle();
-		Measure mesureTorque = new Measure(12.2, "MeasureTorque");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		Measure rmpHigh = new Measure(12.2, "MeasureTorque");
-		Measure fuel = new Measure(12.2, "MeasureTorque");
-		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
-		instance.setId(12);
-		instance.setPercentage(rmpHigh);
-		List<Regime> regimes = new ArrayList<Regime>();
-		regimes.add(regime);
-		instance.setRegimes(regimes);
-		int expResult = 29 * instance.getClass().hashCode();
-		expResult += 11 * instance.getId().hashCode();
-		expResult += 11 * instance.getPercentage().hashCode();
-		for (Regime regime1 : regimes) {
-			expResult += 7 * regime1.hashCode();
+		int expResult = 29 * this.throttle.getClass().hashCode();
+		expResult += 11 * this.throttle.getId().hashCode();
+		expResult += 11 * this.throttle.getPercentage().hashCode();
+		for (Regime regime1 : this.throttle.getRegimes()) {
+			expResult += 11 * regime1.hashCode();
 		}
-		int result = instance.hashCode();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+		assertEquals(expResult, this.throttle.hashCode());
 	}
 
 	/**
@@ -221,22 +185,8 @@ public class ThrottleTest {
 	@Test
 	public void testClone() {
 		System.out.println("clone");
-		Measure mesureTorque = new Measure(12.2, "MeasureTorque");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		Measure rmpHigh = new Measure(12.2, "MeasureTorque");
-		Measure fuel = new Measure(12.2, "MeasureTorque");
-		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
-		Throttle instance = new Throttle();
-		instance.setId(12);
-		instance.setPercentage(rmpHigh);
-		List<Regime> regimes = new ArrayList<Regime>();
-		regimes.add(regime);
-		instance.setRegimes(regimes);
-		Throttle expResult = instance;
-		Throttle result = instance.clone();
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+		Throttle result = this.throttle.clone();
+		assertEquals(this.throttle, result);
 	}
 
 	/**
@@ -245,27 +195,16 @@ public class ThrottleTest {
 	@Test
 	public void testCompareTo() {
 		System.out.println("compareTo");
-		Throttle Throttle = new Throttle();
-		Measure mesureTorque = new Measure(12.2, "MeasureTorque");
-		Measure rmpLow = new Measure(1.2, "MeasureTorque");
-		Measure rmpHigh = new Measure(12.2, "MeasureTorque");
-		Measure fuel = new Measure(12.2, "MeasureTorque");
-		Regime regime = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
 		Throttle instance = new Throttle();
-		instance.setId(12);
-		Throttle.setId(12);
-		Throttle.setPercentage(rmpHigh);
-
-		instance.setPercentage(rmpHigh);
-		List<Regime> regimes = new ArrayList<Regime>();
-		regimes.add(regime);
-		instance.setRegimes(regimes);
-		Throttle.setRegimes(regimes);
+		Measure mesureTorque = new Measure(20.0, "MeasureTorque");
+		Measure rmpLow = new Measure(21.2, "MeasureTorque");
+		Measure rmpHigh = new Measure(30.2, "MeasureTorque");
+		Measure fuel = new Measure(20.2, "MeasureTorque");
+		Regime reg = new Regime(mesureTorque, rmpLow, rmpHigh, fuel);
+		instance.setId(9);
+		instance.setPercentage(this.throttle.getPercentage());
 		int expResult = 0;
-		int result = instance.compareTo(Throttle);
-		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+		assertEquals(expResult, this.throttle.compareTo(instance));
 	}
 
 }

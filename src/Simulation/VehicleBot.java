@@ -51,6 +51,10 @@ public class VehicleBot {
 		}
 		this.segments = segments;
 	}
+        
+        public VehicleBot(){
+
+        }
 
 	public void step() {
 		if (!this.sections.isEmpty()) {

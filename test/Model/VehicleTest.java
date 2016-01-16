@@ -122,16 +122,16 @@ public class VehicleTest {
 		for (Map.Entry<String, Measure> entity : this.vehicle.
 			getVelocityLimits().
 			entrySet()) {
-			expResult += 7 * entity.getKey().hashCode();
-			expResult += 7 * entity.getValue().hashCode();
+			expResult += 11 * entity.getKey().hashCode();
+			expResult += 11 * entity.getValue().hashCode();
 		}
 		for (Map.Entry<Integer, Measure> entity : this.vehicle.getGears().
 			entrySet()) {
-			expResult += 7 * entity.getKey().hashCode();
-			expResult += 7 * entity.getValue().hashCode();
+			expResult += 11 * entity.getKey().hashCode();
+			expResult += 11 * entity.getValue().hashCode();
 		}
 		for (Throttle throttle : this.vehicle.getThrottles()) {
-			expResult += 7 * throttle.hashCode();
+			expResult += 11 * throttle.hashCode();
 		}
 		Integer result = this.vehicle.hashCode();
 		assertEquals(expResult, result);
