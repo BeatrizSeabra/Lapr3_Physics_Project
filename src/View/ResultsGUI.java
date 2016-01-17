@@ -7,9 +7,12 @@ package View;
 
 import Controller.ResultsController;
 import Legacy.Legacy;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -39,6 +42,12 @@ public class ResultsGUI extends GraphicUserInterface {
 	 */
 	@Override
 	public void initiation() {
+		ActionListener task = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				update();
+			}
+		};
+		new Timer(1000, task).start();
 	}
 
 	/**

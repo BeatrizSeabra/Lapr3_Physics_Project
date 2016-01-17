@@ -72,7 +72,9 @@ public class AddVehiclesController {
 				}
 				number++;
 			}
-			vehicles.add(newVehicle);
+			if (!vehicles.contains(newVehicle)) {
+				vehicles.add(newVehicle);
+			}
 		}
 	}
 

@@ -11,7 +11,6 @@ import Model.Throttle;
 import Model.Vehicle;
 import Physics.Measure;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +21,14 @@ import java.util.Map;
 public class VehicleDataLocal implements VehicleData {
 
 	private List<Vehicle> list = new ArrayList();
-        
-        private Integer currentIndex = 0;
+
+	private Integer currentIndex = 0;
 
 	private Integer getNextIndex() {
 		currentIndex++;
 		return this.currentIndex;
 	}
+
 	/**
 	 *
 	 * @param project
@@ -46,7 +46,7 @@ public class VehicleDataLocal implements VehicleData {
 	 */
 	@Override
 	public List<Vehicle> all(Project project) {
-		return project.getVehicles();
+		return (List<Vehicle>) project.getVehicles();
 	}
 
 	/**
@@ -57,47 +57,47 @@ public class VehicleDataLocal implements VehicleData {
 	 */
 	@Override
 	public Boolean save(Project project, Vehicle vehicle) {
-            if (vehicle.getId() == 0) {
-                    vehicle.setId(this.getNextIndex());
-                    project.addVehicle(vehicle);
-                    return this.list.add(vehicle);
-            }
-            Vehicle oldVehicle = this.get(project, vehicle);
-            oldVehicle.setId(vehicle.getId());
-            oldVehicle.setName(vehicle.getName());
-            oldVehicle.setDescription(vehicle.getDescription());
-            oldVehicle.setType(vehicle.getType());
-            oldVehicle.setMotorization(vehicle.getMotorization());
-            oldVehicle.setFuel(vehicle.getFuel());
-            oldVehicle.setMass(vehicle.getMass());
-            oldVehicle.setLoad(vehicle.getLoad());
-            oldVehicle.setDragCoefficient(vehicle.getDragCoefficient());
-            oldVehicle.setFrontalArea(vehicle.getFrontalArea());
-            oldVehicle.setRollingRCoefficient(vehicle.getRollingRCoefficient());
-            oldVehicle.setWheelSize(vehicle.getWheelSize());
-            oldVehicle.setMinRPM(vehicle.getMinRPM());
-            oldVehicle.setMaxRPM(vehicle.getMaxRPM());
-            oldVehicle.setFinalDriveRatio(vehicle.getFinalDriveRatio());
-            oldVehicle.setEnergyRegeneration(vehicle.getEnergyRegeneration());
-            oldVehicle.getVelocityLimits().clear();
-            oldVehicle.getGears().clear();
-            oldVehicle.getThrottles().clear();
-                
-            Map<String, Measure> limits = vehicle.getVelocityLimits();
-            for(String segmentType : limits.keySet()){
-                Measure velocityLimit = limits.get(segmentType);
-                oldVehicle.setVelocityLimits(segmentType, velocityLimit);
-            }
-            Map<Integer, Measure> gears = vehicle.getGears();
-            for (Integer number : gears.keySet()) {
-                Measure ratio = gears.get(number);
-                oldVehicle.setGear(number, ratio);
-            }
-            List<Throttle> throttles = vehicle.getThrottles();
-            for (Throttle throttle : throttles) {
-                oldVehicle.addThrottle(throttle);
-            }
-            return oldVehicle.equals(vehicle);
+		if (vehicle.getId() == 0) {
+			vehicle.setId(this.getNextIndex());
+			project.addVehicle(vehicle);
+			return this.list.add(vehicle);
+		}
+		Vehicle oldVehicle = this.get(project, vehicle);
+		oldVehicle.setId(vehicle.getId());
+		oldVehicle.setName(vehicle.getName());
+		oldVehicle.setDescription(vehicle.getDescription());
+		oldVehicle.setType(vehicle.getType());
+		oldVehicle.setMotorization(vehicle.getMotorization());
+		oldVehicle.setFuel(vehicle.getFuel());
+		oldVehicle.setMass(vehicle.getMass());
+		oldVehicle.setLoad(vehicle.getLoad());
+		oldVehicle.setDragCoefficient(vehicle.getDragCoefficient());
+		oldVehicle.setFrontalArea(vehicle.getFrontalArea());
+		oldVehicle.setRollingRCoefficient(vehicle.getRollingRCoefficient());
+		oldVehicle.setWheelSize(vehicle.getWheelSize());
+		oldVehicle.setMinRPM(vehicle.getMinRPM());
+		oldVehicle.setMaxRPM(vehicle.getMaxRPM());
+		oldVehicle.setFinalDriveRatio(vehicle.getFinalDriveRatio());
+		oldVehicle.setEnergyRegeneration(vehicle.getEnergyRegeneration());
+		oldVehicle.getVelocityLimits().clear();
+		oldVehicle.getGears().clear();
+		oldVehicle.getThrottles().clear();
+
+		Map<String, Measure> limits = vehicle.getVelocityLimits();
+		for (String segmentType : limits.keySet()) {
+			Measure velocityLimit = limits.get(segmentType);
+			oldVehicle.setVelocityLimits(segmentType, velocityLimit);
+		}
+		Map<Integer, Measure> gears = vehicle.getGears();
+		for (Integer number : gears.keySet()) {
+			Measure ratio = gears.get(number);
+			oldVehicle.setGear(number, ratio);
+		}
+		List<Throttle> throttles = vehicle.getThrottles();
+		for (Throttle throttle : throttles) {
+			oldVehicle.addThrottle(throttle);
+		}
+		return oldVehicle.equals(vehicle);
 	}
 
 	/**
@@ -108,10 +108,10 @@ public class VehicleDataLocal implements VehicleData {
 	 */
 	@Override
 	public Boolean save(Project project, List<Vehicle> vehicles) {
-            for (Vehicle vehicle : vehicles) {
-                this.save(project, vehicle);
-            }
-            return true;
+		for (Vehicle vehicle : vehicles) {
+			this.save(project, vehicle);
+		}
+		return true;
 	}
 
 	/**
@@ -122,12 +122,13 @@ public class VehicleDataLocal implements VehicleData {
 	 */
 	@Override
 	public Vehicle get(Project project, Vehicle vehicle) {
-            for (Vehicle vehicleList : this.list) {
-                if (vehicleList.getId() == vehicle.getId() && project.getVehicles().contains(vehicleList)) {
-                    return vehicleList;
-                }
-            }
-            return null;
+		for (Vehicle vehicleList : this.list) {
+			if (vehicleList.getId() == vehicle.getId() && project.getVehicles().
+				contains(vehicleList)) {
+				return vehicleList;
+			}
+		}
+		return null;
 	}
 
 	/**

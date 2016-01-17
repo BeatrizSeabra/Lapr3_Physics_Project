@@ -25,8 +25,6 @@ import java.util.List;
  */
 public class MostEfficientTheoricalAnalysis extends AnalysisMethod {
 
-	double totalForce = 0;
-
 	@Override
 	public Step analyze(Vehicle vehicle, Section section, Segment segment) {
 		Throttle maxThrottle = Collections.max(vehicle.getThrottles());
@@ -136,7 +134,7 @@ public class MostEfficientTheoricalAnalysis extends AnalysisMethod {
 
 	@Override
 	public String getName() {
-		return "Most Efficient Theorical";
+		return "Theoretical Most Energy Efficient Path";
 	}
 
 }

@@ -29,6 +29,41 @@ public class Step {
 	private Measure gravityForce;
 
 	/**
+	 * @return the vector string
+	 */
+	public String[] getResult() {
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(vehicle);
+		stringBuffer.append(";");
+		stringBuffer.append(nodeStart);
+		stringBuffer.append(";");
+		stringBuffer.append(nodeEnd);
+		stringBuffer.append(";");
+		stringBuffer.append(road);
+		stringBuffer.append(";");
+		stringBuffer.append(segment);
+		stringBuffer.append(";");
+		stringBuffer.append(timeEntry);
+		stringBuffer.append(";");
+		stringBuffer.append(timeOut);
+		stringBuffer.append(";");
+		stringBuffer.append(carPower);
+		stringBuffer.append(";");
+		stringBuffer.append(carSpeed);
+		stringBuffer.append(";");
+		stringBuffer.append(speedRelative);
+		stringBuffer.append(";");
+		stringBuffer.append(carForce);
+		stringBuffer.append(";");
+		stringBuffer.append(rollingForce);
+		stringBuffer.append(";");
+		stringBuffer.append(airForce);
+		stringBuffer.append(";");
+		stringBuffer.append(gravityForce);
+		return stringBuffer.toString().split(";");
+	}
+
+	/**
 	 * @return the vehicle
 	 */
 	public String getVehicle() {

@@ -51,10 +51,10 @@ public class VehicleBot {
 		}
 		this.segments = segments;
 	}
-        
-        public VehicleBot(){
 
-        }
+	public VehicleBot() {
+
+	}
 
 	public void step() {
 		if (!this.sections.isEmpty()) {
@@ -62,7 +62,8 @@ public class VehicleBot {
 			if (this.timeNext > 0) {
 				if (this.step == null) {
 					this.step = this.analysisMethod.
-						analyze(this.vehicle, this.segments.getFirst());
+						analyze(this.vehicle, this.sections.getFirst(), this.segments.
+								getFirst());
 				}
 				this.step.getCarPower().setValue(this.step.getCarPower().
 					getValue() + this.stepStop.getCarPower().getValue());
@@ -91,7 +92,9 @@ public class VehicleBot {
 				this.pass();
 				this.step = new Step();
 				this.step = this.analysisMethod.
-					analyze(this.vehicle, this.segments.getFirst());
+					analyze(this.vehicle, this.sections.getFirst(), this.segments.
+							getFirst()
+					);
 				this.step.setTimeEntry(new Measure(this.timeTotal, "s"));
 				this.step.setVehicle(this.vehicle.getName());
 				//this.step.setNodeStart(this.nodeStart.getName());
