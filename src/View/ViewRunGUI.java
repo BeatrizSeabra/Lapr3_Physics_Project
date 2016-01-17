@@ -5,19 +5,20 @@ package View;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import Controller.DeleteRunController;
+import Controller.ViewRunController;
+import Model.Drop;
 import Model.Run;
+import Model.Step;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author LAPR3_20152016_G27
  */
-public class DeleteRunGUI extends GraphicUserInterface {
+public class ViewRunGUI extends GraphicUserInterface {
 
-	private DeleteRunController deleteRunController = new DeleteRunController();
+	private ViewRunController viewRunController = new ViewRunController();
 	private DefaultListModel jModelListRuns = new DefaultListModel();
 
 	/**
@@ -26,7 +27,7 @@ public class DeleteRunGUI extends GraphicUserInterface {
 	 * @param origin
 	 * @param pathAnalysis
 	 */
-	public DeleteRunGUI(GraphicUserInterface origin) {
+	public ViewRunGUI(GraphicUserInterface origin) {
 		this.initComponents();
 		this.creation(origin);
 	}
@@ -36,7 +37,7 @@ public class DeleteRunGUI extends GraphicUserInterface {
 	 */
 	@Override
 	public void initiation() {
-		this.deleteRunController.initiation();
+		this.viewRunController.initiation();
 		this.jListRuns.setModel(this.jModelListRuns);
 	}
 
@@ -46,16 +47,11 @@ public class DeleteRunGUI extends GraphicUserInterface {
 	@Override
 	public void update() {
 		this.jModelListRuns.removeAllElements();
-		List<Run> runs = this.deleteRunController.getRuns();
+		List<Run> runs = this.viewRunController.getRuns();
 		if (runs != null && !runs.isEmpty()) {
 			for (Run run : runs) {
 				this.jModelListRuns.addElement(run);
 			}
-			this.jListRuns.setEnabled(true);
-			this.jButtonDelete.setEnabled(true);
-		} else {
-			this.jListRuns.setEnabled(false);
-			this.jButtonDelete.setEnabled(false);
 		}
 	}
 
@@ -63,7 +59,7 @@ public class DeleteRunGUI extends GraphicUserInterface {
     private void initComponents() {
 
         jButtonCancel = new javax.swing.JButton();
-        jButtonDelete = new javax.swing.JButton();
+        jButtonView = new javax.swing.JButton();
         jLabelWithRuns = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListRuns = new javax.swing.JList();
@@ -78,10 +74,10 @@ public class DeleteRunGUI extends GraphicUserInterface {
             }
         });
 
-        jButtonDelete.setText("Delete");
-        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+        jButtonView.setText("View");
+        jButtonView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteActionPerformed(evt);
+                jButtonViewActionPerformed(evt);
             }
         });
 
@@ -101,7 +97,7 @@ public class DeleteRunGUI extends GraphicUserInterface {
                         .addContainerGap())
                     .addComponent(jLabelWithRuns, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonDelete)
+                        .addComponent(jButtonView)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonCancel))))
         );
@@ -115,20 +111,22 @@ public class DeleteRunGUI extends GraphicUserInterface {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancel)
-                    .addComponent(jButtonDelete))
+                    .addComponent(jButtonView))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-		if (this.jListRuns.getSelectedIndex() != -1 && this.deleteRunController.
-			delete(this.jListRuns.getSelectedIndex())) {
-			JOptionPane.showMessageDialog(this, "Run remove successfully!");
+    private void jButtonViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewActionPerformed
+		if (this.jListRuns.getSelectedIndex() != -1) {
+			Run run = this.viewRunController.getRun(this.jListRuns.
+				getSelectedIndex());
+			new ResultsGUI(null, run.getStepResults(), Step.getLegend());
+			new ResultsGUI(null, run.getDropResults(), Drop.getLegend());
 			this.close();
 		}
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
+    }//GEN-LAST:event_jButtonViewActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
 		this.close();
@@ -136,7 +134,7 @@ public class DeleteRunGUI extends GraphicUserInterface {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonView;
     private javax.swing.JLabel jLabelWithRuns;
     private javax.swing.JList jListRuns;
     private javax.swing.JScrollPane jScrollPane1;

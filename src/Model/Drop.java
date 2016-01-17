@@ -13,6 +13,7 @@ import Physics.Measure;
  */
 public class Drop {
 
+	private Integer id = 0;
 	private String vehicle;
 	private String nodeStart;
 	private String nodeEnd;
@@ -74,6 +75,25 @@ public class Drop {
 		this.time = time;
 	}
 
+	/**
+	 * @return the vector string
+	 */
+	public String[] getResult() {
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(vehicle);
+		stringBuffer.append(";");
+		stringBuffer.append(nodeStart);
+		stringBuffer.append(";");
+		stringBuffer.append(nodeEnd);
+		stringBuffer.append(";");
+		stringBuffer.append(time);
+		return stringBuffer.toString().split(";");
+	}
+
+	static public String[] getLegend() {
+		return "Vehicle;Node Start;Node End;Time Drop".split(";");
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -102,5 +122,19 @@ public class Drop {
 	@Override
 	public String toString() {
 		return "Drop | vehicle: " + this.vehicle + " | node start: " + this.nodeStart + " | node end: " + this.nodeEnd + " | time: " + this.time;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

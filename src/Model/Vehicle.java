@@ -6,6 +6,7 @@
 package Model;
 
 import Physics.Measure;
+import Physics.Measurement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -207,6 +208,13 @@ public class Vehicle {
 	 */
 	public Measure getMass() {
 		return mass;
+	}
+
+	/**
+	 * @return the massTotal
+	 */
+	public Measure getMassTotal() {
+		return Measurement.sum(this.mass, this.load);
 	}
 
 	/**

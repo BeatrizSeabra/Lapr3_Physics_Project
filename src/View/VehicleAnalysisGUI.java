@@ -8,6 +8,7 @@ package View;
 import Controller.ContextController;
 import Controller.VehicleAnalysisController;
 import Model.Node;
+import Model.Step;
 import Model.Vehicle;
 import Simulation.VehicleAnalysis;
 import java.util.List;
@@ -233,7 +234,7 @@ public class VehicleAnalysisGUI extends GraphicUserInterface {
 			analyze();
 		if (results != null && !results.isEmpty()) {
 			for (List<String[]> result : results) {
-				new ResultsGUI(null, result);
+				new ResultsGUI(null, result, Step.getLegend());
 			}
 		} else {
 			JOptionPane.

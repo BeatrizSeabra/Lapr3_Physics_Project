@@ -6,6 +6,7 @@
 package Controller;
 
 import Legacy.Legacy;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
 public class ResultsController {
 
 	private List<String[]> results;
+	private String[] legend;
 
 	/**
 	 * @return the results
@@ -26,9 +28,25 @@ public class ResultsController {
 	/**
 	 * @param results the results to set
 	 */
-	public void setResults(List<String[]> results) {
+	public void setResults(List<String[]> results, String[] legend) {
+		this.legend = legend;
 		this.results = results;
 	}
+	/*
+	 public void setResults(List<Object> results) {
+	 List<Step> steps = (List<Step>) (Object) results;
+	 if (steps != null) {
+	 this.steps = steps;
+	 } else {
+	 List<Drop> drops = (List<Drop>) (Object) results;
+	 if (drops != null) {
+	 this.drops = drops;
+	 } else {
+	 this.results = (List<String[]>) (Object) results;
+	 }
+	 }
+	 }
+	 */
 
 	/**
 	 * @return the results
@@ -37,7 +55,7 @@ public class ResultsController {
 		if (!this.hasResults()) {
 			return new String[0];
 		}
-		return this.results.get(0);
+		return this.legend;
 	}
 
 	/**
@@ -75,7 +93,10 @@ public class ResultsController {
 	 * @return
 	 */
 	public Boolean export(String filePath) {
-		return Legacy.export(filePath, this.results);
+		List<String[]> array = new ArrayList();
+		array.add(this.legend);
+		array.addAll(this.results);
+		return Legacy.export(filePath, array);
 	}
 
 }

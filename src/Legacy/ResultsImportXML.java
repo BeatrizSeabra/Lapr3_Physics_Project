@@ -103,6 +103,18 @@ public class ResultsImportXML implements Import<Run> {
 									run.setId(idRun);
 								}
 								break;
+							case "idStep":
+								Integer idStep = Util.toInteger(text);
+								if (idStep != null) {
+									step.setId(idStep);
+								}
+								break;
+							case "idDrop":
+								Integer idDrop = Util.toInteger(text);
+								if (idDrop != null) {
+									drop.setId(idDrop);
+								}
+								break;
 							case "step":
 								step.setVehicle(vehicle);
 								step.setNodeStart(start);

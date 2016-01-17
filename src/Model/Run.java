@@ -122,6 +122,10 @@ public class Run {
 		this.drops = drops;
 	}
 
+	public Boolean addStep(Step step) {
+		return this.steps.add(step);
+	}
+
 	public Boolean addDrop(Drop drop) {
 		return this.drops.add(drop);
 	}
@@ -162,4 +166,27 @@ public class Run {
 		}
 		return this.hashCode() == other.hashCode();
 	}
+
+	/**
+	 * @return the results
+	 */
+	public List<String[]> getStepResults() {
+		List<String[]> results = new ArrayList();
+		for (Step step : this.steps) {
+			results.add(step.getResult());
+		}
+		return results;
+	}
+
+	/**
+	 * @return the results
+	 */
+	public List<String[]> getDropResults() {
+		List<String[]> results = new ArrayList();
+		for (Drop drop : this.drops) {
+			results.add(drop.getResult());
+		}
+		return results;
+	}
+
 }

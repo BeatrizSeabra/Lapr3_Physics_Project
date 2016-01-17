@@ -7,6 +7,7 @@ package View;
 
 import Controller.PathAnalysisController;
 import Model.Node;
+import Model.Step;
 import Simulation.PathAnalysis;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -185,7 +186,7 @@ public class PathAnalysisGUI extends GraphicUserInterface {
 			List<List<String[]>> results = this.pathAnalysisController.analyze();
 			if (results != null && !results.isEmpty()) {
 				for (List<String[]> result : results) {
-					new ResultsGUI(null, result);
+					new ResultsGUI(null, result, Step.getLegend());
 				}
 			} else {
 				JOptionPane.

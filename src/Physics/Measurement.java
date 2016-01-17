@@ -35,7 +35,7 @@ public abstract class Measurement {
 		if (measure == null || unit == null) {
 			Error.
 				setErrorMessage("The conversion '" + measure + "' to '" + unit + "' was not possible data null!");
-			return null;
+			return new Measure(1.0, "ratio");
 		}
 		if (measure.getUnit().equalsIgnoreCase(unit)) {
 			return new Measure(measure.getValue(), unit);
@@ -46,7 +46,7 @@ public abstract class Measurement {
 		if (ratio == null) {
 			Error.
 				setErrorMessage("The conversion '" + measure + "' to '" + unit + "' was not possible because there is no file in the relationship between units!");
-			return null;
+			return new Measure(1.0, "ratio");
 		}
 		ratio = ratio * measure.getValue();
 		return new Measure(ratio, unit);

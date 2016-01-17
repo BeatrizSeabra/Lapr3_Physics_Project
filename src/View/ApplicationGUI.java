@@ -425,7 +425,7 @@ public class ApplicationGUI extends GraphicUserInterface {
     }//GEN-LAST:event_jMenuItemDeleteRunActionPerformed
 
     private void jMenuItemViewRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewRunActionPerformed
-		//new ViewRunGUI(this);
+		new ViewRunGUI(this);
     }//GEN-LAST:event_jMenuItemViewRunActionPerformed
 
     private void jMenuItemRunSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRunSimulationActionPerformed

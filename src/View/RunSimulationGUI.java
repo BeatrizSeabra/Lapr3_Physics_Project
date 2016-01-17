@@ -19,7 +19,6 @@ public class RunSimulationGUI extends GraphicUserInterface {
 
 	private RunSimulationController runSimulationController = new RunSimulationController();
 	private DefaultComboBoxModel jModelComboBoxAnalysisMethod = new DefaultComboBoxModel();
-	private List<AnalysisMethod> analysisMethods;
 
 	/**
 	 * Creates new form CreateProjectGUI
@@ -37,11 +36,11 @@ public class RunSimulationGUI extends GraphicUserInterface {
 	@Override
 	public void initiation() {
 		this.runSimulationController.initiation();
-		this.analysisMethods = this.runSimulationController.getAnalysisMethods();
+		List<AnalysisMethod> analysisMethods = this.runSimulationController.
+			getAnalysisMethods();
 		this.jComboBoxAnalysisMethod.setModel(this.jModelComboBoxAnalysisMethod);
 		this.jModelComboBoxAnalysisMethod.removeAllElements();
-		for (AnalysisMethod analysisMethod : this.runSimulationController.
-			getAnalysisMethods()) {
+		for (AnalysisMethod analysisMethod : analysisMethods) {
 			this.jModelComboBoxAnalysisMethod.addElement(analysisMethod);
 		}
 		this.jComboBoxDurationType.setSelectedIndex(-1);
@@ -72,6 +71,7 @@ public class RunSimulationGUI extends GraphicUserInterface {
 			this.jButtonPause.setEnabled(false);
 			this.jButtonPause.setText("Pause");
 		}
+		this.jButtonSave.setEnabled(this.runSimulationController.hasResults());
 
 		// TEMPORARIO
 		this.jTextFieldName.setText("Meu Run");
@@ -121,6 +121,7 @@ public class RunSimulationGUI extends GraphicUserInterface {
         jLabelAnalysisMethod = new javax.swing.JLabel();
         jComboBoxAnalysisMethod = new javax.swing.JComboBox();
         jButtonPause = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 23, 400, 200));
@@ -168,6 +169,13 @@ public class RunSimulationGUI extends GraphicUserInterface {
             }
         });
 
+        jButtonSave.setText("Save");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,11 +185,13 @@ public class RunSimulationGUI extends GraphicUserInterface {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonRun)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonPause)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                         .addComponent(jButtonClean)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonCancel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -231,7 +241,8 @@ public class RunSimulationGUI extends GraphicUserInterface {
                     .addComponent(jButtonClean)
                     .addComponent(jButtonCancel)
                     .addComponent(jButtonRun)
-                    .addComponent(jButtonPause))
+                    .addComponent(jButtonPause)
+                    .addComponent(jButtonSave))
                 .addContainerGap())
         );
 
@@ -264,12 +275,10 @@ public class RunSimulationGUI extends GraphicUserInterface {
 				} else if (this.jComboBoxTimeStepType.getSelectedIndex() == 2) {
 					timeStep += " h";
 				}
-				System.out.println(time);
-				System.out.println(timeStep);
+				this.runSimulationController.setActive(true);
 				if (this.runSimulationController.run(this.jTextFieldName.
 					getText(), time, timeStep, this.jComboBoxAnalysisMethod.
 													 getSelectedIndex())) {
-					this.runSimulationController.setActive(true);
 				} else {
 					JOptionPane.
 						showMessageDialog(this, "It is only accept numbers in the times!");
@@ -304,11 +313,21 @@ public class RunSimulationGUI extends GraphicUserInterface {
 		this.update();
     }//GEN-LAST:event_jButtonPauseActionPerformed
 
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+		if (this.runSimulationController.saveResults()) {
+			JOptionPane.showMessageDialog(this, "Successfully saved results!");
+			this.close();
+		} else {
+			JOptionPane.showMessageDialog(this, "Could not save the results!");
+		}
+    }//GEN-LAST:event_jButtonSaveActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonClean;
     private javax.swing.JButton jButtonPause;
     private javax.swing.JButton jButtonRun;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox jComboBoxAnalysisMethod;
     private javax.swing.JComboBox jComboBoxDurationType;
     private javax.swing.JComboBox jComboBoxTimeStepType;

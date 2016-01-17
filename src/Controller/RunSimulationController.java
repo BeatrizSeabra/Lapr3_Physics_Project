@@ -5,13 +5,17 @@
  */
 package Controller;
 
+import Model.Drop;
+import Model.Run;
 import Model.Simulation;
+import Model.Step;
 import Physics.Measure;
 import Physics.Measurement;
 import Simulation.AnalysisMethod;
 import Simulation.Simulator;
 import System.Settings;
 import System.Util;
+import View.ResultsGUI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +28,7 @@ public class RunSimulationController {
 	private Simulation simulation;
 	private Simulator simulator;
 	private List<AnalysisMethod> analysisMethods;
+	private Run run;
 
 	/**
 	 *
@@ -33,6 +38,10 @@ public class RunSimulationController {
 		this.simulation = ContextController.getOpenSimulation();
 		this.simulator = new Simulator();
 		return true;
+	}
+
+	public boolean hasResults() {
+		return this.run != null;
 	}
 
 	public List<AnalysisMethod> getAnalysisMethods() {
@@ -60,10 +69,17 @@ public class RunSimulationController {
 		Measure timeStepMeasure = Measurement.
 			convert(new Measure(timeStepValue, timeStepUnit), "s");
 		if (timeMeasure != null && timeStepMeasure != null) {
-			this.simulator.
-				setData(this.simulation, name, timeMeasure, timeStepMeasure, this.analysisMethods.
-						get(method));
+			this.run = new Run();
+			this.run.setName(name);
+			this.run.setTime(timeMeasure);
+			this.run.setTimeStep(timeStepMeasure);
+			this.run.setMethod(this.analysisMethods.get(method));
+			this.simulator.setData(this.simulation, this.run);
 			this.simulator.run();
+			List<String[]> drops = run.getDropResults();
+			List<String[]> steps = run.getStepResults();
+			new ResultsGUI(null, drops, Drop.getLegend());
+			new ResultsGUI(null, steps, Step.getLegend());
 			return true;
 		}
 		return false;
@@ -95,6 +111,10 @@ public class RunSimulationController {
 	 */
 	public void setPause(Boolean pause) {
 		this.simulator.setPause(pause);
+	}
+
+	public Boolean saveResults() {
+		return Data.Data.getRunData().save(this.simulation, this.run);
 	}
 
 }

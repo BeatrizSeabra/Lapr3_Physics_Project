@@ -30,8 +30,7 @@ public abstract class Error {
 	 * @param errorMessage
 	 */
 	static public void setErrorMessage(String errorMessage) {
-		//Error.log(errorMessage);
-		System.out.println("LOG: " + errorMessage);
+		Error.log(errorMessage);
 		Error.errorMessage = errorMessage;
 	}
 

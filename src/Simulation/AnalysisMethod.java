@@ -44,16 +44,19 @@ public abstract class AnalysisMethod {
 
 	public Deque<Section> path(Vehicle vehicle, Node startNode, Node endNode,
 							   RoadNetwork roadNetwork) {
-		int size = this.bestPaths.size();
-		for (int i = 0; i < size; i++) {
-			if (this.vehicles.get(i).equals(vehicle) && this.roadNetworks.get(i).
-				equals(roadNetwork) && this.startNodes.get(i).equals(startNode) && this.endNodes.
-				get(i).equals(endNodes)) {
-				return this.bestPaths.get(i);
-			}
-		}
-		this.analyze(vehicle, startNode, endNode, roadNetwork);
-		return this.bestPaths.get(size);
+		return (Deque<Section>) this.
+			analyze(vehicle, startNode, endNode, roadNetwork);/*
+		 int size = this.bestPaths.size();
+		 for (int i = 0; i < size; i++) {
+		 if (this.vehicles.get(i).equals(vehicle) && this.roadNetworks.get(i).
+		 equals(roadNetwork) && this.startNodes.get(i).equals(startNode) && this.endNodes.
+		 get(i).equals(endNodes)) {
+		 return this.bestPaths.get(i);
+		 }
+		 }
+		 this.bestPaths.add((Deque<Section>) this.analyze(vehicle, startNode, endNode, roadNetwork));
+		 return this.bestPaths.get(size);*/
+
 	}
 
 	public abstract List<Section> analyze(Vehicle vehicle, Node startNode,

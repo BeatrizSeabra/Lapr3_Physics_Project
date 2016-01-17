@@ -21,6 +21,7 @@ public class Traffic {
 	private Measure arrivalRate;
 	private Segment segment;
 	private VehicleBot vehicleBot;
+	private int timeNews = 0;
 
 	/**
 	 *
@@ -169,6 +170,20 @@ public class Traffic {
 	 */
 	public void setVehicleBot(VehicleBot vehicleBot) {
 		this.vehicleBot = vehicleBot;
+	}
+
+	/**
+	 * @return the timeNews
+	 */
+	public int getTimeNews() {
+		return timeNews;
+	}
+
+	/**
+	 * @param timeNews the timeNews to set
+	 */
+	public void setTimeNews(int timeNews) {
+		this.timeNews = timeNews;
 	}
 
 }

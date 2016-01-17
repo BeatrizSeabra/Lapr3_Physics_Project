@@ -31,8 +31,9 @@ public class ResultsGUI extends GraphicUserInterface {
 	 * @param origin
 	 * @param result
 	 */
-	public ResultsGUI(GraphicUserInterface origin, List<String[]> result) {
-		this.resultsController.setResults(result);
+	public ResultsGUI(GraphicUserInterface origin, List<String[]> result,
+					  String[] legend) {
+		this.resultsController.setResults(result, legend);
 		this.initComponents();
 		this.creation(origin);
 	}
@@ -101,8 +102,8 @@ public class ResultsGUI extends GraphicUserInterface {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelWithResults, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelWithResults, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                        .addGap(87, 87, 87)
                         .addComponent(jButtonExport))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())

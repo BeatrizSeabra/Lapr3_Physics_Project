@@ -10,7 +10,6 @@ import Data.VehicleData;
 import Legacy.Legacy;
 import Model.Project;
 import Model.Vehicle;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ public class AddVehiclesController {
 	public void initiation() {
 		this.project = ContextController.getOpenProject();
 		this.vehicleData = Data.getVehicleData();
-		this.vehicles = new ArrayList(this.vehicleData.all(this.project));
+		this.vehicles = this.project.getVehicles();
 	}
 
 	/**

@@ -14,7 +14,6 @@ import Model.Segment;
 import Model.Simulation;
 import Model.Traffic;
 import Physics.Measure;
-import Physics.Measurement;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
@@ -31,24 +30,20 @@ public class Simulator {
 	private Run run;
 	private Boolean active = false;
 	private Boolean pause = false;
-	//private Map<Traffic, Segment> segments = new HashMap();
 	private List<VehicleBot> vehicleBots = new ArrayList();
 	private Integer time = 0;
 	private Integer timeStep;
 	private Timer timer;
+	private List<String[]> result;
 
-	public void setData(Simulation simulation, String name, Measure time,
-						Measure timeStep, AnalysisMethod analysisMethod) {
+	public void setData(Simulation simulation, Run run) {
+		this.run = run;
 		this.simulation = simulation;
-		this.run = new Run();
-		this.run.setName(name);
-		this.run.setTime(time);
-		this.run.setTimeStep(timeStep);
-		this.run.setMethod(analysisMethod);
-		this.timeStep = Measurement.convert(timeStep, "s").getValue().intValue();
+		this.timeStep = run.getTimeStep().getValue().intValue();
 	}
 
 	public void run() {
+		this.result = result;
 		this.createBots();
 		this.active = true;
 		timer = new Timer();
@@ -62,8 +57,6 @@ public class Simulator {
 			this.stepNewVehicles();
 			this.time += this.timeStep;
 		}
-
-		System.out.println("DROP!!!! " + this.run.getDrops().size());
 	}
 
 	private class TimerSchedule extends TimerTask {
@@ -86,9 +79,9 @@ public class Simulator {
 		for (Traffic traffic : this.simulation.getTraffics()) {
 			Deque<Section> sections = this.run.getMethod().path(traffic.
 				getVehicle(), traffic.getNodeStart(), traffic.getNodeEnd(), roadNetwork);
-			VehicleBot vehicleBot = new VehicleBot(traffic.getVehicle(), sections, this.run.
-												   getSteps(), this.timeStep, this.run.
-												   getMethod());
+			VehicleBot vehicleBot = new VehicleBot(traffic.getVehicle(), sections, this.run, this.timeStep, traffic.
+												   getNodeStart(), traffic.
+												   getNodeEnd());
 			traffic.setSegment(sections.peekFirst().getSegments().get(0));
 			traffic.setVehicleBot(vehicleBot);
 		}
@@ -102,26 +95,28 @@ public class Simulator {
 
 	private void stepNewVehicles() {
 		for (Traffic traffic : this.simulation.getTraffics()) {
-			int amount = Physics.PhysicsMath.
-				exponentialDistributionRandom(traffic.getArrivalRate().
-					getValue()).intValue();
-			amount = 1;
-			Segment segment = traffic.getSegment();
-			VehicleBot vehicleBot = traffic.getVehicleBot();
-			for (int i = 0; i < amount; i++) {
-				int numberVehicles = segment.getNumberVehiclesCurrent();
-				if (numberVehicles < segment.getNumberVehicles()) {
-					this.vehicleBots.add(vehicleBot);
-					segment.setNumberVehiclesCurrent(numberVehicles + 1);
-				} else {
-					Drop drop = new Drop();
-					drop.setVehicle(traffic.getVehicle().getName());
-					drop.setNodeStart(traffic.getNodeStart().getName());
-					drop.setNodeEnd(traffic.getNodeEnd().getName());
-					drop.setTime(new Measure(Double.parseDouble(this.time.
-						toString()), "s"));
-					this.run.addDrop(drop);
-
+			if (traffic.getTimeNews() > 0) {
+				traffic.setTimeNews(traffic.getTimeNews() - this.timeStep);
+			} else {
+				traffic.setTimeNews(Physics.PhysicsMath.
+					exponentialDistributionRandom(traffic.getArrivalRate().
+						getValue() * 60).intValue());
+				Segment segment = traffic.getSegment();
+				VehicleBot vehicleBot = traffic.getVehicleBot();
+				for (int i = 0; i < traffic.getArrivalRate().getValue(); i++) {
+					int numberVehicles = segment.getNumberVehiclesCurrent();
+					if (numberVehicles < segment.getNumberVehicles()) {
+						this.vehicleBots.add(vehicleBot);
+						segment.setNumberVehiclesCurrent(numberVehicles + 1);
+					} else {
+						Drop drop = new Drop();
+						drop.setVehicle(traffic.getVehicle().getName());
+						drop.setNodeStart(traffic.getNodeStart().getName());
+						drop.setNodeEnd(traffic.getNodeEnd().getName());
+						drop.setTime(new Measure(Double.parseDouble(this.time.
+							toString()), "s"));
+						this.run.addDrop(drop);
+					}
 				}
 			}
 		}

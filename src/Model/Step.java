@@ -13,6 +13,7 @@ import Physics.Measure;
  */
 public class Step {
 
+	private Integer id = 0;
 	private String vehicle;
 	private String nodeStart;
 	private String nodeEnd;
@@ -61,6 +62,11 @@ public class Step {
 		stringBuffer.append(";");
 		stringBuffer.append(gravityForce);
 		return stringBuffer.toString().split(";");
+	}
+
+	static public String[] getLegend() {
+		return "Vehicle;N. Start;N. End;Road;Segment;Entry;Out;Power;Speed;Relative;Car F.;Rolling F.;Air F.;Gravity F.".
+			split(";");
 	}
 
 	/**
@@ -297,5 +303,19 @@ public class Step {
 			return false;
 		}
 		return this.hashCode() == other.hashCode();
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }
