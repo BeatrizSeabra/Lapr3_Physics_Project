@@ -48,7 +48,9 @@ public class AddVehiclesGUI extends GraphicUserInterface {
 	public void update() {
 		this.jModelListVehicles.removeAllElements();
 		for (Vehicle vehicle : this.addVehiclesController.getVehicles()) {
-			this.jModelListVehicles.addElement(vehicle);
+			if (!this.jModelListVehicles.contains(vehicle)) {
+				this.jModelListVehicles.addElement(vehicle);
+			}
 		}
 		this.jButtonSave.setEnabled(this.addVehiclesController.hasChanges());
 	}

@@ -52,13 +52,17 @@ public class ViewProjectGUI extends JPanel {
 		this.jLabelDescription.setText(project.getDescription());
 		this.jTextAreaRoadNetwork.setText(project.getRoadNetwork().toString());
 		for (Vehicle vehicle : project.getVehicles()) {
-			this.jModelListVehicles.addElement(vehicle);
+			if (!this.jModelListVehicles.contains(vehicle)) {
+				this.jModelListVehicles.addElement(vehicle);
+			}
 		}
 		Simulation simulation = ContextController.getOpenSimulation();
 		if (simulation != null) {
 			this.jTextAreaSimulation.setText(simulation.toString());
 			for (Run run : simulation.getRuns()) {
-				this.jModelListRuns.addElement(run);
+				if (!this.jModelListRuns.contains(run)) {
+					this.jModelListRuns.addElement(run);
+				}
 			}
 		}
 	}
