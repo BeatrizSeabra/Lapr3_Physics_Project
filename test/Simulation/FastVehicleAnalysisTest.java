@@ -245,7 +245,7 @@ public class FastVehicleAnalysisTest {
 				stringBuilder.append(column);
 			}
 		}
-		String expResult = "NameSegment maxVelocityRestricted maxVelocityVehicle GearGear maxVelocityUsed maxVelocityLenghtTimeTotalNoden00,00 sSegment01120,00 km/h4443,05 km/h120,00 km/h20,00 km600,00 s0,00 sNoden2600,00 s";
+		String expResult = "NameSegment maxVelocityRestricted maxVelocityVehicle GearGear maxVelocityUsed maxVelocityLenghtTimeTotalNoden00,00 sSegment01120,00 km/h1,00 ratio4443,05 km/h120,00 km/h20,00 km600,00 s0,00 sNoden2600,00 s";
 		assertEquals(expResult, stringBuilder.toString());
 	}
 }

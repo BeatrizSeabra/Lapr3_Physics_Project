@@ -108,8 +108,8 @@ public class VehicleDataLocal implements VehicleData {
 	 */
 	@Override
 	public Boolean save(Project project, List<Vehicle> vehicles) {
-		for (Vehicle vehicle : vehicles) {
-			this.save(project, vehicle);
+		for (int i = 0; i < vehicles.size(); i++) {
+			this.save(project, vehicles.get(i));
 		}
 		return true;
 	}

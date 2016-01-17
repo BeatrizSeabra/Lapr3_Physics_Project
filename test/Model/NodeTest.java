@@ -276,8 +276,6 @@ public class NodeTest {
 		section.add(section3);
 		section.add(section4);
 		section.add(section5);
-		VehicleBot vehicleBot = new VehicleBot(this.vehicle, section, null, Integer.SIZE, null);
-
 	}
 
 	@BeforeClass
@@ -314,9 +312,9 @@ public class NodeTest {
 	public void testHashCode() {
 		System.out.println("testHashCode");
 		Integer expResult = 29 * this.node.getClass().hashCode();
-                expResult += 11 * this.node.getId().hashCode();
+		expResult += 11 * this.node.getId().hashCode();
 		expResult += 11 * this.node.getName().hashCode();
-                
+
 		Integer result = this.node.hashCode();
 		assertEquals(expResult, result);
 	}
